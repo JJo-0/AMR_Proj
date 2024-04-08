@@ -25,7 +25,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
     && mkdir /home/$USERNAME/.config && chown -R $USERNAME:$USERNAME /home/$USERNAME/.config
 
-# copy config files
+# copy config files 
 #COPY config/ /etc/ros/ros2/
 
 # Install language
