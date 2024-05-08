@@ -61,6 +61,3 @@ ENV LIBGL_ALWAYS_SOFTWARE=1
 COPY entrypoint.sh /entrypoint.sh
 COPY bashrc /home/${USERNAME}/.bashrc
 
-# Set up entrypoint and default command
-ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
-CMD ["bash"]
