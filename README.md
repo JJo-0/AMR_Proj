@@ -13,7 +13,7 @@
 |:---|:---:| ---:|
 | 프로젝트 기간| 2023.05.01 ~ | 아이디어 회의 2023년 부터 시작 |
 | 프로젝트 성격 | 캡스톤디자인(졸업작품) | |
-| 개발 인원 | 팀 / 4명 | ([박지호](https://github.com/JJo-0)| [이건원](https://github.com/leegunwon) | [조성우](https://github.com/) | [장영도](https://github.com/)) |
+| 개발 인원 | 팀 / 4명 | ([박지호](https://github.com/JJo-0), [이건원](https://github.com/leegunwon),  [조성우](https://github.com/), [장영도](https://github.com/)) |
 | 하드웨어 | raspberry pi 5, mdrobot 등.. [링크](##하드웨어) | |
 
 
