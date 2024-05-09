@@ -11,4 +11,3 @@
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/Desktop,target=/desktop,type=bind"
   ]
 }
-

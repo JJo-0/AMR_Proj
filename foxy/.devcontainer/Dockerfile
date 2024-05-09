@@ -19,6 +19,7 @@ RUN apt-get update \
     nano \
     x11-apps \
     ros-foxy-desktop \
+    ros-foxy-twist-mux \
     ros-foxy-xacro \
     ros-foxy-ros2-control \
     ros-foxy-ros2-controllers \
