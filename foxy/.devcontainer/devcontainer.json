@@ -2,7 +2,7 @@
   "name": "foxy",
   "dockerFile": "Dockerfile",
   "runArgs": [
-    "--privileged",
+    "--privileged", 
     "--network=host"
   ],
   "workspaceMount": "source=${localWorkspaceFolder},target=/${localWorkspaceFolderBasename},type=bind",
