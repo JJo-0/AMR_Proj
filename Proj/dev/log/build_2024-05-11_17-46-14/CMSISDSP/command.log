@@ -1,0 +1,1 @@
+Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/CMSISDSP': /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/CMSISDSP

@@ -1,0 +1,13 @@
+# Target labels
+ xrceagent
+# Source files and their labels
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/CMakeFiles/xrceagent
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/CMakeFiles/xrceagent.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/CMakeFiles/xrceagent-complete.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-stamp/xrceagent-install.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-stamp/xrceagent-mkdir.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-stamp/xrceagent-download.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-stamp/xrceagent-update.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-stamp/xrceagent-patch.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-stamp/xrceagent-configure.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-stamp/xrceagent-build.rule

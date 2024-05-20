@@ -1,0 +1,40 @@
+[0.141s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/arm_bayes_example': /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Examples/ARM/arm_bayes_example -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/arm_bayes_example
+[0.481s] -- The C compiler identification is GNU 9.4.0
+[0.907s] -- The CXX compiler identification is GNU 9.4.0
+[0.935s] -- Check for working C compiler: /usr/bin/cc
+[1.404s] -- Check for working C compiler: /usr/bin/cc -- works
+[1.412s] -- Detecting C compiler ABI info
+[1.948s] -- Detecting C compiler ABI info - done
+[2.004s] -- Detecting C compile features
+[2.004s] -- Detecting C compile features - done
+[2.019s] -- Check for working CXX compiler: /usr/bin/c++
+[2.438s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[2.456s] -- Detecting CXX compiler ABI info
+[2.917s] -- Detecting CXX compiler ABI info - done
+[2.956s] -- Detecting CXX compile features
+[2.963s] -- Detecting CXX compile features - done
+[2.970s] CMake Error at /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source/CMakeLists.txt:12 (include):
+[2.971s]   include could not find load file:
+[2.971s] 
+[2.971s]     configLib
+[2.971s] 
+[2.972s] 
+[2.972s] CMake Error at /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source/BasicMathFunctions/CMakeLists.txt:5 (include):
+[2.972s]   include could not find load file:
+[2.973s] 
+[2.973s]     configLib
+[2.974s] 
+[2.974s] 
+[2.976s] CMake Error at /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source/BasicMathFunctions/CMakeLists.txt:6 (include):
+[2.979s]   include could not find load file:
+[2.979s] 
+[2.979s]     configDsp
+[2.980s] 
+[2.980s] 
+[2.983s] CMake Error at /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source/BasicMathFunctions/CMakeLists.txt:34 (configLib):
+[2.984s]   Unknown CMake command "configLib".
+[2.984s] 
+[2.985s] 
+[2.985s] -- Configuring incomplete, errors occurred!
+[2.989s] See also "/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/arm_bayes_example/CMakeFiles/CMakeOutput.log".
+[3.019s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/arm_bayes_example' returned '1': /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Examples/ARM/arm_bayes_example -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/arm_bayes_example

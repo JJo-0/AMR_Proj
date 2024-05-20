@@ -1,0 +1,39 @@
+[0.096s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ydlidar_ros2_driver': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ydlidar_ros2_driver -- -j4 -l4
+[0.436s] [ 50%] Built target ydlidar_ros2_driver_node
+[0.445s] [100%] Built target ydlidar_ros2_driver_client
+[0.497s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ydlidar_ros2_driver' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ydlidar_ros2_driver -- -j4 -l4
+[0.631s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ydlidar_ros2_driver': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ydlidar_ros2_driver
+[0.655s] -- Install configuration: ""
+[0.655s] -- Execute custom install script
+[0.658s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/lib/ydlidar_ros2_driver/ydlidar_ros2_driver_node
+[0.662s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/lib/ydlidar_ros2_driver/ydlidar_ros2_driver_client
+[0.662s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/launch/ydlidar.py
+[0.665s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/launch/ydlidar_launch.py
+[0.665s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/launch/ydlidar_launch_view.py
+[0.666s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/params/G1.yaml
+[0.666s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/params/G2.yaml
+[0.666s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/params/G6.yaml
+[0.666s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/params/TG.yaml
+[0.666s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/params/TminiPro.yaml
+[0.667s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/params/X2.yaml
+[0.674s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/params/X4-Pro.yaml
+[0.674s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/params/X4.yaml
+[0.691s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/params/ydlidar.yaml
+[0.691s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/startup/initenv.sh
+[0.691s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/config/ydlidar.rviz
+[0.692s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ament_index/resource_index/package_run_dependencies/ydlidar_ros2_driver
+[0.692s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ament_index/resource_index/parent_prefix_path/ydlidar_ros2_driver
+[0.692s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/environment/ament_prefix_path.sh
+[0.692s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/environment/ament_prefix_path.dsv
+[0.692s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/environment/path.sh
+[0.692s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/environment/path.dsv
+[0.692s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/local_setup.bash
+[0.692s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/local_setup.sh
+[0.693s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/local_setup.zsh
+[0.693s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/local_setup.dsv
+[0.693s] -- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/package.dsv
+[0.724s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ament_index/resource_index/packages/ydlidar_ros2_driver
+[0.724s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/cmake/ydlidar_ros2_driverConfig.cmake
+[0.724s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/cmake/ydlidar_ros2_driverConfig-version.cmake
+[0.725s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver/share/ydlidar_ros2_driver/package.xml
+[0.757s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ydlidar_ros2_driver' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ydlidar_ros2_driver

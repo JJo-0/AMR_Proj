@@ -1,0 +1,13 @@
+# Target labels
+ spdlog
+# Source files and their labels
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/CMakeFiles/spdlog
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/CMakeFiles/spdlog.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/CMakeFiles/spdlog-complete.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-stamp/spdlog-install.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-stamp/spdlog-mkdir.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-stamp/spdlog-download.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-stamp/spdlog-update.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-stamp/spdlog-patch.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-stamp/spdlog-configure.rule
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-stamp/spdlog-build.rule

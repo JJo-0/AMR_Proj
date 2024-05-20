@@ -1,0 +1,51 @@
+[1.090s] Invoking command in '/home/gunwon/dev/src/omo_r1mini_bringup': AMENT_PREFIX_PATH=/home/gunwon/dev/install/omo_r1mini_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/gunwon/dev/install/omo_r1mini_description PYTHONPATH=/home/gunwon/dev/build/omo_r1mini_bringup/prefix_override:/home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/omo_r1mini_bringup build --build-base /home/gunwon/dev/build/omo_r1mini_bringup/build install --record /home/gunwon/dev/build/omo_r1mini_bringup/install.log --single-version-externally-managed
+[1.317s] running egg_info
+[1.317s] creating ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info
+[1.317s] writing ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/PKG-INFO
+[1.317s] writing dependency_links to ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/dependency_links.txt
+[1.317s] writing entry points to ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/entry_points.txt
+[1.317s] writing requirements to ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/requires.txt
+[1.317s] writing top-level names to ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/top_level.txt
+[1.319s] writing manifest file '../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/SOURCES.txt'
+[1.320s] reading manifest file '../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/SOURCES.txt'
+[1.321s] writing manifest file '../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/SOURCES.txt'
+[1.321s] running build
+[1.321s] running build_py
+[1.321s] creating /home/gunwon/dev/build/omo_r1mini_bringup/build
+[1.321s] creating /home/gunwon/dev/build/omo_r1mini_bringup/build/lib
+[1.321s] creating /home/gunwon/dev/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup
+[1.321s] copying omo_r1mini_bringup/__init__.py -> /home/gunwon/dev/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup
+[1.321s] creating /home/gunwon/dev/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts
+[1.321s] copying omo_r1mini_bringup/scripts/__init__.py -> /home/gunwon/dev/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts
+[1.322s] copying omo_r1mini_bringup/scripts/omo_r1mini_mcu_node.py -> /home/gunwon/dev/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts
+[1.322s] copying omo_r1mini_bringup/scripts/omo_r1mini_motor_setting_node.py -> /home/gunwon/dev/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts
+[1.322s] running install
+[1.322s] running install_lib
+[1.323s] creating /home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup
+[1.323s] copying /home/gunwon/dev/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/__init__.py -> /home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup
+[1.323s] creating /home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts
+[1.323s] copying /home/gunwon/dev/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts/__init__.py -> /home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts
+[1.323s] copying /home/gunwon/dev/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts/omo_r1mini_mcu_node.py -> /home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts
+[1.323s] copying /home/gunwon/dev/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts/omo_r1mini_motor_setting_node.py -> /home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts
+[1.323s] byte-compiling /home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/__init__.py to __init__.cpython-38.pyc
+[1.323s] byte-compiling /home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts/__init__.py to __init__.cpython-38.pyc
+[1.324s] byte-compiling /home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts/omo_r1mini_mcu_node.py to omo_r1mini_mcu_node.cpython-38.pyc
+[1.325s] byte-compiling /home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts/omo_r1mini_motor_setting_node.py to omo_r1mini_motor_setting_node.cpython-38.pyc
+[1.325s] running install_data
+[1.326s] creating /home/gunwon/dev/install/omo_r1mini_bringup/share/ament_index
+[1.326s] creating /home/gunwon/dev/install/omo_r1mini_bringup/share/ament_index/resource_index
+[1.326s] creating /home/gunwon/dev/install/omo_r1mini_bringup/share/ament_index/resource_index/packages
+[1.326s] copying resource/omo_r1mini_bringup -> /home/gunwon/dev/install/omo_r1mini_bringup/share/ament_index/resource_index/packages
+[1.326s] copying package.xml -> /home/gunwon/dev/install/omo_r1mini_bringup/share/omo_r1mini_bringup
+[1.326s] creating /home/gunwon/dev/install/omo_r1mini_bringup/share/omo_r1mini_bringup/launch
+[1.326s] copying launch/omo_r1mini_motor_setting.launch.py -> /home/gunwon/dev/install/omo_r1mini_bringup/share/omo_r1mini_bringup/launch
+[1.326s] copying launch/omo_r1mini_mcu.launch.py -> /home/gunwon/dev/install/omo_r1mini_bringup/share/omo_r1mini_bringup/launch
+[1.326s] creating /home/gunwon/dev/install/omo_r1mini_bringup/share/omo_r1mini_bringup/param
+[1.326s] copying param/omo_r1mini_mcu.yaml -> /home/gunwon/dev/install/omo_r1mini_bringup/share/omo_r1mini_bringup/param
+[1.326s] running install_egg_info
+[1.327s] Copying ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info to /home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup-0.0.1-py3.8.egg-info
+[1.328s] running install_scripts
+[1.342s] Installing omo_r1mini_mcu_node script to /home/gunwon/dev/install/omo_r1mini_bringup/lib/omo_r1mini_bringup
+[1.342s] Installing omo_r1mini_motor_setting_node script to /home/gunwon/dev/install/omo_r1mini_bringup/lib/omo_r1mini_bringup
+[1.342s] writing list of installed files to '/home/gunwon/dev/build/omo_r1mini_bringup/install.log'
+[1.356s] Invoked command in '/home/gunwon/dev/src/omo_r1mini_bringup' returned '0': AMENT_PREFIX_PATH=/home/gunwon/dev/install/omo_r1mini_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/gunwon/dev/install/omo_r1mini_description PYTHONPATH=/home/gunwon/dev/build/omo_r1mini_bringup/prefix_override:/home/gunwon/dev/install/omo_r1mini_bringup/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/omo_r1mini_bringup build --build-base /home/gunwon/dev/build/omo_r1mini_bringup/build install --record /home/gunwon/dev/build/omo_r1mini_bringup/install.log --single-version-externally-managed

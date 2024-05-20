@@ -1,0 +1,79 @@
+-- The C compiler identification is GNU 9.4.0
+-- The CXX compiler identification is GNU 9.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found hardware_interface: 0.11.0 (/opt/ros/foxy/share/hardware_interface/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+-- Found FastRTPS: /opt/ros/foxy/include  
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found controller_manager: 0.11.0 (/opt/ros/foxy/share/controller_manager/cmake)
+-- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm
+[35m[1mScanning dependencies of target diffdrive_stm[0m
+[35m[1mScanning dependencies of target fake_robot[0m
+[ 14%] [32mBuilding CXX object CMakeFiles/fake_robot.dir/src/fake_robot.cpp.o[0m
+[ 28%] [32mBuilding CXX object CMakeFiles/fake_robot.dir/src/wheel.cpp.o[0m
+[ 42%] [32mBuilding CXX object CMakeFiles/diffdrive_stm.dir/src/wheel.cpp.o[0m
+[ 57%] [32mBuilding CXX object CMakeFiles/diffdrive_stm.dir/src/diffdrive_stm.cpp.o[0m
+[ 71%] [32mBuilding CXX object CMakeFiles/diffdrive_stm.dir/src/my_node.cpp.o[0m
+[ 85%] [32m[1mLinking CXX shared library libfake_robot.so[0m
+[ 85%] Built target fake_robot
+[100%] [32m[1mLinking CXX shared library libdiffdrive_stm.so[0m
+[100%] Built target diffdrive_stm
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm//robot_hardware.xml
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm//fake_robot_hardware.xml
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/lib/libdiffdrive_stm.so
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/lib/libfake_robot.so
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/controllers/robot_controller_example.yaml
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/fake_robot.launch.py
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/test_robot.launch.py
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/environment/library_path.sh
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/environment/library_path.dsv
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/ament_index/resource_index/package_run_dependencies/diffdrive_stm
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/ament_index/resource_index/parent_prefix_path/diffdrive_stm
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/environment/ament_prefix_path.sh
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/environment/ament_prefix_path.dsv
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/environment/path.sh
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/environment/path.dsv
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/local_setup.bash
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/local_setup.sh
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/local_setup.zsh
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/local_setup.dsv
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/package.dsv
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/ament_index/resource_index/packages/diffdrive_stm
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/diffdrive_stm
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/cmake/ament_cmake_export_libraries-extras.cmake
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/cmake/diffdrive_stmConfig.cmake
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/cmake/diffdrive_stmConfig-version.cmake
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/package.xml

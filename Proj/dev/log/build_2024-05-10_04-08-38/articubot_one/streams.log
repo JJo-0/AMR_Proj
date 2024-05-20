@@ -1,0 +1,70 @@
+[0.032s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/articubot_one -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one
+[0.080s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.133s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.498s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.511s] -- Found ament_lint_auto: 0.9.8 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+[0.660s] -- Added test 'copyright' to check source files copyright and LICENSE
+[0.667s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.670s] -- Added test 'lint_cmake' to check CMake code style
+[0.672s] -- Added test 'pep257' to check Python code against some of the style conventions in PEP 257
+[0.675s] -- Added test 'xmllint' to check XML markup files
+[0.680s] -- Configuring done
+[0.688s] -- Generating done
+[0.689s] -- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one
+[0.696s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/articubot_one -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one
+[0.703s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one -- -j4 -l4
+[0.801s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one -- -j4 -l4
+[0.894s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one
+[0.913s] -- Install configuration: ""
+[0.914s] -- Execute custom install script
+[0.915s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/config/empty.yaml
+[0.915s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/config/gaz_ros2_ctl_use_sim.yaml
+[0.915s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/config/gazebo_params.yaml
+[0.915s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/config/gun.rviz
+[0.916s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/config/joystick.yaml
+[0.916s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/config/main.rviz
+[0.916s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/config/mapper_params_online_async.yaml
+[0.916s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/config/my_controllers.yaml
+[0.917s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/config/nav2_params.yaml
+[0.917s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/config/twist_mux.yaml
+[0.917s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/description/camera.xacro
+[0.918s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/description/depth_camera.xacro
+[0.918s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/description/face.xacro
+[0.918s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/description/gazebo_control.xacro
+[0.918s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/description/inertial_macros.xacro
+[0.919s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/description/lidar.xacro
+[0.919s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/description/robot.urdf.xacro
+[0.919s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/description/robot_0_C.xacro
+[0.919s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/description/robot_core.xacro
+[0.919s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/description/ros2_control.xacro
+[0.920s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/launch/camera.launch.py
+[0.920s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/launch/joystick.launch.py
+[0.920s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/launch/launch_robot.launch.py
+[0.921s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/launch/launch_sim.launch.py
+[0.921s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/launch/localization_launch.py
+[0.922s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/launch/navigation_launch.py
+[0.922s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/launch/online_async_launch.py
+[0.922s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/launch/rplidar.launch.py
+[0.922s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/launch/rsp.launch.py
+[0.923s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/launch/teleop_launch.py
+[0.923s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/worlds/empty.world
+[0.924s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/worlds/no_roof_small_warehouse.world
+[0.924s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/worlds/obstacles.world
+[0.925s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/worlds/prac.world
+[0.925s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/worlds/small_warehouse.world
+[0.926s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/ament_index/resource_index/package_run_dependencies/articubot_one
+[0.927s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/ament_index/resource_index/parent_prefix_path/articubot_one
+[0.928s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/environment/ament_prefix_path.sh
+[0.928s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/environment/ament_prefix_path.dsv
+[0.930s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/environment/path.sh
+[0.930s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/environment/path.dsv
+[0.930s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/local_setup.bash
+[0.931s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/local_setup.sh
+[0.933s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/local_setup.zsh
+[0.934s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/local_setup.dsv
+[0.934s] -- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/package.dsv
+[0.966s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/ament_index/resource_index/packages/articubot_one
+[0.967s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/cmake/articubot_oneConfig.cmake
+[0.968s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/cmake/articubot_oneConfig-version.cmake
+[0.968s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one/share/articubot_one/package.xml
+[0.979s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one

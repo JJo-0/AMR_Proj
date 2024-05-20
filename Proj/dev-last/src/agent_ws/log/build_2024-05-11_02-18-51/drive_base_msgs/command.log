@@ -1,0 +1,4 @@
+Invoking command in '/home/gunwon/dev/src/agent_ws/build/drive_base_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/gunwon/dev/src/agent_ws/build/drive_base_msgs -- -j12 -l12
+Invoked command in '/home/gunwon/dev/src/agent_ws/build/drive_base_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/gunwon/dev/src/agent_ws/build/drive_base_msgs -- -j12 -l12
+Invoking command in '/home/gunwon/dev/src/agent_ws/build/drive_base_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/gunwon/dev/src/agent_ws/build/drive_base_msgs
+Invoked command in '/home/gunwon/dev/src/agent_ws/build/drive_base_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/gunwon/dev/src/agent_ws/build/drive_base_msgs

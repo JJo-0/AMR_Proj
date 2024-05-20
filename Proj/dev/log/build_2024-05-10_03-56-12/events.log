@@ -1,0 +1,77 @@
+[0.000000] (-) TimerEvent: {}
+[0.000347] (-) JobUnselected: {'identifier': 'CMSISDSP'}
+[0.000424] (-) JobUnselected: {'identifier': 'CMSISNN'}
+[0.000467] (-) JobUnselected: {'identifier': 'arm_bayes_example'}
+[0.000499] (-) JobUnselected: {'identifier': 'arm_class_marks_example'}
+[0.000535] (-) JobUnselected: {'identifier': 'arm_convolution_example'}
+[0.000571] (-) JobUnselected: {'identifier': 'arm_dotproduct_example'}
+[0.000605] (-) JobUnselected: {'identifier': 'arm_fft_bin_example'}
+[0.000976] (-) JobUnselected: {'identifier': 'arm_fir_example'}
+[0.001021] (-) JobUnselected: {'identifier': 'arm_graphic_equalizer_example'}
+[0.001046] (-) JobUnselected: {'identifier': 'arm_linear_interp_example'}
+[0.001068] (-) JobUnselected: {'identifier': 'arm_matrix_example'}
+[0.001090] (-) JobUnselected: {'identifier': 'arm_signal_convergence_example'}
+[0.001111] (-) JobUnselected: {'identifier': 'arm_sin_cos_example'}
+[0.001131] (-) JobUnselected: {'identifier': 'arm_svm_example'}
+[0.001151] (-) JobUnselected: {'identifier': 'arm_variance_example'}
+[0.001172] (-) JobUnselected: {'identifier': 'articubot_one'}
+[0.001192] (-) JobUnselected: {'identifier': 'diffdrive_stm'}
+[0.001213] (-) JobUnselected: {'identifier': 'drive_base_msgs'}
+[0.001233] (-) JobUnselected: {'identifier': 'micro_ros_agent'}
+[0.001264] (-) JobUnselected: {'identifier': 'micro_ros_msgs'}
+[0.001286] (-) JobUnselected: {'identifier': 'micro_ros_setup'}
+[0.001306] (-) JobUnselected: {'identifier': 'micro_ros_stmcube'}
+[0.001332] (ydlidar_ros2_driver) JobQueued: {'identifier': 'ydlidar_ros2_driver', 'dependencies': OrderedDict()}
+[0.001844] (ydlidar_ros2_driver) JobStarted: {'identifier': 'ydlidar_ros2_driver'}
+[0.031699] (ydlidar_ros2_driver) JobProgress: {'identifier': 'ydlidar_ros2_driver', 'progress': 'cmake'}
+[0.033676] (ydlidar_ros2_driver) Command: {'cmd': ['/usr/bin/cmake', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/ydlidar_ros2_driver', '-DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver'], 'cwd': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ydlidar_ros2_driver', 'env': OrderedDict([('HOSTNAME', '333c1b73fc44'), ('GIT_ASKPASS', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LIBGL_ALWAYS_SOFTWARE', '1'), ('LD_LIBRARY_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib'), ('BROWSER', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/bin/helpers/browser.sh'), ('HOME', '/home/vscode'), ('OLDPWD', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/ydlidar'), ('TERM_PROGRAM_VERSION', '1.89.0'), ('VSCODE_IPC_HOOK_CLI', '/tmp/vscode-ipc-68a2e4ea-8868-4f88-a130-9528677bcc49.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/node'), ('COLORTERM', 'truecolor'), ('REMOTE_CONTAINERS', 'true'), ('WAYLAND_DISPLAY', 'vscode-wayland-882bd342-dccf-4385-becd-2a14e714854a.sock'), ('COLCON_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install'), ('ROS_DISTRO', 'foxy'), ('REMOTE_CONTAINERS_IPC', '/tmp/vscode-remote-containers-ipc-bee94bc2-4ec6-4580-b6ed-ac15daa01b8d.sock'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/bin/remote-cli:/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('XDG_RUNTIME_DIR', '/tmp/user/1002'), ('REMOTE_CONTAINERS_SOCKETS', '["/tmp/vscode-ssh-auth-bee94bc2-4ec6-4580-b6ed-ac15daa01b8d.sock","/tmp/.X11-unix/X8","/home/vscode/.gnupg/S.gpg-agent"]'), ('DISPLAY', ':8'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/tmp/user/1002/vscode-git-4f6cd1cbae.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/tmp/vscode-ssh-auth-bee94bc2-4ec6-4580-b6ed-ac15daa01b8d.sock'), ('AMENT_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one:/opt/ros/foxy'), ('DEBIAN_FRONTEND', 'noninteractive'), ('REMOTE_CONTAINERS_DISPLAY_SOCK', '/tmp/.X11-unix/X8'), ('SHELL', '/bin/bash'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ydlidar_ros2_driver'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one:/opt/ros/foxy')]), 'shell': False}
+[0.098480] (ydlidar_ros2_driver) StdoutLine: {'line': b'-- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)\n'}
+[0.099477] (-) TimerEvent: {}
+[0.161876] (ydlidar_ros2_driver) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[0.199598] (-) TimerEvent: {}
+[0.299975] (-) TimerEvent: {}
+[0.400384] (-) TimerEvent: {}
+[0.485676] (ydlidar_ros2_driver) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[0.495380] (ydlidar_ros2_driver) StdoutLine: {'line': b'-- Found rclcpp: 2.4.3 (/opt/ros/foxy/share/rclcpp/cmake)\n'}
+[0.500451] (-) TimerEvent: {}
+[0.554751] (ydlidar_ros2_driver) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.559441] (ydlidar_ros2_driver) StdoutLine: {'line': b'-- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)\n'}
+[0.600588] (-) TimerEvent: {}
+[0.701009] (-) TimerEvent: {}
+[0.801435] (-) TimerEvent: {}
+[0.808806] (ydlidar_ros2_driver) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.885976] (ydlidar_ros2_driver) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)\n'}
+[0.888003] (ydlidar_ros2_driver) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.901544] (-) TimerEvent: {}
+[1.003728] (-) TimerEvent: {}
+[1.105846] (-) TimerEvent: {}
+[1.126993] (ydlidar_ros2_driver) StdoutLine: {'line': b'-- Found sensor_msgs: 2.0.5 (/opt/ros/foxy/share/sensor_msgs/cmake)\n'}
+[1.205982] (-) TimerEvent: {}
+[1.299813] (ydlidar_ros2_driver) StdoutLine: {'line': b'-- Found visualization_msgs: 2.0.5 (/opt/ros/foxy/share/visualization_msgs/cmake)\n'}
+[1.306164] (-) TimerEvent: {}
+[1.401824] (ydlidar_ros2_driver) StdoutLine: {'line': b'-- Found std_srvs: 2.0.5 (/opt/ros/foxy/share/std_srvs/cmake)\n'}
+[1.406237] (-) TimerEvent: {}
+[1.445732] (ydlidar_ros2_driver) StderrLine: {'line': b'CMake Error at CMakeLists.txt:25 (find_package):\n'}
+[1.446190] (ydlidar_ros2_driver) StderrLine: {'line': b'  By not providing "Findydlidar_sdk.cmake" in CMAKE_MODULE_PATH this project\n'}
+[1.446280] (ydlidar_ros2_driver) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[1.446350] (ydlidar_ros2_driver) StderrLine: {'line': b'  "ydlidar_sdk", but CMake did not find one.\n'}
+[1.446419] (ydlidar_ros2_driver) StderrLine: {'line': b'\n'}
+[1.446483] (ydlidar_ros2_driver) StderrLine: {'line': b'  Could not find a package configuration file provided by "ydlidar_sdk" with\n'}
+[1.446546] (ydlidar_ros2_driver) StderrLine: {'line': b'  any of the following names:\n'}
+[1.446642] (ydlidar_ros2_driver) StderrLine: {'line': b'\n'}
+[1.446728] (ydlidar_ros2_driver) StderrLine: {'line': b'    ydlidar_sdkConfig.cmake\n'}
+[1.446793] (ydlidar_ros2_driver) StderrLine: {'line': b'    ydlidar_sdk-config.cmake\n'}
+[1.446863] (ydlidar_ros2_driver) StderrLine: {'line': b'\n'}
+[1.446926] (ydlidar_ros2_driver) StderrLine: {'line': b'  Add the installation prefix of "ydlidar_sdk" to CMAKE_PREFIX_PATH or set\n'}
+[1.446989] (ydlidar_ros2_driver) StderrLine: {'line': b'  "ydlidar_sdk_DIR" to a directory containing one of the above files.  If\n'}
+[1.447051] (ydlidar_ros2_driver) StderrLine: {'line': b'  "ydlidar_sdk" provides a separate development package or SDK, be sure it\n'}
+[1.447111] (ydlidar_ros2_driver) StderrLine: {'line': b'  has been installed.\n'}
+[1.447171] (ydlidar_ros2_driver) StderrLine: {'line': b'\n'}
+[1.447231] (ydlidar_ros2_driver) StderrLine: {'line': b'\n'}
+[1.449321] (ydlidar_ros2_driver) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[1.449551] (ydlidar_ros2_driver) StdoutLine: {'line': b'See also "/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ydlidar_ros2_driver/CMakeFiles/CMakeOutput.log".\n'}
+[1.449654] (ydlidar_ros2_driver) StdoutLine: {'line': b'See also "/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ydlidar_ros2_driver/CMakeFiles/CMakeError.log".\n'}
+[1.464633] (ydlidar_ros2_driver) CommandEnded: {'returncode': 1}
+[1.506480] (-) TimerEvent: {}
+[1.521564] (ydlidar_ros2_driver) JobEnded: {'identifier': 'ydlidar_ros2_driver', 'rc': 1}
+[1.533296] (-) EventReactorShutdown: {}

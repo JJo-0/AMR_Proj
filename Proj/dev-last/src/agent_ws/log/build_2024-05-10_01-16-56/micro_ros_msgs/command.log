@@ -1,0 +1,6 @@
+Invoking command in '/home/gunwon/dev/src/agent_ws/build/micro_ros_msgs': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/gunwon/dev/src/agent_ws/src/uros/micro_ros_msgs -DCMAKE_INSTALL_PREFIX=/home/gunwon/dev/src/agent_ws/install/micro_ros_msgs
+Invoked command in '/home/gunwon/dev/src/agent_ws/build/micro_ros_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/gunwon/dev/src/agent_ws/src/uros/micro_ros_msgs -DCMAKE_INSTALL_PREFIX=/home/gunwon/dev/src/agent_ws/install/micro_ros_msgs
+Invoking command in '/home/gunwon/dev/src/agent_ws/build/micro_ros_msgs': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/gunwon/dev/src/agent_ws/build/micro_ros_msgs -- -j12 -l12
+Invoked command in '/home/gunwon/dev/src/agent_ws/build/micro_ros_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/gunwon/dev/src/agent_ws/build/micro_ros_msgs -- -j12 -l12
+Invoking command in '/home/gunwon/dev/src/agent_ws/build/micro_ros_msgs': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/gunwon/dev/src/agent_ws/build/micro_ros_msgs
+Invoked command in '/home/gunwon/dev/src/agent_ws/build/micro_ros_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/gunwon/dev/src/agent_ws/build/micro_ros_msgs

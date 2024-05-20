@@ -1,0 +1,1 @@
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm/ament_cmake_core/diffdrive_stmConfig-version.cmake

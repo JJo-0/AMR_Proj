@@ -1,0 +1,8 @@
+{
+  "package_name": "micro_ros_msgs",
+  "non_idl_tuples": [
+    "/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/src/uros/micro_ros_msgs:msg/Graph.msg",
+    "/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/src/uros/micro_ros_msgs:msg/Node.msg",
+    "/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/src/uros/micro_ros_msgs:msg/Entity.msg"
+  ]
+}

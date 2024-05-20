@@ -1,0 +1,252 @@
+[0.000000] (-) TimerEvent: {}
+[0.000559] (CMSISDSP) JobQueued: {'identifier': 'CMSISDSP', 'dependencies': OrderedDict()}
+[0.001254] (CMSISNN) JobQueued: {'identifier': 'CMSISNN', 'dependencies': OrderedDict()}
+[0.001457] (arm_bayes_example) JobQueued: {'identifier': 'arm_bayes_example', 'dependencies': OrderedDict()}
+[0.001484] (arm_class_marks_example) JobQueued: {'identifier': 'arm_class_marks_example', 'dependencies': OrderedDict()}
+[0.001924] (arm_convolution_example) JobQueued: {'identifier': 'arm_convolution_example', 'dependencies': OrderedDict()}
+[0.001948] (arm_dotproduct_example) JobQueued: {'identifier': 'arm_dotproduct_example', 'dependencies': OrderedDict()}
+[0.001970] (arm_fft_bin_example) JobQueued: {'identifier': 'arm_fft_bin_example', 'dependencies': OrderedDict()}
+[0.002031] (arm_fir_example) JobQueued: {'identifier': 'arm_fir_example', 'dependencies': OrderedDict()}
+[0.002084] (arm_graphic_equalizer_example) JobQueued: {'identifier': 'arm_graphic_equalizer_example', 'dependencies': OrderedDict()}
+[0.002110] (arm_linear_interp_example) JobQueued: {'identifier': 'arm_linear_interp_example', 'dependencies': OrderedDict()}
+[0.002147] (arm_matrix_example) JobQueued: {'identifier': 'arm_matrix_example', 'dependencies': OrderedDict()}
+[0.002930] (arm_signal_convergence_example) JobQueued: {'identifier': 'arm_signal_convergence_example', 'dependencies': OrderedDict()}
+[0.003415] (arm_sin_cos_example) JobQueued: {'identifier': 'arm_sin_cos_example', 'dependencies': OrderedDict()}
+[0.003478] (arm_svm_example) JobQueued: {'identifier': 'arm_svm_example', 'dependencies': OrderedDict()}
+[0.003523] (arm_variance_example) JobQueued: {'identifier': 'arm_variance_example', 'dependencies': OrderedDict()}
+[0.003566] (articubot_one) JobQueued: {'identifier': 'articubot_one', 'dependencies': OrderedDict()}
+[0.003609] (diffdrive_stm) JobQueued: {'identifier': 'diffdrive_stm', 'dependencies': OrderedDict()}
+[0.003651] (drive_base_msgs) JobQueued: {'identifier': 'drive_base_msgs', 'dependencies': OrderedDict()}
+[0.003691] (ds4drv) JobQueued: {'identifier': 'ds4drv', 'dependencies': OrderedDict()}
+[0.003740] (micro_ros_msgs) JobQueued: {'identifier': 'micro_ros_msgs', 'dependencies': OrderedDict()}
+[0.003763] (micro_ros_setup) JobQueued: {'identifier': 'micro_ros_setup', 'dependencies': OrderedDict()}
+[0.003784] (micro_ros_stmcube) JobQueued: {'identifier': 'micro_ros_stmcube', 'dependencies': OrderedDict()}
+[0.003804] (ydlidar_ros2_driver) JobQueued: {'identifier': 'ydlidar_ros2_driver', 'dependencies': OrderedDict()}
+[0.003824] (micro_ros_agent) JobQueued: {'identifier': 'micro_ros_agent', 'dependencies': OrderedDict([('micro_ros_msgs', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/micro_ros_msgs')])}
+[0.003853] (micro_ros_msgs) JobStarted: {'identifier': 'micro_ros_msgs'}
+[0.034862] (CMSISDSP) JobStarted: {'identifier': 'CMSISDSP'}
+[0.069038] (CMSISNN) JobStarted: {'identifier': 'CMSISNN'}
+[0.104086] (arm_bayes_example) JobStarted: {'identifier': 'arm_bayes_example'}
+[0.106629] (-) TimerEvent: {}
+[0.133824] (micro_ros_msgs) JobProgress: {'identifier': 'micro_ros_msgs', 'progress': 'cmake'}
+[0.134497] (micro_ros_msgs) Command: {'cmd': ['/usr/bin/cmake', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/src/uros/micro_ros_msgs', '-DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/micro_ros_msgs'], 'cwd': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/micro_ros_msgs', 'env': OrderedDict([('HOSTNAME', 'edr1-desktop'), ('GIT_ASKPASS', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LIBGL_ALWAYS_SOFTWARE', '1'), ('LD_LIBRARY_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib'), ('BROWSER', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/bin/helpers/browser.sh'), ('HOME', '/home/vscode'), ('OLDPWD', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/ds4drv'), ('TERM_PROGRAM_VERSION', '1.89.0'), ('VSCODE_IPC_HOOK_CLI', '/tmp/vscode-ipc-b4b7346a-bc50-45ea-b6c0-da98c35f5f51.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/node'), ('COLORTERM', 'truecolor'), ('REMOTE_CONTAINERS', 'true'), ('WAYLAND_DISPLAY', 'vscode-wayland-8fa3253a-1058-4bd4-adf5-cdaa66be46ba.sock'), ('COLCON_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install'), ('ROS_DISTRO', 'foxy'), ('REMOTE_CONTAINERS_IPC', '/tmp/vscode-remote-containers-ipc-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/bin/remote-cli:/home/vscode/.local/bin:/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('XDG_RUNTIME_DIR', '/tmp/user/1002'), ('REMOTE_CONTAINERS_SOCKETS', '["/tmp/vscode-ssh-auth-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock","/tmp/.X11-unix/X2","/home/vscode/.gnupg/S.gpg-agent"]'), ('DISPLAY', ':2'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/tmp/user/1002/vscode-git-4f6cd1cbae.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/tmp/vscode-ssh-auth-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock'), ('AMENT_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one:/opt/ros/foxy'), ('DEBIAN_FRONTEND', 'noninteractive'), ('REMOTE_CONTAINERS_DISPLAY_SOCK', '/tmp/.X11-unix/X2'), ('SHELL', '/bin/bash'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/micro_ros_msgs'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one:/opt/ros/foxy')]), 'shell': False}
+[0.163282] (CMSISDSP) JobProgress: {'identifier': 'CMSISDSP', 'progress': 'cmake'}
+[0.164198] (CMSISDSP) Command: {'cmd': ['/usr/bin/cmake', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source', '-DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/CMSISDSP'], 'cwd': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/CMSISDSP', 'env': OrderedDict([('HOSTNAME', 'edr1-desktop'), ('GIT_ASKPASS', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LIBGL_ALWAYS_SOFTWARE', '1'), ('LD_LIBRARY_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib'), ('BROWSER', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/bin/helpers/browser.sh'), ('HOME', '/home/vscode'), ('OLDPWD', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/ds4drv'), ('TERM_PROGRAM_VERSION', '1.89.0'), ('VSCODE_IPC_HOOK_CLI', '/tmp/vscode-ipc-b4b7346a-bc50-45ea-b6c0-da98c35f5f51.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/node'), ('COLORTERM', 'truecolor'), ('REMOTE_CONTAINERS', 'true'), ('WAYLAND_DISPLAY', 'vscode-wayland-8fa3253a-1058-4bd4-adf5-cdaa66be46ba.sock'), ('COLCON_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install'), ('ROS_DISTRO', 'foxy'), ('REMOTE_CONTAINERS_IPC', '/tmp/vscode-remote-containers-ipc-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/bin/remote-cli:/home/vscode/.local/bin:/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('XDG_RUNTIME_DIR', '/tmp/user/1002'), ('REMOTE_CONTAINERS_SOCKETS', '["/tmp/vscode-ssh-auth-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock","/tmp/.X11-unix/X2","/home/vscode/.gnupg/S.gpg-agent"]'), ('DISPLAY', ':2'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/tmp/user/1002/vscode-git-4f6cd1cbae.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/tmp/vscode-ssh-auth-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock'), ('AMENT_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one:/opt/ros/foxy'), ('DEBIAN_FRONTEND', 'noninteractive'), ('REMOTE_CONTAINERS_DISPLAY_SOCK', '/tmp/.X11-unix/X2'), ('SHELL', '/bin/bash'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/CMSISDSP'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one')]), 'shell': False}
+[0.182380] (CMSISNN) JobProgress: {'identifier': 'CMSISNN', 'progress': 'cmake'}
+[0.182645] (CMSISNN) Command: {'cmd': ['/usr/bin/cmake', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/NN', '-DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/CMSISNN'], 'cwd': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/CMSISNN', 'env': OrderedDict([('HOSTNAME', 'edr1-desktop'), ('GIT_ASKPASS', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LIBGL_ALWAYS_SOFTWARE', '1'), ('LD_LIBRARY_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib'), ('BROWSER', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/bin/helpers/browser.sh'), ('HOME', '/home/vscode'), ('OLDPWD', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/ds4drv'), ('TERM_PROGRAM_VERSION', '1.89.0'), ('VSCODE_IPC_HOOK_CLI', '/tmp/vscode-ipc-b4b7346a-bc50-45ea-b6c0-da98c35f5f51.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/node'), ('COLORTERM', 'truecolor'), ('REMOTE_CONTAINERS', 'true'), ('WAYLAND_DISPLAY', 'vscode-wayland-8fa3253a-1058-4bd4-adf5-cdaa66be46ba.sock'), ('COLCON_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install'), ('ROS_DISTRO', 'foxy'), ('REMOTE_CONTAINERS_IPC', '/tmp/vscode-remote-containers-ipc-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/bin/remote-cli:/home/vscode/.local/bin:/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('XDG_RUNTIME_DIR', '/tmp/user/1002'), ('REMOTE_CONTAINERS_SOCKETS', '["/tmp/vscode-ssh-auth-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock","/tmp/.X11-unix/X2","/home/vscode/.gnupg/S.gpg-agent"]'), ('DISPLAY', ':2'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/tmp/user/1002/vscode-git-4f6cd1cbae.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/tmp/vscode-ssh-auth-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock'), ('AMENT_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one:/opt/ros/foxy'), ('DEBIAN_FRONTEND', 'noninteractive'), ('REMOTE_CONTAINERS_DISPLAY_SOCK', '/tmp/.X11-unix/X2'), ('SHELL', '/bin/bash'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/CMSISNN'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one')]), 'shell': False}
+[0.212287] (-) TimerEvent: {}
+[0.222576] (arm_bayes_example) JobProgress: {'identifier': 'arm_bayes_example', 'progress': 'cmake'}
+[0.228789] (arm_bayes_example) Command: {'cmd': ['/usr/bin/cmake', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Examples/ARM/arm_bayes_example', '-DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/arm_bayes_example'], 'cwd': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/arm_bayes_example', 'env': OrderedDict([('HOSTNAME', 'edr1-desktop'), ('GIT_ASKPASS', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LIBGL_ALWAYS_SOFTWARE', '1'), ('LD_LIBRARY_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib'), ('BROWSER', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/bin/helpers/browser.sh'), ('HOME', '/home/vscode'), ('OLDPWD', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/ds4drv'), ('TERM_PROGRAM_VERSION', '1.89.0'), ('VSCODE_IPC_HOOK_CLI', '/tmp/vscode-ipc-b4b7346a-bc50-45ea-b6c0-da98c35f5f51.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/node'), ('COLORTERM', 'truecolor'), ('REMOTE_CONTAINERS', 'true'), ('WAYLAND_DISPLAY', 'vscode-wayland-8fa3253a-1058-4bd4-adf5-cdaa66be46ba.sock'), ('COLCON_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install'), ('ROS_DISTRO', 'foxy'), ('REMOTE_CONTAINERS_IPC', '/tmp/vscode-remote-containers-ipc-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/bin/remote-cli:/home/vscode/.local/bin:/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('XDG_RUNTIME_DIR', '/tmp/user/1002'), ('REMOTE_CONTAINERS_SOCKETS', '["/tmp/vscode-ssh-auth-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock","/tmp/.X11-unix/X2","/home/vscode/.gnupg/S.gpg-agent"]'), ('DISPLAY', ':2'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/tmp/user/1002/vscode-git-4f6cd1cbae.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/tmp/vscode-ssh-auth-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock'), ('AMENT_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one:/opt/ros/foxy'), ('DEBIAN_FRONTEND', 'noninteractive'), ('REMOTE_CONTAINERS_DISPLAY_SOCK', '/tmp/.X11-unix/X2'), ('SHELL', '/bin/bash'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/arm_bayes_example'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one')]), 'shell': False}
+[0.312580] (-) TimerEvent: {}
+[0.414470] (-) TimerEvent: {}
+[0.523523] (micro_ros_msgs) StdoutLine: {'line': b'-- The C compiler identification is GNU 9.4.0\n'}
+[0.524426] (-) TimerEvent: {}
+[0.564480] (CMSISNN) StdoutLine: {'line': b'-- The C compiler identification is GNU 9.4.0\n'}
+[0.572595] (CMSISDSP) StdoutLine: {'line': b'-- The C compiler identification is GNU 9.4.0\n'}
+[0.584985] (arm_bayes_example) StdoutLine: {'line': b'-- The C compiler identification is GNU 9.4.0\n'}
+[0.625412] (-) TimerEvent: {}
+[0.726275] (-) TimerEvent: {}
+[0.832430] (-) TimerEvent: {}
+[0.934629] (-) TimerEvent: {}
+[0.989403] (CMSISDSP) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 9.4.0\n'}
+[1.001751] (CMSISNN) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 9.4.0\n'}
+[1.011393] (arm_bayes_example) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 9.4.0\n'}
+[1.028317] (micro_ros_msgs) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 9.4.0\n'}
+[1.034304] (CMSISNN) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc\n'}
+[1.036049] (-) TimerEvent: {}
+[1.038755] (arm_bayes_example) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc\n'}
+[1.040193] (CMSISDSP) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc\n'}
+[1.059179] (micro_ros_msgs) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc\n'}
+[1.139640] (-) TimerEvent: {}
+[1.247554] (-) TimerEvent: {}
+[1.349607] (-) TimerEvent: {}
+[1.452128] (-) TimerEvent: {}
+[1.507485] (arm_bayes_example) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc -- works\n'}
+[1.512301] (CMSISDSP) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc -- works\n'}
+[1.515919] (arm_bayes_example) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.531414] (CMSISDSP) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.532039] (CMSISNN) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc -- works\n'}
+[1.532563] (micro_ros_msgs) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc -- works\n'}
+[1.533031] (micro_ros_msgs) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.533288] (CMSISNN) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.553409] (-) TimerEvent: {}
+[1.655434] (-) TimerEvent: {}
+[1.760449] (-) TimerEvent: {}
+[1.861533] (-) TimerEvent: {}
+[1.949207] (CMSISDSP) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.962672] (-) TimerEvent: {}
+[2.021939] (CMSISDSP) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[2.036945] (CMSISDSP) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[2.044126] (CMSISDSP) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++\n'}
+[2.047589] (CMSISNN) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[2.051674] (arm_bayes_example) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[2.057716] (micro_ros_msgs) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[2.065305] (-) TimerEvent: {}
+[2.080810] (CMSISNN) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[2.082411] (CMSISNN) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[2.090501] (CMSISNN) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++\n'}
+[2.107760] (arm_bayes_example) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[2.108164] (arm_bayes_example) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[2.114716] (micro_ros_msgs) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[2.116893] (micro_ros_msgs) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[2.118826] (arm_bayes_example) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++\n'}
+[2.135642] (micro_ros_msgs) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++\n'}
+[2.166881] (-) TimerEvent: {}
+[2.269508] (-) TimerEvent: {}
+[2.370784] (-) TimerEvent: {}
+[2.472404] (-) TimerEvent: {}
+[2.542072] (arm_bayes_example) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ -- works\n'}
+[2.558384] (arm_bayes_example) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[2.561615] (CMSISNN) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ -- works\n'}
+[2.572310] (CMSISNN) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[2.572956] (-) TimerEvent: {}
+[2.582587] (CMSISDSP) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ -- works\n'}
+[2.593334] (CMSISDSP) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[2.673398] (-) TimerEvent: {}
+[2.717990] (micro_ros_msgs) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ -- works\n'}
+[2.722047] (micro_ros_msgs) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[2.774004] (-) TimerEvent: {}
+[2.875585] (-) TimerEvent: {}
+[2.989989] (-) TimerEvent: {}
+[3.016994] (arm_bayes_example) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[3.038796] (CMSISDSP) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[3.059349] (arm_bayes_example) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[3.066461] (arm_bayes_example) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[3.074062] (arm_bayes_example) StderrLine: {'line': b'CMake Error at /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source/CMakeLists.txt:12 (include):\n'}
+[3.074855] (arm_bayes_example) StderrLine: {'line': b'  include could not find load file:\n'}
+[3.075346] (arm_bayes_example) StderrLine: {'line': b'\n'}
+[3.075595] (arm_bayes_example) StderrLine: {'line': b'    configLib\n'}
+[3.075742] (arm_bayes_example) StderrLine: {'line': b'\n'}
+[3.075865] (arm_bayes_example) StderrLine: {'line': b'\n'}
+[3.075961] (arm_bayes_example) StderrLine: {'line': b'CMake Error at /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source/BasicMathFunctions/CMakeLists.txt:5 (include):\n'}
+[3.076359] (arm_bayes_example) StderrLine: {'line': b'  include could not find load file:\n'}
+[3.076750] (arm_bayes_example) StderrLine: {'line': b'\n'}
+[3.077093] (arm_bayes_example) StderrLine: {'line': b'    configLib\n'}
+[3.077770] (arm_bayes_example) StderrLine: {'line': b'\n'}
+[3.078399] (arm_bayes_example) StderrLine: {'line': b'\n'}
+[3.079541] (arm_bayes_example) StderrLine: {'line': b'CMake Error at /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source/BasicMathFunctions/CMakeLists.txt:6 (include):\n'}
+[3.081244] (arm_bayes_example) StderrLine: {'line': b'  include could not find load file:\n'}
+[3.083301] (arm_bayes_example) StderrLine: {'line': b'\n'}
+[3.083635] (arm_bayes_example) StderrLine: {'line': b'    configDsp\n'}
+[3.083821] (arm_bayes_example) StderrLine: {'line': b'\n'}
+[3.083975] (arm_bayes_example) StderrLine: {'line': b'\n'}
+[3.087295] (arm_bayes_example) StderrLine: {'line': b'CMake Error at /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source/BasicMathFunctions/CMakeLists.txt:34 (configLib):\n'}
+[3.087985] (arm_bayes_example) StderrLine: {'line': b'  Unknown CMake command "configLib".\n'}
+[3.088384] (arm_bayes_example) StderrLine: {'line': b'\n'}
+[3.088714] (arm_bayes_example) StderrLine: {'line': b'\n'}
+[3.088950] (arm_bayes_example) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[3.090376] (arm_bayes_example) StdoutLine: {'line': b'See also "/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/arm_bayes_example/CMakeFiles/CMakeOutput.log".\n'}
+[3.093929] (-) TimerEvent: {}
+[3.111545] (micro_ros_msgs) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[3.112018] (CMSISNN) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[3.123429] (arm_bayes_example) CommandEnded: {'returncode': 1}
+[3.124131] (arm_bayes_example) JobEnded: {'identifier': 'arm_bayes_example', 'rc': 1}
+[3.125196] (CMSISDSP) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[3.125425] (CMSISDSP) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[3.125522] (CMSISDSP) StderrLine: {'line': b'CMake Error at CMakeLists.txt:12 (include):\n'}
+[3.125666] (CMSISDSP) StderrLine: {'line': b'  include could not find load file:\n'}
+[3.127782] (CMSISDSP) StderrLine: {'line': b'\n'}
+[3.128162] (CMSISDSP) StderrLine: {'line': b'    configLib\n'}
+[3.128451] (CMSISDSP) StderrLine: {'line': b'\n'}
+[3.128640] (CMSISDSP) StderrLine: {'line': b'\n'}
+[3.128788] (CMSISDSP) StderrLine: {'line': b'CMake Error at BasicMathFunctions/CMakeLists.txt:5 (include):\n'}
+[3.128932] (CMSISDSP) StderrLine: {'line': b'  include could not find load file:\n'}
+[3.129055] (CMSISDSP) StderrLine: {'line': b'\n'}
+[3.129212] (CMSISDSP) StderrLine: {'line': b'    configLib\n'}
+[3.129421] (CMSISDSP) StderrLine: {'line': b'\n'}
+[3.134793] (CMSISDSP) StderrLine: {'line': b'\n'}
+[3.135040] (CMSISDSP) StderrLine: {'line': b'CMake Error at BasicMathFunctions/CMakeLists.txt:6 (include):\n'}
+[3.135197] (CMSISDSP) StderrLine: {'line': b'  include could not find load file:\n'}
+[3.135416] (CMSISDSP) StderrLine: {'line': b'\n'}
+[3.135576] (CMSISDSP) StderrLine: {'line': b'    configDsp\n'}
+[3.135704] (CMSISDSP) StderrLine: {'line': b'\n'}
+[3.135820] (CMSISDSP) StderrLine: {'line': b'\n'}
+[3.135922] (CMSISDSP) StderrLine: {'line': b'CMake Error at BasicMathFunctions/CMakeLists.txt:34 (configLib):\n'}
+[3.136017] (CMSISDSP) StderrLine: {'line': b'  Unknown CMake command "configLib".\n'}
+[3.139479] (CMSISDSP) StderrLine: {'line': b'\n'}
+[3.141236] (CMSISDSP) StderrLine: {'line': b'\n'}
+[3.141505] (CMSISDSP) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[3.141720] (CMSISDSP) StdoutLine: {'line': b'See also "/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/CMSISDSP/CMakeFiles/CMakeOutput.log".\n'}
+[3.141898] (CMSISDSP) JobEnded: {'identifier': 'CMSISDSP', 'rc': 'SIGINT'}
+[3.148880] (micro_ros_msgs) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[3.151756] (micro_ros_msgs) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[3.166980] (CMSISNN) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[3.169312] (CMSISNN) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[3.177563] (micro_ros_msgs) StdoutLine: {'line': b'-- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)\n'}
+[3.194324] (-) TimerEvent: {}
+[3.202728] (CMSISNN) StdoutLine: {'line': b'-- Configuring done\n'}
+[3.294504] (-) TimerEvent: {}
+[3.318476] (micro_ros_msgs) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") \n'}
+[3.319864] (micro_ros_msgs) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[3.329351] (CMSISNN) StdoutLine: {'line': b'-- Generating done\n'}
+[3.329880] (CMSISNN) StdoutLine: {'line': b'-- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/CMSISNN\n'}
+[3.345422] (CMSISNN) JobEnded: {'identifier': 'CMSISNN', 'rc': 'SIGINT'}
+[3.394643] (-) TimerEvent: {}
+[3.498546] (-) TimerEvent: {}
+[3.600984] (-) TimerEvent: {}
+[3.701571] (-) TimerEvent: {}
+[3.803727] (-) TimerEvent: {}
+[3.904498] (-) TimerEvent: {}
+[3.930366] (micro_ros_msgs) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.0.1 (/opt/ros/foxy/share/rosidl_default_generators/cmake)\n'}
+[3.945300] (micro_ros_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[3.963336] (micro_ros_msgs) StdoutLine: {'line': b'-- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)\n'}
+[4.004617] (-) TimerEvent: {}
+[4.105116] (-) TimerEvent: {}
+[4.205627] (-) TimerEvent: {}
+[4.264061] (micro_ros_msgs) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "1.1.1f")  \n'}
+[4.305750] (-) TimerEvent: {}
+[4.336154] (micro_ros_msgs) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/foxy/include  \n'}
+[4.405894] (-) TimerEvent: {}
+[4.506406] (-) TimerEvent: {}
+[4.516079] (micro_ros_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[4.575302] (micro_ros_msgs) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.9.8 (/opt/ros/foxy/share/ament_lint_auto/cmake)\n'}
+[4.606517] (-) TimerEvent: {}
+[4.706950] (-) TimerEvent: {}
+[4.785238] (micro_ros_msgs) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") \n'}
+[4.807054] (-) TimerEvent: {}
+[4.907602] (-) TimerEvent: {}
+[4.917242] (micro_ros_msgs) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.9.2 (/opt/ros/foxy/share/ament_cmake_ros/cmake)\n'}
+[5.007728] (-) TimerEvent: {}
+[5.108200] (-) TimerEvent: {}
+[5.167805] (micro_ros_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[5.185587] (micro_ros_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[5.208307] (-) TimerEvent: {}
+[5.227896] (micro_ros_msgs) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3.5") \n'}
+[5.233938] (micro_ros_msgs) StdoutLine: {'line': b'-- Found python_cmake_module: 0.8.1 (/opt/ros/foxy/share/python_cmake_module/cmake)\n'}
+[5.288886] (micro_ros_msgs) StdoutLine: {'line': b'-- Found PythonLibs: /usr/lib/aarch64-linux-gnu/libpython3.8.so (found suitable version "3.8.10", minimum required is "3.5") \n'}
+[5.289319] (micro_ros_msgs) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[5.289443] (micro_ros_msgs) StdoutLine: {'line': b'-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.8\n'}
+[5.289529] (micro_ros_msgs) StdoutLine: {'line': b'-- Using PYTHON_LIBRARIES: /usr/lib/aarch64-linux-gnu/libpython3.8.so\n'}
+[5.308420] (-) TimerEvent: {}
+[5.328666] (micro_ros_msgs) StdoutLine: {'line': b'-- Found PythonExtra: .so  \n'}
+[5.408556] (-) TimerEvent: {}
+[5.413281] (micro_ros_msgs) StdoutLine: {'line': b"-- Added test 'copyright' to check source files copyright and LICENSE\n"}
+[5.481026] (micro_ros_msgs) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[5.506021] (micro_ros_msgs) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[5.510320] (-) TimerEvent: {}
+[5.523394] (micro_ros_msgs) StdoutLine: {'line': b'-- Configuring done\n'}
+[5.595895] (micro_ros_msgs) StdoutLine: {'line': b'-- Generating done\n'}
+[5.603371] (micro_ros_msgs) StdoutLine: {'line': b'-- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/micro_ros_msgs\n'}
+[5.610447] (-) TimerEvent: {}
+[5.614333] (micro_ros_msgs) JobEnded: {'identifier': 'micro_ros_msgs', 'rc': 'SIGINT'}
+[5.625899] (arm_class_marks_example) JobSkipped: {'identifier': 'arm_class_marks_example'}
+[5.626089] (arm_convolution_example) JobSkipped: {'identifier': 'arm_convolution_example'}
+[5.626335] (arm_dotproduct_example) JobSkipped: {'identifier': 'arm_dotproduct_example'}
+[5.626406] (arm_fft_bin_example) JobSkipped: {'identifier': 'arm_fft_bin_example'}
+[5.626440] (arm_fir_example) JobSkipped: {'identifier': 'arm_fir_example'}
+[5.626470] (arm_graphic_equalizer_example) JobSkipped: {'identifier': 'arm_graphic_equalizer_example'}
+[5.626498] (arm_linear_interp_example) JobSkipped: {'identifier': 'arm_linear_interp_example'}
+[5.626523] (arm_matrix_example) JobSkipped: {'identifier': 'arm_matrix_example'}
+[5.626548] (arm_signal_convergence_example) JobSkipped: {'identifier': 'arm_signal_convergence_example'}
+[5.626572] (arm_sin_cos_example) JobSkipped: {'identifier': 'arm_sin_cos_example'}
+[5.626597] (arm_svm_example) JobSkipped: {'identifier': 'arm_svm_example'}
+[5.626621] (arm_variance_example) JobSkipped: {'identifier': 'arm_variance_example'}
+[5.626648] (articubot_one) JobSkipped: {'identifier': 'articubot_one'}
+[5.626673] (diffdrive_stm) JobSkipped: {'identifier': 'diffdrive_stm'}
+[5.626697] (drive_base_msgs) JobSkipped: {'identifier': 'drive_base_msgs'}
+[5.626722] (ds4drv) JobSkipped: {'identifier': 'ds4drv'}
+[5.626748] (micro_ros_setup) JobSkipped: {'identifier': 'micro_ros_setup'}
+[5.626771] (micro_ros_stmcube) JobSkipped: {'identifier': 'micro_ros_stmcube'}
+[5.626795] (ydlidar_ros2_driver) JobSkipped: {'identifier': 'ydlidar_ros2_driver'}
+[5.626820] (micro_ros_agent) JobSkipped: {'identifier': 'micro_ros_agent'}
+[5.626843] (-) EventReactorShutdown: {}

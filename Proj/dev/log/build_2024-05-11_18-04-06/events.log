@@ -1,0 +1,157 @@
+[0.000000] (-) TimerEvent: {}
+[0.000564] (-) JobUnselected: {'identifier': 'CMSISDSP'}
+[0.001012] (-) JobUnselected: {'identifier': 'CMSISNN'}
+[0.001621] (-) JobUnselected: {'identifier': 'arm_bayes_example'}
+[0.002288] (-) JobUnselected: {'identifier': 'arm_class_marks_example'}
+[0.002393] (-) JobUnselected: {'identifier': 'arm_convolution_example'}
+[0.002429] (-) JobUnselected: {'identifier': 'arm_dotproduct_example'}
+[0.002493] (-) JobUnselected: {'identifier': 'arm_fft_bin_example'}
+[0.002541] (-) JobUnselected: {'identifier': 'arm_fir_example'}
+[0.002566] (-) JobUnselected: {'identifier': 'arm_graphic_equalizer_example'}
+[0.003678] (-) JobUnselected: {'identifier': 'arm_linear_interp_example'}
+[0.004402] (-) JobUnselected: {'identifier': 'arm_matrix_example'}
+[0.004499] (-) JobUnselected: {'identifier': 'arm_signal_convergence_example'}
+[0.004552] (-) JobUnselected: {'identifier': 'arm_sin_cos_example'}
+[0.004602] (-) JobUnselected: {'identifier': 'arm_svm_example'}
+[0.004649] (-) JobUnselected: {'identifier': 'arm_variance_example'}
+[0.004696] (-) JobUnselected: {'identifier': 'articubot_one'}
+[0.004743] (-) JobUnselected: {'identifier': 'diffdrive_stm'}
+[0.004785] (-) JobUnselected: {'identifier': 'drive_base_msgs'}
+[0.004853] (-) JobUnselected: {'identifier': 'micro_ros_agent'}
+[0.005005] (-) JobUnselected: {'identifier': 'micro_ros_msgs'}
+[0.005066] (-) JobUnselected: {'identifier': 'micro_ros_setup'}
+[0.005124] (-) JobUnselected: {'identifier': 'micro_ros_stmcube'}
+[0.005182] (-) JobUnselected: {'identifier': 'ydlidar_ros2_driver'}
+[0.005239] (ds4drv) JobQueued: {'identifier': 'ds4drv', 'dependencies': OrderedDict()}
+[0.005385] (ds4drv) JobStarted: {'identifier': 'ds4drv'}
+[0.099177] (-) TimerEvent: {}
+[0.199944] (-) TimerEvent: {}
+[0.300458] (-) TimerEvent: {}
+[0.400947] (-) TimerEvent: {}
+[0.501446] (-) TimerEvent: {}
+[0.602001] (-) TimerEvent: {}
+[0.702646] (-) TimerEvent: {}
+[0.803045] (-) TimerEvent: {}
+[0.903527] (-) TimerEvent: {}
+[1.004611] (-) TimerEvent: {}
+[1.105164] (-) TimerEvent: {}
+[1.205658] (-) TimerEvent: {}
+[1.292780] (ds4drv) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/ds4drv', 'build', '--build-base', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build', 'install', '--record', '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/install.log', '--single-version-externally-managed'], 'cwd': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/ds4drv', 'env': {'HOSTNAME': 'edr1-desktop', 'GIT_ASKPASS': '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/extensions/git/dist/askpass.sh', 'SHLVL': '2', 'LIBGL_ALWAYS_SOFTWARE': '1', 'LD_LIBRARY_PATH': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib', 'BROWSER': '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/bin/helpers/browser.sh', 'HOME': '/home/vscode', 'OLDPWD': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/src', 'TERM_PROGRAM_VERSION': '1.89.0', 'VSCODE_IPC_HOOK_CLI': '/tmp/vscode-ipc-b4b7346a-bc50-45ea-b6c0-da98c35f5f51.sock', 'ROS_PYTHON_VERSION': '3', 'VSCODE_GIT_ASKPASS_MAIN': '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/node', 'COLORTERM': 'truecolor', 'REMOTE_CONTAINERS': 'true', 'WAYLAND_DISPLAY': 'vscode-wayland-8fa3253a-1058-4bd4-adf5-cdaa66be46ba.sock', 'COLCON_PREFIX_PATH': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install', 'ROS_DISTRO': 'foxy', 'REMOTE_CONTAINERS_IPC': '/tmp/vscode-remote-containers-ipc-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm-256color', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/vscode/vscode-server/bin/linux-arm64/b58957e67ee1e712cebf466b995adf4c5307b2bd/bin/remote-cli:/home/vscode/.local/bin:/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'XDG_RUNTIME_DIR': '/tmp/user/1002', 'REMOTE_CONTAINERS_SOCKETS': '["/tmp/vscode-ssh-auth-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock","/tmp/.X11-unix/X2","/home/vscode/.gnupg/S.gpg-agent"]', 'DISPLAY': ':2', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'VSCODE_GIT_IPC_HANDLE': '/tmp/user/1002/vscode-git-4f6cd1cbae.sock', 'TERM_PROGRAM': 'vscode', 'SSH_AUTH_SOCK': '/tmp/vscode-ssh-auth-f228ec8a-4a8a-4f5d-a152-8f31c501bfa1.sock', 'AMENT_PREFIX_PATH': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one:/opt/ros/foxy', 'DEBIAN_FRONTEND': 'noninteractive', 'REMOTE_CONTAINERS_DISPLAY_SOCK': '/tmp/.X11-unix/X2', 'SHELL': '/bin/bash', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'PWD': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/prefix_override:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm:/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/articubot_one'}, 'shell': False}
+[1.305759] (-) TimerEvent: {}
+[1.406303] (-) TimerEvent: {}
+[1.506712] (-) TimerEvent: {}
+[1.607478] (-) TimerEvent: {}
+[1.690486] (ds4drv) StdoutLine: {'line': b'running egg_info\n'}
+[1.691990] (ds4drv) StdoutLine: {'line': b'creating ../../build/ds4drv/ds4drv.egg-info\n'}
+[1.692540] (ds4drv) StdoutLine: {'line': b'writing ../../build/ds4drv/ds4drv.egg-info/PKG-INFO\n'}
+[1.692725] (ds4drv) StdoutLine: {'line': b'writing dependency_links to ../../build/ds4drv/ds4drv.egg-info/dependency_links.txt\n'}
+[1.692895] (ds4drv) StdoutLine: {'line': b'writing entry points to ../../build/ds4drv/ds4drv.egg-info/entry_points.txt\n'}
+[1.693065] (ds4drv) StdoutLine: {'line': b'writing requirements to ../../build/ds4drv/ds4drv.egg-info/requires.txt\n'}
+[1.693321] (ds4drv) StdoutLine: {'line': b'writing top-level names to ../../build/ds4drv/ds4drv.egg-info/top_level.txt\n'}
+[1.701671] (ds4drv) StdoutLine: {'line': b"writing manifest file '../../build/ds4drv/ds4drv.egg-info/SOURCES.txt'\n"}
+[1.710629] (-) TimerEvent: {}
+[1.804278] (ds4drv) StdoutLine: {'line': b"reading manifest file '../../build/ds4drv/ds4drv.egg-info/SOURCES.txt'\n"}
+[1.804886] (ds4drv) StdoutLine: {'line': b"reading manifest template 'MANIFEST.in'\n"}
+[1.805041] (ds4drv) StdoutLine: {'line': b"writing manifest file '../../build/ds4drv/ds4drv.egg-info/SOURCES.txt'\n"}
+[1.806258] (ds4drv) StdoutLine: {'line': b'running build\n'}
+[1.809432] (ds4drv) StdoutLine: {'line': b'running build_py\n'}
+[1.811993] (-) TimerEvent: {}
+[1.814300] (ds4drv) StdoutLine: {'line': b'creating /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build\n'}
+[1.814685] (ds4drv) StdoutLine: {'line': b'creating /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib\n'}
+[1.818158] (ds4drv) StdoutLine: {'line': b'creating /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.818414] (ds4drv) StdoutLine: {'line': b'copying ds4drv/config.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.818589] (ds4drv) StdoutLine: {'line': b'copying ds4drv/__main__.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.818797] (ds4drv) StdoutLine: {'line': b'copying ds4drv/logger.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.819018] (ds4drv) StdoutLine: {'line': b'copying ds4drv/utils.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.819313] (ds4drv) StdoutLine: {'line': b'copying ds4drv/action.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.819539] (ds4drv) StdoutLine: {'line': b'copying ds4drv/__init__.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.819756] (ds4drv) StdoutLine: {'line': b'copying ds4drv/eventloop.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.819970] (ds4drv) StdoutLine: {'line': b'copying ds4drv/device.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.827511] (ds4drv) StdoutLine: {'line': b'copying ds4drv/exceptions.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.829486] (ds4drv) StdoutLine: {'line': b'copying ds4drv/daemon.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.829659] (ds4drv) StdoutLine: {'line': b'copying ds4drv/backend.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.829770] (ds4drv) StdoutLine: {'line': b'copying ds4drv/uinput.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv\n'}
+[1.829870] (ds4drv) StdoutLine: {'line': b'creating /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions\n'}
+[1.829962] (ds4drv) StdoutLine: {'line': b'copying ds4drv/actions/led.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions\n'}
+[1.830117] (ds4drv) StdoutLine: {'line': b'copying ds4drv/actions/dump.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions\n'}
+[1.830237] (ds4drv) StdoutLine: {'line': b'copying ds4drv/actions/status.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions\n'}
+[1.830347] (ds4drv) StdoutLine: {'line': b'copying ds4drv/actions/binding.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions\n'}
+[1.830456] (ds4drv) StdoutLine: {'line': b'copying ds4drv/actions/__init__.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions\n'}
+[1.830562] (ds4drv) StdoutLine: {'line': b'copying ds4drv/actions/btsignal.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions\n'}
+[1.830667] (ds4drv) StdoutLine: {'line': b'copying ds4drv/actions/input.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions\n'}
+[1.830760] (ds4drv) StdoutLine: {'line': b'copying ds4drv/actions/battery.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions\n'}
+[1.830854] (ds4drv) StdoutLine: {'line': b'creating /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/backends\n'}
+[1.830947] (ds4drv) StdoutLine: {'line': b'copying ds4drv/backends/bluetooth.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/backends\n'}
+[1.831045] (ds4drv) StdoutLine: {'line': b'copying ds4drv/backends/__init__.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/backends\n'}
+[1.837236] (ds4drv) StdoutLine: {'line': b'copying ds4drv/backends/hidraw.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/backends\n'}
+[1.837496] (ds4drv) StdoutLine: {'line': b'creating /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/packages\n'}
+[1.837665] (ds4drv) StdoutLine: {'line': b'copying ds4drv/packages/timerfd.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/packages\n'}
+[1.837785] (ds4drv) StdoutLine: {'line': b'copying ds4drv/packages/__init__.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/packages\n'}
+[1.837878] (ds4drv) StdoutLine: {'line': b'running install\n'}
+[1.837971] (ds4drv) StdoutLine: {'line': b'running install_lib\n'}
+[1.838060] (ds4drv) StdoutLine: {'line': b'creating /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.838200] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/config.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.838306] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/__main__.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.838448] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/logger.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.838554] (ds4drv) StdoutLine: {'line': b'creating /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/backends\n'}
+[1.838651] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/backends/bluetooth.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/backends\n'}
+[1.838765] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/backends/__init__.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/backends\n'}
+[1.838871] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/backends/hidraw.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/backends\n'}
+[1.838980] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/utils.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.841482] (ds4drv) StdoutLine: {'line': b'creating /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/packages\n'}
+[1.841826] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/packages/timerfd.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/packages\n'}
+[1.841943] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/packages/__init__.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/packages\n'}
+[1.842034] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/action.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.842295] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/__init__.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.842453] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/eventloop.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.842573] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/device.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.842735] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/exceptions.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.842960] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/daemon.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.843158] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/backend.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.843333] (ds4drv) StdoutLine: {'line': b'creating /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions\n'}
+[1.843502] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions/led.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions\n'}
+[1.843710] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions/dump.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions\n'}
+[1.843870] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions/status.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions\n'}
+[1.844005] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions/binding.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions\n'}
+[1.844177] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions/__init__.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions\n'}
+[1.844345] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions/btsignal.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions\n'}
+[1.844546] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions/input.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions\n'}
+[1.844689] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/actions/battery.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions\n'}
+[1.844812] (ds4drv) StdoutLine: {'line': b'copying /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/build/lib/ds4drv/uinput.py -> /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv\n'}
+[1.849161] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/config.py to config.cpython-38.pyc\n'}
+[1.849503] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/__main__.py to __main__.cpython-38.pyc\n'}
+[1.849898] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/logger.py to logger.cpython-38.pyc\n'}
+[1.850159] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/backends/bluetooth.py to bluetooth.cpython-38.pyc\n'}
+[1.850394] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/backends/__init__.py to __init__.cpython-38.pyc\n'}
+[1.850720] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/backends/hidraw.py to hidraw.cpython-38.pyc\n'}
+[1.852948] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/utils.py to utils.cpython-38.pyc\n'}
+[1.854115] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/packages/timerfd.py to timerfd.cpython-38.pyc\n'}
+[1.856495] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/packages/__init__.py to __init__.cpython-38.pyc\n'}
+[1.857018] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/action.py to action.cpython-38.pyc\n'}
+[1.858565] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/__init__.py to __init__.cpython-38.pyc\n'}
+[1.859049] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/eventloop.py to eventloop.cpython-38.pyc\n'}
+[1.862680] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/device.py to device.cpython-38.pyc\n'}
+[1.866698] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/exceptions.py to exceptions.cpython-38.pyc\n'}
+[1.867375] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/daemon.py to daemon.cpython-38.pyc\n'}
+[1.868688] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/backend.py to backend.cpython-38.pyc\n'}
+[1.869804] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions/led.py to led.cpython-38.pyc\n'}
+[1.873908] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions/dump.py to dump.cpython-38.pyc\n'}
+[1.874477] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions/status.py to status.cpython-38.pyc\n'}
+[1.874759] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions/binding.py to binding.cpython-38.pyc\n'}
+[1.876650] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions/__init__.py to __init__.cpython-38.pyc\n'}
+[1.877035] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions/btsignal.py to btsignal.cpython-38.pyc\n'}
+[1.878236] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions/input.py to input.cpython-38.pyc\n'}
+[1.879861] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/actions/battery.py to battery.cpython-38.pyc\n'}
+[1.881036] (ds4drv) StdoutLine: {'line': b'byte-compiling /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv/uinput.py to uinput.cpython-38.pyc\n'}
+[1.886530] (ds4drv) StdoutLine: {'line': b'running install_egg_info\n'}
+[1.893269] (ds4drv) StdoutLine: {'line': b'Copying ../../build/ds4drv/ds4drv.egg-info to /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/lib/python3.8/site-packages/ds4drv-0.5.1-py3.8.egg-info\n'}
+[1.896217] (ds4drv) StdoutLine: {'line': b'running install_scripts\n'}
+[1.916210] (-) TimerEvent: {}
+[1.954694] (ds4drv) StdoutLine: {'line': b'Installing ds4drv script to /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/ds4drv/bin\n'}
+[1.960381] (ds4drv) StdoutLine: {'line': b"writing list of installed files to '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/ds4drv/install.log'\n"}
+[2.016461] (-) TimerEvent: {}
+[2.095643] (ds4drv) CommandEnded: {'returncode': 0}
+[2.120273] (-) TimerEvent: {}
+[2.227555] (-) TimerEvent: {}
+[2.253699] (ds4drv) JobEnded: {'identifier': 'ds4drv', 'rc': 0}
+[2.257318] (-) EventReactorShutdown: {}

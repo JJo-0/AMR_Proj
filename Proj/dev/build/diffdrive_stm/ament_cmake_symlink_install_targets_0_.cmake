@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm/libdiffdrive_stm.so" "/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm/libfake_robot.so" "TARGETS" "diffdrive_stm" "fake_robot" "DESTINATION" "lib")

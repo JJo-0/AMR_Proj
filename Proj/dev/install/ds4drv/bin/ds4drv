@@ -1,0 +1,12 @@
+#!/usr/bin/python3
+# EASY-INSTALL-ENTRY-SCRIPT: 'ds4drv==0.5.1','console_scripts','ds4drv'
+__requires__ = 'ds4drv==0.5.1'
+import re
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(
+        load_entry_point('ds4drv==0.5.1', 'console_scripts', 'ds4drv')()
+    )

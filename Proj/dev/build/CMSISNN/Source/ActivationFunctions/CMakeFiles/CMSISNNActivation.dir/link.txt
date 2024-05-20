@@ -1,0 +1,2 @@
+/usr/bin/ar qc libCMSISNNActivation.a  CMakeFiles/CMSISNNActivation.dir/arm_relu6_s8.c.o
+/usr/bin/ranlib libCMSISNNActivation.a

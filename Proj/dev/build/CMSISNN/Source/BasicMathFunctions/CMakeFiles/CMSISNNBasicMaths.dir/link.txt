@@ -1,0 +1,2 @@
+/usr/bin/ar qc libCMSISNNBasicMaths.a  CMakeFiles/CMSISNNBasicMaths.dir/arm_elementwise_add_s16.c.o CMakeFiles/CMSISNNBasicMaths.dir/arm_elementwise_add_s8.c.o CMakeFiles/CMSISNNBasicMaths.dir/arm_elementwise_mul_s16.c.o CMakeFiles/CMSISNNBasicMaths.dir/arm_elementwise_mul_s8.c.o
+/usr/bin/ranlib libCMSISNNBasicMaths.a

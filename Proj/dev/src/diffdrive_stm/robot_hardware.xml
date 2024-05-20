@@ -1,0 +1,9 @@
+<library path="diffdrive_stm">
+  <class name="diffdrive_stm/DiffDriveStm"
+         type="DiffDriveStm"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Hardware Interface for Differential Drive Arduino controller.
+    </description>
+  </class>
+</library>

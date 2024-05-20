@@ -1,0 +1,1 @@
+/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one/ament_cmake_environment_hooks/local_setup.bash

@@ -1,0 +1,6 @@
+Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/diffdrive_stm -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm
+Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/diffdrive_stm -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm
+Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm -- -j4 -l4
+Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm -- -j4 -l4
+Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm
+Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/diffdrive_stm

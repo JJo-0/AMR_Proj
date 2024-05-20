@@ -1,0 +1,31 @@
+[ 57%] Built target diffdrive_stm
+[100%] Built target fake_robot
+-- Install configuration: ""
+-- Execute custom install script
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm//robot_hardware.xml
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm//fake_robot_hardware.xml
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/lib/libdiffdrive_stm.so
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/lib/libfake_robot.so
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/controllers/robot_controller_example.yaml
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/fake_robot.launch.py
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/test_robot.launch.py
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/environment/library_path.sh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/environment/library_path.dsv
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/ament_index/resource_index/package_run_dependencies/diffdrive_stm
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/ament_index/resource_index/parent_prefix_path/diffdrive_stm
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/environment/path.sh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/environment/path.dsv
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/local_setup.bash
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/local_setup.sh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/local_setup.zsh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/local_setup.dsv
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/package.dsv
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/ament_index/resource_index/packages/diffdrive_stm
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/diffdrive_stm
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/cmake/ament_cmake_export_libraries-extras.cmake
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/cmake/diffdrive_stmConfig.cmake
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/cmake/diffdrive_stmConfig-version.cmake
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev/install/diffdrive_stm/share/diffdrive_stm/package.xml

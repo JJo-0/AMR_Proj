@@ -1,0 +1,22 @@
+CMake Error at /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source/CMakeLists.txt:12 (include):
+  include could not find load file:
+
+    configLib
+
+
+CMake Error at /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source/BasicMathFunctions/CMakeLists.txt:5 (include):
+  include could not find load file:
+
+    configLib
+
+
+CMake Error at /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source/BasicMathFunctions/CMakeLists.txt:6 (include):
+  include could not find load file:
+
+    configDsp
+
+
+CMake Error at /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Source/BasicMathFunctions/CMakeLists.txt:34 (configLib):
+  Unknown CMake command "configLib".
+
+

@@ -1,0 +1,4 @@
+source;share/diffdrive_stm/local_setup.bash
+source;share/diffdrive_stm/local_setup.dsv
+source;share/diffdrive_stm/local_setup.sh
+source;share/diffdrive_stm/local_setup.zsh

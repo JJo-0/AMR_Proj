@@ -1,0 +1,2 @@
+/usr/bin/ar qc libCMSISNNReshape.a  CMakeFiles/CMSISNNReshape.dir/arm_reshape_s8.c.o
+/usr/bin/ranlib libCMSISNNReshape.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libCMSISNNSVDF.a  CMakeFiles/CMSISNNSVDF.dir/arm_svdf_s8.c.o CMakeFiles/CMSISNNSVDF.dir/arm_svdf_state_s16_s8.c.o
+/usr/bin/ranlib libCMSISNNSVDF.a

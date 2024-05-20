@@ -1,0 +1,23 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/foxy/include/**",
+        "/home/jangyoungdo/dev/src/agent_ws/src/uros/micro-ROS-Agent/micro_ros_agent/include/**",
+        "/home/jangyoungdo/dev/src/diffdrive_stm/include/**",
+        "/home/jangyoungdo/dev/src/stella_ahrs/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

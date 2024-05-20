@@ -1,0 +1,2 @@
+/usr/bin/ar qc libCMSISNNSoftmax.a  CMakeFiles/CMSISNNSoftmax.dir/arm_nn_softmax_common_s8.c.o CMakeFiles/CMSISNNSoftmax.dir/arm_softmax_s8.c.o
+/usr/bin/ranlib libCMSISNNSoftmax.a

@@ -1,0 +1,4 @@
+Invoking command in '/home/gunwon/dev/build/omo_r1mini_description': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/gunwon/dev/build/omo_r1mini_description -- -j12 -l12
+Invoked command in '/home/gunwon/dev/build/omo_r1mini_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/gunwon/dev/build/omo_r1mini_description -- -j12 -l12
+Invoking command in '/home/gunwon/dev/build/omo_r1mini_description': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/gunwon/dev/build/omo_r1mini_description
+Invoked command in '/home/gunwon/dev/build/omo_r1mini_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/gunwon/dev/build/omo_r1mini_description

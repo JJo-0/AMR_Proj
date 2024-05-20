@@ -1,0 +1,9 @@
+{
+  "package_name": "drive_base_msgs",
+  "non_idl_tuples": [
+    "/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/src/uros/drive_base/drive_base_msgs:msg/CommandHeader.msg",
+    "/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/src/uros/drive_base/drive_base_msgs:msg/BaseInfo.msg",
+    "/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/src/uros/drive_base/drive_base_msgs:msg/CommandStatus.msg",
+    "/desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/src/uros/drive_base/drive_base_msgs:msg/TRVCommand.msg"
+  ]
+}
