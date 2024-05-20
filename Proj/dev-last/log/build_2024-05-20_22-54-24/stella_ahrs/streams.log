@@ -1,0 +1,50 @@
+[0.065s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs -- -j4 -l4
+[0.378s] [35m[1mScanning dependencies of target stella_ahrs_node[0m
+[0.461s] [ 16%] [32mBuilding CXX object CMakeFiles/stella_ahrs_node.dir/src/listener.cpp.o[0m
+[3.069s] [01m[K/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[3.069s] [01m[K/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:7:18:[m[K [01;35m[Kwarning: [m[KISO C++ forbids converting a string constant to ‘[01m[Kchar*[m[K’ [[01;35m[K-Wwrite-strings[m[K]
+[3.069s]     7 |     char *port = [01;35m[K"/dev/ttyUSB1"[m[K;
+[3.069s]       |                  [01;35m[K^~~~~~~~~~~~~~[m[K
+[3.706s] In file included from [01m[K/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:1[m[K:
+[3.706s] [01m[K/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/include/mw/mw_ahrs.hpp:[m[K At global scope:
+[3.706s] [01m[K/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/include/mw/mw_ahrs.hpp:41:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Krun_bool[m[K’ defined but not used [[01;35m[K-Wunused-variable[m[K]
+[3.706s]    41 | static bool [01;35m[Krun_bool[m[K = false;
+[3.706s]       |             [01;35m[K^~~~~~~~[m[K
+[3.707s] [01m[K/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/include/mw/mw_ahrs.hpp:38:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kmag_value[m[K’ defined but not used [[01;35m[K-Wunused-variable[m[K]
+[3.707s]    38 |              [01;35m[Kmag_value[m[K[3] = {
+[3.707s]       |              [01;35m[K^~~~~~~~~[m[K
+[3.707s] [01m[K/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/include/mw/mw_ahrs.hpp:35:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kdeg_value[m[K’ defined but not used [[01;35m[K-Wunused-variable[m[K]
+[3.707s]    35 |              [01;35m[Kdeg_value[m[K[3] = {
+[3.707s]       |              [01;35m[K^~~~~~~~~[m[K
+[3.707s] [01m[K/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/include/mw/mw_ahrs.hpp:32:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kgyr_value[m[K’ defined but not used [[01;35m[K-Wunused-variable[m[K]
+[3.707s]    32 |              [01;35m[Kgyr_value[m[K[3] = {
+[3.708s]       |              [01;35m[K^~~~~~~~~[m[K
+[3.708s] [01m[K/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/include/mw/mw_ahrs.hpp:29:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kacc_value[m[K’ defined but not used [[01;35m[K-Wunused-variable[m[K]
+[3.708s]    29 | static float [01;35m[Kacc_value[m[K[3] = {
+[3.708s]       |              [01;35m[K^~~~~~~~~[m[K
+[3.898s] [ 33%] [32m[1mLinking CXX executable stella_ahrs_node[0m
+[4.523s] [100%] Built target stella_ahrs_node
+[4.552s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs -- -j4 -l4
+[4.625s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs
+[4.646s] -- Install configuration: ""
+[4.648s] -- Execute custom install script
+[4.649s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs//launch/stella_ahrs_launch.py
+[4.650s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/rviz/imu_test.rviz
+[4.651s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/lib/stella_ahrs/stella_ahrs_node
+[4.652s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/ament_index/resource_index/package_run_dependencies/stella_ahrs
+[4.652s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/ament_index/resource_index/parent_prefix_path/stella_ahrs
+[4.653s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/environment/ament_prefix_path.sh
+[4.654s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/environment/ament_prefix_path.dsv
+[4.655s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/environment/path.sh
+[4.658s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/environment/path.dsv
+[4.659s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/local_setup.bash
+[4.659s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/local_setup.sh
+[4.660s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/local_setup.zsh
+[4.660s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/local_setup.dsv
+[4.661s] -- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/package.dsv
+[4.682s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/ament_index/resource_index/packages/stella_ahrs
+[4.683s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/cmake/ament_cmake_export_include_directories-extras.cmake
+[4.683s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/cmake/stella_ahrsConfig.cmake
+[4.683s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/cmake/stella_ahrsConfig-version.cmake
+[4.684s] -- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs/share/stella_ahrs/package.xml
+[4.692s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs

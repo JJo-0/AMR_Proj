@@ -1,0 +1,3030 @@
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"freertos.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.MX_FREERTOS_Init,"ax",%progbits
+  20              		.align	1
+  21              		.global	MX_FREERTOS_Init
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	MX_FREERTOS_Init:
+  27              	.LFB142:
+  28              		.file 1 "Core/Src/freertos.c"
+   1:Core/Src/freertos.c **** /* USER CODE BEGIN Header */
+   2:Core/Src/freertos.c **** /**
+   3:Core/Src/freertos.c ****   *********************  *********************************************************
+   4:Core/Src/freertos.c ****   * File Name          : freertos.c
+   5:Core/Src/freertos.c ****   * Description        : Code for freertos applications
+   6:Core/Src/freertos.c ****   ******************************************************************************
+   7:Core/Src/freertos.c ****   * @attention
+   8:Core/Src/freertos.c ****   *
+   9:Core/Src/freertos.c ****   * Copyright (c) 2024 STMicroelectronics.
+  10:Core/Src/freertos.c ****   * All rights reserved.
+  11:Core/Src/freertos.c ****   *
+  12:Core/Src/freertos.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  13:Core/Src/freertos.c ****   * in the root directory of this software component.
+  14:Core/Src/freertos.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Core/Src/freertos.c ****   *
+  16:Core/Src/freertos.c ****   ******************************************************************************
+  17:Core/Src/freertos.c ****   */
+  18:Core/Src/freertos.c **** /* USER CODE END Header */
+  19:Core/Src/freertos.c **** 
+  20:Core/Src/freertos.c **** /* Includes ------------------------------------------------------------------*/
+  21:Core/Src/freertos.c **** #include "FreeRTOS.h"
+  22:Core/Src/freertos.c **** #include "task.h"
+  23:Core/Src/freertos.c **** #include "main.h"
+  24:Core/Src/freertos.c **** #include "cmsis_os.h"
+  25:Core/Src/freertos.c **** 
+  26:Core/Src/freertos.c **** /* Private includes ----------------------------------------------------------*/
+  27:Core/Src/freertos.c **** /* USER CODE BEGIN Includes */
+  28:Core/Src/freertos.c **** #include <stdbool.h>
+  29:Core/Src/freertos.c **** #include <rcl/rcl.h>
+  30:Core/Src/freertos.c **** #include <rcl/error_handling.h>
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 2
+
+
+  31:Core/Src/freertos.c **** #include <rclc/rclc.h>
+  32:Core/Src/freertos.c **** #include <rclc/executor.h>
+  33:Core/Src/freertos.c **** #include <uxr/client/transport.h>
+  34:Core/Src/freertos.c **** #include <rmw_microxrcedds_c/config.h>
+  35:Core/Src/freertos.c **** #include <rmw_microros/rmw_microros.h>
+  36:Core/Src/freertos.c **** 
+  37:Core/Src/freertos.c **** #include <std_msgs/msg/int32.h>
+  38:Core/Src/freertos.c **** #include <std_msgs/msg/u_int16.h>
+  39:Core/Src/freertos.c **** #include <std_msgs/msg/string.h>
+  40:Core/Src/freertos.c **** #include <geometry_msgs/msg/twist.h>
+  41:Core/Src/freertos.c **** #include <geometry_msgs/msg/detail/twist__struct.h>
+  42:Core/Src/freertos.c **** #include <nav_msgs/msg/odometry.h>
+  43:Core/Src/freertos.c **** #include <std_msgs/msg/float32.h>
+  44:Core/Src/freertos.c **** #include <std_msgs/msg/float64.h>
+  45:Core/Src/freertos.c **** 
+  46:Core/Src/freertos.c **** #include "usart.h"
+  47:Core/Src/freertos.c **** #include "tim.h"
+  48:Core/Src/freertos.c **** 
+  49:Core/Src/freertos.c **** //#include "math.h"
+  50:Core/Src/freertos.c **** #include <math.h>
+  51:Core/Src/freertos.c **** /* USER CODE END Includes */
+  52:Core/Src/freertos.c **** 
+  53:Core/Src/freertos.c **** /* Private typedef -----------------------------------------------------------*/
+  54:Core/Src/freertos.c **** typedef StaticTask_t osStaticThreadDef_t;
+  55:Core/Src/freertos.c **** /* USER CODE BEGIN PTD */
+  56:Core/Src/freertos.c **** 
+  57:Core/Src/freertos.c **** /* USER CODE END PTD */
+  58:Core/Src/freertos.c **** 
+  59:Core/Src/freertos.c **** /* Private define ------------------------------------------------------------*/
+  60:Core/Src/freertos.c **** /* USER CODE BEGIN PD */
+  61:Core/Src/freertos.c **** 
+  62:Core/Src/freertos.c **** /* USER CODE END PD */
+  63:Core/Src/freertos.c **** 
+  64:Core/Src/freertos.c **** /* Private macro -------------------------------------------------------------*/
+  65:Core/Src/freertos.c **** /* USER CODE BEGIN PM */
+  66:Core/Src/freertos.c **** 
+  67:Core/Src/freertos.c **** /* USER CODE END PM */
+  68:Core/Src/freertos.c **** 
+  69:Core/Src/freertos.c **** /* Private variables ---------------------------------------------------------*/
+  70:Core/Src/freertos.c **** /* USER CODE BEGIN Variables */
+  71:Core/Src/freertos.c **** /*
+  72:Core/Src/freertos.c **** char Run_State = 'B';
+  73:Core/Src/freertos.c **** char Motor_State = 'T';
+  74:Core/Src/freertos.c **** char Run_Dir = 'F';
+  75:Core/Src/freertos.c **** */
+  76:Core/Src/freertos.c **** 
+  77:Core/Src/freertos.c **** #define _USE_MATH_DEFINES
+  78:Core/Src/freertos.c **** 
+  79:Core/Src/freertos.c **** char Run_State;
+  80:Core/Src/freertos.c **** char Motor_State;
+  81:Core/Src/freertos.c **** char Run_Dir;
+  82:Core/Src/freertos.c **** 
+  83:Core/Src/freertos.c **** 
+  84:Core/Src/freertos.c **** // 선속도와 각속도의 모든 값을 변수에 저장
+  85:Core/Src/freertos.c **** float linear_velocity_x;
+  86:Core/Src/freertos.c **** float linear_velocity_y;
+  87:Core/Src/freertos.c **** float linear_velocity_z;
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 3
+
+
+  88:Core/Src/freertos.c **** 
+  89:Core/Src/freertos.c **** float angular_velocity_x;
+  90:Core/Src/freertos.c **** float angular_velocity_y;
+  91:Core/Src/freertos.c **** float angular_velocity_z;
+  92:Core/Src/freertos.c **** 
+  93:Core/Src/freertos.c **** int m1_hall=0, m2_hall=0;
+  94:Core/Src/freertos.c **** 
+  95:Core/Src/freertos.c **** int m1_rev=0, m2_rev=0;
+  96:Core/Src/freertos.c **** int m1_deg=0, m2_deg=0;
+  97:Core/Src/freertos.c **** int m1_deg_10=0, m2_deg_10=0;
+  98:Core/Src/freertos.c **** int m1_deg_10_p=0, m2_deg_10_p=0;
+  99:Core/Src/freertos.c **** int m1_deg_1_10=0, m2_deg_1_10=0;
+ 100:Core/Src/freertos.c **** int m1_rpm=0, m2_rpm=0;
+ 101:Core/Src/freertos.c **** int m1_rpm_p=0, m2_rpm_p=0;
+ 102:Core/Src/freertos.c **** int m1_rpm_p_10=0, m2_rpm_p_10=0;
+ 103:Core/Src/freertos.c **** 
+ 104:Core/Src/freertos.c **** //std_msgs__msg__Int32 msg;
+ 105:Core/Src/freertos.c **** int hall1 = 0, hall2 = 0;
+ 106:Core/Src/freertos.c **** 
+ 107:Core/Src/freertos.c **** typedef struct{
+ 108:Core/Src/freertos.c **** 	double vx, vy, vz;
+ 109:Core/Src/freertos.c **** } Twist_value;
+ 110:Core/Src/freertos.c **** /*
+ 111:Core/Src/freertos.c **** Twist_value Linear = {0, 0, 0};
+ 112:Core/Src/freertos.c **** Twist_value Angular = {0, 0, 0};*/
+ 113:Core/Src/freertos.c **** Twist_value Linear;
+ 114:Core/Src/freertos.c **** Twist_value Angular;
+ 115:Core/Src/freertos.c **** 
+ 116:Core/Src/freertos.c **** 
+ 117:Core/Src/freertos.c **** //int count_sec = 0;
+ 118:Core/Src/freertos.c **** //int turn_flag = 0;
+ 119:Core/Src/freertos.c **** int m_mode = 0; // 0: stop, 1: straight, 2: rotation mode
+ 120:Core/Src/freertos.c **** 
+ 121:Core/Src/freertos.c **** double angle;
+ 122:Core/Src/freertos.c **** 
+ 123:Core/Src/freertos.c **** int timeout = 10000000;
+ 124:Core/Src/freertos.c **** 
+ 125:Core/Src/freertos.c **** /* USER CODE END Variables */
+ 126:Core/Src/freertos.c **** /* Definitions for defaultTask */
+ 127:Core/Src/freertos.c **** osThreadId_t defaultTaskHandle;
+ 128:Core/Src/freertos.c **** uint32_t defaultTaskBuffer[ 3000 ];
+ 129:Core/Src/freertos.c **** osStaticThreadDef_t defaultTaskControlBlock;
+ 130:Core/Src/freertos.c **** const osThreadAttr_t defaultTask_attributes = {
+ 131:Core/Src/freertos.c ****   .name = "defaultTask",
+ 132:Core/Src/freertos.c ****   .cb_mem = &defaultTaskControlBlock,
+ 133:Core/Src/freertos.c ****   .cb_size = sizeof(defaultTaskControlBlock),
+ 134:Core/Src/freertos.c ****   .stack_mem = &defaultTaskBuffer[0],
+ 135:Core/Src/freertos.c ****   .stack_size = sizeof(defaultTaskBuffer),
+ 136:Core/Src/freertos.c ****   .priority = (osPriority_t) osPriorityNormal,
+ 137:Core/Src/freertos.c **** };
+ 138:Core/Src/freertos.c **** 
+ 139:Core/Src/freertos.c **** /* Private function prototypes -----------------------------------------------*/
+ 140:Core/Src/freertos.c **** /* USER CODE BEGIN FunctionPrototypes */
+ 141:Core/Src/freertos.c **** bool cubemx_transport_open(struct uxrCustomTransport * transport);
+ 142:Core/Src/freertos.c **** bool cubemx_transport_close(struct uxrCustomTransport * transport);
+ 143:Core/Src/freertos.c **** size_t cubemx_transport_write(struct uxrCustomTransport* transport, const uint8_t * buf, size_t len
+ 144:Core/Src/freertos.c **** size_t cubemx_transport_read(struct uxrCustomTransport* transport, uint8_t* buf, size_t len, int ti
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 4
+
+
+ 145:Core/Src/freertos.c **** 
+ 146:Core/Src/freertos.c **** void * microros_allocate(size_t size, void * state);
+ 147:Core/Src/freertos.c **** void microros_deallocate(void * pointer, void * state);
+ 148:Core/Src/freertos.c **** void * microros_reallocate(void * pointer, size_t size, void * state);
+ 149:Core/Src/freertos.c **** void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element, void * state);
+ 150:Core/Src/freertos.c **** 
+ 151:Core/Src/freertos.c **** void messageCallback(const void *msgin);
+ 152:Core/Src/freertos.c **** void messageCallback_test1(const void *msgin);
+ 153:Core/Src/freertos.c **** void messageCallback_test2(const void *msgin);
+ 154:Core/Src/freertos.c **** void twist_subscription_callback(const void * msgin);
+ 155:Core/Src/freertos.c **** 
+ 156:Core/Src/freertos.c **** 
+ 157:Core/Src/freertos.c **** //my motor test functions
+ 158:Core/Src/freertos.c **** 
+ 159:Core/Src/freertos.c **** //int MOTION_MODE(double x, double y, double z);
+ 160:Core/Src/freertos.c **** 
+ 161:Core/Src/freertos.c **** void RUN_DIR(char);
+ 162:Core/Src/freertos.c **** 
+ 163:Core/Src/freertos.c **** void RUN_RB(char);
+ 164:Core/Src/freertos.c **** void MOTOR_SS(char);
+ 165:Core/Src/freertos.c **** 
+ 166:Core/Src/freertos.c **** double MOTOR_CAL_LINE_PWM(double,double,double);
+ 167:Core/Src/freertos.c **** 
+ 168:Core/Src/freertos.c **** void PWM_L(double);
+ 169:Core/Src/freertos.c **** void PWM_R(double);
+ 170:Core/Src/freertos.c **** 
+ 171:Core/Src/freertos.c **** double CAL_LinearSpeed(double, double, double);
+ 172:Core/Src/freertos.c **** double CAL_AngularSpeed(double x, double y, double z);
+ 173:Core/Src/freertos.c **** 
+ 174:Core/Src/freertos.c **** //void TURN(double);
+ 175:Core/Src/freertos.c **** 
+ 176:Core/Src/freertos.c **** double TURN(double ang);
+ 177:Core/Src/freertos.c **** //int MOTION_MODE(double, double, double);
+ 178:Core/Src/freertos.c **** //void MOTION_MODE(double, double, double);
+ 179:Core/Src/freertos.c **** void MOTION_MODE(double lx, double ly, double lz, double ax, double ay, double az);
+ 180:Core/Src/freertos.c **** 
+ 181:Core/Src/freertos.c **** 
+ 182:Core/Src/freertos.c **** 
+ 183:Core/Src/freertos.c **** 
+ 184:Core/Src/freertos.c **** 
+ 185:Core/Src/freertos.c **** 
+ 186:Core/Src/freertos.c **** /* USER CODE END FunctionPrototypes */
+ 187:Core/Src/freertos.c **** 
+ 188:Core/Src/freertos.c **** void StartDefaultTask(void *argument);
+ 189:Core/Src/freertos.c **** 
+ 190:Core/Src/freertos.c **** void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
+ 191:Core/Src/freertos.c **** 
+ 192:Core/Src/freertos.c **** /**
+ 193:Core/Src/freertos.c ****   * @brief  FreeRTOS initialization
+ 194:Core/Src/freertos.c ****   * @param  None
+ 195:Core/Src/freertos.c ****   * @retval None
+ 196:Core/Src/freertos.c ****   */
+ 197:Core/Src/freertos.c **** void MX_FREERTOS_Init(void) {
+  29              		.loc 1 197 29 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 5
+
+
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+ 198:Core/Src/freertos.c ****   /* USER CODE BEGIN Init */
+ 199:Core/Src/freertos.c **** 
+ 200:Core/Src/freertos.c ****   /* USER CODE END Init */
+ 201:Core/Src/freertos.c **** 
+ 202:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_MUTEX */
+ 203:Core/Src/freertos.c ****   /* add mutexes, ... */
+ 204:Core/Src/freertos.c ****   /* USER CODE END RTOS_MUTEX */
+ 205:Core/Src/freertos.c **** 
+ 206:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_SEMAPHORES */
+ 207:Core/Src/freertos.c ****   /* add semaphores, ... */
+ 208:Core/Src/freertos.c ****   /* USER CODE END RTOS_SEMAPHORES */
+ 209:Core/Src/freertos.c **** 
+ 210:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_TIMERS */
+ 211:Core/Src/freertos.c ****   /* start timers, add new ones, ... */
+ 212:Core/Src/freertos.c ****   /* USER CODE END RTOS_TIMERS */
+ 213:Core/Src/freertos.c **** 
+ 214:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_QUEUES */
+ 215:Core/Src/freertos.c ****   /* add queues, ... */
+ 216:Core/Src/freertos.c ****   /* USER CODE END RTOS_QUEUES */
+ 217:Core/Src/freertos.c **** 
+ 218:Core/Src/freertos.c ****   /* Create the thread(s) */
+ 219:Core/Src/freertos.c ****   /* creation of defaultTask */
+ 220:Core/Src/freertos.c ****   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  38              		.loc 1 220 3 view .LVU1
+  39              		.loc 1 220 23 is_stmt 0 view .LVU2
+  40 0002 044A     		ldr	r2, .L3
+  41 0004 0021     		movs	r1, #0
+  42 0006 0448     		ldr	r0, .L3+4
+  43 0008 FFF7FEFF 		bl	osThreadNew
+  44              	.LVL0:
+  45              		.loc 1 220 21 view .LVU3
+  46 000c 034B     		ldr	r3, .L3+8
+  47 000e 1860     		str	r0, [r3]
+ 221:Core/Src/freertos.c **** 
+ 222:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_THREADS */
+ 223:Core/Src/freertos.c ****   /* add threads, ... */
+ 224:Core/Src/freertos.c ****   /* USER CODE END RTOS_THREADS */
+ 225:Core/Src/freertos.c **** 
+ 226:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_EVENTS */
+ 227:Core/Src/freertos.c ****   /* add events, ... */
+ 228:Core/Src/freertos.c ****   /* USER CODE END RTOS_EVENTS */
+ 229:Core/Src/freertos.c **** 
+ 230:Core/Src/freertos.c **** }
+  48              		.loc 1 230 1 view .LVU4
+  49 0010 08BD     		pop	{r3, pc}
+  50              	.L4:
+  51 0012 00BF     		.align	2
+  52              	.L3:
+  53 0014 00000000 		.word	.LANCHOR0
+  54 0018 00000000 		.word	StartDefaultTask
+  55 001c 00000000 		.word	.LANCHOR1
+  56              		.cfi_endproc
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 6
+
+
+  57              	.LFE142:
+  59              		.section	.rodata.messageCallback.str1.4,"aMS",%progbits,1
+  60              		.align	2
+  61              	.LC0:
+  62 0000 52656365 		.ascii	"Received: %s\012\000"
+  62      69766564 
+  62      3A202573 
+  62      0A00
+  63              		.section	.text.messageCallback,"ax",%progbits
+  64              		.align	1
+  65              		.global	messageCallback
+  66              		.syntax unified
+  67              		.thumb
+  68              		.thumb_func
+  70              	messageCallback:
+  71              	.LVL1:
+  72              	.LFB144:
+ 231:Core/Src/freertos.c **** 
+ 232:Core/Src/freertos.c **** /* USER CODE BEGIN Header_StartDefaultTask */
+ 233:Core/Src/freertos.c **** /**
+ 234:Core/Src/freertos.c ****   * @brief  Function implementing the defaultTask thread.
+ 235:Core/Src/freertos.c ****   * @param  argument: Not used
+ 236:Core/Src/freertos.c ****   * @retval None
+ 237:Core/Src/freertos.c ****   */
+ 238:Core/Src/freertos.c **** /* USER CODE END Header_StartDefaultTask */
+ 239:Core/Src/freertos.c **** void StartDefaultTask(void *argument)
+ 240:Core/Src/freertos.c **** {
+ 241:Core/Src/freertos.c ****   /* USER CODE BEGIN StartDefaultTask */
+ 242:Core/Src/freertos.c ****   /* USER CODE BEGIN 5 */
+ 243:Core/Src/freertos.c **** 
+ 244:Core/Src/freertos.c ****   // micro-ROS configuration
+ 245:Core/Src/freertos.c **** 
+ 246:Core/Src/freertos.c ****   rmw_uros_set_custom_transport(
+ 247:Core/Src/freertos.c ****     true,
+ 248:Core/Src/freertos.c ****     (void *) &huart3,
+ 249:Core/Src/freertos.c ****     cubemx_transport_open,
+ 250:Core/Src/freertos.c ****     cubemx_transport_close,
+ 251:Core/Src/freertos.c ****     cubemx_transport_write,
+ 252:Core/Src/freertos.c ****     cubemx_transport_read);
+ 253:Core/Src/freertos.c **** 
+ 254:Core/Src/freertos.c ****   rcl_allocator_t freeRTOS_allocator = rcutils_get_zero_initialized_allocator();
+ 255:Core/Src/freertos.c ****   freeRTOS_allocator.allocate = microros_allocate;
+ 256:Core/Src/freertos.c ****   freeRTOS_allocator.deallocate = microros_deallocate;
+ 257:Core/Src/freertos.c ****   freeRTOS_allocator.reallocate = microros_reallocate;
+ 258:Core/Src/freertos.c ****   freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
+ 259:Core/Src/freertos.c **** 
+ 260:Core/Src/freertos.c ****   if (!rcutils_set_default_allocator(&freeRTOS_allocator)) {
+ 261:Core/Src/freertos.c ****       printf("Error on default allocators (line %d)\n", __LINE__); 
+ 262:Core/Src/freertos.c ****   }
+ 263:Core/Src/freertos.c **** 
+ 264:Core/Src/freertos.c ****   // micro-ROS app
+ 265:Core/Src/freertos.c **** 
+ 266:Core/Src/freertos.c ****   rcl_publisher_t publisher;
+ 267:Core/Src/freertos.c ****   std_msgs__msg__Int32 msg;
+ 268:Core/Src/freertos.c **** //test
+ 269:Core/Src/freertos.c ****   rcl_publisher_t publisher_test;
+ 270:Core/Src/freertos.c ****   std_msgs__msg__Int32_test1 msg_test;
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 7
+
+
+ 271:Core/Src/freertos.c **** 
+ 272:Core/Src/freertos.c ****   rcl_subscription_t subscriber_test1;
+ 273:Core/Src/freertos.c ****   std_msgs__msg__Int32_test2 submsg_test1;
+ 274:Core/Src/freertos.c **** 
+ 275:Core/Src/freertos.c ****   rcl_subscription_t subscriber_test2;
+ 276:Core/Src/freertos.c ****   std_msgs__msg__Int32_test3 submsg_test2;
+ 277:Core/Src/freertos.c **** //
+ 278:Core/Src/freertos.c ****   rcl_publisher_t publisher_1;
+ 279:Core/Src/freertos.c ****   std_msgs__msg__Int32_pub1 pubmsg_1;
+ 280:Core/Src/freertos.c **** 
+ 281:Core/Src/freertos.c ****   rcl_publisher_t publisher_2;
+ 282:Core/Src/freertos.c ****   std_msgs__msg__Int32_pub2 pubmsg_2;
+ 283:Core/Src/freertos.c **** 
+ 284:Core/Src/freertos.c ****   rcl_subscription_t subscriber_2;
+ 285:Core/Src/freertos.c **** //  std_msgs__msg__String_sub1 submsg_1;
+ 286:Core/Src/freertos.c ****   geometry_msgs__msg__Twist submsg_2;
+ 287:Core/Src/freertos.c **** //  geometry_msgs__msg__Twist * submsg_2_1;
+ 288:Core/Src/freertos.c **** 
+ 289:Core/Src/freertos.c ****   rclc_support_t support;
+ 290:Core/Src/freertos.c ****   rcl_allocator_t allocator;
+ 291:Core/Src/freertos.c ****   rcl_node_t node;
+ 292:Core/Src/freertos.c **** 
+ 293:Core/Src/freertos.c ****   allocator = rcl_get_default_allocator();
+ 294:Core/Src/freertos.c **** 
+ 295:Core/Src/freertos.c ****   //create init_options
+ 296:Core/Src/freertos.c ****   rclc_support_init(&support, 0, NULL, &allocator);
+ 297:Core/Src/freertos.c **** 
+ 298:Core/Src/freertos.c **** 
+ 299:Core/Src/freertos.c **** 
+ 300:Core/Src/freertos.c ****   // create node
+ 301:Core/Src/freertos.c ****   rclc_node_init_default(&node, "cubemx_node", "", &support);
+ 302:Core/Src/freertos.c **** 
+ 303:Core/Src/freertos.c ****   // create publisher example
+ 304:Core/Src/freertos.c ****   rclc_publisher_init_default(
+ 305:Core/Src/freertos.c ****     &publisher,
+ 306:Core/Src/freertos.c ****     &node,
+ 307:Core/Src/freertos.c ****     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+ 308:Core/Src/freertos.c ****     "cubemx_publisher");
+ 309:Core/Src/freertos.c **** 
+ 310:Core/Src/freertos.c **** 
+ 311:Core/Src/freertos.c ****   // create publisher_2
+ 312:Core/Src/freertos.c ****   rclc_publisher_init_default(
+ 313:Core/Src/freertos.c ****     &publisher_1,
+ 314:Core/Src/freertos.c ****     &node,
+ 315:Core/Src/freertos.c ****     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+ 316:Core/Src/freertos.c ****     "r_enc");
+ 317:Core/Src/freertos.c **** 
+ 318:Core/Src/freertos.c ****   	  // r_wheel_vel
+ 319:Core/Src/freertos.c ****   // create publisher_3
+ 320:Core/Src/freertos.c ****   rclc_publisher_init_default(
+ 321:Core/Src/freertos.c ****     &publisher_2,
+ 322:Core/Src/freertos.c ****     &node,
+ 323:Core/Src/freertos.c ****     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+ 324:Core/Src/freertos.c ****     "l_enc");
+ 325:Core/Src/freertos.c **** 
+ 326:Core/Src/freertos.c ****   	  //l_enc
+ 327:Core/Src/freertos.c ****   // create publisher_test
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 8
+
+
+ 328:Core/Src/freertos.c ****   rclc_publisher_init_default(
+ 329:Core/Src/freertos.c ****     &publisher_test,
+ 330:Core/Src/freertos.c ****     &node,
+ 331:Core/Src/freertos.c ****     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+ 332:Core/Src/freertos.c ****     "cubemx_publisher_test");
+ 333:Core/Src/freertos.c **** 
+ 334:Core/Src/freertos.c ****   // create subscriber_test1
+ 335:Core/Src/freertos.c ****   rclc_subscription_init_default(
+ 336:Core/Src/freertos.c ****       &subscriber_2,
+ 337:Core/Src/freertos.c ****       &node,
+ 338:Core/Src/freertos.c **** //      ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, twist),
+ 339:Core/Src/freertos.c ****       ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, Twist),
+ 340:Core/Src/freertos.c ****       "diffbot_base_controller/cmd_vel_unstamped");
+ 341:Core/Src/freertos.c **** 
+ 342:Core/Src/freertos.c ****   // create subscriber_test2
+ 343:Core/Src/freertos.c **** /*  rclc_subscription_init_default(
+ 344:Core/Src/freertos.c ****       &subscriber_test2,
+ 345:Core/Src/freertos.c ****       &node,
+ 346:Core/Src/freertos.c ****       ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+ 347:Core/Src/freertos.c **** //	    "cubemx_publisher_test");
+ 348:Core/Src/freertos.c ****         "r_wheel_vel");*/
+ 349:Core/Src/freertos.c **** 
+ 350:Core/Src/freertos.c ****   // create subscriber
+ 351:Core/Src/freertos.c **** /*  rclc_subscription_init_default(
+ 352:Core/Src/freertos.c ****       &subscriber_1,
+ 353:Core/Src/freertos.c ****       &node,
+ 354:Core/Src/freertos.c ****       ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, String),
+ 355:Core/Src/freertos.c ****       "r_wheel_vel_String");*/
+ 356:Core/Src/freertos.c **** 
+ 357:Core/Src/freertos.c **** 
+ 358:Core/Src/freertos.c **** 
+ 359:Core/Src/freertos.c **** 
+ 360:Core/Src/freertos.c ****   // add subscriber to executor
+ 361:Core/Src/freertos.c ****   rclc_executor_t executor;
+ 362:Core/Src/freertos.c ****   rclc_executor_init(&executor, &support.context, 1, &allocator);
+ 363:Core/Src/freertos.c **** //  rclc_executor_add_subscription(&executor, &subscriber_1, &submsg_1, &messageCallback, ON_NEW_DA
+ 364:Core/Src/freertos.c **** 
+ 365:Core/Src/freertos.c **** //  rclc_executor_add_subscription(&executor, &subscriber_test1, &submsg_test1, &messageCallback_te
+ 366:Core/Src/freertos.c **** //  rclc_executor_add_subscription(&executor, &subscriber_1, &submsg_test2, &twist_subscription_cal
+ 367:Core/Src/freertos.c ****   rclc_executor_add_subscription(&executor, &subscriber_2, &submsg_2, &twist_subscription_callback,
+ 368:Core/Src/freertos.c **** 
+ 369:Core/Src/freertos.c ****   msg.data = 0;
+ 370:Core/Src/freertos.c ****   pubmsg_1.hall_1 = 0;
+ 371:Core/Src/freertos.c ****   pubmsg_2.hall_2 = 0;
+ 372:Core/Src/freertos.c **** 
+ 373:Core/Src/freertos.c **** 
+ 374:Core/Src/freertos.c **** //  RUN_INIT();
+ 375:Core/Src/freertos.c **** 
+ 376:Core/Src/freertos.c **** 
+ 377:Core/Src/freertos.c ****   for(;;)
+ 378:Core/Src/freertos.c ****   {
+ 379:Core/Src/freertos.c ****     // publish message
+ 380:Core/Src/freertos.c **** //    rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
+ 381:Core/Src/freertos.c **** 	 rcl_ret_t ret_3 = rcl_publish(&publisher_2, &pubmsg_2, NULL);
+ 382:Core/Src/freertos.c **** 	 rcl_ret_t ret_2 = rcl_publish(&publisher_1, &pubmsg_1, NULL);
+ 383:Core/Src/freertos.c **** //    rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
+ 384:Core/Src/freertos.c ****     rcl_ret_t ret_test = rcl_publish(&publisher_test, &msg_test, NULL);
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 9
+
+
+ 385:Core/Src/freertos.c **** /*    if (ret != RCL_RET_OK)
+ 386:Core/Src/freertos.c ****     {
+ 387:Core/Src/freertos.c ****       printf("Error publishing (line %d)\n", __LINE__); 
+ 388:Core/Src/freertos.c ****     }*/
+ 389:Core/Src/freertos.c ****     if (ret_2 != RCL_RET_OK)
+ 390:Core/Src/freertos.c ****     {
+ 391:Core/Src/freertos.c ****       printf("Error publishing (line %d)\n", __LINE__);
+ 392:Core/Src/freertos.c ****     }
+ 393:Core/Src/freertos.c ****     if (ret_3 != RCL_RET_OK)
+ 394:Core/Src/freertos.c ****     {
+ 395:Core/Src/freertos.c ****       printf("Error publishing (line %d)\n", __LINE__);
+ 396:Core/Src/freertos.c ****     }
+ 397:Core/Src/freertos.c **** 
+ 398:Core/Src/freertos.c ****     // subscribe message
+ 399:Core/Src/freertos.c **** //    rclc_executor_spin(&executor);
+ 400:Core/Src/freertos.c **** //    rclc_executor_spin_some(&executor, timeout);
+ 401:Core/Src/freertos.c **** //    rclc_executor_spin_one_period(&executor, timeout);
+ 402:Core/Src/freertos.c **** 
+ 403:Core/Src/freertos.c ****     // hall pulse count
+ 404:Core/Src/freertos.c **** 	pubmsg_1.hall_1 = hall1;
+ 405:Core/Src/freertos.c **** 	pubmsg_2.hall_2 = hall2;
+ 406:Core/Src/freertos.c **** 
+ 407:Core/Src/freertos.c ****     // reset the hall sensor data
+ 408:Core/Src/freertos.c **** 	hall1 = 0;
+ 409:Core/Src/freertos.c **** 	hall2 = 0;
+ 410:Core/Src/freertos.c **** 
+ 411:Core/Src/freertos.c **** /*
+ 412:Core/Src/freertos.c **** 	Linear.vx = submsg_2_1->linear.x;
+ 413:Core/Src/freertos.c **** 	Linear.vy = submsg_2_1->linear.y;
+ 414:Core/Src/freertos.c **** 	Linear.vz = submsg_2_1->linear.z;*/
+ 415:Core/Src/freertos.c **** 
+ 416:Core/Src/freertos.c **** /*	Linear.vx = submsg_2.linear.x;
+ 417:Core/Src/freertos.c **** 	Linear.vy = submsg_2.linear.y;
+ 418:Core/Src/freertos.c **** 	Linear.vz = submsg_2.linear.z;*/
+ 419:Core/Src/freertos.c **** 
+ 420:Core/Src/freertos.c **** 	// move the robot.
+ 421:Core/Src/freertos.c **** //	MOTION_MODE(Linear.vx, Linear.vy, Linear.vz);
+ 422:Core/Src/freertos.c **** /*
+ 423:Core/Src/freertos.c **** 	if(m_mode == 0){
+ 424:Core/Src/freertos.c **** 		// robot stop
+ 425:Core/Src/freertos.c **** 		Run_State = 'B';
+ 426:Core/Src/freertos.c **** //		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, SET);	// Motor1 RUN/BRK - BRK
+ 427:Core/Src/freertos.c **** //		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, SET);	// Motor2 RUN/BRK - BRK
+ 428:Core/Src/freertos.c **** 	}
+ 429:Core/Src/freertos.c **** 	else if(m_mode == 1){
+ 430:Core/Src/freertos.c **** 		// robot move straight
+ 431:Core/Src/freertos.c **** 		if(Linear.vx >0){
+ 432:Core/Src/freertos.c **** 			Run_Dir = 'F';
+ 433:Core/Src/freertos.c **** 			Run_State = 'U';
+ 434:Core/Src/freertos.c **** 			PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz));
+ 435:Core/Src/freertos.c **** 			PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz));
+ 436:Core/Src/freertos.c **** 		}
+ 437:Core/Src/freertos.c **** 		else if (Linear.vx < 0)
+ 438:Core/Src/freertos.c **** 		{
+ 439:Core/Src/freertos.c **** 			Run_Dir = 'O';
+ 440:Core/Src/freertos.c **** 			Run_State = 'U';
+ 441:Core/Src/freertos.c **** 			PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz));
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 10
+
+
+ 442:Core/Src/freertos.c **** 			PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz));
+ 443:Core/Src/freertos.c **** 		}
+ 444:Core/Src/freertos.c **** 
+ 445:Core/Src/freertos.c **** 
+ 446:Core/Src/freertos.c **** 
+ 447:Core/Src/freertos.c **** 	}
+ 448:Core/Src/freertos.c **** 	else if(m_mode == 2){
+ 449:Core/Src/freertos.c **** 		// robot move rotation
+ 450:Core/Src/freertos.c **** 		if(Linear.vx==0 && Linear.vy==0){
+ 451:Core/Src/freertos.c **** 			if(Angular.vz > 0){
+ 452:Core/Src/freertos.c **** 				Run_Dir = 'L';
+ 453:Core/Src/freertos.c **** 				Run_State = 'U';
+ 454:Core/Src/freertos.c **** 			}
+ 455:Core/Src/freertos.c **** 			else if(Angular.vz < 0){
+ 456:Core/Src/freertos.c **** 				Run_Dir = 'R';
+ 457:Core/Src/freertos.c **** 				Run_State = 'U';
+ 458:Core/Src/freertos.c **** 			}
+ 459:Core/Src/freertos.c **** 			PWM_R(TURN(Angular.vz));
+ 460:Core/Src/freertos.c **** 			PWM_L(TURN(Angular.vz));
+ 461:Core/Src/freertos.c **** 		}
+ 462:Core/Src/freertos.c **** */
+ 463:Core/Src/freertos.c **** 
+ 464:Core/Src/freertos.c **** 	// 좌회전
+ 465:Core/Src/freertos.c **** 	if(m_mode == 1){
+ 466:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 467:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 468:Core/Src/freertos.c **** 	}
+ 469:Core/Src/freertos.c **** 	// 우회전
+ 470:Core/Src/freertos.c **** 	else if(m_mode == 2){
+ 471:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 472:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 473:Core/Src/freertos.c **** 	}
+ 474:Core/Src/freertos.c **** 	else {
+ 475:Core/Src/freertos.c **** 		// robot stop
+ 476:Core/Src/freertos.c **** 		Run_State = 'B';
+ 477:Core/Src/freertos.c **** 	}
+ 478:Core/Src/freertos.c **** 
+ 479:Core/Src/freertos.c **** 
+ 480:Core/Src/freertos.c **** 
+ 481:Core/Src/freertos.c **** 
+ 482:Core/Src/freertos.c **** 
+ 483:Core/Src/freertos.c **** 
+ 484:Core/Src/freertos.c **** 
+ 485:Core/Src/freertos.c **** 
+ 486:Core/Src/freertos.c **** 
+ 487:Core/Src/freertos.c **** 		/*
+ 488:Core/Src/freertos.c **** 		angle = CAL_ANG(Linear.vx, Linear.vy, Linear.vz);
+ 489:Core/Src/freertos.c **** 		TURN(angle);*/
+ 490:Core/Src/freertos.c **** //	}
+ 491:Core/Src/freertos.c **** 
+ 492:Core/Src/freertos.c **** 	// Motor activate
+ 493:Core/Src/freertos.c **** //    RUN_DIR('F');
+ 494:Core/Src/freertos.c **** //    RUN_RB('U');
+ 495:Core/Src/freertos.c ****     RUN_DIR(Run_Dir);
+ 496:Core/Src/freertos.c ****     RUN_RB(Run_State);
+ 497:Core/Src/freertos.c ****     MOTOR_SS(Motor_State);
+ 498:Core/Src/freertos.c **** 
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 11
+
+
+ 499:Core/Src/freertos.c ****     rclc_executor_spin_some(&executor, timeout);
+ 500:Core/Src/freertos.c **** 
+ 501:Core/Src/freertos.c ****         osDelay(10);
+ 502:Core/Src/freertos.c ****       }
+ 503:Core/Src/freertos.c ****   /* USER CODE END StartDefaultTask */
+ 504:Core/Src/freertos.c **** }
+ 505:Core/Src/freertos.c **** 
+ 506:Core/Src/freertos.c **** /* Private application code --------------------------------------------------*/
+ 507:Core/Src/freertos.c **** /* USER CODE BEGIN Application */
+ 508:Core/Src/freertos.c **** 
+ 509:Core/Src/freertos.c **** 	// 기본 ?��?��(default task) ?��?��?�� 구독 콜백 ?��?��
+ 510:Core/Src/freertos.c **** 	void messageCallback(const void *msgin) {
+  73              		.loc 1 510 42 is_stmt 1 view -0
+  74              		.cfi_startproc
+  75              		@ args = 0, pretend = 0, frame = 0
+  76              		@ frame_needed = 0, uses_anonymous_args = 0
+  77              		.loc 1 510 42 is_stmt 0 view .LVU6
+  78 0000 08B5     		push	{r3, lr}
+  79              	.LCFI1:
+  80              		.cfi_def_cfa_offset 8
+  81              		.cfi_offset 3, -8
+  82              		.cfi_offset 14, -4
+ 511:Core/Src/freertos.c **** 		const std_msgs__msg__String_sub1 *msg = (const std_msgs__msg__String_sub1 *)msgin;
+  83              		.loc 1 511 3 is_stmt 1 view .LVU7
+  84              	.LVL2:
+ 512:Core/Src/freertos.c **** 		printf("Received: %s\n", msg->dir_1);
+  85              		.loc 1 512 3 view .LVU8
+  86 0002 90E80E00 		ldm	r0, {r1, r2, r3}
+  87 0006 0248     		ldr	r0, .L7
+  88              	.LVL3:
+  89              		.loc 1 512 3 is_stmt 0 view .LVU9
+  90 0008 FFF7FEFF 		bl	printf
+  91              	.LVL4:
+ 513:Core/Src/freertos.c **** 	}
+  92              		.loc 1 513 2 view .LVU10
+  93 000c 08BD     		pop	{r3, pc}
+  94              	.L8:
+  95 000e 00BF     		.align	2
+  96              	.L7:
+  97 0010 00000000 		.word	.LC0
+  98              		.cfi_endproc
+  99              	.LFE144:
+ 101              		.section	.rodata.messageCallback_test1.str1.4,"aMS",%progbits,1
+ 102              		.align	2
+ 103              	.LC1:
+ 104 0000 52656365 		.ascii	"Received: %d\012\000"
+ 104      69766564 
+ 104      3A202564 
+ 104      0A00
+ 105              		.section	.text.messageCallback_test1,"ax",%progbits
+ 106              		.align	1
+ 107              		.global	messageCallback_test1
+ 108              		.syntax unified
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	messageCallback_test1:
+ 113              	.LVL5:
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 12
+
+
+ 114              	.LFB145:
+ 514:Core/Src/freertos.c **** 
+ 515:Core/Src/freertos.c **** 	void messageCallback_test1(const void *msgin) {
+ 115              		.loc 1 515 48 is_stmt 1 view -0
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 0
+ 118              		@ frame_needed = 0, uses_anonymous_args = 0
+ 119              		.loc 1 515 48 is_stmt 0 view .LVU12
+ 120 0000 08B5     		push	{r3, lr}
+ 121              	.LCFI2:
+ 122              		.cfi_def_cfa_offset 8
+ 123              		.cfi_offset 3, -8
+ 124              		.cfi_offset 14, -4
+ 516:Core/Src/freertos.c **** 		const std_msgs__msg__Int32_test2 *msg = (const std_msgs__msg__Int32_test2 *)msgin;
+ 125              		.loc 1 516 3 is_stmt 1 view .LVU13
+ 126              	.LVL6:
+ 517:Core/Src/freertos.c **** 		printf("Received: %d\n", msg->test_2);
+ 127              		.loc 1 517 3 view .LVU14
+ 128 0002 0168     		ldr	r1, [r0]
+ 129 0004 0148     		ldr	r0, .L11
+ 130              	.LVL7:
+ 131              		.loc 1 517 3 is_stmt 0 view .LVU15
+ 132 0006 FFF7FEFF 		bl	printf
+ 133              	.LVL8:
+ 518:Core/Src/freertos.c **** 	}
+ 134              		.loc 1 518 2 view .LVU16
+ 135 000a 08BD     		pop	{r3, pc}
+ 136              	.L12:
+ 137              		.align	2
+ 138              	.L11:
+ 139 000c 00000000 		.word	.LC1
+ 140              		.cfi_endproc
+ 141              	.LFE145:
+ 143              		.section	.text.messageCallback_test2,"ax",%progbits
+ 144              		.align	1
+ 145              		.global	messageCallback_test2
+ 146              		.syntax unified
+ 147              		.thumb
+ 148              		.thumb_func
+ 150              	messageCallback_test2:
+ 151              	.LVL9:
+ 152              	.LFB146:
+ 519:Core/Src/freertos.c **** 
+ 520:Core/Src/freertos.c **** 	void messageCallback_test2(const void *msgin) {
+ 153              		.loc 1 520 48 is_stmt 1 view -0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 0
+ 156              		@ frame_needed = 0, uses_anonymous_args = 0
+ 157              		.loc 1 520 48 is_stmt 0 view .LVU18
+ 158 0000 08B5     		push	{r3, lr}
+ 159              	.LCFI3:
+ 160              		.cfi_def_cfa_offset 8
+ 161              		.cfi_offset 3, -8
+ 162              		.cfi_offset 14, -4
+ 521:Core/Src/freertos.c **** 		const std_msgs__msg__Int32_test3 *msg = (const std_msgs__msg__Int32_test3 *)msgin;
+ 163              		.loc 1 521 3 is_stmt 1 view .LVU19
+ 164              	.LVL10:
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 13
+
+
+ 522:Core/Src/freertos.c **** 		printf("Received: %d\n", msg->test_3);
+ 165              		.loc 1 522 3 view .LVU20
+ 166 0002 0168     		ldr	r1, [r0]
+ 167 0004 0148     		ldr	r0, .L15
+ 168              	.LVL11:
+ 169              		.loc 1 522 3 is_stmt 0 view .LVU21
+ 170 0006 FFF7FEFF 		bl	printf
+ 171              	.LVL12:
+ 523:Core/Src/freertos.c **** 	}
+ 172              		.loc 1 523 2 view .LVU22
+ 173 000a 08BD     		pop	{r3, pc}
+ 174              	.L16:
+ 175              		.align	2
+ 176              	.L15:
+ 177 000c 00000000 		.word	.LC1
+ 178              		.cfi_endproc
+ 179              	.LFE146:
+ 181              		.section	.text.RUN_INIT,"ax",%progbits
+ 182              		.align	1
+ 183              		.global	RUN_INIT
+ 184              		.syntax unified
+ 185              		.thumb
+ 186              		.thumb_func
+ 188              	RUN_INIT:
+ 189              	.LFB148:
+ 524:Core/Src/freertos.c **** 
+ 525:Core/Src/freertos.c **** 	void twist_subscription_callback(const void * msgin)
+ 526:Core/Src/freertos.c **** 	{
+ 527:Core/Src/freertos.c **** 	    const geometry_msgs__msg__Twist * msg = (const geometry_msgs__msg__Twist *)msgin;
+ 528:Core/Src/freertos.c **** 
+ 529:Core/Src/freertos.c **** 	    HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+ 530:Core/Src/freertos.c **** 
+ 531:Core/Src/freertos.c **** /*		Run_State = 'U';
+ 532:Core/Src/freertos.c **** 		Run_Dir = 'F';
+ 533:Core/Src/freertos.c **** 		Motor_State = 'T';*/
+ 534:Core/Src/freertos.c **** 
+ 535:Core/Src/freertos.c **** //    	m_mode = 1;
+ 536:Core/Src/freertos.c **** 
+ 537:Core/Src/freertos.c **** /*	    if(m_mode == 0){
+ 538:Core/Src/freertos.c **** 	    	m_mode = 1;
+ 539:Core/Src/freertos.c **** 	    }
+ 540:Core/Src/freertos.c **** 	    else{
+ 541:Core/Src/freertos.c **** 	    	m_mode =0;
+ 542:Core/Src/freertos.c **** 	    }*/
+ 543:Core/Src/freertos.c **** 
+ 544:Core/Src/freertos.c **** 	    // 선속도와 각속도의 모든 값을 변수에 저장
+ 545:Core/Src/freertos.c **** /*	    float linear_velocity_x = msg->linear.x;
+ 546:Core/Src/freertos.c **** 	    float linear_velocity_y = msg->linear.y;
+ 547:Core/Src/freertos.c **** 	    float linear_velocity_z = msg->linear.z;
+ 548:Core/Src/freertos.c **** 
+ 549:Core/Src/freertos.c **** 	    float angular_velocity_x = msg->angular.x;
+ 550:Core/Src/freertos.c **** 	    float angular_velocity_y = msg->angular.y;
+ 551:Core/Src/freertos.c **** 	    float angular_velocity_z = msg->angular.z;*/
+ 552:Core/Src/freertos.c **** 
+ 553:Core/Src/freertos.c **** 
+ 554:Core/Src/freertos.c **** /*		Linear.vx = submsg_2.linear.x;
+ 555:Core/Src/freertos.c **** 		Linear.vy = submsg_2.linear.y;
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 14
+
+
+ 556:Core/Src/freertos.c **** 		Linear.vz = submsg_2.linear.z;
+ 557:Core/Src/freertos.c **** 
+ 558:Core/Src/freertos.c **** 		Angular.vx = submsg_2.angular.x;
+ 559:Core/Src/freertos.c **** 		Angular.vy = submsg_2.angular.y;
+ 560:Core/Src/freertos.c **** 		Angular.vz = submsg_2.angular.z;*/
+ 561:Core/Src/freertos.c **** 
+ 562:Core/Src/freertos.c **** 	    // 선속도와 각속도의 모든 값을 변수에 저장
+ 563:Core/Src/freertos.c **** /*	    linear_velocity_x = msg->linear.x;
+ 564:Core/Src/freertos.c **** 	    linear_velocity_y = msg->linear.y;
+ 565:Core/Src/freertos.c **** 	    linear_velocity_z = msg->linear.z;
+ 566:Core/Src/freertos.c **** 
+ 567:Core/Src/freertos.c **** 	    angular_velocity_x = msg->angular.x;
+ 568:Core/Src/freertos.c **** 	    angular_velocity_y = msg->angular.y;
+ 569:Core/Src/freertos.c **** 	    angular_velocity_z = msg->angular.z;*/
+ 570:Core/Src/freertos.c **** 
+ 571:Core/Src/freertos.c **** 
+ 572:Core/Src/freertos.c **** 		Linear.vx = msg->linear.x;
+ 573:Core/Src/freertos.c **** 		Linear.vy = msg->linear.y;
+ 574:Core/Src/freertos.c **** 		Linear.vz = msg->linear.z;
+ 575:Core/Src/freertos.c **** 
+ 576:Core/Src/freertos.c **** 		Angular.vx = msg->angular.x;
+ 577:Core/Src/freertos.c **** 		Angular.vy = msg->angular.y;
+ 578:Core/Src/freertos.c **** 		Angular.vz = msg->angular.z;
+ 579:Core/Src/freertos.c **** 
+ 580:Core/Src/freertos.c **** 		MOTION_MODE(Linear.vx, Linear.vy, Linear.vz, Angular.vx, Angular.vy, Angular.vz);
+ 581:Core/Src/freertos.c **** /*		if(Linear.vy != 0)	m_mode = 2;
+ 582:Core/Src/freertos.c **** 		else if(Linear.vy == 0){
+ 583:Core/Src/freertos.c **** 			if(Linear.vx == 0)	m_mode = 0;
+ 584:Core/Src/freertos.c **** 			else		m_mode = 1;
+ 585:Core/Src/freertos.c **** 		}*/
+ 586:Core/Src/freertos.c **** 
+ 587:Core/Src/freertos.c **** 
+ 588:Core/Src/freertos.c **** 
+ 589:Core/Src/freertos.c **** 
+ 590:Core/Src/freertos.c **** 	    // 저장된 값을 출력
+ 591:Core/Src/freertos.c **** /*	    printf("Received Twist - Linear Velocity (X: %f, Y: %f, Z: %f), Angular Velocity (X: %f, Y: 
+ 592:Core/Src/freertos.c **** 	           linear_velocity_x, linear_velocity_y, linear_velocity_z,
+ 593:Core/Src/freertos.c **** 	           angular_velocity_x, angular_velocity_y, angular_velocity_z);*/
+ 594:Core/Src/freertos.c **** 
+ 595:Core/Src/freertos.c **** 	    // MOTION_MODE 함수를 호출하여 m_mode 설정
+ 596:Core/Src/freertos.c **** //		m_mode = MOTION_MODE(linear_velocity_x, linear_velocity_y, linear_velocity_z);
+ 597:Core/Src/freertos.c **** //		MOTION_MODE(Linear.vx, Linear.vy, Linear.vz);
+ 598:Core/Src/freertos.c **** //		m_mode = MOTION_MODE(Linear.vx, Linear.vy, Linear.vz);
+ 599:Core/Src/freertos.c **** //		m_mode = 1;
+ 600:Core/Src/freertos.c **** 	}
+ 601:Core/Src/freertos.c **** 
+ 602:Core/Src/freertos.c **** 	// Motor function
+ 603:Core/Src/freertos.c **** 	void RUN_INIT(void){
+ 190              		.loc 1 603 21 is_stmt 1 view -0
+ 191              		.cfi_startproc
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 194 0000 10B5     		push	{r4, lr}
+ 195              	.LCFI4:
+ 196              		.cfi_def_cfa_offset 8
+ 197              		.cfi_offset 4, -8
+ 198              		.cfi_offset 14, -4
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 15
+
+
+ 604:Core/Src/freertos.c **** 		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, SET);	// Motor1 RUN/BRK - BRK
+ 199              		.loc 1 604 5 view .LVU24
+ 200 0002 0C4C     		ldr	r4, .L19
+ 201 0004 0122     		movs	r2, #1
+ 202 0006 4FF40051 		mov	r1, #8192
+ 203 000a 2046     		mov	r0, r4
+ 204 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 205              	.LVL13:
+ 605:Core/Src/freertos.c **** 		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, SET);	// Motor1 START/STOP - STOP
+ 206              		.loc 1 605 5 view .LVU25
+ 207 0010 0122     		movs	r2, #1
+ 208 0012 4FF48041 		mov	r1, #16384
+ 209 0016 2046     		mov	r0, r4
+ 210 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 211              	.LVL14:
+ 606:Core/Src/freertos.c **** 	  	  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, SET);	// Motor2 RUN/BRK - BRK
+ 212              		.loc 1 606 7 view .LVU26
+ 213 001c 0122     		movs	r2, #1
+ 214 001e 8021     		movs	r1, #128
+ 215 0020 0548     		ldr	r0, .L19+4
+ 216 0022 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 217              	.LVL15:
+ 607:Core/Src/freertos.c **** 	  	  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);	// Motor2 START/STOP - STOP
+ 218              		.loc 1 607 7 view .LVU27
+ 219 0026 0122     		movs	r2, #1
+ 220 0028 0821     		movs	r1, #8
+ 221 002a 0448     		ldr	r0, .L19+8
+ 222 002c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 223              	.LVL16:
+ 608:Core/Src/freertos.c **** 	}
+ 224              		.loc 1 608 2 is_stmt 0 view .LVU28
+ 225 0030 10BD     		pop	{r4, pc}
+ 226              	.L20:
+ 227 0032 00BF     		.align	2
+ 228              	.L19:
+ 229 0034 00140240 		.word	1073878016
+ 230 0038 000C0240 		.word	1073875968
+ 231 003c 00100240 		.word	1073876992
+ 232              		.cfi_endproc
+ 233              	.LFE148:
+ 235              		.section	.text.RUN_DIR,"ax",%progbits
+ 236              		.align	1
+ 237              		.global	RUN_DIR
+ 238              		.syntax unified
+ 239              		.thumb
+ 240              		.thumb_func
+ 242              	RUN_DIR:
+ 243              	.LVL17:
+ 244              	.LFB149:
+ 609:Core/Src/freertos.c **** 
+ 610:Core/Src/freertos.c **** 
+ 611:Core/Src/freertos.c **** 	void RUN_DIR(char dir){
+ 245              		.loc 1 611 24 is_stmt 1 view -0
+ 246              		.cfi_startproc
+ 247              		@ args = 0, pretend = 0, frame = 0
+ 248              		@ frame_needed = 0, uses_anonymous_args = 0
+ 249              		.loc 1 611 24 is_stmt 0 view .LVU30
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 16
+
+
+ 250 0000 10B5     		push	{r4, lr}
+ 251              	.LCFI5:
+ 252              		.cfi_def_cfa_offset 8
+ 253              		.cfi_offset 4, -8
+ 254              		.cfi_offset 14, -4
+ 612:Core/Src/freertos.c **** 
+ 613:Core/Src/freertos.c **** 		if(dir == 'F'){			// Front
+ 255              		.loc 1 613 3 is_stmt 1 view .LVU31
+ 256 0002 4638     		subs	r0, r0, #70
+ 257              	.LVL18:
+ 258              		.loc 1 613 3 is_stmt 0 view .LVU32
+ 259 0004 0C28     		cmp	r0, #12
+ 260 0006 14D8     		bhi	.L21
+ 261 0008 DFE800F0 		tbb	[pc, r0]
+ 262              	.L24:
+ 263 000c 07       		.byte	(.L27-.L24)/2
+ 264 000d 13       		.byte	(.L21-.L24)/2
+ 265 000e 13       		.byte	(.L21-.L24)/2
+ 266 000f 13       		.byte	(.L21-.L24)/2
+ 267 0010 13       		.byte	(.L21-.L24)/2
+ 268 0011 13       		.byte	(.L21-.L24)/2
+ 269 0012 21       		.byte	(.L26-.L24)/2
+ 270 0013 13       		.byte	(.L21-.L24)/2
+ 271 0014 13       		.byte	(.L21-.L24)/2
+ 272 0015 14       		.byte	(.L25-.L24)/2
+ 273 0016 13       		.byte	(.L21-.L24)/2
+ 274 0017 13       		.byte	(.L21-.L24)/2
+ 275 0018 2E       		.byte	(.L23-.L24)/2
+ 276 0019 00       		.p2align 1
+ 277              	.L27:
+ 614:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, SET);		// Motor1 DIR - CW
+ 278              		.loc 1 614 4 is_stmt 1 view .LVU33
+ 279 001a 1A4C     		ldr	r4, .L30
+ 280 001c 0122     		movs	r2, #1
+ 281 001e 4FF48051 		mov	r1, #4096
+ 282 0022 2046     		mov	r0, r4
+ 283 0024 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 284              	.LVL19:
+ 615:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, RESET);	// Motor2 DIR - CCW
+ 285              		.loc 1 615 7 view .LVU34
+ 286 0028 0022     		movs	r2, #0
+ 287 002a 0421     		movs	r1, #4
+ 288 002c 2046     		mov	r0, r4
+ 289 002e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 290              	.LVL20:
+ 291              	.L21:
+ 616:Core/Src/freertos.c **** 		}
+ 617:Core/Src/freertos.c **** 		else if(dir == 'O'){	// Back
+ 618:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, RESET);		// Motor1 DIR - CCW
+ 619:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+ 620:Core/Src/freertos.c **** 		}
+ 621:Core/Src/freertos.c **** 		else if(dir == 'L'){	// Left
+ 622:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, SET);		// Motor1 DIR - CW
+ 623:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+ 624:Core/Src/freertos.c **** 		}
+ 625:Core/Src/freertos.c **** 		else if(dir == 'R'){	// Right
+ 626:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, RESET);		// Motor1 DIR - CCW
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 17
+
+
+ 627:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, RESET);	// Motor2 DIR - CCW
+ 628:Core/Src/freertos.c **** 		}
+ 629:Core/Src/freertos.c **** 	}
+ 292              		.loc 1 629 2 is_stmt 0 view .LVU35
+ 293 0032 10BD     		pop	{r4, pc}
+ 294              	.L25:
+ 618:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+ 295              		.loc 1 618 4 is_stmt 1 view .LVU36
+ 296 0034 134C     		ldr	r4, .L30
+ 297 0036 0022     		movs	r2, #0
+ 298 0038 4FF48051 		mov	r1, #4096
+ 299 003c 2046     		mov	r0, r4
+ 300 003e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 301              	.LVL21:
+ 619:Core/Src/freertos.c **** 		}
+ 302              		.loc 1 619 7 view .LVU37
+ 303 0042 0122     		movs	r2, #1
+ 304 0044 0421     		movs	r1, #4
+ 305 0046 2046     		mov	r0, r4
+ 306 0048 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 307              	.LVL22:
+ 308 004c F1E7     		b	.L21
+ 309              	.L26:
+ 622:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+ 310              		.loc 1 622 4 view .LVU38
+ 311 004e 0D4C     		ldr	r4, .L30
+ 312 0050 0122     		movs	r2, #1
+ 313 0052 4FF48051 		mov	r1, #4096
+ 314 0056 2046     		mov	r0, r4
+ 315 0058 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 316              	.LVL23:
+ 623:Core/Src/freertos.c **** 		}
+ 317              		.loc 1 623 7 view .LVU39
+ 318 005c 0122     		movs	r2, #1
+ 319 005e 0421     		movs	r1, #4
+ 320 0060 2046     		mov	r0, r4
+ 321 0062 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 322              	.LVL24:
+ 323 0066 E4E7     		b	.L21
+ 324              	.L23:
+ 626:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, RESET);	// Motor2 DIR - CCW
+ 325              		.loc 1 626 4 view .LVU40
+ 326 0068 064C     		ldr	r4, .L30
+ 327 006a 0022     		movs	r2, #0
+ 328 006c 4FF48051 		mov	r1, #4096
+ 329 0070 2046     		mov	r0, r4
+ 330 0072 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 331              	.LVL25:
+ 627:Core/Src/freertos.c **** 		}
+ 332              		.loc 1 627 7 view .LVU41
+ 333 0076 0022     		movs	r2, #0
+ 334 0078 0421     		movs	r1, #4
+ 335 007a 2046     		mov	r0, r4
+ 336 007c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 337              	.LVL26:
+ 338              		.loc 1 629 2 is_stmt 0 view .LVU42
+ 339 0080 D7E7     		b	.L21
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 18
+
+
+ 340              	.L31:
+ 341 0082 00BF     		.align	2
+ 342              	.L30:
+ 343 0084 00140240 		.word	1073878016
+ 344              		.cfi_endproc
+ 345              	.LFE149:
+ 347              		.section	.text.RUN_RB,"ax",%progbits
+ 348              		.align	1
+ 349              		.global	RUN_RB
+ 350              		.syntax unified
+ 351              		.thumb
+ 352              		.thumb_func
+ 354              	RUN_RB:
+ 355              	.LVL27:
+ 356              	.LFB150:
+ 630:Core/Src/freertos.c **** 
+ 631:Core/Src/freertos.c **** 	void RUN_RB(char runstate){
+ 357              		.loc 1 631 28 is_stmt 1 view -0
+ 358              		.cfi_startproc
+ 359              		@ args = 0, pretend = 0, frame = 0
+ 360              		@ frame_needed = 0, uses_anonymous_args = 0
+ 361              		.loc 1 631 28 is_stmt 0 view .LVU44
+ 362 0000 08B5     		push	{r3, lr}
+ 363              	.LCFI6:
+ 364              		.cfi_def_cfa_offset 8
+ 365              		.cfi_offset 3, -8
+ 366              		.cfi_offset 14, -4
+ 632:Core/Src/freertos.c **** 
+ 633:Core/Src/freertos.c **** 		if(runstate == 'U'){
+ 367              		.loc 1 633 3 is_stmt 1 view .LVU45
+ 368              		.loc 1 633 5 is_stmt 0 view .LVU46
+ 369 0002 5528     		cmp	r0, #85
+ 370 0004 02D0     		beq	.L36
+ 634:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, RESET);	// Motor1 RUN/BRK - RUN
+ 635:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, RESET);	// Motor2 RUN/BRK - RUN
+ 636:Core/Src/freertos.c **** 		}
+ 637:Core/Src/freertos.c **** 		else if(runstate == 'B'){
+ 371              		.loc 1 637 8 is_stmt 1 view .LVU47
+ 372              		.loc 1 637 10 is_stmt 0 view .LVU48
+ 373 0006 4228     		cmp	r0, #66
+ 374 0008 0CD0     		beq	.L37
+ 375              	.LVL28:
+ 376              	.L32:
+ 638:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, SET);	// Motor1 RUN/BRK - BRK
+ 639:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, SET);	// Motor2 RUN/BRK - BRK
+ 640:Core/Src/freertos.c **** 		}
+ 641:Core/Src/freertos.c **** 	}
+ 377              		.loc 1 641 2 view .LVU49
+ 378 000a 08BD     		pop	{r3, pc}
+ 379              	.LVL29:
+ 380              	.L36:
+ 634:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, RESET);	// Motor1 RUN/BRK - RUN
+ 381              		.loc 1 634 4 is_stmt 1 view .LVU50
+ 382 000c 0022     		movs	r2, #0
+ 383 000e 4FF40051 		mov	r1, #8192
+ 384 0012 0A48     		ldr	r0, .L38
+ 385              	.LVL30:
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 19
+
+
+ 634:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, RESET);	// Motor1 RUN/BRK - RUN
+ 386              		.loc 1 634 4 is_stmt 0 view .LVU51
+ 387 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 388              	.LVL31:
+ 635:Core/Src/freertos.c **** 		}
+ 389              		.loc 1 635 4 is_stmt 1 view .LVU52
+ 390 0018 0022     		movs	r2, #0
+ 391 001a 8021     		movs	r1, #128
+ 392 001c 0848     		ldr	r0, .L38+4
+ 393 001e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 394              	.LVL32:
+ 395 0022 F2E7     		b	.L32
+ 396              	.LVL33:
+ 397              	.L37:
+ 638:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, SET);	// Motor1 RUN/BRK - BRK
+ 398              		.loc 1 638 8 view .LVU53
+ 399 0024 0122     		movs	r2, #1
+ 400 0026 4FF40051 		mov	r1, #8192
+ 401 002a 0448     		ldr	r0, .L38
+ 402              	.LVL34:
+ 638:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, SET);	// Motor1 RUN/BRK - BRK
+ 403              		.loc 1 638 8 is_stmt 0 view .LVU54
+ 404 002c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 405              	.LVL35:
+ 639:Core/Src/freertos.c **** 		}
+ 406              		.loc 1 639 8 is_stmt 1 view .LVU55
+ 407 0030 0122     		movs	r2, #1
+ 408 0032 8021     		movs	r1, #128
+ 409 0034 0248     		ldr	r0, .L38+4
+ 410 0036 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 411              	.LVL36:
+ 412              		.loc 1 641 2 is_stmt 0 view .LVU56
+ 413 003a E6E7     		b	.L32
+ 414              	.L39:
+ 415              		.align	2
+ 416              	.L38:
+ 417 003c 00140240 		.word	1073878016
+ 418 0040 000C0240 		.word	1073875968
+ 419              		.cfi_endproc
+ 420              	.LFE150:
+ 422              		.section	.text.MOTOR_SS,"ax",%progbits
+ 423              		.align	1
+ 424              		.global	MOTOR_SS
+ 425              		.syntax unified
+ 426              		.thumb
+ 427              		.thumb_func
+ 429              	MOTOR_SS:
+ 430              	.LVL37:
+ 431              	.LFB151:
+ 642:Core/Src/freertos.c **** 
+ 643:Core/Src/freertos.c **** 	void MOTOR_SS(char motorstate){
+ 432              		.loc 1 643 32 is_stmt 1 view -0
+ 433              		.cfi_startproc
+ 434              		@ args = 0, pretend = 0, frame = 0
+ 435              		@ frame_needed = 0, uses_anonymous_args = 0
+ 436              		.loc 1 643 32 is_stmt 0 view .LVU58
+ 437 0000 08B5     		push	{r3, lr}
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 20
+
+
+ 438              	.LCFI7:
+ 439              		.cfi_def_cfa_offset 8
+ 440              		.cfi_offset 3, -8
+ 441              		.cfi_offset 14, -4
+ 644:Core/Src/freertos.c **** 
+ 645:Core/Src/freertos.c **** 		if(motorstate == 'T'){
+ 442              		.loc 1 645 3 is_stmt 1 view .LVU59
+ 443              		.loc 1 645 5 is_stmt 0 view .LVU60
+ 444 0002 5428     		cmp	r0, #84
+ 445 0004 02D0     		beq	.L44
+ 646:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, RESET);	// Motor1 START/STOP - START
+ 647:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);	// Motor2 START/STOP - START
+ 648:Core/Src/freertos.c **** 		}
+ 649:Core/Src/freertos.c **** 		else if(motorstate == 'P'){
+ 446              		.loc 1 649 8 is_stmt 1 view .LVU61
+ 447              		.loc 1 649 10 is_stmt 0 view .LVU62
+ 448 0006 5028     		cmp	r0, #80
+ 449 0008 0CD0     		beq	.L45
+ 450              	.LVL38:
+ 451              	.L40:
+ 650:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, SET);	// Motor1 START/STOP - STOP
+ 651:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);	// Motor2 START/STOP - STOP
+ 652:Core/Src/freertos.c **** 		}
+ 653:Core/Src/freertos.c **** 	}
+ 452              		.loc 1 653 2 view .LVU63
+ 453 000a 08BD     		pop	{r3, pc}
+ 454              	.LVL39:
+ 455              	.L44:
+ 646:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, RESET);	// Motor1 START/STOP - START
+ 456              		.loc 1 646 7 is_stmt 1 view .LVU64
+ 457 000c 0022     		movs	r2, #0
+ 458 000e 4FF48041 		mov	r1, #16384
+ 459 0012 0A48     		ldr	r0, .L46
+ 460              	.LVL40:
+ 646:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, RESET);	// Motor1 START/STOP - START
+ 461              		.loc 1 646 7 is_stmt 0 view .LVU65
+ 462 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 463              	.LVL41:
+ 647:Core/Src/freertos.c **** 		}
+ 464              		.loc 1 647 7 is_stmt 1 view .LVU66
+ 465 0018 0022     		movs	r2, #0
+ 466 001a 0821     		movs	r1, #8
+ 467 001c 0848     		ldr	r0, .L46+4
+ 468 001e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 469              	.LVL42:
+ 470 0022 F2E7     		b	.L40
+ 471              	.LVL43:
+ 472              	.L45:
+ 650:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, SET);	// Motor1 START/STOP - STOP
+ 473              		.loc 1 650 8 view .LVU67
+ 474 0024 0122     		movs	r2, #1
+ 475 0026 4FF48041 		mov	r1, #16384
+ 476 002a 0448     		ldr	r0, .L46
+ 477              	.LVL44:
+ 650:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, SET);	// Motor1 START/STOP - STOP
+ 478              		.loc 1 650 8 is_stmt 0 view .LVU68
+ 479 002c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 21
+
+
+ 480              	.LVL45:
+ 651:Core/Src/freertos.c **** 		}
+ 481              		.loc 1 651 8 is_stmt 1 view .LVU69
+ 482 0030 0122     		movs	r2, #1
+ 483 0032 0821     		movs	r1, #8
+ 484 0034 0248     		ldr	r0, .L46+4
+ 485 0036 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 486              	.LVL46:
+ 487              		.loc 1 653 2 is_stmt 0 view .LVU70
+ 488 003a E6E7     		b	.L40
+ 489              	.L47:
+ 490              		.align	2
+ 491              	.L46:
+ 492 003c 00140240 		.word	1073878016
+ 493 0040 00100240 		.word	1073876992
+ 494              		.cfi_endproc
+ 495              	.LFE151:
+ 497              		.section	.text.HAL_TIM_IC_CaptureCallback,"ax",%progbits
+ 498              		.align	1
+ 499              		.global	HAL_TIM_IC_CaptureCallback
+ 500              		.syntax unified
+ 501              		.thumb
+ 502              		.thumb_func
+ 504              	HAL_TIM_IC_CaptureCallback:
+ 505              	.LVL47:
+ 506              	.LFB152:
+ 654:Core/Src/freertos.c **** 
+ 655:Core/Src/freertos.c **** 	void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+ 656:Core/Src/freertos.c **** 	{
+ 507              		.loc 1 656 2 is_stmt 1 view -0
+ 508              		.cfi_startproc
+ 509              		@ args = 0, pretend = 0, frame = 0
+ 510              		@ frame_needed = 0, uses_anonymous_args = 0
+ 511              		.loc 1 656 2 is_stmt 0 view .LVU72
+ 512 0000 10B5     		push	{r4, lr}
+ 513              	.LCFI8:
+ 514              		.cfi_def_cfa_offset 8
+ 515              		.cfi_offset 4, -8
+ 516              		.cfi_offset 14, -4
+ 517 0002 0446     		mov	r4, r0
+ 657:Core/Src/freertos.c **** 		if ( htim->Instance == TIM2){
+ 518              		.loc 1 657 3 is_stmt 1 view .LVU73
+ 519              		.loc 1 657 12 is_stmt 0 view .LVU74
+ 520 0004 0368     		ldr	r3, [r0]
+ 521              		.loc 1 657 6 view .LVU75
+ 522 0006 B3F1804F 		cmp	r3, #1073741824
+ 523 000a 04D0     		beq	.L54
+ 524              	.LVL48:
+ 525              	.L49:
+ 658:Core/Src/freertos.c **** 
+ 659:Core/Src/freertos.c **** 			// Motor1
+ 660:Core/Src/freertos.c **** 			if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+ 661:Core/Src/freertos.c **** 			{
+ 662:Core/Src/freertos.c **** 				// - CW
+ 663:Core/Src/freertos.c **** 				if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_12) == 1){
+ 664:Core/Src/freertos.c **** 					hall1 = hall1 + 1;
+ 665:Core/Src/freertos.c **** 				}
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 22
+
+
+ 666:Core/Src/freertos.c **** 				// - CCW
+ 667:Core/Src/freertos.c **** 				else if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_12) == 0){
+ 668:Core/Src/freertos.c **** 					hall1 = hall1 - 1;
+ 669:Core/Src/freertos.c **** 				}
+ 670:Core/Src/freertos.c **** 			}
+ 671:Core/Src/freertos.c **** 		}
+ 672:Core/Src/freertos.c **** 
+ 673:Core/Src/freertos.c **** 		if ( htim->Instance == TIM5){
+ 526              		.loc 1 673 3 is_stmt 1 view .LVU76
+ 527              		.loc 1 673 12 is_stmt 0 view .LVU77
+ 528 000c 2268     		ldr	r2, [r4]
+ 529              		.loc 1 673 6 view .LVU78
+ 530 000e 1C4B     		ldr	r3, .L56
+ 531 0010 9A42     		cmp	r2, r3
+ 532 0012 1BD0     		beq	.L55
+ 533              	.L48:
+ 674:Core/Src/freertos.c **** 
+ 675:Core/Src/freertos.c **** 					// Motor2
+ 676:Core/Src/freertos.c **** 			if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+ 677:Core/Src/freertos.c **** 			{
+ 678:Core/Src/freertos.c **** 				// - CW
+ 679:Core/Src/freertos.c **** 				if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_2) == 1){
+ 680:Core/Src/freertos.c **** 					hall2 = hall2 - 1;
+ 681:Core/Src/freertos.c **** 				}
+ 682:Core/Src/freertos.c **** 				// - CCW
+ 683:Core/Src/freertos.c **** 				else if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_2) == 0){
+ 684:Core/Src/freertos.c **** 					hall2 = hall2 + 1;
+ 685:Core/Src/freertos.c **** 				}
+ 686:Core/Src/freertos.c **** 			}
+ 687:Core/Src/freertos.c **** 		}
+ 688:Core/Src/freertos.c **** 
+ 689:Core/Src/freertos.c **** 
+ 690:Core/Src/freertos.c **** 
+ 691:Core/Src/freertos.c **** 
+ 692:Core/Src/freertos.c **** 
+ 693:Core/Src/freertos.c **** 
+ 694:Core/Src/freertos.c **** 	}
+ 534              		.loc 1 694 2 view .LVU79
+ 535 0014 10BD     		pop	{r4, pc}
+ 536              	.LVL49:
+ 537              	.L54:
+ 660:Core/Src/freertos.c **** 			{
+ 538              		.loc 1 660 4 is_stmt 1 view .LVU80
+ 660:Core/Src/freertos.c **** 			{
+ 539              		.loc 1 660 11 is_stmt 0 view .LVU81
+ 540 0016 037F     		ldrb	r3, [r0, #28]	@ zero_extendqisi2
+ 660:Core/Src/freertos.c **** 			{
+ 541              		.loc 1 660 6 view .LVU82
+ 542 0018 012B     		cmp	r3, #1
+ 543 001a F7D1     		bne	.L49
+ 663:Core/Src/freertos.c **** 					hall1 = hall1 + 1;
+ 544              		.loc 1 663 5 is_stmt 1 view .LVU83
+ 663:Core/Src/freertos.c **** 					hall1 = hall1 + 1;
+ 545              		.loc 1 663 8 is_stmt 0 view .LVU84
+ 546 001c 4FF48051 		mov	r1, #4096
+ 547 0020 1848     		ldr	r0, .L56+4
+ 548              	.LVL50:
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 23
+
+
+ 663:Core/Src/freertos.c **** 					hall1 = hall1 + 1;
+ 549              		.loc 1 663 8 view .LVU85
+ 550 0022 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 551              	.LVL51:
+ 663:Core/Src/freertos.c **** 					hall1 = hall1 + 1;
+ 552              		.loc 1 663 7 view .LVU86
+ 553 0026 0128     		cmp	r0, #1
+ 554 0028 04D1     		bne	.L50
+ 664:Core/Src/freertos.c **** 				}
+ 555              		.loc 1 664 6 is_stmt 1 view .LVU87
+ 664:Core/Src/freertos.c **** 				}
+ 556              		.loc 1 664 20 is_stmt 0 view .LVU88
+ 557 002a 174A     		ldr	r2, .L56+8
+ 558 002c 1368     		ldr	r3, [r2]
+ 559 002e 0133     		adds	r3, r3, #1
+ 664:Core/Src/freertos.c **** 				}
+ 560              		.loc 1 664 12 view .LVU89
+ 561 0030 1360     		str	r3, [r2]
+ 562 0032 EBE7     		b	.L49
+ 563              	.L50:
+ 667:Core/Src/freertos.c **** 					hall1 = hall1 - 1;
+ 564              		.loc 1 667 10 is_stmt 1 view .LVU90
+ 667:Core/Src/freertos.c **** 					hall1 = hall1 - 1;
+ 565              		.loc 1 667 13 is_stmt 0 view .LVU91
+ 566 0034 4FF48051 		mov	r1, #4096
+ 567 0038 1248     		ldr	r0, .L56+4
+ 568 003a FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 569              	.LVL52:
+ 667:Core/Src/freertos.c **** 					hall1 = hall1 - 1;
+ 570              		.loc 1 667 12 view .LVU92
+ 571 003e 0028     		cmp	r0, #0
+ 572 0040 E4D1     		bne	.L49
+ 668:Core/Src/freertos.c **** 				}
+ 573              		.loc 1 668 6 is_stmt 1 view .LVU93
+ 668:Core/Src/freertos.c **** 				}
+ 574              		.loc 1 668 20 is_stmt 0 view .LVU94
+ 575 0042 114A     		ldr	r2, .L56+8
+ 576 0044 1368     		ldr	r3, [r2]
+ 577 0046 013B     		subs	r3, r3, #1
+ 668:Core/Src/freertos.c **** 				}
+ 578              		.loc 1 668 12 view .LVU95
+ 579 0048 1360     		str	r3, [r2]
+ 580 004a DFE7     		b	.L49
+ 581              	.L55:
+ 676:Core/Src/freertos.c **** 			{
+ 582              		.loc 1 676 4 is_stmt 1 view .LVU96
+ 676:Core/Src/freertos.c **** 			{
+ 583              		.loc 1 676 11 is_stmt 0 view .LVU97
+ 584 004c 237F     		ldrb	r3, [r4, #28]	@ zero_extendqisi2
+ 676:Core/Src/freertos.c **** 			{
+ 585              		.loc 1 676 6 view .LVU98
+ 586 004e 012B     		cmp	r3, #1
+ 587 0050 E0D1     		bne	.L48
+ 679:Core/Src/freertos.c **** 					hall2 = hall2 - 1;
+ 588              		.loc 1 679 5 is_stmt 1 view .LVU99
+ 679:Core/Src/freertos.c **** 					hall2 = hall2 - 1;
+ 589              		.loc 1 679 8 is_stmt 0 view .LVU100
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 24
+
+
+ 590 0052 0421     		movs	r1, #4
+ 591 0054 0B48     		ldr	r0, .L56+4
+ 592 0056 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 593              	.LVL53:
+ 679:Core/Src/freertos.c **** 					hall2 = hall2 - 1;
+ 594              		.loc 1 679 7 view .LVU101
+ 595 005a 0128     		cmp	r0, #1
+ 596 005c 04D1     		bne	.L52
+ 680:Core/Src/freertos.c **** 				}
+ 597              		.loc 1 680 6 is_stmt 1 view .LVU102
+ 680:Core/Src/freertos.c **** 				}
+ 598              		.loc 1 680 20 is_stmt 0 view .LVU103
+ 599 005e 0B4A     		ldr	r2, .L56+12
+ 600 0060 1368     		ldr	r3, [r2]
+ 601 0062 013B     		subs	r3, r3, #1
+ 680:Core/Src/freertos.c **** 				}
+ 602              		.loc 1 680 12 view .LVU104
+ 603 0064 1360     		str	r3, [r2]
+ 604 0066 D5E7     		b	.L48
+ 605              	.L52:
+ 683:Core/Src/freertos.c **** 					hall2 = hall2 + 1;
+ 606              		.loc 1 683 10 is_stmt 1 view .LVU105
+ 683:Core/Src/freertos.c **** 					hall2 = hall2 + 1;
+ 607              		.loc 1 683 13 is_stmt 0 view .LVU106
+ 608 0068 0421     		movs	r1, #4
+ 609 006a 0648     		ldr	r0, .L56+4
+ 610 006c FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 611              	.LVL54:
+ 683:Core/Src/freertos.c **** 					hall2 = hall2 + 1;
+ 612              		.loc 1 683 12 view .LVU107
+ 613 0070 0028     		cmp	r0, #0
+ 614 0072 CFD1     		bne	.L48
+ 684:Core/Src/freertos.c **** 				}
+ 615              		.loc 1 684 6 is_stmt 1 view .LVU108
+ 684:Core/Src/freertos.c **** 				}
+ 616              		.loc 1 684 20 is_stmt 0 view .LVU109
+ 617 0074 054A     		ldr	r2, .L56+12
+ 618 0076 1368     		ldr	r3, [r2]
+ 619 0078 0133     		adds	r3, r3, #1
+ 684:Core/Src/freertos.c **** 				}
+ 620              		.loc 1 684 12 view .LVU110
+ 621 007a 1360     		str	r3, [r2]
+ 622              		.loc 1 694 2 view .LVU111
+ 623 007c CAE7     		b	.L48
+ 624              	.L57:
+ 625 007e 00BF     		.align	2
+ 626              	.L56:
+ 627 0080 000C0040 		.word	1073744896
+ 628 0084 00140240 		.word	1073878016
+ 629 0088 00000000 		.word	.LANCHOR2
+ 630 008c 00000000 		.word	.LANCHOR3
+ 631              		.cfi_endproc
+ 632              	.LFE152:
+ 634              		.global	__aeabi_d2iz
+ 635              		.section	.text.PWM_R,"ax",%progbits
+ 636              		.align	1
+ 637              		.global	PWM_R
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 25
+
+
+ 638              		.syntax unified
+ 639              		.thumb
+ 640              		.thumb_func
+ 642              	PWM_R:
+ 643              	.LVL55:
+ 644              	.LFB153:
+ 695:Core/Src/freertos.c **** 
+ 696:Core/Src/freertos.c **** /*	void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+ 697:Core/Src/freertos.c **** 	{
+ 698:Core/Src/freertos.c **** 		if( htim->Instance == TIM3 ){
+ 699:Core/Src/freertos.c **** 			if(turn_flag == 1){
+ 700:Core/Src/freertos.c **** 				count_sec++;
+ 701:Core/Src/freertos.c **** 			}
+ 702:Core/Src/freertos.c **** 		}
+ 703:Core/Src/freertos.c **** */
+ 704:Core/Src/freertos.c **** 
+ 705:Core/Src/freertos.c **** 	void PWM_R(double duty){
+ 645              		.loc 1 705 25 is_stmt 1 view -0
+ 646              		.cfi_startproc
+ 647              		@ args = 0, pretend = 0, frame = 0
+ 648              		@ frame_needed = 0, uses_anonymous_args = 0
+ 649              		.loc 1 705 25 is_stmt 0 view .LVU113
+ 650 0000 08B5     		push	{r3, lr}
+ 651              	.LCFI9:
+ 652              		.cfi_def_cfa_offset 8
+ 653              		.cfi_offset 3, -8
+ 654              		.cfi_offset 14, -4
+ 655 0002 51EC100B 		vmov	r0, r1, d0
+ 706:Core/Src/freertos.c **** 		__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, (int)duty-1);
+ 656              		.loc 1 706 3 is_stmt 1 view .LVU114
+ 657 0006 FFF7FEFF 		bl	__aeabi_d2iz
+ 658              	.LVL56:
+ 659              		.loc 1 706 3 is_stmt 0 view .LVU115
+ 660 000a 024B     		ldr	r3, .L60
+ 661 000c 1B68     		ldr	r3, [r3]
+ 662 000e 0138     		subs	r0, r0, #1
+ 663 0010 5863     		str	r0, [r3, #52]
+ 707:Core/Src/freertos.c **** 	}
+ 664              		.loc 1 707 2 view .LVU116
+ 665 0012 08BD     		pop	{r3, pc}
+ 666              	.L61:
+ 667              		.align	2
+ 668              	.L60:
+ 669 0014 00000000 		.word	htim4
+ 670              		.cfi_endproc
+ 671              	.LFE153:
+ 673              		.section	.text.PWM_L,"ax",%progbits
+ 674              		.align	1
+ 675              		.global	PWM_L
+ 676              		.syntax unified
+ 677              		.thumb
+ 678              		.thumb_func
+ 680              	PWM_L:
+ 681              	.LVL57:
+ 682              	.LFB154:
+ 708:Core/Src/freertos.c **** 	void PWM_L(double duty){
+ 683              		.loc 1 708 25 is_stmt 1 view -0
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 26
+
+
+ 684              		.cfi_startproc
+ 685              		@ args = 0, pretend = 0, frame = 0
+ 686              		@ frame_needed = 0, uses_anonymous_args = 0
+ 687              		.loc 1 708 25 is_stmt 0 view .LVU118
+ 688 0000 08B5     		push	{r3, lr}
+ 689              	.LCFI10:
+ 690              		.cfi_def_cfa_offset 8
+ 691              		.cfi_offset 3, -8
+ 692              		.cfi_offset 14, -4
+ 693 0002 51EC100B 		vmov	r0, r1, d0
+ 709:Core/Src/freertos.c **** 		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, (int)duty-1);
+ 694              		.loc 1 709 3 is_stmt 1 view .LVU119
+ 695 0006 FFF7FEFF 		bl	__aeabi_d2iz
+ 696              	.LVL58:
+ 697              		.loc 1 709 3 is_stmt 0 view .LVU120
+ 698 000a 024B     		ldr	r3, .L64
+ 699 000c 1B68     		ldr	r3, [r3]
+ 700 000e 0138     		subs	r0, r0, #1
+ 701 0010 5863     		str	r0, [r3, #52]
+ 710:Core/Src/freertos.c **** 	}
+ 702              		.loc 1 710 2 view .LVU121
+ 703 0012 08BD     		pop	{r3, pc}
+ 704              	.L65:
+ 705              		.align	2
+ 706              	.L64:
+ 707 0014 00000000 		.word	htim3
+ 708              		.cfi_endproc
+ 709              	.LFE154:
+ 711              		.global	__aeabi_dcmplt
+ 712              		.global	__aeabi_dmul
+ 713              		.section	.text.CAL_LinearSpeed,"ax",%progbits
+ 714              		.align	1
+ 715              		.global	CAL_LinearSpeed
+ 716              		.syntax unified
+ 717              		.thumb
+ 718              		.thumb_func
+ 720              	CAL_LinearSpeed:
+ 721              	.LVL59:
+ 722              	.LFB155:
+ 711:Core/Src/freertos.c **** 
+ 712:Core/Src/freertos.c **** 	// Calculate the final speed.
+ 713:Core/Src/freertos.c **** 	double CAL_LinearSpeed(double x, double y, double z)
+ 714:Core/Src/freertos.c **** 	{
+ 723              		.loc 1 714 2 is_stmt 1 view -0
+ 724              		.cfi_startproc
+ 725              		@ args = 0, pretend = 0, frame = 0
+ 726              		@ frame_needed = 0, uses_anonymous_args = 0
+ 727              		.loc 1 714 2 is_stmt 0 view .LVU123
+ 728 0000 38B5     		push	{r3, r4, r5, lr}
+ 729              	.LCFI11:
+ 730              		.cfi_def_cfa_offset 16
+ 731              		.cfi_offset 3, -16
+ 732              		.cfi_offset 4, -12
+ 733              		.cfi_offset 5, -8
+ 734              		.cfi_offset 14, -4
+ 735 0002 55EC104B 		vmov	r4, r5, d0
+ 715:Core/Src/freertos.c **** 		double distance = 0;
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 27
+
+
+ 736              		.loc 1 715 3 is_stmt 1 view .LVU124
+ 737              	.LVL60:
+ 716:Core/Src/freertos.c **** 		double duty_percent = 0;
+ 738              		.loc 1 716 3 view .LVU125
+ 717:Core/Src/freertos.c **** 
+ 718:Core/Src/freertos.c **** 		if(x < 0){
+ 739              		.loc 1 718 3 view .LVU126
+ 740              		.loc 1 718 5 is_stmt 0 view .LVU127
+ 741 0006 0022     		movs	r2, #0
+ 742 0008 0023     		movs	r3, #0
+ 743 000a 10EE100A 		vmov	r0, s0	@ int
+ 744 000e 2946     		mov	r1, r5
+ 745 0010 FFF7FEFF 		bl	__aeabi_dcmplt
+ 746              	.LVL61:
+ 747              		.loc 1 718 5 view .LVU128
+ 748 0014 48B9     		cbnz	r0, .L71
+ 749              	.LVL62:
+ 750              	.L67:
+ 719:Core/Src/freertos.c **** 			distance = -x;
+ 720:Core/Src/freertos.c **** 		}
+ 721:Core/Src/freertos.c **** 		else{
+ 722:Core/Src/freertos.c **** 			distance = x;
+ 723:Core/Src/freertos.c **** 		}
+ 724:Core/Src/freertos.c **** 
+ 725:Core/Src/freertos.c **** 		duty_percent = distance * (20.0/(0.0965*M_PI));
+ 751              		.loc 1 725 3 is_stmt 1 view .LVU129
+ 752              		.loc 1 725 16 is_stmt 0 view .LVU130
+ 753 0016 08A3     		adr	r3, .L72
+ 754 0018 D3E90023 		ldrd	r2, [r3]
+ 755 001c 2046     		mov	r0, r4
+ 756 001e 2946     		mov	r1, r5
+ 757 0020 FFF7FEFF 		bl	__aeabi_dmul
+ 758              	.LVL63:
+ 726:Core/Src/freertos.c **** 
+ 727:Core/Src/freertos.c **** 		return duty_percent;
+ 759              		.loc 1 727 3 is_stmt 1 view .LVU131
+ 728:Core/Src/freertos.c **** 	}
+ 760              		.loc 1 728 2 is_stmt 0 view .LVU132
+ 761 0024 41EC100B 		vmov	d0, r0, r1
+ 762 0028 38BD     		pop	{r3, r4, r5, pc}
+ 763              	.LVL64:
+ 764              	.L71:
+ 719:Core/Src/freertos.c **** 			distance = -x;
+ 765              		.loc 1 719 4 is_stmt 1 view .LVU133
+ 719:Core/Src/freertos.c **** 			distance = -x;
+ 766              		.loc 1 719 13 is_stmt 0 view .LVU134
+ 767 002a 05F10043 		add	r3, r5, #-2147483648
+ 768 002e 1D46     		mov	r5, r3
+ 769              	.LVL65:
+ 719:Core/Src/freertos.c **** 			distance = -x;
+ 770              		.loc 1 719 13 view .LVU135
+ 771 0030 F1E7     		b	.L67
+ 772              	.L73:
+ 773 0032 00BFAFF3 		.align	3
+ 773      0080
+ 774              	.L72:
+ 775 0038 DE7A0C39 		.word	957119198
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 28
+
+
+ 776 003c 247E5040 		.word	1079016996
+ 777              		.cfi_endproc
+ 778              	.LFE155:
+ 780              		.global	__aeabi_ddiv
+ 781              		.section	.text.CAL_AngularSpeed,"ax",%progbits
+ 782              		.align	1
+ 783              		.global	CAL_AngularSpeed
+ 784              		.syntax unified
+ 785              		.thumb
+ 786              		.thumb_func
+ 788              	CAL_AngularSpeed:
+ 789              	.LVL66:
+ 790              	.LFB156:
+ 729:Core/Src/freertos.c **** 
+ 730:Core/Src/freertos.c **** 	// Calculate the angle at which the robot should turn.
+ 731:Core/Src/freertos.c **** 
+ 732:Core/Src/freertos.c **** 	double CAL_AngularSpeed(double x, double y, double z)
+ 733:Core/Src/freertos.c **** 	{
+ 791              		.loc 1 733 2 is_stmt 1 view -0
+ 792              		.cfi_startproc
+ 793              		@ args = 0, pretend = 0, frame = 0
+ 794              		@ frame_needed = 0, uses_anonymous_args = 0
+ 795              		.loc 1 733 2 is_stmt 0 view .LVU137
+ 796 0000 08B5     		push	{r3, lr}
+ 797              	.LCFI12:
+ 798              		.cfi_def_cfa_offset 8
+ 799              		.cfi_offset 3, -8
+ 800              		.cfi_offset 14, -4
+ 801 0002 51EC120B 		vmov	r0, r1, d2
+ 734:Core/Src/freertos.c **** 		double half_ang = 0;
+ 802              		.loc 1 734 3 is_stmt 1 view .LVU138
+ 803              	.LVL67:
+ 735:Core/Src/freertos.c **** 		double mps = 0;
+ 804              		.loc 1 735 3 view .LVU139
+ 736:Core/Src/freertos.c **** 		double wheel_rps = 0;
+ 805              		.loc 1 736 3 view .LVU140
+ 737:Core/Src/freertos.c **** 		double wheel_pwm = 0;
+ 806              		.loc 1 737 3 view .LVU141
+ 738:Core/Src/freertos.c **** 
+ 739:Core/Src/freertos.c **** 		wheel_pwm = (100*0.38*z)/(5*M_PI*0.0965*2);
+ 807              		.loc 1 739 3 view .LVU142
+ 808              		.loc 1 739 24 is_stmt 0 view .LVU143
+ 809 0006 0022     		movs	r2, #0
+ 810 0008 074B     		ldr	r3, .L76+8
+ 811 000a FFF7FEFF 		bl	__aeabi_dmul
+ 812              	.LVL68:
+ 813              		.loc 1 739 13 view .LVU144
+ 814 000e 04A3     		adr	r3, .L76
+ 815 0010 D3E90023 		ldrd	r2, [r3]
+ 816 0014 FFF7FEFF 		bl	__aeabi_ddiv
+ 817              	.LVL69:
+ 740:Core/Src/freertos.c **** 
+ 741:Core/Src/freertos.c **** 		return wheel_pwm;
+ 818              		.loc 1 741 3 is_stmt 1 view .LVU145
+ 742:Core/Src/freertos.c **** 	}
+ 819              		.loc 1 742 2 is_stmt 0 view .LVU146
+ 820 0018 41EC100B 		vmov	d0, r0, r1
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 29
+
+
+ 821 001c 08BD     		pop	{r3, pc}
+ 822              	.L77:
+ 823 001e 00BF     		.align	3
+ 824              	.L76:
+ 825 0020 F5E846DA 		.word	-632887051
+ 826 0024 CA400840 		.word	1074282698
+ 827 0028 00004340 		.word	1078132736
+ 828              		.cfi_endproc
+ 829              	.LFE156:
+ 831              		.section	.rodata.StartDefaultTask.str1.4,"aMS",%progbits,1
+ 832              		.align	2
+ 833              	.LC2:
+ 834 0000 4572726F 		.ascii	"Error on default allocators (line %d)\012\000"
+ 834      72206F6E 
+ 834      20646566 
+ 834      61756C74 
+ 834      20616C6C 
+ 835 0027 00       		.align	2
+ 836              	.LC3:
+ 837 0028 00       		.ascii	"\000"
+ 838 0029 000000   		.align	2
+ 839              	.LC4:
+ 840 002c 63756265 		.ascii	"cubemx_node\000"
+ 840      6D785F6E 
+ 840      6F646500 
+ 841              		.align	2
+ 842              	.LC5:
+ 843 0038 63756265 		.ascii	"cubemx_publisher\000"
+ 843      6D785F70 
+ 843      75626C69 
+ 843      73686572 
+ 843      00
+ 844 0049 000000   		.align	2
+ 845              	.LC6:
+ 846 004c 725F656E 		.ascii	"r_enc\000"
+ 846      6300
+ 847 0052 0000     		.align	2
+ 848              	.LC7:
+ 849 0054 6C5F656E 		.ascii	"l_enc\000"
+ 849      6300
+ 850 005a 0000     		.align	2
+ 851              	.LC8:
+ 852 005c 63756265 		.ascii	"cubemx_publisher_test\000"
+ 852      6D785F70 
+ 852      75626C69 
+ 852      73686572 
+ 852      5F746573 
+ 853 0072 0000     		.align	2
+ 854              	.LC9:
+ 855 0074 64696666 		.ascii	"diffbot_base_controller/cmd_vel_unstamped\000"
+ 855      626F745F 
+ 855      62617365 
+ 855      5F636F6E 
+ 855      74726F6C 
+ 856 009e 0000     		.align	2
+ 857              	.LC10:
+ 858 00a0 4572726F 		.ascii	"Error publishing (line %d)\012\000"
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 30
+
+
+ 858      72207075 
+ 858      626C6973 
+ 858      68696E67 
+ 858      20286C69 
+ 859              		.global	__aeabi_dadd
+ 860              		.global	__aeabi_dsub
+ 861              		.section	.text.StartDefaultTask,"ax",%progbits
+ 862              		.align	1
+ 863              		.global	StartDefaultTask
+ 864              		.syntax unified
+ 865              		.thumb
+ 866              		.thumb_func
+ 868              	StartDefaultTask:
+ 869              	.LVL70:
+ 870              	.LFB143:
+ 240:Core/Src/freertos.c ****   /* USER CODE BEGIN StartDefaultTask */
+ 871              		.loc 1 240 1 is_stmt 1 view -0
+ 872              		.cfi_startproc
+ 873              		@ args = 0, pretend = 0, frame = 344
+ 874              		@ frame_needed = 0, uses_anonymous_args = 0
+ 240:Core/Src/freertos.c ****   /* USER CODE BEGIN StartDefaultTask */
+ 875              		.loc 1 240 1 is_stmt 0 view .LVU148
+ 876 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 877              	.LCFI13:
+ 878              		.cfi_def_cfa_offset 20
+ 879              		.cfi_offset 4, -20
+ 880              		.cfi_offset 5, -16
+ 881              		.cfi_offset 6, -12
+ 882              		.cfi_offset 7, -8
+ 883              		.cfi_offset 14, -4
+ 884 0002 D9B0     		sub	sp, sp, #356
+ 885              	.LCFI14:
+ 886              		.cfi_def_cfa_offset 376
+ 246:Core/Src/freertos.c ****     true,
+ 887              		.loc 1 246 3 is_stmt 1 view .LVU149
+ 888 0004 954B     		ldr	r3, .L92
+ 889 0006 0193     		str	r3, [sp, #4]
+ 890 0008 954B     		ldr	r3, .L92+4
+ 891 000a 0093     		str	r3, [sp]
+ 892 000c 954B     		ldr	r3, .L92+8
+ 893 000e 964A     		ldr	r2, .L92+12
+ 894 0010 9649     		ldr	r1, .L92+16
+ 895 0012 0120     		movs	r0, #1
+ 896              	.LVL71:
+ 246:Core/Src/freertos.c ****     true,
+ 897              		.loc 1 246 3 is_stmt 0 view .LVU150
+ 898 0014 FFF7FEFF 		bl	rmw_uros_set_custom_transport
+ 899              	.LVL72:
+ 254:Core/Src/freertos.c ****   freeRTOS_allocator.allocate = microros_allocate;
+ 900              		.loc 1 254 3 is_stmt 1 view .LVU151
+ 254:Core/Src/freertos.c ****   freeRTOS_allocator.allocate = microros_allocate;
+ 901              		.loc 1 254 40 is_stmt 0 view .LVU152
+ 902 0018 53A8     		add	r0, sp, #332
+ 903 001a FFF7FEFF 		bl	rcutils_get_zero_initialized_allocator
+ 904              	.LVL73:
+ 255:Core/Src/freertos.c ****   freeRTOS_allocator.deallocate = microros_deallocate;
+ 905              		.loc 1 255 3 is_stmt 1 view .LVU153
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 31
+
+
+ 255:Core/Src/freertos.c ****   freeRTOS_allocator.deallocate = microros_deallocate;
+ 906              		.loc 1 255 31 is_stmt 0 view .LVU154
+ 907 001e 944B     		ldr	r3, .L92+20
+ 908 0020 5393     		str	r3, [sp, #332]
+ 256:Core/Src/freertos.c ****   freeRTOS_allocator.reallocate = microros_reallocate;
+ 909              		.loc 1 256 3 is_stmt 1 view .LVU155
+ 256:Core/Src/freertos.c ****   freeRTOS_allocator.reallocate = microros_reallocate;
+ 910              		.loc 1 256 33 is_stmt 0 view .LVU156
+ 911 0022 944B     		ldr	r3, .L92+24
+ 912 0024 5493     		str	r3, [sp, #336]
+ 257:Core/Src/freertos.c ****   freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
+ 913              		.loc 1 257 3 is_stmt 1 view .LVU157
+ 257:Core/Src/freertos.c ****   freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
+ 914              		.loc 1 257 33 is_stmt 0 view .LVU158
+ 915 0026 944B     		ldr	r3, .L92+28
+ 916 0028 5593     		str	r3, [sp, #340]
+ 258:Core/Src/freertos.c **** 
+ 917              		.loc 1 258 3 is_stmt 1 view .LVU159
+ 258:Core/Src/freertos.c **** 
+ 918              		.loc 1 258 36 is_stmt 0 view .LVU160
+ 919 002a 944B     		ldr	r3, .L92+32
+ 920 002c 5693     		str	r3, [sp, #344]
+ 260:Core/Src/freertos.c ****       printf("Error on default allocators (line %d)\n", __LINE__); 
+ 921              		.loc 1 260 3 is_stmt 1 view .LVU161
+ 260:Core/Src/freertos.c ****       printf("Error on default allocators (line %d)\n", __LINE__); 
+ 922              		.loc 1 260 8 is_stmt 0 view .LVU162
+ 923 002e 53A8     		add	r0, sp, #332
+ 924 0030 FFF7FEFF 		bl	rcutils_set_default_allocator
+ 925              	.LVL74:
+ 260:Core/Src/freertos.c ****       printf("Error on default allocators (line %d)\n", __LINE__); 
+ 926              		.loc 1 260 6 view .LVU163
+ 927 0034 0028     		cmp	r0, #0
+ 928 0036 4DD0     		beq	.L87
+ 929              	.L79:
+ 266:Core/Src/freertos.c ****   std_msgs__msg__Int32 msg;
+ 930              		.loc 1 266 3 is_stmt 1 view .LVU164
+ 267:Core/Src/freertos.c **** //test
+ 931              		.loc 1 267 3 view .LVU165
+ 269:Core/Src/freertos.c ****   std_msgs__msg__Int32_test1 msg_test;
+ 932              		.loc 1 269 3 view .LVU166
+ 270:Core/Src/freertos.c **** 
+ 933              		.loc 1 270 3 view .LVU167
+ 272:Core/Src/freertos.c ****   std_msgs__msg__Int32_test2 submsg_test1;
+ 934              		.loc 1 272 3 view .LVU168
+ 273:Core/Src/freertos.c **** 
+ 935              		.loc 1 273 3 view .LVU169
+ 275:Core/Src/freertos.c ****   std_msgs__msg__Int32_test3 submsg_test2;
+ 936              		.loc 1 275 3 view .LVU170
+ 276:Core/Src/freertos.c **** //
+ 937              		.loc 1 276 3 view .LVU171
+ 278:Core/Src/freertos.c ****   std_msgs__msg__Int32_pub1 pubmsg_1;
+ 938              		.loc 1 278 3 view .LVU172
+ 279:Core/Src/freertos.c **** 
+ 939              		.loc 1 279 3 view .LVU173
+ 281:Core/Src/freertos.c ****   std_msgs__msg__Int32_pub2 pubmsg_2;
+ 940              		.loc 1 281 3 view .LVU174
+ 282:Core/Src/freertos.c **** 
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 32
+
+
+ 941              		.loc 1 282 3 view .LVU175
+ 284:Core/Src/freertos.c **** //  std_msgs__msg__String_sub1 submsg_1;
+ 942              		.loc 1 284 3 view .LVU176
+ 286:Core/Src/freertos.c **** //  geometry_msgs__msg__Twist * submsg_2_1;
+ 943              		.loc 1 286 3 view .LVU177
+ 289:Core/Src/freertos.c ****   rcl_allocator_t allocator;
+ 944              		.loc 1 289 3 view .LVU178
+ 290:Core/Src/freertos.c ****   rcl_node_t node;
+ 945              		.loc 1 290 3 view .LVU179
+ 291:Core/Src/freertos.c **** 
+ 946              		.loc 1 291 3 view .LVU180
+ 293:Core/Src/freertos.c **** 
+ 947              		.loc 1 293 3 view .LVU181
+ 293:Core/Src/freertos.c **** 
+ 948              		.loc 1 293 15 is_stmt 0 view .LVU182
+ 949 0038 02A8     		add	r0, sp, #8
+ 950 003a FFF7FEFF 		bl	rcutils_get_default_allocator
+ 951              	.LVL75:
+ 952 003e 2BAD     		add	r5, sp, #172
+ 953 0040 02AC     		add	r4, sp, #8
+ 954 0042 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 955 0044 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 956 0046 2368     		ldr	r3, [r4]
+ 957 0048 2B60     		str	r3, [r5]
+ 296:Core/Src/freertos.c **** 
+ 958              		.loc 1 296 3 is_stmt 1 view .LVU183
+ 959 004a 2BAB     		add	r3, sp, #172
+ 960 004c 0022     		movs	r2, #0
+ 961 004e 1146     		mov	r1, r2
+ 962 0050 30A8     		add	r0, sp, #192
+ 963 0052 FFF7FEFF 		bl	rclc_support_init
+ 964              	.LVL76:
+ 301:Core/Src/freertos.c **** 
+ 965              		.loc 1 301 3 view .LVU184
+ 966 0056 30AB     		add	r3, sp, #192
+ 967 0058 894A     		ldr	r2, .L92+36
+ 968 005a 8A49     		ldr	r1, .L92+40
+ 969 005c 29A8     		add	r0, sp, #164
+ 970 005e FFF7FEFF 		bl	rclc_node_init_default
+ 971              	.LVL77:
+ 304:Core/Src/freertos.c ****     &publisher,
+ 972              		.loc 1 304 3 view .LVU185
+ 973 0062 FFF7FEFF 		bl	rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__Int32
+ 974              	.LVL78:
+ 975 0066 0246     		mov	r2, r0
+ 976 0068 874B     		ldr	r3, .L92+44
+ 977 006a 29A9     		add	r1, sp, #164
+ 978 006c 52A8     		add	r0, sp, #328
+ 979 006e FFF7FEFF 		bl	rclc_publisher_init_default
+ 980              	.LVL79:
+ 312:Core/Src/freertos.c ****     &publisher_1,
+ 981              		.loc 1 312 3 view .LVU186
+ 982 0072 FFF7FEFF 		bl	rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__Int32
+ 983              	.LVL80:
+ 984 0076 0246     		mov	r2, r0
+ 985 0078 844B     		ldr	r3, .L92+48
+ 986 007a 29A9     		add	r1, sp, #164
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 33
+
+
+ 987 007c 4FA8     		add	r0, sp, #316
+ 988 007e FFF7FEFF 		bl	rclc_publisher_init_default
+ 989              	.LVL81:
+ 320:Core/Src/freertos.c ****     &publisher_2,
+ 990              		.loc 1 320 3 view .LVU187
+ 991 0082 FFF7FEFF 		bl	rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__Int32
+ 992              	.LVL82:
+ 993 0086 0246     		mov	r2, r0
+ 994 0088 814B     		ldr	r3, .L92+52
+ 995 008a 29A9     		add	r1, sp, #164
+ 996 008c 4DA8     		add	r0, sp, #308
+ 997 008e FFF7FEFF 		bl	rclc_publisher_init_default
+ 998              	.LVL83:
+ 328:Core/Src/freertos.c ****     &publisher_test,
+ 999              		.loc 1 328 3 view .LVU188
+ 1000 0092 FFF7FEFF 		bl	rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__Int32
+ 1001              	.LVL84:
+ 1002 0096 0246     		mov	r2, r0
+ 1003 0098 7E4B     		ldr	r3, .L92+56
+ 1004 009a 29A9     		add	r1, sp, #164
+ 1005 009c 51A8     		add	r0, sp, #324
+ 1006 009e FFF7FEFF 		bl	rclc_publisher_init_default
+ 1007              	.LVL85:
+ 335:Core/Src/freertos.c ****       &subscriber_2,
+ 1008              		.loc 1 335 3 view .LVU189
+ 1009 00a2 FFF7FEFF 		bl	rosidl_typesupport_c__get_message_type_support_handle__geometry_msgs__msg__Twist
+ 1010              	.LVL86:
+ 1011 00a6 0246     		mov	r2, r0
+ 1012 00a8 7B4B     		ldr	r3, .L92+60
+ 1013 00aa 29A9     		add	r1, sp, #164
+ 1014 00ac 4BA8     		add	r0, sp, #300
+ 1015 00ae FFF7FEFF 		bl	rclc_subscription_init_default
+ 1016              	.LVL87:
+ 361:Core/Src/freertos.c ****   rclc_executor_init(&executor, &support.context, 1, &allocator);
+ 1017              		.loc 1 361 3 view .LVU190
+ 362:Core/Src/freertos.c **** //  rclc_executor_add_subscription(&executor, &subscriber_1, &submsg_1, &messageCallback, ON_NEW_DA
+ 1018              		.loc 1 362 3 view .LVU191
+ 1019 00b2 2BAB     		add	r3, sp, #172
+ 1020 00b4 0122     		movs	r2, #1
+ 1021 00b6 31A9     		add	r1, sp, #196
+ 1022 00b8 08A8     		add	r0, sp, #32
+ 1023 00ba FFF7FEFF 		bl	rclc_executor_init
+ 1024              	.LVL88:
+ 367:Core/Src/freertos.c **** 
+ 1025              		.loc 1 367 3 view .LVU192
+ 1026 00be 0024     		movs	r4, #0
+ 1027 00c0 0094     		str	r4, [sp]
+ 1028 00c2 764B     		ldr	r3, .L92+64
+ 1029 00c4 3EAA     		add	r2, sp, #248
+ 1030 00c6 4BA9     		add	r1, sp, #300
+ 1031 00c8 08A8     		add	r0, sp, #32
+ 1032 00ca FFF7FEFF 		bl	rclc_executor_add_subscription
+ 1033              	.LVL89:
+ 369:Core/Src/freertos.c ****   pubmsg_1.hall_1 = 0;
+ 1034              		.loc 1 369 3 view .LVU193
+ 370:Core/Src/freertos.c ****   pubmsg_2.hall_2 = 0;
+ 1035              		.loc 1 370 3 view .LVU194
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 34
+
+
+ 370:Core/Src/freertos.c ****   pubmsg_2.hall_2 = 0;
+ 1036              		.loc 1 370 19 is_stmt 0 view .LVU195
+ 1037 00ce 4E94     		str	r4, [sp, #312]
+ 371:Core/Src/freertos.c **** 
+ 1038              		.loc 1 371 3 is_stmt 1 view .LVU196
+ 371:Core/Src/freertos.c **** 
+ 1039              		.loc 1 371 19 is_stmt 0 view .LVU197
+ 1040 00d0 4C94     		str	r4, [sp, #304]
+ 1041 00d2 60E0     		b	.L85
+ 1042              	.L87:
+ 261:Core/Src/freertos.c ****   }
+ 1043              		.loc 1 261 7 is_stmt 1 view .LVU198
+ 1044 00d4 40F20511 		movw	r1, #261
+ 1045 00d8 7148     		ldr	r0, .L92+68
+ 1046 00da FFF7FEFF 		bl	printf
+ 1047              	.LVL90:
+ 1048 00de ABE7     		b	.L79
+ 1049              	.LVL91:
+ 1050              	.L88:
+ 1051              	.LBB2:
+ 391:Core/Src/freertos.c ****     }
+ 1052              		.loc 1 391 7 view .LVU199
+ 1053 00e0 40F28711 		movw	r1, #391
+ 1054 00e4 6F48     		ldr	r0, .L92+72
+ 1055 00e6 FFF7FEFF 		bl	printf
+ 1056              	.LVL92:
+ 1057 00ea 67E0     		b	.L80
+ 1058              	.L89:
+ 395:Core/Src/freertos.c ****     }
+ 1059              		.loc 1 395 7 view .LVU200
+ 1060 00ec 40F28B11 		movw	r1, #395
+ 1061 00f0 6C48     		ldr	r0, .L92+72
+ 1062 00f2 FFF7FEFF 		bl	printf
+ 1063              	.LVL93:
+ 1064 00f6 63E0     		b	.L81
+ 1065              	.L90:
+ 466:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1066              		.loc 1 466 3 view .LVU201
+ 466:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1067              		.loc 1 466 9 is_stmt 0 view .LVU202
+ 1068 00f8 6B4D     		ldr	r5, .L92+76
+ 1069              	.LVL94:
+ 466:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1070              		.loc 1 466 9 view .LVU203
+ 1071 00fa 95ED042B 		vldr.64	d2, [r5, #16]
+ 1072 00fe 95ED021B 		vldr.64	d1, [r5, #8]
+ 1073 0102 95ED000B 		vldr.64	d0, [r5]
+ 1074 0106 FFF7FEFF 		bl	CAL_LinearSpeed
+ 1075              	.LVL95:
+ 1076 010a 57EC106B 		vmov	r6, r7, d0
+ 466:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1077              		.loc 1 466 60 view .LVU204
+ 1078 010e 674C     		ldr	r4, .L92+80
+ 1079              	.LVL96:
+ 466:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1080              		.loc 1 466 60 view .LVU205
+ 1081 0110 94ED042B 		vldr.64	d2, [r4, #16]
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 35
+
+
+ 1082 0114 94ED021B 		vldr.64	d1, [r4, #8]
+ 1083 0118 94ED000B 		vldr.64	d0, [r4]
+ 1084 011c FFF7FEFF 		bl	CAL_AngularSpeed
+ 1085              	.LVL97:
+ 1086 0120 53EC102B 		vmov	r2, r3, d0
+ 466:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1087              		.loc 1 466 3 view .LVU206
+ 1088 0124 3046     		mov	r0, r6
+ 1089 0126 3946     		mov	r1, r7
+ 1090 0128 FFF7FEFF 		bl	__aeabi_dadd
+ 1091              	.LVL98:
+ 1092 012c 41EC100B 		vmov	d0, r0, r1
+ 1093 0130 FFF7FEFF 		bl	PWM_R
+ 1094              	.LVL99:
+ 467:Core/Src/freertos.c **** 	}
+ 1095              		.loc 1 467 3 is_stmt 1 view .LVU207
+ 467:Core/Src/freertos.c **** 	}
+ 1096              		.loc 1 467 9 is_stmt 0 view .LVU208
+ 1097 0134 95ED042B 		vldr.64	d2, [r5, #16]
+ 1098 0138 95ED021B 		vldr.64	d1, [r5, #8]
+ 1099 013c 95ED000B 		vldr.64	d0, [r5]
+ 1100 0140 FFF7FEFF 		bl	CAL_LinearSpeed
+ 1101              	.LVL100:
+ 1102 0144 57EC106B 		vmov	r6, r7, d0
+ 467:Core/Src/freertos.c **** 	}
+ 1103              		.loc 1 467 60 view .LVU209
+ 1104 0148 94ED042B 		vldr.64	d2, [r4, #16]
+ 1105 014c 94ED021B 		vldr.64	d1, [r4, #8]
+ 1106 0150 94ED000B 		vldr.64	d0, [r4]
+ 1107 0154 FFF7FEFF 		bl	CAL_AngularSpeed
+ 1108              	.LVL101:
+ 1109 0158 53EC102B 		vmov	r2, r3, d0
+ 467:Core/Src/freertos.c **** 	}
+ 1110              		.loc 1 467 3 view .LVU210
+ 1111 015c 3046     		mov	r0, r6
+ 1112 015e 3946     		mov	r1, r7
+ 1113 0160 FFF7FEFF 		bl	__aeabi_dsub
+ 1114              	.LVL102:
+ 1115 0164 41EC100B 		vmov	d0, r0, r1
+ 1116 0168 FFF7FEFF 		bl	PWM_L
+ 1117              	.LVL103:
+ 1118              	.L83:
+ 495:Core/Src/freertos.c ****     RUN_RB(Run_State);
+ 1119              		.loc 1 495 5 is_stmt 1 view .LVU211
+ 1120 016c 504B     		ldr	r3, .L92+84
+ 1121 016e 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 1122 0170 FFF7FEFF 		bl	RUN_DIR
+ 1123              	.LVL104:
+ 496:Core/Src/freertos.c ****     MOTOR_SS(Motor_State);
+ 1124              		.loc 1 496 5 view .LVU212
+ 1125 0174 4F4B     		ldr	r3, .L92+88
+ 1126 0176 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 1127 0178 FFF7FEFF 		bl	RUN_RB
+ 1128              	.LVL105:
+ 497:Core/Src/freertos.c **** 
+ 1129              		.loc 1 497 5 view .LVU213
+ 1130 017c 4E4B     		ldr	r3, .L92+92
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 36
+
+
+ 1131 017e 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 1132 0180 FFF7FEFF 		bl	MOTOR_SS
+ 1133              	.LVL106:
+ 499:Core/Src/freertos.c **** 
+ 1134              		.loc 1 499 5 view .LVU214
+ 1135 0184 4D4B     		ldr	r3, .L92+96
+ 1136 0186 1A68     		ldr	r2, [r3]
+ 1137 0188 D317     		asrs	r3, r2, #31
+ 1138 018a 08A8     		add	r0, sp, #32
+ 1139 018c FFF7FEFF 		bl	rclc_executor_spin_some
+ 1140              	.LVL107:
+ 501:Core/Src/freertos.c ****       }
+ 1141              		.loc 1 501 9 view .LVU215
+ 1142 0190 0A20     		movs	r0, #10
+ 1143 0192 FFF7FEFF 		bl	osDelay
+ 1144              	.LVL108:
+ 1145              	.LBE2:
+ 377:Core/Src/freertos.c ****   {
+ 1146              		.loc 1 377 3 view .LVU216
+ 1147              	.L85:
+ 377:Core/Src/freertos.c ****   {
+ 1148              		.loc 1 377 3 view .LVU217
+ 1149              	.LBB3:
+ 381:Core/Src/freertos.c **** 	 rcl_ret_t ret_2 = rcl_publish(&publisher_1, &pubmsg_1, NULL);
+ 1150              		.loc 1 381 3 view .LVU218
+ 381:Core/Src/freertos.c **** 	 rcl_ret_t ret_2 = rcl_publish(&publisher_1, &pubmsg_1, NULL);
+ 1151              		.loc 1 381 21 is_stmt 0 view .LVU219
+ 1152 0196 0022     		movs	r2, #0
+ 1153 0198 4CA9     		add	r1, sp, #304
+ 1154 019a 4DA8     		add	r0, sp, #308
+ 1155 019c FFF7FEFF 		bl	rcl_publish
+ 1156              	.LVL109:
+ 1157 01a0 0446     		mov	r4, r0
+ 1158              	.LVL110:
+ 382:Core/Src/freertos.c **** //    rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
+ 1159              		.loc 1 382 3 is_stmt 1 view .LVU220
+ 382:Core/Src/freertos.c **** //    rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
+ 1160              		.loc 1 382 21 is_stmt 0 view .LVU221
+ 1161 01a2 0022     		movs	r2, #0
+ 1162 01a4 4EA9     		add	r1, sp, #312
+ 1163 01a6 4FA8     		add	r0, sp, #316
+ 1164              	.LVL111:
+ 382:Core/Src/freertos.c **** //    rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
+ 1165              		.loc 1 382 21 view .LVU222
+ 1166 01a8 FFF7FEFF 		bl	rcl_publish
+ 1167              	.LVL112:
+ 1168 01ac 0546     		mov	r5, r0
+ 1169              	.LVL113:
+ 384:Core/Src/freertos.c **** /*    if (ret != RCL_RET_OK)
+ 1170              		.loc 1 384 5 is_stmt 1 view .LVU223
+ 384:Core/Src/freertos.c **** /*    if (ret != RCL_RET_OK)
+ 1171              		.loc 1 384 26 is_stmt 0 view .LVU224
+ 1172 01ae 0022     		movs	r2, #0
+ 1173 01b0 50A9     		add	r1, sp, #320
+ 1174 01b2 51A8     		add	r0, sp, #324
+ 1175              	.LVL114:
+ 384:Core/Src/freertos.c **** /*    if (ret != RCL_RET_OK)
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 37
+
+
+ 1176              		.loc 1 384 26 view .LVU225
+ 1177 01b4 FFF7FEFF 		bl	rcl_publish
+ 1178              	.LVL115:
+ 389:Core/Src/freertos.c ****     {
+ 1179              		.loc 1 389 5 is_stmt 1 view .LVU226
+ 389:Core/Src/freertos.c ****     {
+ 1180              		.loc 1 389 8 is_stmt 0 view .LVU227
+ 1181 01b8 002D     		cmp	r5, #0
+ 1182 01ba 91D1     		bne	.L88
+ 1183              	.L80:
+ 393:Core/Src/freertos.c ****     {
+ 1184              		.loc 1 393 5 is_stmt 1 view .LVU228
+ 393:Core/Src/freertos.c ****     {
+ 1185              		.loc 1 393 8 is_stmt 0 view .LVU229
+ 1186 01bc 002C     		cmp	r4, #0
+ 1187 01be 95D1     		bne	.L89
+ 1188              	.L81:
+ 404:Core/Src/freertos.c **** 	pubmsg_2.hall_2 = hall2;
+ 1189              		.loc 1 404 2 is_stmt 1 view .LVU230
+ 404:Core/Src/freertos.c **** 	pubmsg_2.hall_2 = hall2;
+ 1190              		.loc 1 404 18 is_stmt 0 view .LVU231
+ 1191 01c0 3F49     		ldr	r1, .L92+100
+ 1192 01c2 0B68     		ldr	r3, [r1]
+ 1193 01c4 4E93     		str	r3, [sp, #312]
+ 405:Core/Src/freertos.c **** 
+ 1194              		.loc 1 405 2 is_stmt 1 view .LVU232
+ 405:Core/Src/freertos.c **** 
+ 1195              		.loc 1 405 18 is_stmt 0 view .LVU233
+ 1196 01c6 3F4B     		ldr	r3, .L92+104
+ 1197 01c8 1A68     		ldr	r2, [r3]
+ 1198 01ca 4C92     		str	r2, [sp, #304]
+ 408:Core/Src/freertos.c **** 	hall2 = 0;
+ 1199              		.loc 1 408 2 is_stmt 1 view .LVU234
+ 408:Core/Src/freertos.c **** 	hall2 = 0;
+ 1200              		.loc 1 408 8 is_stmt 0 view .LVU235
+ 1201 01cc 0022     		movs	r2, #0
+ 1202 01ce 0A60     		str	r2, [r1]
+ 409:Core/Src/freertos.c **** 
+ 1203              		.loc 1 409 2 is_stmt 1 view .LVU236
+ 409:Core/Src/freertos.c **** 
+ 1204              		.loc 1 409 8 is_stmt 0 view .LVU237
+ 1205 01d0 1A60     		str	r2, [r3]
+ 465:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1206              		.loc 1 465 2 is_stmt 1 view .LVU238
+ 465:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1207              		.loc 1 465 12 is_stmt 0 view .LVU239
+ 1208 01d2 3D4B     		ldr	r3, .L92+108
+ 1209 01d4 1B68     		ldr	r3, [r3]
+ 465:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1210              		.loc 1 465 4 view .LVU240
+ 1211 01d6 012B     		cmp	r3, #1
+ 1212 01d8 8ED0     		beq	.L90
+ 470:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1213              		.loc 1 470 7 is_stmt 1 view .LVU241
+ 470:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1214              		.loc 1 470 9 is_stmt 0 view .LVU242
+ 1215 01da 022B     		cmp	r3, #2
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 38
+
+
+ 1216 01dc 03D0     		beq	.L91
+ 476:Core/Src/freertos.c **** 	}
+ 1217              		.loc 1 476 3 is_stmt 1 view .LVU243
+ 476:Core/Src/freertos.c **** 	}
+ 1218              		.loc 1 476 13 is_stmt 0 view .LVU244
+ 1219 01de 354B     		ldr	r3, .L92+88
+ 1220 01e0 4222     		movs	r2, #66
+ 1221 01e2 1A70     		strb	r2, [r3]
+ 1222 01e4 C2E7     		b	.L83
+ 1223              	.L91:
+ 471:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1224              		.loc 1 471 3 is_stmt 1 view .LVU245
+ 471:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1225              		.loc 1 471 9 is_stmt 0 view .LVU246
+ 1226 01e6 304D     		ldr	r5, .L92+76
+ 1227              	.LVL116:
+ 471:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1228              		.loc 1 471 9 view .LVU247
+ 1229 01e8 95ED042B 		vldr.64	d2, [r5, #16]
+ 1230 01ec 95ED021B 		vldr.64	d1, [r5, #8]
+ 1231 01f0 95ED000B 		vldr.64	d0, [r5]
+ 1232 01f4 FFF7FEFF 		bl	CAL_LinearSpeed
+ 1233              	.LVL117:
+ 1234 01f8 57EC106B 		vmov	r6, r7, d0
+ 471:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1235              		.loc 1 471 60 view .LVU248
+ 1236 01fc 2B4C     		ldr	r4, .L92+80
+ 1237              	.LVL118:
+ 471:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1238              		.loc 1 471 60 view .LVU249
+ 1239 01fe 94ED042B 		vldr.64	d2, [r4, #16]
+ 1240 0202 94ED021B 		vldr.64	d1, [r4, #8]
+ 1241 0206 94ED000B 		vldr.64	d0, [r4]
+ 1242 020a FFF7FEFF 		bl	CAL_AngularSpeed
+ 1243              	.LVL119:
+ 1244 020e 53EC102B 		vmov	r2, r3, d0
+ 471:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1245              		.loc 1 471 3 view .LVU250
+ 1246 0212 3046     		mov	r0, r6
+ 1247 0214 3946     		mov	r1, r7
+ 1248 0216 FFF7FEFF 		bl	__aeabi_dsub
+ 1249              	.LVL120:
+ 1250 021a 41EC100B 		vmov	d0, r0, r1
+ 1251 021e FFF7FEFF 		bl	PWM_R
+ 1252              	.LVL121:
+ 472:Core/Src/freertos.c **** 	}
+ 1253              		.loc 1 472 3 is_stmt 1 view .LVU251
+ 472:Core/Src/freertos.c **** 	}
+ 1254              		.loc 1 472 9 is_stmt 0 view .LVU252
+ 1255 0222 95ED042B 		vldr.64	d2, [r5, #16]
+ 1256 0226 95ED021B 		vldr.64	d1, [r5, #8]
+ 1257 022a 95ED000B 		vldr.64	d0, [r5]
+ 1258 022e FFF7FEFF 		bl	CAL_LinearSpeed
+ 1259              	.LVL122:
+ 1260 0232 57EC106B 		vmov	r6, r7, d0
+ 472:Core/Src/freertos.c **** 	}
+ 1261              		.loc 1 472 60 view .LVU253
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 39
+
+
+ 1262 0236 94ED042B 		vldr.64	d2, [r4, #16]
+ 1263 023a 94ED021B 		vldr.64	d1, [r4, #8]
+ 1264 023e 94ED000B 		vldr.64	d0, [r4]
+ 1265 0242 FFF7FEFF 		bl	CAL_AngularSpeed
+ 1266              	.LVL123:
+ 1267 0246 53EC102B 		vmov	r2, r3, d0
+ 472:Core/Src/freertos.c **** 	}
+ 1268              		.loc 1 472 3 view .LVU254
+ 1269 024a 3046     		mov	r0, r6
+ 1270 024c 3946     		mov	r1, r7
+ 1271 024e FFF7FEFF 		bl	__aeabi_dadd
+ 1272              	.LVL124:
+ 1273 0252 41EC100B 		vmov	d0, r0, r1
+ 1274 0256 FFF7FEFF 		bl	PWM_L
+ 1275              	.LVL125:
+ 1276 025a 87E7     		b	.L83
+ 1277              	.L93:
+ 1278              		.align	2
+ 1279              	.L92:
+ 1280 025c 00000000 		.word	cubemx_transport_read
+ 1281 0260 00000000 		.word	cubemx_transport_write
+ 1282 0264 00000000 		.word	cubemx_transport_close
+ 1283 0268 00000000 		.word	cubemx_transport_open
+ 1284 026c 00000000 		.word	huart3
+ 1285 0270 00000000 		.word	microros_allocate
+ 1286 0274 00000000 		.word	microros_deallocate
+ 1287 0278 00000000 		.word	microros_reallocate
+ 1288 027c 00000000 		.word	microros_zero_allocate
+ 1289 0280 28000000 		.word	.LC3
+ 1290 0284 2C000000 		.word	.LC4
+ 1291 0288 38000000 		.word	.LC5
+ 1292 028c 4C000000 		.word	.LC6
+ 1293 0290 54000000 		.word	.LC7
+ 1294 0294 5C000000 		.word	.LC8
+ 1295 0298 74000000 		.word	.LC9
+ 1296 029c 00000000 		.word	twist_subscription_callback
+ 1297 02a0 00000000 		.word	.LC2
+ 1298 02a4 A0000000 		.word	.LC10
+ 1299 02a8 00000000 		.word	.LANCHOR5
+ 1300 02ac 00000000 		.word	.LANCHOR6
+ 1301 02b0 00000000 		.word	.LANCHOR8
+ 1302 02b4 00000000 		.word	.LANCHOR7
+ 1303 02b8 00000000 		.word	.LANCHOR9
+ 1304 02bc 00000000 		.word	.LANCHOR10
+ 1305 02c0 00000000 		.word	.LANCHOR2
+ 1306 02c4 00000000 		.word	.LANCHOR3
+ 1307 02c8 00000000 		.word	.LANCHOR4
+ 1308              	.LBE3:
+ 1309              		.cfi_endproc
+ 1310              	.LFE143:
+ 1312              		.global	__aeabi_dcmpeq
+ 1313              		.section	.text.MOTION_MODE,"ax",%progbits
+ 1314              		.align	1
+ 1315              		.global	MOTION_MODE
+ 1316              		.syntax unified
+ 1317              		.thumb
+ 1318              		.thumb_func
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 40
+
+
+ 1320              	MOTION_MODE:
+ 1321              	.LVL126:
+ 1322              	.LFB157:
+ 743:Core/Src/freertos.c **** 
+ 744:Core/Src/freertos.c **** 	void MOTION_MODE(double lx, double ly, double lz, double ax, double ay, double az)
+ 745:Core/Src/freertos.c **** 	{
+ 1323              		.loc 1 745 2 is_stmt 1 view -0
+ 1324              		.cfi_startproc
+ 1325              		@ args = 0, pretend = 0, frame = 0
+ 1326              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1327              		.loc 1 745 2 is_stmt 0 view .LVU256
+ 1328 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1329              	.LCFI15:
+ 1330              		.cfi_def_cfa_offset 24
+ 1331              		.cfi_offset 3, -24
+ 1332              		.cfi_offset 4, -20
+ 1333              		.cfi_offset 5, -16
+ 1334              		.cfi_offset 6, -12
+ 1335              		.cfi_offset 7, -8
+ 1336              		.cfi_offset 14, -4
+ 1337 0002 51EC100B 		vmov	r0, r1, d0
+ 1338 0006 57EC116B 		vmov	r6, r7, d1
+ 1339 000a 55EC154B 		vmov	r4, r5, d5
+ 746:Core/Src/freertos.c **** 	    if(lx == 0 && ly == 0) {
+ 1340              		.loc 1 746 6 is_stmt 1 view .LVU257
+ 1341              		.loc 1 746 8 is_stmt 0 view .LVU258
+ 1342 000e 0022     		movs	r2, #0
+ 1343 0010 0023     		movs	r3, #0
+ 1344 0012 FFF7FEFF 		bl	__aeabi_dcmpeq
+ 1345              	.LVL127:
+ 1346              		.loc 1 746 8 view .LVU259
+ 1347 0016 50B1     		cbz	r0, .L95
+ 1348              		.loc 1 746 17 discriminator 1 view .LVU260
+ 1349 0018 0022     		movs	r2, #0
+ 1350 001a 0023     		movs	r3, #0
+ 1351 001c 3046     		mov	r0, r6
+ 1352 001e 3946     		mov	r1, r7
+ 1353 0020 FFF7FEFF 		bl	__aeabi_dcmpeq
+ 1354              	.LVL128:
+ 1355 0024 18B1     		cbz	r0, .L95
+ 747:Core/Src/freertos.c **** 	        m_mode = 0; // 정지
+ 1356              		.loc 1 747 10 is_stmt 1 view .LVU261
+ 1357              		.loc 1 747 17 is_stmt 0 view .LVU262
+ 1358 0026 094B     		ldr	r3, .L107
+ 1359 0028 0022     		movs	r2, #0
+ 1360 002a 1A60     		str	r2, [r3]
+ 1361 002c 09E0     		b	.L94
+ 1362              	.L95:
+ 748:Core/Src/freertos.c **** 	    }
+ 749:Core/Src/freertos.c **** 	    else {
+ 750:Core/Src/freertos.c **** 	    	if(az < 0){
+ 1363              		.loc 1 750 7 is_stmt 1 view .LVU263
+ 1364              		.loc 1 750 9 is_stmt 0 view .LVU264
+ 1365 002e 0022     		movs	r2, #0
+ 1366 0030 0023     		movs	r3, #0
+ 1367 0032 2046     		mov	r0, r4
+ 1368 0034 2946     		mov	r1, r5
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 41
+
+
+ 1369 0036 FFF7FEFF 		bl	__aeabi_dcmplt
+ 1370              	.LVL129:
+ 1371 003a 18B9     		cbnz	r0, .L106
+ 751:Core/Src/freertos.c **** 		        m_mode = 2;
+ 752:Core/Src/freertos.c **** 	    	}
+ 753:Core/Src/freertos.c **** 	    	else{
+ 754:Core/Src/freertos.c **** 	    		m_mode = 1;
+ 1372              		.loc 1 754 8 is_stmt 1 view .LVU265
+ 1373              		.loc 1 754 15 is_stmt 0 view .LVU266
+ 1374 003c 034B     		ldr	r3, .L107
+ 1375 003e 0122     		movs	r2, #1
+ 1376 0040 1A60     		str	r2, [r3]
+ 1377              	.L94:
+ 755:Core/Src/freertos.c **** 	    	}
+ 756:Core/Src/freertos.c **** 	    }
+ 757:Core/Src/freertos.c **** 	}
+ 1378              		.loc 1 757 2 view .LVU267
+ 1379 0042 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1380              	.LVL130:
+ 1381              	.L106:
+ 751:Core/Src/freertos.c **** 		        m_mode = 2;
+ 1382              		.loc 1 751 11 is_stmt 1 view .LVU268
+ 751:Core/Src/freertos.c **** 		        m_mode = 2;
+ 1383              		.loc 1 751 18 is_stmt 0 view .LVU269
+ 1384 0044 014B     		ldr	r3, .L107
+ 1385 0046 0222     		movs	r2, #2
+ 1386 0048 1A60     		str	r2, [r3]
+ 1387 004a FAE7     		b	.L94
+ 1388              	.L108:
+ 1389              		.align	2
+ 1390              	.L107:
+ 1391 004c 00000000 		.word	.LANCHOR4
+ 1392              		.cfi_endproc
+ 1393              	.LFE157:
+ 1395              		.section	.text.twist_subscription_callback,"ax",%progbits
+ 1396              		.align	1
+ 1397              		.global	twist_subscription_callback
+ 1398              		.syntax unified
+ 1399              		.thumb
+ 1400              		.thumb_func
+ 1402              	twist_subscription_callback:
+ 1403              	.LVL131:
+ 1404              	.LFB147:
+ 526:Core/Src/freertos.c **** 	    const geometry_msgs__msg__Twist * msg = (const geometry_msgs__msg__Twist *)msgin;
+ 1405              		.loc 1 526 2 is_stmt 1 view -0
+ 1406              		.cfi_startproc
+ 1407              		@ args = 0, pretend = 0, frame = 0
+ 1408              		@ frame_needed = 0, uses_anonymous_args = 0
+ 526:Core/Src/freertos.c **** 	    const geometry_msgs__msg__Twist * msg = (const geometry_msgs__msg__Twist *)msgin;
+ 1409              		.loc 1 526 2 is_stmt 0 view .LVU271
+ 1410 0000 10B5     		push	{r4, lr}
+ 1411              	.LCFI16:
+ 1412              		.cfi_def_cfa_offset 8
+ 1413              		.cfi_offset 4, -8
+ 1414              		.cfi_offset 14, -4
+ 1415 0002 0446     		mov	r4, r0
+ 527:Core/Src/freertos.c **** 
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 42
+
+
+ 1416              		.loc 1 527 6 is_stmt 1 view .LVU272
+ 1417              	.LVL132:
+ 529:Core/Src/freertos.c **** 
+ 1418              		.loc 1 529 6 view .LVU273
+ 1419 0004 4FF40061 		mov	r1, #2048
+ 1420 0008 0F48     		ldr	r0, .L111
+ 1421              	.LVL133:
+ 529:Core/Src/freertos.c **** 
+ 1422              		.loc 1 529 6 is_stmt 0 view .LVU274
+ 1423 000a FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 1424              	.LVL134:
+ 572:Core/Src/freertos.c **** 		Linear.vy = msg->linear.y;
+ 1425              		.loc 1 572 3 is_stmt 1 view .LVU275
+ 572:Core/Src/freertos.c **** 		Linear.vy = msg->linear.y;
+ 1426              		.loc 1 572 26 is_stmt 0 view .LVU276
+ 1427 000e 94ED000B 		vldr.64	d0, [r4]
+ 572:Core/Src/freertos.c **** 		Linear.vy = msg->linear.y;
+ 1428              		.loc 1 572 13 view .LVU277
+ 1429 0012 0E4B     		ldr	r3, .L111+4
+ 1430 0014 83ED000B 		vstr.64	d0, [r3]
+ 573:Core/Src/freertos.c **** 		Linear.vz = msg->linear.z;
+ 1431              		.loc 1 573 3 is_stmt 1 view .LVU278
+ 573:Core/Src/freertos.c **** 		Linear.vz = msg->linear.z;
+ 1432              		.loc 1 573 26 is_stmt 0 view .LVU279
+ 1433 0018 94ED021B 		vldr.64	d1, [r4, #8]
+ 573:Core/Src/freertos.c **** 		Linear.vz = msg->linear.z;
+ 1434              		.loc 1 573 13 view .LVU280
+ 1435 001c 83ED021B 		vstr.64	d1, [r3, #8]
+ 574:Core/Src/freertos.c **** 
+ 1436              		.loc 1 574 3 is_stmt 1 view .LVU281
+ 574:Core/Src/freertos.c **** 
+ 1437              		.loc 1 574 26 is_stmt 0 view .LVU282
+ 1438 0020 94ED042B 		vldr.64	d2, [r4, #16]
+ 574:Core/Src/freertos.c **** 
+ 1439              		.loc 1 574 13 view .LVU283
+ 1440 0024 83ED042B 		vstr.64	d2, [r3, #16]
+ 576:Core/Src/freertos.c **** 		Angular.vy = msg->angular.y;
+ 1441              		.loc 1 576 3 is_stmt 1 view .LVU284
+ 576:Core/Src/freertos.c **** 		Angular.vy = msg->angular.y;
+ 1442              		.loc 1 576 28 is_stmt 0 view .LVU285
+ 1443 0028 94ED063B 		vldr.64	d3, [r4, #24]
+ 576:Core/Src/freertos.c **** 		Angular.vy = msg->angular.y;
+ 1444              		.loc 1 576 14 view .LVU286
+ 1445 002c 084B     		ldr	r3, .L111+8
+ 1446 002e 83ED003B 		vstr.64	d3, [r3]
+ 577:Core/Src/freertos.c **** 		Angular.vz = msg->angular.z;
+ 1447              		.loc 1 577 3 is_stmt 1 view .LVU287
+ 577:Core/Src/freertos.c **** 		Angular.vz = msg->angular.z;
+ 1448              		.loc 1 577 28 is_stmt 0 view .LVU288
+ 1449 0032 94ED084B 		vldr.64	d4, [r4, #32]
+ 577:Core/Src/freertos.c **** 		Angular.vz = msg->angular.z;
+ 1450              		.loc 1 577 14 view .LVU289
+ 1451 0036 83ED024B 		vstr.64	d4, [r3, #8]
+ 578:Core/Src/freertos.c **** 
+ 1452              		.loc 1 578 3 is_stmt 1 view .LVU290
+ 578:Core/Src/freertos.c **** 
+ 1453              		.loc 1 578 28 is_stmt 0 view .LVU291
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 43
+
+
+ 1454 003a 94ED0A5B 		vldr.64	d5, [r4, #40]
+ 578:Core/Src/freertos.c **** 
+ 1455              		.loc 1 578 14 view .LVU292
+ 1456 003e 83ED045B 		vstr.64	d5, [r3, #16]
+ 580:Core/Src/freertos.c **** /*		if(Linear.vy != 0)	m_mode = 2;
+ 1457              		.loc 1 580 3 is_stmt 1 view .LVU293
+ 1458 0042 FFF7FEFF 		bl	MOTION_MODE
+ 1459              	.LVL135:
+ 600:Core/Src/freertos.c **** 
+ 1460              		.loc 1 600 2 is_stmt 0 view .LVU294
+ 1461 0046 10BD     		pop	{r4, pc}
+ 1462              	.LVL136:
+ 1463              	.L112:
+ 600:Core/Src/freertos.c **** 
+ 1464              		.loc 1 600 2 view .LVU295
+ 1465              		.align	2
+ 1466              	.L111:
+ 1467 0048 00040240 		.word	1073873920
+ 1468 004c 00000000 		.word	.LANCHOR5
+ 1469 0050 00000000 		.word	.LANCHOR6
+ 1470              		.cfi_endproc
+ 1471              	.LFE147:
+ 1473              		.global	defaultTask_attributes
+ 1474              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 1475              		.align	2
+ 1476              	.LC11:
+ 1477 0000 64656661 		.ascii	"defaultTask\000"
+ 1477      756C7454 
+ 1477      61736B00 
+ 1478              		.global	defaultTaskControlBlock
+ 1479              		.global	defaultTaskBuffer
+ 1480              		.global	defaultTaskHandle
+ 1481              		.global	timeout
+ 1482              		.global	angle
+ 1483              		.global	m_mode
+ 1484              		.global	Angular
+ 1485              		.global	Linear
+ 1486              		.global	hall2
+ 1487              		.global	hall1
+ 1488              		.global	m2_rpm_p_10
+ 1489              		.global	m1_rpm_p_10
+ 1490              		.global	m2_rpm_p
+ 1491              		.global	m1_rpm_p
+ 1492              		.global	m2_rpm
+ 1493              		.global	m1_rpm
+ 1494              		.global	m2_deg_1_10
+ 1495              		.global	m1_deg_1_10
+ 1496              		.global	m2_deg_10_p
+ 1497              		.global	m1_deg_10_p
+ 1498              		.global	m2_deg_10
+ 1499              		.global	m1_deg_10
+ 1500              		.global	m2_deg
+ 1501              		.global	m1_deg
+ 1502              		.global	m2_rev
+ 1503              		.global	m1_rev
+ 1504              		.global	m2_hall
+ 1505              		.global	m1_hall
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 44
+
+
+ 1506              		.global	angular_velocity_z
+ 1507              		.global	angular_velocity_y
+ 1508              		.global	angular_velocity_x
+ 1509              		.global	linear_velocity_z
+ 1510              		.global	linear_velocity_y
+ 1511              		.global	linear_velocity_x
+ 1512              		.global	Run_Dir
+ 1513              		.global	Motor_State
+ 1514              		.global	Run_State
+ 1515              		.section	.bss.Angular,"aw",%nobits
+ 1516              		.align	3
+ 1517              		.set	.LANCHOR6,. + 0
+ 1520              	Angular:
+ 1521 0000 00000000 		.space	24
+ 1521      00000000 
+ 1521      00000000 
+ 1521      00000000 
+ 1521      00000000 
+ 1522              		.section	.bss.Linear,"aw",%nobits
+ 1523              		.align	3
+ 1524              		.set	.LANCHOR5,. + 0
+ 1527              	Linear:
+ 1528 0000 00000000 		.space	24
+ 1528      00000000 
+ 1528      00000000 
+ 1528      00000000 
+ 1528      00000000 
+ 1529              		.section	.bss.Motor_State,"aw",%nobits
+ 1530              		.set	.LANCHOR9,. + 0
+ 1533              	Motor_State:
+ 1534 0000 00       		.space	1
+ 1535              		.section	.bss.Run_Dir,"aw",%nobits
+ 1536              		.set	.LANCHOR8,. + 0
+ 1539              	Run_Dir:
+ 1540 0000 00       		.space	1
+ 1541              		.section	.bss.Run_State,"aw",%nobits
+ 1542              		.set	.LANCHOR7,. + 0
+ 1545              	Run_State:
+ 1546 0000 00       		.space	1
+ 1547              		.section	.bss.angle,"aw",%nobits
+ 1548              		.align	3
+ 1551              	angle:
+ 1552 0000 00000000 		.space	8
+ 1552      00000000 
+ 1553              		.section	.bss.angular_velocity_x,"aw",%nobits
+ 1554              		.align	2
+ 1557              	angular_velocity_x:
+ 1558 0000 00000000 		.space	4
+ 1559              		.section	.bss.angular_velocity_y,"aw",%nobits
+ 1560              		.align	2
+ 1563              	angular_velocity_y:
+ 1564 0000 00000000 		.space	4
+ 1565              		.section	.bss.angular_velocity_z,"aw",%nobits
+ 1566              		.align	2
+ 1569              	angular_velocity_z:
+ 1570 0000 00000000 		.space	4
+ 1571              		.section	.bss.defaultTaskBuffer,"aw",%nobits
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 45
+
+
+ 1572              		.align	2
+ 1575              	defaultTaskBuffer:
+ 1576 0000 00000000 		.space	12000
+ 1576      00000000 
+ 1576      00000000 
+ 1576      00000000 
+ 1576      00000000 
+ 1577              		.section	.bss.defaultTaskControlBlock,"aw",%nobits
+ 1578              		.align	2
+ 1581              	defaultTaskControlBlock:
+ 1582 0000 00000000 		.space	92
+ 1582      00000000 
+ 1582      00000000 
+ 1582      00000000 
+ 1582      00000000 
+ 1583              		.section	.bss.defaultTaskHandle,"aw",%nobits
+ 1584              		.align	2
+ 1585              		.set	.LANCHOR1,. + 0
+ 1588              	defaultTaskHandle:
+ 1589 0000 00000000 		.space	4
+ 1590              		.section	.bss.hall1,"aw",%nobits
+ 1591              		.align	2
+ 1592              		.set	.LANCHOR2,. + 0
+ 1595              	hall1:
+ 1596 0000 00000000 		.space	4
+ 1597              		.section	.bss.hall2,"aw",%nobits
+ 1598              		.align	2
+ 1599              		.set	.LANCHOR3,. + 0
+ 1602              	hall2:
+ 1603 0000 00000000 		.space	4
+ 1604              		.section	.bss.linear_velocity_x,"aw",%nobits
+ 1605              		.align	2
+ 1608              	linear_velocity_x:
+ 1609 0000 00000000 		.space	4
+ 1610              		.section	.bss.linear_velocity_y,"aw",%nobits
+ 1611              		.align	2
+ 1614              	linear_velocity_y:
+ 1615 0000 00000000 		.space	4
+ 1616              		.section	.bss.linear_velocity_z,"aw",%nobits
+ 1617              		.align	2
+ 1620              	linear_velocity_z:
+ 1621 0000 00000000 		.space	4
+ 1622              		.section	.bss.m1_deg,"aw",%nobits
+ 1623              		.align	2
+ 1626              	m1_deg:
+ 1627 0000 00000000 		.space	4
+ 1628              		.section	.bss.m1_deg_10,"aw",%nobits
+ 1629              		.align	2
+ 1632              	m1_deg_10:
+ 1633 0000 00000000 		.space	4
+ 1634              		.section	.bss.m1_deg_10_p,"aw",%nobits
+ 1635              		.align	2
+ 1638              	m1_deg_10_p:
+ 1639 0000 00000000 		.space	4
+ 1640              		.section	.bss.m1_deg_1_10,"aw",%nobits
+ 1641              		.align	2
+ 1644              	m1_deg_1_10:
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 46
+
+
+ 1645 0000 00000000 		.space	4
+ 1646              		.section	.bss.m1_hall,"aw",%nobits
+ 1647              		.align	2
+ 1650              	m1_hall:
+ 1651 0000 00000000 		.space	4
+ 1652              		.section	.bss.m1_rev,"aw",%nobits
+ 1653              		.align	2
+ 1656              	m1_rev:
+ 1657 0000 00000000 		.space	4
+ 1658              		.section	.bss.m1_rpm,"aw",%nobits
+ 1659              		.align	2
+ 1662              	m1_rpm:
+ 1663 0000 00000000 		.space	4
+ 1664              		.section	.bss.m1_rpm_p,"aw",%nobits
+ 1665              		.align	2
+ 1668              	m1_rpm_p:
+ 1669 0000 00000000 		.space	4
+ 1670              		.section	.bss.m1_rpm_p_10,"aw",%nobits
+ 1671              		.align	2
+ 1674              	m1_rpm_p_10:
+ 1675 0000 00000000 		.space	4
+ 1676              		.section	.bss.m2_deg,"aw",%nobits
+ 1677              		.align	2
+ 1680              	m2_deg:
+ 1681 0000 00000000 		.space	4
+ 1682              		.section	.bss.m2_deg_10,"aw",%nobits
+ 1683              		.align	2
+ 1686              	m2_deg_10:
+ 1687 0000 00000000 		.space	4
+ 1688              		.section	.bss.m2_deg_10_p,"aw",%nobits
+ 1689              		.align	2
+ 1692              	m2_deg_10_p:
+ 1693 0000 00000000 		.space	4
+ 1694              		.section	.bss.m2_deg_1_10,"aw",%nobits
+ 1695              		.align	2
+ 1698              	m2_deg_1_10:
+ 1699 0000 00000000 		.space	4
+ 1700              		.section	.bss.m2_hall,"aw",%nobits
+ 1701              		.align	2
+ 1704              	m2_hall:
+ 1705 0000 00000000 		.space	4
+ 1706              		.section	.bss.m2_rev,"aw",%nobits
+ 1707              		.align	2
+ 1710              	m2_rev:
+ 1711 0000 00000000 		.space	4
+ 1712              		.section	.bss.m2_rpm,"aw",%nobits
+ 1713              		.align	2
+ 1716              	m2_rpm:
+ 1717 0000 00000000 		.space	4
+ 1718              		.section	.bss.m2_rpm_p,"aw",%nobits
+ 1719              		.align	2
+ 1722              	m2_rpm_p:
+ 1723 0000 00000000 		.space	4
+ 1724              		.section	.bss.m2_rpm_p_10,"aw",%nobits
+ 1725              		.align	2
+ 1728              	m2_rpm_p_10:
+ 1729 0000 00000000 		.space	4
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 47
+
+
+ 1730              		.section	.bss.m_mode,"aw",%nobits
+ 1731              		.align	2
+ 1732              		.set	.LANCHOR4,. + 0
+ 1735              	m_mode:
+ 1736 0000 00000000 		.space	4
+ 1737              		.section	.data.timeout,"aw"
+ 1738              		.align	2
+ 1739              		.set	.LANCHOR10,. + 0
+ 1742              	timeout:
+ 1743 0000 80969800 		.word	10000000
+ 1744              		.section	.rodata.defaultTask_attributes,"a"
+ 1745              		.align	2
+ 1746              		.set	.LANCHOR0,. + 0
+ 1749              	defaultTask_attributes:
+ 1750 0000 00000000 		.word	.LC11
+ 1751 0004 00000000 		.space	4
+ 1752 0008 00000000 		.word	defaultTaskControlBlock
+ 1753 000c 5C000000 		.word	92
+ 1754 0010 00000000 		.word	defaultTaskBuffer
+ 1755 0014 E02E0000 		.word	12000
+ 1756 0018 18000000 		.word	24
+ 1757 001c 00000000 		.space	8
+ 1757      00000000 
+ 1758              		.text
+ 1759              	.Letext0:
+ 1760              		.file 2 "C:\\ST\\STM32CubeIDE_1.13.1\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
+ 1761              		.file 3 "C:\\ST\\STM32CubeIDE_1.13.1\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
+ 1762              		.file 4 "C:\\ST\\STM32CubeIDE_1.13.1\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
+ 1763              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h"
+ 1764              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h"
+ 1765              		.file 7 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
+ 1766              		.file 8 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
+ 1767              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 1768              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 1769              		.file 11 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 1770              		.file 12 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+ 1771              		.file 13 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 1772              		.file 14 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+ 1773              		.file 15 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcutils
+ 1774              		.file 16 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/all
+ 1775              		.file 17 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw/ret
+ 1776              		.file 18 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcutils
+ 1777              		.file 19 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw/typ
+ 1778              		.file 20 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/typ
+ 1779              		.file 21 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/ini
+ 1780              		.file 22 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/con
+ 1781              		.file 23 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/nod
+ 1782              		.file 24 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rosidl_
+ 1783              		.file 25 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/pub
+ 1784              		.file 26 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/sub
+ 1785              		.file 27 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/cli
+ 1786              		.file 28 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/gua
+ 1787              		.file 29 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/ser
+ 1788              		.file 30 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/tim
+ 1789              		.file 31 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw/qos
+ 1790              		.file 32 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/tim
+ 1791              		.file 33 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/eve
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 48
+
+
+ 1792              		.file 34 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/wai
+ 1793              		.file 35 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/ty
+ 1794              		.file 36 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/ex
+ 1795              		.file 37 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/ex
+ 1796              		.file 38 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/uxr/cli
+ 1797              		.file 39 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/uxr/cli
+ 1798              		.file 40 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/uxr/cli
+ 1799              		.file 41 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/std_msg
+ 1800              		.file 42 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rosidl_
+ 1801              		.file 43 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/std_msg
+ 1802              		.file 44 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/geometr
+ 1803              		.file 45 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/geometr
+ 1804              		.file 46 "Core/Inc/usart.h"
+ 1805              		.file 47 "Core/Inc/tim.h"
+ 1806              		.file 48 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/su
+ 1807              		.file 49 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/geometr
+ 1808              		.file 50 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/pu
+ 1809              		.file 51 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/std_msg
+ 1810              		.file 52 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/no
+ 1811              		.file 53 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/in
+ 1812              		.file 54 "C:\\ST\\STM32CubeIDE_1.13.1\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltoo
+ 1813              		.file 55 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw_mic
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 49
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 freertos.c
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:20     .text.MX_FREERTOS_Init:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:26     .text.MX_FREERTOS_Init:0000000000000000 MX_FREERTOS_Init
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:53     .text.MX_FREERTOS_Init:0000000000000014 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:868    .text.StartDefaultTask:0000000000000000 StartDefaultTask
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:60     .rodata.messageCallback.str1.4:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:64     .text.messageCallback:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:70     .text.messageCallback:0000000000000000 messageCallback
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:97     .text.messageCallback:0000000000000010 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:102    .rodata.messageCallback_test1.str1.4:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:106    .text.messageCallback_test1:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:112    .text.messageCallback_test1:0000000000000000 messageCallback_test1
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:139    .text.messageCallback_test1:000000000000000c $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:144    .text.messageCallback_test2:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:150    .text.messageCallback_test2:0000000000000000 messageCallback_test2
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:177    .text.messageCallback_test2:000000000000000c $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:182    .text.RUN_INIT:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:188    .text.RUN_INIT:0000000000000000 RUN_INIT
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:229    .text.RUN_INIT:0000000000000034 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:236    .text.RUN_DIR:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:242    .text.RUN_DIR:0000000000000000 RUN_DIR
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:263    .text.RUN_DIR:000000000000000c $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:343    .text.RUN_DIR:0000000000000084 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:348    .text.RUN_RB:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:354    .text.RUN_RB:0000000000000000 RUN_RB
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:417    .text.RUN_RB:000000000000003c $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:423    .text.MOTOR_SS:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:429    .text.MOTOR_SS:0000000000000000 MOTOR_SS
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:492    .text.MOTOR_SS:000000000000003c $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:498    .text.HAL_TIM_IC_CaptureCallback:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:504    .text.HAL_TIM_IC_CaptureCallback:0000000000000000 HAL_TIM_IC_CaptureCallback
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:627    .text.HAL_TIM_IC_CaptureCallback:0000000000000080 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:636    .text.PWM_R:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:642    .text.PWM_R:0000000000000000 PWM_R
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:669    .text.PWM_R:0000000000000014 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:674    .text.PWM_L:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:680    .text.PWM_L:0000000000000000 PWM_L
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:707    .text.PWM_L:0000000000000014 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:714    .text.CAL_LinearSpeed:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:720    .text.CAL_LinearSpeed:0000000000000000 CAL_LinearSpeed
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:775    .text.CAL_LinearSpeed:0000000000000038 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:782    .text.CAL_AngularSpeed:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:788    .text.CAL_AngularSpeed:0000000000000000 CAL_AngularSpeed
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:825    .text.CAL_AngularSpeed:0000000000000020 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:832    .rodata.StartDefaultTask.str1.4:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:862    .text.StartDefaultTask:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1280   .text.StartDefaultTask:000000000000025c $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1402   .text.twist_subscription_callback:0000000000000000 twist_subscription_callback
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1314   .text.MOTION_MODE:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1320   .text.MOTION_MODE:0000000000000000 MOTION_MODE
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1391   .text.MOTION_MODE:000000000000004c $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1396   .text.twist_subscription_callback:0000000000000000 $t
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1467   .text.twist_subscription_callback:0000000000000048 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1749   .rodata.defaultTask_attributes:0000000000000000 defaultTask_attributes
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1475   .rodata.str1.4:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1581   .bss.defaultTaskControlBlock:0000000000000000 defaultTaskControlBlock
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 50
+
+
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1575   .bss.defaultTaskBuffer:0000000000000000 defaultTaskBuffer
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1588   .bss.defaultTaskHandle:0000000000000000 defaultTaskHandle
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1742   .data.timeout:0000000000000000 timeout
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1551   .bss.angle:0000000000000000 angle
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1735   .bss.m_mode:0000000000000000 m_mode
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1520   .bss.Angular:0000000000000000 Angular
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1527   .bss.Linear:0000000000000000 Linear
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1602   .bss.hall2:0000000000000000 hall2
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1595   .bss.hall1:0000000000000000 hall1
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1728   .bss.m2_rpm_p_10:0000000000000000 m2_rpm_p_10
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1674   .bss.m1_rpm_p_10:0000000000000000 m1_rpm_p_10
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1722   .bss.m2_rpm_p:0000000000000000 m2_rpm_p
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1668   .bss.m1_rpm_p:0000000000000000 m1_rpm_p
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1716   .bss.m2_rpm:0000000000000000 m2_rpm
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1662   .bss.m1_rpm:0000000000000000 m1_rpm
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1698   .bss.m2_deg_1_10:0000000000000000 m2_deg_1_10
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1644   .bss.m1_deg_1_10:0000000000000000 m1_deg_1_10
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1692   .bss.m2_deg_10_p:0000000000000000 m2_deg_10_p
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1638   .bss.m1_deg_10_p:0000000000000000 m1_deg_10_p
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1686   .bss.m2_deg_10:0000000000000000 m2_deg_10
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1632   .bss.m1_deg_10:0000000000000000 m1_deg_10
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1680   .bss.m2_deg:0000000000000000 m2_deg
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1626   .bss.m1_deg:0000000000000000 m1_deg
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1710   .bss.m2_rev:0000000000000000 m2_rev
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1656   .bss.m1_rev:0000000000000000 m1_rev
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1704   .bss.m2_hall:0000000000000000 m2_hall
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1650   .bss.m1_hall:0000000000000000 m1_hall
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1569   .bss.angular_velocity_z:0000000000000000 angular_velocity_z
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1563   .bss.angular_velocity_y:0000000000000000 angular_velocity_y
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1557   .bss.angular_velocity_x:0000000000000000 angular_velocity_x
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1620   .bss.linear_velocity_z:0000000000000000 linear_velocity_z
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1614   .bss.linear_velocity_y:0000000000000000 linear_velocity_y
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1608   .bss.linear_velocity_x:0000000000000000 linear_velocity_x
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1539   .bss.Run_Dir:0000000000000000 Run_Dir
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1533   .bss.Motor_State:0000000000000000 Motor_State
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1545   .bss.Run_State:0000000000000000 Run_State
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1516   .bss.Angular:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1523   .bss.Linear:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1534   .bss.Motor_State:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1540   .bss.Run_Dir:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1546   .bss.Run_State:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1548   .bss.angle:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1554   .bss.angular_velocity_x:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1560   .bss.angular_velocity_y:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1566   .bss.angular_velocity_z:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1572   .bss.defaultTaskBuffer:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1578   .bss.defaultTaskControlBlock:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1584   .bss.defaultTaskHandle:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1591   .bss.hall1:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1598   .bss.hall2:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1605   .bss.linear_velocity_x:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1611   .bss.linear_velocity_y:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1617   .bss.linear_velocity_z:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1623   .bss.m1_deg:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1629   .bss.m1_deg_10:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1635   .bss.m1_deg_10_p:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1641   .bss.m1_deg_1_10:0000000000000000 $d
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 51
+
+
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1647   .bss.m1_hall:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1653   .bss.m1_rev:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1659   .bss.m1_rpm:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1665   .bss.m1_rpm_p:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1671   .bss.m1_rpm_p_10:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1677   .bss.m2_deg:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1683   .bss.m2_deg_10:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1689   .bss.m2_deg_10_p:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1695   .bss.m2_deg_1_10:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1701   .bss.m2_hall:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1707   .bss.m2_rev:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1713   .bss.m2_rpm:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1719   .bss.m2_rpm_p:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1725   .bss.m2_rpm_p_10:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1731   .bss.m_mode:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1738   .data.timeout:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:1745   .rodata.defaultTask_attributes:0000000000000000 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:276    .text.RUN_DIR:0000000000000019 $d
+C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s:276    .text.RUN_DIR:000000000000001a $t
+
+UNDEFINED SYMBOLS
+osThreadNew
+printf
+HAL_GPIO_WritePin
+HAL_GPIO_ReadPin
+__aeabi_d2iz
+htim4
+htim3
+__aeabi_dcmplt
+__aeabi_dmul
+__aeabi_ddiv
+__aeabi_dadd
+__aeabi_dsub
+rmw_uros_set_custom_transport
+rcutils_get_zero_initialized_allocator
+rcutils_set_default_allocator
+rcutils_get_default_allocator
+rclc_support_init
+rclc_node_init_default
+rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__Int32
+rclc_publisher_init_default
+rosidl_typesupport_c__get_message_type_support_handle__geometry_msgs__msg__Twist
+rclc_subscription_init_default
+rclc_executor_init
+rclc_executor_add_subscription
+rclc_executor_spin_some
+osDelay
+rcl_publish
+cubemx_transport_read
+cubemx_transport_write
+cubemx_transport_close
+cubemx_transport_open
+huart3
+microros_allocate
+microros_deallocate
+microros_reallocate
+microros_zero_allocate
+ARM GAS  C:\Users\sungw\AppData\Local\Temp\ccEFkxtT.s 			page 52
+
+
+__aeabi_dcmpeq
+HAL_GPIO_TogglePin

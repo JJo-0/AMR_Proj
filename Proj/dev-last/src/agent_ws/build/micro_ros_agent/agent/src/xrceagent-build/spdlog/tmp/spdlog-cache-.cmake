@@ -1,6 +1,6 @@
 
-set(CMAKE_INSTALL_PREFIX "/home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2" CACHE PATH "Initial cache" FORCE)
-set(CMAKE_PREFIX_PATH "/home/gunwon/dev/src/agent_ws/install/micro_ros_agent;/home/gunwon/dev/src/agent_ws/install/micro_ros_agent" CACHE PATH "Initial cache" FORCE)
+set(CMAKE_INSTALL_PREFIX "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2" CACHE PATH "Initial cache" FORCE)
+set(CMAKE_PREFIX_PATH "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent;/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent" CACHE PATH "Initial cache" FORCE)
 set(BUILD_SHARED_LIBS "OFF" CACHE BOOL "Initial cache" FORCE)
 set(CMAKE_TOOLCHAIN_FILE "" CACHE PATH "Initial cache" FORCE)
 set(CMAKE_BUILD_TYPE "" CACHE STRING "Initial cache" FORCE)

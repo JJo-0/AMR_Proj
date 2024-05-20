@@ -1,0 +1,22 @@
+[1.542s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/omo_r1mini_bringup': CMAKE_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/micro_ros_setup:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/articubot_one PYTHONPATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_bringup/prefix_override:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/omo_r1mini_bringup build --build-base /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_bringup/build install --record /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_bringup/install.log --single-version-externally-managed
+[2.009s] running egg_info
+[2.009s] writing ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/PKG-INFO
+[2.009s] writing dependency_links to ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/dependency_links.txt
+[2.010s] writing entry points to ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/entry_points.txt
+[2.014s] writing requirements to ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/requires.txt
+[2.016s] writing top-level names to ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/top_level.txt
+[2.112s] reading manifest file '../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/SOURCES.txt'
+[2.114s] writing manifest file '../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/SOURCES.txt'
+[2.116s] running build
+[2.117s] running build_py
+[2.117s] running install
+[2.119s] running install_lib
+[2.123s] running install_data
+[2.125s] running install_egg_info
+[2.130s] removing '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup-0.0.1-py3.8.egg-info' (and everything under it)
+[2.131s] Copying ../../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info to /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup-0.0.1-py3.8.egg-info
+[2.134s] running install_scripts
+[2.175s] Installing omo_r1mini_mcu_node script to /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup/lib/omo_r1mini_bringup
+[2.177s] Installing omo_r1mini_motor_setting_node script to /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup/lib/omo_r1mini_bringup
+[2.178s] writing list of installed files to '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_bringup/install.log'
+[2.264s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/omo_r1mini_bringup' returned '0': CMAKE_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/micro_ros_setup:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/articubot_one PYTHONPATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_bringup/prefix_override:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/omo_r1mini_bringup build --build-base /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_bringup/build install --record /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_bringup/install.log --single-version-externally-managed

@@ -27,6 +27,8 @@ RUN apt-get update \
     ros-foxy-slam-toolbox \
     ros-foxy-navigation2 \
     ros-foxy-nav2-bringup \
+    ros-foxy-cartographer \
+    ros-foxy-cartographer-ros \
     joystick jstest-gtk evtest \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
@@ -45,6 +47,7 @@ RUN ln -fs /usr/share/zoneinfo/Asia/Seoul /etc/localtime \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
     && apt-get install -y tzdata \
+    python3-pip \
     && dpkg-reconfigure --frontend noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/*
 

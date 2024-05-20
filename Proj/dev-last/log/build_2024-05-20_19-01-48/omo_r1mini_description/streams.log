@@ -1,0 +1,65 @@
+[0.112s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/omo_r1mini_description -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description
+[0.401s] -- The C compiler identification is GNU 9.4.0
+[0.781s] -- The CXX compiler identification is GNU 9.4.0
+[0.809s] -- Check for working C compiler: /usr/bin/cc
+[1.179s] -- Check for working C compiler: /usr/bin/cc -- works
+[1.181s] -- Detecting C compiler ABI info
+[1.529s] -- Detecting C compiler ABI info - done
+[1.586s] -- Detecting C compile features
+[1.586s] -- Detecting C compile features - done
+[1.596s] -- Check for working CXX compiler: /usr/bin/c++
+[1.927s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[1.930s] -- Detecting CXX compiler ABI info
+[2.355s] -- Detecting CXX compiler ABI info - done
+[2.395s] -- Detecting CXX compile features
+[2.395s] -- Detecting CXX compile features - done
+[2.395s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[2.463s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[2.464s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[3.307s] -- Found urdf: 2.4.0 (/opt/ros/foxy/share/urdf/cmake)
+[3.658s] -- Configuring done
+[3.664s] -- Generating done
+[3.666s] -- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_description
+[3.699s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/omo_r1mini_description -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description
+[3.707s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_description -- -j4 -l4
+[3.955s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_description -- -j4 -l4
+[4.053s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_description
+[4.076s] -- Install configuration: ""
+[4.076s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/meshes
+[4.076s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/meshes/wheels
+[4.076s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/meshes/wheels/wheel_assy.dae
+[4.168s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/meshes/wheels/caster_wheel_rotate.dae
+[4.169s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/meshes/wheels/caster_wheel_mount.dae
+[4.172s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/meshes/wheels/caster_wheel.dae
+[4.179s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/meshes/bases
+[4.179s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/meshes/bases/housing_body.dae
+[4.184s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/meshes/bases/body_assy.dae
+[4.198s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/meshes/sensors
+[4.198s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/meshes/sensors/ydlidar_assy.dae
+[4.203s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/rviz
+[4.208s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/rviz/model.rviz
+[4.208s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/urdf
+[4.208s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/urdf/robot.xacro
+[4.215s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/urdf/omo_r1mini.urdf
+[4.216s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/urdf/macros.xacro
+[4.219s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/urdf/camera.xacro
+[4.221s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/launch
+[4.222s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/launch/omo_r1mini_state_publisher.launch.py
+[4.226s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/launch/omo_r1mini_description_rviz.launch.py
+[4.227s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/launch/omo_r1mini_description.launch.py
+[4.227s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/ament_index/resource_index/package_run_dependencies/omo_r1mini_description
+[4.227s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/ament_index/resource_index/parent_prefix_path/omo_r1mini_description
+[4.237s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/environment/ament_prefix_path.sh
+[4.238s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/environment/ament_prefix_path.dsv
+[4.238s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/environment/path.sh
+[4.238s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/environment/path.dsv
+[4.238s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/local_setup.bash
+[4.242s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/local_setup.sh
+[4.243s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/local_setup.zsh
+[4.243s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/local_setup.dsv
+[4.243s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/package.dsv
+[4.243s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/ament_index/resource_index/packages/omo_r1mini_description
+[4.243s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/cmake/omo_r1mini_descriptionConfig.cmake
+[4.243s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/cmake/omo_r1mini_descriptionConfig-version.cmake
+[4.244s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description/share/omo_r1mini_description/package.xml
+[4.294s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_description

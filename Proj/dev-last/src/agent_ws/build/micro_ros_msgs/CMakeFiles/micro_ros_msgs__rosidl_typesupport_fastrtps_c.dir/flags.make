@@ -6,5 +6,5 @@ CXX_FLAGS = -fPIC   -Wall -Wextra -Wpedantic -Wall -Wextra -Wpedantic -std=gnu++
 
 CXX_DEFINES = -DFOONATHAN_MEMORY=1 -DFOONATHAN_MEMORY_VERSION_MAJOR=0 -DFOONATHAN_MEMORY_VERSION_MINOR=7 -DFOONATHAN_MEMORY_VERSION_PATCH=1 -DRCUTILS_ENABLE_FAULT_INJECTION -DROS_PACKAGE_NAME=\"micro_ros_msgs\" -Dmicro_ros_msgs__rosidl_typesupport_fastrtps_c_EXPORTS
 
-CXX_INCLUDES = -I/home/gunwon/dev/src/agent_ws/build/micro_ros_msgs/rosidl_generator_c -I/home/gunwon/dev/src/agent_ws/build/micro_ros_msgs/rosidl_generator_cpp -I/home/gunwon/dev/src/agent_ws/build/micro_ros_msgs/rosidl_typesupport_fastrtps_c -I/home/gunwon/dev/src/agent_ws/build/micro_ros_msgs/rosidl_typesupport_fastrtps_cpp -isystem /opt/ros/foxy/include -isystem /opt/ros/foxy/include/foonathan_memory 
+CXX_INCLUDES = -I/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_msgs/rosidl_generator_c -I/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_msgs/rosidl_generator_cpp -I/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_msgs/rosidl_typesupport_fastrtps_c -I/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_msgs/rosidl_typesupport_fastrtps_cpp -isystem /opt/ros/foxy/include -isystem /opt/ros/foxy/include/foonathan_memory 
 

@@ -1,0 +1,29 @@
+-- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2
+-- Install configuration: ""
+-- Execute custom install script
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/launch/navigation2.launch.py
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/launch/navigation2_rviz.launch.py
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/map/turtlebot3_world.pgm
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/map/turtlebot3_world.yaml
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/param/omo_r1mini.yaml
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/rviz/tb3_navigation2.rviz
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/ament_index/resource_index/package_run_dependencies/omo_r1mini_navigation2
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/ament_index/resource_index/parent_prefix_path/omo_r1mini_navigation2
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/environment/path.sh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/environment/path.dsv
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/local_setup.bash
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/local_setup.sh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/local_setup.zsh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/local_setup.dsv
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/package.dsv
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/ament_index/resource_index/packages/omo_r1mini_navigation2
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/cmake/omo_r1mini_navigation2Config.cmake
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/cmake/omo_r1mini_navigation2Config-version.cmake
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/package.xml

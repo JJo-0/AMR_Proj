@@ -1,6 +1,0 @@
-Invoking command in '/home/gunwon/dev/build/omo_r1mini_cartographer': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/gunwon/dev/src/omo_r1mini_cartographer -DCMAKE_INSTALL_PREFIX=/home/gunwon/dev/install/omo_r1mini_cartographer
-Invoked command in '/home/gunwon/dev/build/omo_r1mini_cartographer' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/gunwon/dev/src/omo_r1mini_cartographer -DCMAKE_INSTALL_PREFIX=/home/gunwon/dev/install/omo_r1mini_cartographer
-Invoking command in '/home/gunwon/dev/build/omo_r1mini_cartographer': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/gunwon/dev/build/omo_r1mini_cartographer -- -j12 -l12
-Invoked command in '/home/gunwon/dev/build/omo_r1mini_cartographer' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/gunwon/dev/build/omo_r1mini_cartographer -- -j12 -l12
-Invoking command in '/home/gunwon/dev/build/omo_r1mini_cartographer': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/gunwon/dev/build/omo_r1mini_cartographer
-Invoked command in '/home/gunwon/dev/build/omo_r1mini_cartographer' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/gunwon/dev/build/omo_r1mini_cartographer

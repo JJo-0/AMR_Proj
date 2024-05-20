@@ -6,5 +6,5 @@ C_FLAGS = -fPIC   -Wall -std=gnu11
 
 C_DEFINES = -DRCUTILS_ENABLE_FAULT_INJECTION -DROS_PACKAGE_NAME=\"drive_base_msgs\" -Ddrive_base_msgs__rosidl_generator_c_EXPORTS
 
-C_INCLUDES = -I/home/gunwon/dev/src/agent_ws/build/drive_base_msgs/rosidl_generator_c -isystem /opt/ros/foxy/include 
+C_INCLUDES = -I/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs/rosidl_generator_c -isystem /opt/ros/foxy/include 
 

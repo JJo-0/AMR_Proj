@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;MicroRos_25/MicroRos_24.ioc&apos; to &apos;MicroRos_25.ioc&apos;" description="Rename resource &apos;MicroRos_24.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="MicroRos_24.ioc" name="MicroRos_25.ioc" stamp="1716185153789" updateReferences="true"/>
+</session>

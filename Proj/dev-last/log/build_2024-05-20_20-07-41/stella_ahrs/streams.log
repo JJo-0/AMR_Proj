@@ -1,0 +1,5 @@
+[0.178s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs -- -j4 -l4
+[0.403s] make[2]: *** No rule to make target '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MW_AHRS_aarch64.a', needed by 'stella_ahrs_node'.  Stop.
+[0.406s] make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/stella_ahrs_node.dir/all] Error 2
+[0.408s] make: *** [Makefile:141: all] Error 2
+[0.769s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs -- -j4 -l4

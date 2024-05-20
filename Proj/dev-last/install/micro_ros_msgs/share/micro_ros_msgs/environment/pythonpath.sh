@@ -1,0 +1,1 @@
+/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/micro_ros_msgs/ament_cmake_environment_hooks/pythonpath.sh

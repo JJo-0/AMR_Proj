@@ -6,5 +6,5 @@ CXX_FLAGS =   -Wall -Wextra -Wpedantic -std=gnu++14
 
 CXX_DEFINES = -DFOONATHAN_MEMORY=1 -DFOONATHAN_MEMORY_VERSION_MAJOR=0 -DFOONATHAN_MEMORY_VERSION_MINOR=7 -DFOONATHAN_MEMORY_VERSION_PATCH=1 -DRCUTILS_ENABLE_FAULT_INJECTION -DSPDLOG_COMPILED_LIB
 
-CXX_INCLUDES = -I/home/gunwon/dev/src/agent_ws/src/uros/micro-ROS-Agent/micro_ros_agent/include -isystem /home/gunwon/dev/src/agent_ws/install/micro_ros_msgs/include -isystem /opt/ros/foxy/include -isystem /opt/ros/foxy/include/foonathan_memory -isystem /home/gunwon/dev/src/agent_ws/install/micro_ros_agent/include 
+CXX_INCLUDES = -I/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/src/uros/micro-ROS-Agent/micro_ros_agent/include -isystem /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/include -isystem /opt/ros/foxy/include -isystem /opt/ros/foxy/include/foonathan_memory -isystem /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include 
 

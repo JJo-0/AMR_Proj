@@ -1,8 +1,8 @@
-# Install script for directory: /home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog/example
+# Install script for directory: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog/example
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2")
+  set(CMAKE_INSTALL_PREFIX "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

@@ -1,6 +1,0 @@
-Invoking command in '/home/gunwon/dev/build/ydlidar_ros2_driver': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/gunwon/dev/src/ydlidar_ros2_driver -DCMAKE_INSTALL_PREFIX=/home/gunwon/dev/install/ydlidar_ros2_driver
-Invoked command in '/home/gunwon/dev/build/ydlidar_ros2_driver' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/gunwon/dev/src/ydlidar_ros2_driver -DCMAKE_INSTALL_PREFIX=/home/gunwon/dev/install/ydlidar_ros2_driver
-Invoking command in '/home/gunwon/dev/build/ydlidar_ros2_driver': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/gunwon/dev/build/ydlidar_ros2_driver -- -j12 -l12
-Invoked command in '/home/gunwon/dev/build/ydlidar_ros2_driver' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/gunwon/dev/build/ydlidar_ros2_driver -- -j12 -l12
-Invoking command in '/home/gunwon/dev/build/ydlidar_ros2_driver': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/gunwon/dev/build/ydlidar_ros2_driver
-Invoked command in '/home/gunwon/dev/build/ydlidar_ros2_driver' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/gunwon/dev/build/ydlidar_ros2_driver

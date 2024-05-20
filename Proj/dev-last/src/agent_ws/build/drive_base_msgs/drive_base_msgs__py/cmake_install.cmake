@@ -1,8 +1,8 @@
-# Install script for directory: /home/gunwon/dev/src/agent_ws/build/drive_base_msgs/drive_base_msgs__py
+# Install script for directory: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs/drive_base_msgs__py
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/gunwon/dev/src/agent_ws/install/drive_base_msgs")
+  set(CMAKE_INSTALL_PREFIX "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

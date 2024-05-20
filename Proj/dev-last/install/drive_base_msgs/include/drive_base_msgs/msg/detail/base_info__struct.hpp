@@ -1,0 +1,1 @@
+/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/drive_base_msgs/rosidl_generator_cpp/drive_base_msgs/msg/detail/base_info__struct.hpp

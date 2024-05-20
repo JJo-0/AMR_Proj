@@ -1,6 +1,0 @@
-Invoking command in '/home/gunwon/dev/build/stella_ahrs': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/gunwon/dev/src/stella_ahrs -DCMAKE_INSTALL_PREFIX=/home/gunwon/dev/install/stella_ahrs
-Invoked command in '/home/gunwon/dev/build/stella_ahrs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/gunwon/dev/src/stella_ahrs -DCMAKE_INSTALL_PREFIX=/home/gunwon/dev/install/stella_ahrs
-Invoking command in '/home/gunwon/dev/build/stella_ahrs': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/gunwon/dev/build/stella_ahrs -- -j12 -l12
-Invoked command in '/home/gunwon/dev/build/stella_ahrs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/gunwon/dev/build/stella_ahrs -- -j12 -l12
-Invoking command in '/home/gunwon/dev/build/stella_ahrs': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/gunwon/dev/build/stella_ahrs
-Invoked command in '/home/gunwon/dev/build/stella_ahrs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/gunwon/dev/build/stella_ahrs

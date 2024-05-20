@@ -1,2 +1,1 @@
-source;share/ydlidar_ros2_driver/environment/ament_prefix_path.sh
-source;share/ydlidar_ros2_driver/environment/path.sh
+/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/ament_cmake_environment_hooks/local_setup.dsv

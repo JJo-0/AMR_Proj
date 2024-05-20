@@ -1,0 +1,484 @@
+2024-05-20 02:13:30,109 [INFO] Mcu:1675 - InternalPropertyChange: try BijectiveRequest:Input Capture direct mode
+2024-05-20 02:13:47,259 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 302391560 Bytes (652214272)
+2024-05-20 02:13:51,095 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 540450400 Bytes (652214272)
+2024-05-20 02:13:53,325 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: FREERTOS
+2024-05-20 02:13:53,325 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:13:53,325 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:13:53,325 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:13:53,325 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:13:53,325 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2024-05-20 02:13:53,325 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2024-05-20 02:13:53,326 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2024-05-20 02:13:53,326 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: USART
+2024-05-20 02:13:53,326 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: DMA
+2024-05-20 02:13:53,326 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:13:53,326 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2024-05-20 02:13:53,326 [INFO] CodeGenerator:807 - code generatio: config db path: /opt/st/stm32cubeide_1.14.0/plugins/com.st.stm32cube.common.mx_6.10.0.202311202037//db/
+2024-05-20 02:13:53,585 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/license.tmp_save
+2024-05-20 02:13:53,910 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/license.tmp
+2024-05-20 02:13:53,983 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/gpio.c_save
+2024-05-20 02:13:54,095 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/gpio.c
+2024-05-20 02:13:54,096 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/gpio.h_save
+2024-05-20 02:13:54,154 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/gpio.h
+2024-05-20 02:13:54,720 [INFO] Middleware:1439 - No code input for Bsp Dependency
+2024-05-20 02:13:54,723 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_inc.tmp_save
+2024-05-20 02:13:54,783 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_inc.tmp
+2024-05-20 02:13:54,784 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelInit.tmp_save
+2024-05-20 02:13:54,838 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelInit.tmp
+2024-05-20 02:13:54,839 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelStart.tmp_save
+2024-05-20 02:13:54,891 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelStart.tmp
+2024-05-20 02:13:54,891 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_typedefs.tmp_save
+2024-05-20 02:13:54,940 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_typedefs.tmp
+2024-05-20 02:13:54,941 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_vars.tmp_save
+2024-05-20 02:13:54,994 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_vars.tmp
+2024-05-20 02:13:54,994 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_pfp.tmp_save
+2024-05-20 02:13:55,042 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_pfp.tmp
+2024-05-20 02:13:55,043 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_obj_creat.tmp_save
+2024-05-20 02:13:55,092 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_obj_creat.tmp
+2024-05-20 02:13:55,093 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_default_thread.tmp_save
+2024-05-20 02:13:55,139 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_default_thread.tmp
+2024-05-20 02:13:55,140 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_threads.tmp_save
+2024-05-20 02:13:55,185 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_threads.tmp
+2024-05-20 02:13:55,190 [INFO] Middleware:1439 - No code input for Bsp Dependency
+2024-05-20 02:13:55,193 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_inc.tmp_save
+2024-05-20 02:13:55,237 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_inc.tmp
+2024-05-20 02:13:55,238 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelInit.tmp_save
+2024-05-20 02:13:55,283 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelInit.tmp
+2024-05-20 02:13:55,284 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelStart.tmp_save
+2024-05-20 02:13:55,327 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelStart.tmp
+2024-05-20 02:13:55,328 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_typedefs.tmp_save
+2024-05-20 02:13:55,370 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_typedefs.tmp
+2024-05-20 02:13:55,371 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_vars.tmp_save
+2024-05-20 02:13:55,413 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_vars.tmp
+2024-05-20 02:13:55,414 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_pfp.tmp_save
+2024-05-20 02:13:55,455 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_pfp.tmp
+2024-05-20 02:13:55,456 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_obj_creat.tmp_save
+2024-05-20 02:13:55,499 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_obj_creat.tmp
+2024-05-20 02:13:55,500 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_default_thread.tmp_save
+2024-05-20 02:13:55,542 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_default_thread.tmp
+2024-05-20 02:13:55,543 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_threads.tmp_save
+2024-05-20 02:13:55,584 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_threads.tmp
+2024-05-20 02:13:55,585 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/FreeRTOSConfig.h_save
+2024-05-20 02:13:55,645 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/FreeRTOSConfig.h
+2024-05-20 02:13:55,647 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/freertos.c_save
+2024-05-20 02:13:55,704 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/freertos.c
+2024-05-20 02:13:55,739 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/dma.c_save
+2024-05-20 02:13:55,788 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/dma.c
+2024-05-20 02:13:55,789 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/dma.h_save
+2024-05-20 02:13:55,860 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/dma.h
+2024-05-20 02:13:55,864 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/tim.c_save
+2024-05-20 02:13:56,018 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/tim.c
+2024-05-20 02:13:56,019 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/tim.h_save
+2024-05-20 02:13:56,065 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/tim.h
+2024-05-20 02:13:56,068 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/usart.c_save
+2024-05-20 02:13:56,137 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/usart.c
+2024-05-20 02:13:56,138 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/usart.h_save
+2024-05-20 02:13:56,181 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/usart.h
+2024-05-20 02:13:56,189 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_it.c_save
+2024-05-20 02:13:56,247 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_it.c
+2024-05-20 02:13:56,248 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/stm32f4xx_it.h_save
+2024-05-20 02:13:56,293 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/stm32f4xx_it.h
+2024-05-20 02:13:56,298 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_hal_msp.c_save
+2024-05-20 02:13:56,359 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_hal_msp.c
+2024-05-20 02:13:56,360 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/system.tmp_save
+2024-05-20 02:13:56,403 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/system.tmp
+2024-05-20 02:13:56,404 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_hal_timebase_tim.c_save
+2024-05-20 02:13:56,450 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_hal_timebase_tim.c
+2024-05-20 02:13:56,453 [INFO] CodeEngine:311 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/stm32f4xx_hal_conf.h_save
+2024-05-20 02:13:56,502 [INFO] CodeEngine:335 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/stm32f4xx_hal_conf.h
+2024-05-20 02:13:56,530 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/main.h_save
+2024-05-20 02:13:56,591 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/main.h
+2024-05-20 02:13:56,593 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/main.c_save
+2024-05-20 02:13:56,672 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/main.c
+2024-05-20 02:13:57,196 [INFO] ProjectBuilder:3076 - Time for Copy HAL[0] : 167mS.
+2024-05-20 02:13:57,200 [INFO] ProjectBuilder:4485 - Project Generator version: 4.2.0-B44
+2024-05-20 02:13:57,432 [INFO] ConfigFileManager:1495 - The Die is : DIE419
+2024-05-20 02:13:57,439 [INFO] ApiDbMcu:508 - Load IP Config File for FATFS
+2024-05-20 02:13:57,441 [INFO] ApiDbMcu:508 - Load IP Config File for LIBJPEG
+2024-05-20 02:13:57,449 [INFO] ApiDbMcu:508 - Load IP Config File for LWIP
+2024-05-20 02:13:57,457 [INFO] ApiDbMcu:508 - Load IP Config File for MBEDTLS
+2024-05-20 02:13:57,466 [INFO] ApiDbMcu:508 - Load IP Config File for USB_DEVICE
+2024-05-20 02:13:57,471 [INFO] ApiDbMcu:508 - Load IP Config File for USB_HOST
+2024-05-20 02:14:01,382 [INFO] ProjectBuilder:4747 - Time for Generating toolchain IDE Files: 4182mS.
+2024-05-20 02:14:01,748 [INFO] ProjectBuilder:2947 - Time for Copy CMSIS : 365mS.
+2024-05-20 02:14:01,856 [INFO] ProjectBuilder:2947 - Time for Copy CMSIS : 108mS.
+2024-05-20 02:30:10,303 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 444656696 Bytes (947912704)
+2024-05-20 02:30:10,756 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 516486200 Bytes (947912704)
+2024-05-20 02:30:11,907 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: FREERTOS
+2024-05-20 02:30:11,907 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:30:11,907 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:30:11,907 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:30:11,907 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:30:11,907 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2024-05-20 02:30:11,907 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2024-05-20 02:30:11,907 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2024-05-20 02:30:11,907 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: USART
+2024-05-20 02:30:11,907 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: DMA
+2024-05-20 02:30:11,907 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:30:11,908 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2024-05-20 02:30:11,908 [INFO] CodeGenerator:807 - code generatio: config db path: /opt/st/stm32cubeide_1.14.0/plugins/com.st.stm32cube.common.mx_6.10.0.202311202037//db/
+2024-05-20 02:30:11,932 [INFO] Argument:325 - Argument : hdmavalue: null
+2024-05-20 02:30:11,932 [INFO] Argument:327 - 	 sub Args: 
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : Instancevalue: DMA1_Stream1
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : Instancevalue: DMA1_Stream1
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : Initvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:327 - 	 sub Args: 
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : Channelvalue: DMA_CHANNEL_4
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : Channelvalue: DMA_CHANNEL_4
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : Modevalue: DMA_CIRCULAR
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : Modevalue: DMA_CIRCULAR
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : Priorityvalue: DMA_PRIORITY_VERY_HIGH
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : Priorityvalue: DMA_PRIORITY_VERY_HIGH
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : FIFOModevalue: DMA_FIFOMODE_DISABLE
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : FIFOModevalue: DMA_FIFOMODE_DISABLE
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : FIFOThresholdvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : FIFOThresholdvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : MemBurstvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : MemBurstvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : PeriphBurstvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : PeriphBurstvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : Lockvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : Lockvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : Statevalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : Statevalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : Parentvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : Parentvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : XferCpltCallbackvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:335 - Argument : XferCpltCallbackvalue: null
+2024-05-20 02:30:11,933 [INFO] Argument:325 - Argument : XferHalfCpltCallbackvalue: null
+2024-05-20 02:30:11,934 [INFO] Argument:335 - Argument : XferHalfCpltCallbackvalue: null
+2024-05-20 02:30:11,934 [INFO] Argument:325 - Argument : XferM1CpltCallbackvalue: null
+2024-05-20 02:30:11,934 [INFO] Argument:335 - Argument : XferM1CpltCallbackvalue: null
+2024-05-20 02:30:11,934 [INFO] Argument:325 - Argument : XferErrorCallbackvalue: null
+2024-05-20 02:30:11,934 [INFO] Argument:335 - Argument : XferErrorCallbackvalue: null
+2024-05-20 02:30:11,934 [INFO] Argument:325 - Argument : ErrorCodevalue: null
+2024-05-20 02:30:11,934 [INFO] Argument:335 - Argument : ErrorCodevalue: null
+2024-05-20 02:30:11,934 [INFO] Argument:325 - Argument : hdmavalue: null
+2024-05-20 02:30:11,934 [INFO] Argument:327 - 	 sub Args: 
+2024-05-20 02:30:11,934 [INFO] Argument:325 - Argument : Instancevalue: DMA1_Stream3
+2024-05-20 02:30:11,934 [INFO] Argument:335 - Argument : Instancevalue: DMA1_Stream3
+2024-05-20 02:30:11,934 [INFO] Argument:325 - Argument : Initvalue: null
+2024-05-20 02:30:11,934 [INFO] Argument:327 - 	 sub Args: 
+2024-05-20 02:30:11,934 [INFO] Argument:325 - Argument : Channelvalue: DMA_CHANNEL_4
+2024-05-20 02:30:11,934 [INFO] Argument:335 - Argument : Channelvalue: DMA_CHANNEL_4
+2024-05-20 02:30:11,934 [INFO] Argument:325 - Argument : Directionvalue: DMA_MEMORY_TO_PERIPH
+2024-05-20 02:30:11,934 [INFO] Argument:335 - Argument : Directionvalue: DMA_MEMORY_TO_PERIPH
+2024-05-20 02:30:11,934 [INFO] Argument:325 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2024-05-20 02:30:11,934 [INFO] Argument:335 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : Modevalue: DMA_NORMAL
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : Modevalue: DMA_NORMAL
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : Priorityvalue: DMA_PRIORITY_VERY_HIGH
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : Priorityvalue: DMA_PRIORITY_VERY_HIGH
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : FIFOModevalue: DMA_FIFOMODE_DISABLE
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : FIFOModevalue: DMA_FIFOMODE_DISABLE
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : FIFOThresholdvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : FIFOThresholdvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : MemBurstvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : MemBurstvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : PeriphBurstvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : PeriphBurstvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : Lockvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : Lockvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : Statevalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : Statevalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : Parentvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : Parentvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : XferCpltCallbackvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : XferCpltCallbackvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : XferHalfCpltCallbackvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : XferHalfCpltCallbackvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : XferM1CpltCallbackvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : XferM1CpltCallbackvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : XferErrorCallbackvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : XferErrorCallbackvalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:325 - Argument : ErrorCodevalue: null
+2024-05-20 02:30:11,935 [INFO] Argument:335 - Argument : ErrorCodevalue: null
+2024-05-20 02:30:12,040 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/license.tmp_save
+2024-05-20 02:30:12,119 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/license.tmp
+2024-05-20 02:30:12,211 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/gpio.c_save
+2024-05-20 02:30:12,279 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/gpio.c
+2024-05-20 02:30:12,280 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/gpio.h_save
+2024-05-20 02:30:12,327 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/gpio.h
+2024-05-20 02:30:12,661 [INFO] Middleware:1439 - No code input for Bsp Dependency
+2024-05-20 02:30:12,663 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_inc.tmp_save
+2024-05-20 02:30:12,706 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_inc.tmp
+2024-05-20 02:30:12,706 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelInit.tmp_save
+2024-05-20 02:30:12,751 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelInit.tmp
+2024-05-20 02:30:12,751 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelStart.tmp_save
+2024-05-20 02:30:12,794 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelStart.tmp
+2024-05-20 02:30:12,794 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_typedefs.tmp_save
+2024-05-20 02:30:12,845 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_typedefs.tmp
+2024-05-20 02:30:12,846 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_vars.tmp_save
+2024-05-20 02:30:12,891 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_vars.tmp
+2024-05-20 02:30:12,892 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_pfp.tmp_save
+2024-05-20 02:30:12,934 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_pfp.tmp
+2024-05-20 02:30:12,935 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_obj_creat.tmp_save
+2024-05-20 02:30:12,979 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_obj_creat.tmp
+2024-05-20 02:30:12,979 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_default_thread.tmp_save
+2024-05-20 02:30:13,020 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_default_thread.tmp
+2024-05-20 02:30:13,021 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_threads.tmp_save
+2024-05-20 02:30:13,063 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_threads.tmp
+2024-05-20 02:30:13,069 [INFO] Middleware:1439 - No code input for Bsp Dependency
+2024-05-20 02:30:13,072 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_inc.tmp_save
+2024-05-20 02:30:13,115 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_inc.tmp
+2024-05-20 02:30:13,116 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelInit.tmp_save
+2024-05-20 02:30:13,160 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelInit.tmp
+2024-05-20 02:30:13,161 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelStart.tmp_save
+2024-05-20 02:30:13,202 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelStart.tmp
+2024-05-20 02:30:13,202 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_typedefs.tmp_save
+2024-05-20 02:30:13,245 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_typedefs.tmp
+2024-05-20 02:30:13,246 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_vars.tmp_save
+2024-05-20 02:30:13,293 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_vars.tmp
+2024-05-20 02:30:13,294 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_pfp.tmp_save
+2024-05-20 02:30:13,336 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_pfp.tmp
+2024-05-20 02:30:13,337 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_obj_creat.tmp_save
+2024-05-20 02:30:13,382 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_obj_creat.tmp
+2024-05-20 02:30:13,383 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_default_thread.tmp_save
+2024-05-20 02:30:13,425 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_default_thread.tmp
+2024-05-20 02:30:13,426 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_threads.tmp_save
+2024-05-20 02:30:13,467 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_threads.tmp
+2024-05-20 02:30:13,468 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/FreeRTOSConfig.h_save
+2024-05-20 02:30:13,525 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/FreeRTOSConfig.h
+2024-05-20 02:30:13,527 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/freertos.c_save
+2024-05-20 02:30:13,582 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/freertos.c
+2024-05-20 02:30:13,617 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/dma.c_save
+2024-05-20 02:30:13,659 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/dma.c
+2024-05-20 02:30:13,660 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/dma.h_save
+2024-05-20 02:30:13,703 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/dma.h
+2024-05-20 02:30:13,706 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/tim.c_save
+2024-05-20 02:30:13,810 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/tim.c
+2024-05-20 02:30:13,811 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/tim.h_save
+2024-05-20 02:30:13,851 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/tim.h
+2024-05-20 02:30:13,854 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/usart.c_save
+2024-05-20 02:30:13,913 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/usart.c
+2024-05-20 02:30:13,914 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/usart.h_save
+2024-05-20 02:30:13,957 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/usart.h
+2024-05-20 02:30:13,963 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_it.c_save
+2024-05-20 02:30:14,076 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_it.c
+2024-05-20 02:30:14,077 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/stm32f4xx_it.h_save
+2024-05-20 02:30:14,120 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/stm32f4xx_it.h
+2024-05-20 02:30:14,123 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_hal_msp.c_save
+2024-05-20 02:30:14,182 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_hal_msp.c
+2024-05-20 02:30:14,183 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/system.tmp_save
+2024-05-20 02:30:14,223 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/system.tmp
+2024-05-20 02:30:14,223 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_hal_timebase_tim.c_save
+2024-05-20 02:30:14,266 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_hal_timebase_tim.c
+2024-05-20 02:30:14,269 [INFO] CodeEngine:311 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/stm32f4xx_hal_conf.h_save
+2024-05-20 02:30:14,316 [INFO] CodeEngine:335 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/stm32f4xx_hal_conf.h
+2024-05-20 02:30:14,328 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/main.h_save
+2024-05-20 02:30:14,386 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/main.h
+2024-05-20 02:30:14,387 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/main.c_save
+2024-05-20 02:30:14,457 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/main.c
+2024-05-20 02:30:14,826 [INFO] ProjectBuilder:3076 - Time for Copy HAL[0] : 47mS.
+2024-05-20 02:30:14,828 [INFO] ProjectBuilder:4485 - Project Generator version: 4.2.0-B44
+2024-05-20 02:30:14,997 [INFO] ConfigFileManager:1495 - The Die is : DIE419
+2024-05-20 02:30:17,728 [INFO] ProjectBuilder:4747 - Time for Generating toolchain IDE Files: 2900mS.
+2024-05-20 02:30:17,843 [INFO] ProjectBuilder:2947 - Time for Copy CMSIS : 115mS.
+2024-05-20 02:30:17,941 [INFO] ProjectBuilder:2947 - Time for Copy CMSIS : 98mS.
+2024-05-20 02:39:20,647 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,527x250,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2024-05-20 02:39:21,517 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2024-05-20 02:39:26,053 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 756738792 Bytes (993001472)
+2024-05-20 02:39:26,414 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 823052864 Bytes (993001472)
+2024-05-20 02:39:27,725 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: FREERTOS
+2024-05-20 02:39:27,725 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:39:27,726 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:39:27,726 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:39:27,726 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:39:27,726 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2024-05-20 02:39:27,726 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2024-05-20 02:39:27,726 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2024-05-20 02:39:27,726 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: USART
+2024-05-20 02:39:27,726 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: DMA
+2024-05-20 02:39:27,726 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8
+2024-05-20 02:39:27,726 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2024-05-20 02:39:27,726 [INFO] CodeGenerator:807 - code generatio: config db path: /opt/st/stm32cubeide_1.14.0/plugins/com.st.stm32cube.common.mx_6.10.0.202311202037//db/
+2024-05-20 02:39:27,751 [INFO] Argument:325 - Argument : hdmavalue: null
+2024-05-20 02:39:27,751 [INFO] Argument:327 - 	 sub Args: 
+2024-05-20 02:39:27,751 [INFO] Argument:325 - Argument : Instancevalue: DMA1_Stream1
+2024-05-20 02:39:27,751 [INFO] Argument:335 - Argument : Instancevalue: DMA1_Stream1
+2024-05-20 02:39:27,751 [INFO] Argument:325 - Argument : Initvalue: null
+2024-05-20 02:39:27,751 [INFO] Argument:327 - 	 sub Args: 
+2024-05-20 02:39:27,751 [INFO] Argument:325 - Argument : Channelvalue: DMA_CHANNEL_4
+2024-05-20 02:39:27,751 [INFO] Argument:335 - Argument : Channelvalue: DMA_CHANNEL_4
+2024-05-20 02:39:27,751 [INFO] Argument:325 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2024-05-20 02:39:27,751 [INFO] Argument:335 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2024-05-20 02:39:27,751 [INFO] Argument:325 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2024-05-20 02:39:27,751 [INFO] Argument:335 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2024-05-20 02:39:27,751 [INFO] Argument:325 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2024-05-20 02:39:27,751 [INFO] Argument:335 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2024-05-20 02:39:27,751 [INFO] Argument:325 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2024-05-20 02:39:27,751 [INFO] Argument:335 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2024-05-20 02:39:27,751 [INFO] Argument:325 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2024-05-20 02:39:27,751 [INFO] Argument:335 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2024-05-20 02:39:27,751 [INFO] Argument:325 - Argument : Modevalue: DMA_CIRCULAR
+2024-05-20 02:39:27,751 [INFO] Argument:335 - Argument : Modevalue: DMA_CIRCULAR
+2024-05-20 02:39:27,751 [INFO] Argument:325 - Argument : Priorityvalue: DMA_PRIORITY_VERY_HIGH
+2024-05-20 02:39:27,751 [INFO] Argument:335 - Argument : Priorityvalue: DMA_PRIORITY_VERY_HIGH
+2024-05-20 02:39:27,752 [INFO] Argument:325 - Argument : FIFOModevalue: DMA_FIFOMODE_DISABLE
+2024-05-20 02:39:27,752 [INFO] Argument:335 - Argument : FIFOModevalue: DMA_FIFOMODE_DISABLE
+2024-05-20 02:39:27,752 [INFO] Argument:325 - Argument : FIFOThresholdvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:335 - Argument : FIFOThresholdvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:325 - Argument : MemBurstvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:335 - Argument : MemBurstvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:325 - Argument : PeriphBurstvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:335 - Argument : PeriphBurstvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:325 - Argument : Lockvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:335 - Argument : Lockvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:325 - Argument : Statevalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:335 - Argument : Statevalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:325 - Argument : Parentvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:335 - Argument : Parentvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:325 - Argument : XferCpltCallbackvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:335 - Argument : XferCpltCallbackvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:325 - Argument : XferHalfCpltCallbackvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:335 - Argument : XferHalfCpltCallbackvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:325 - Argument : XferM1CpltCallbackvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:335 - Argument : XferM1CpltCallbackvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:325 - Argument : XferErrorCallbackvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:335 - Argument : XferErrorCallbackvalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:325 - Argument : ErrorCodevalue: null
+2024-05-20 02:39:27,752 [INFO] Argument:335 - Argument : ErrorCodevalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : hdmavalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:327 - 	 sub Args: 
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : Instancevalue: DMA1_Stream3
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : Instancevalue: DMA1_Stream3
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : Initvalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:327 - 	 sub Args: 
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : Channelvalue: DMA_CHANNEL_4
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : Channelvalue: DMA_CHANNEL_4
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : Directionvalue: DMA_MEMORY_TO_PERIPH
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : Directionvalue: DMA_MEMORY_TO_PERIPH
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : Modevalue: DMA_NORMAL
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : Modevalue: DMA_NORMAL
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : Priorityvalue: DMA_PRIORITY_VERY_HIGH
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : Priorityvalue: DMA_PRIORITY_VERY_HIGH
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : FIFOModevalue: DMA_FIFOMODE_DISABLE
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : FIFOModevalue: DMA_FIFOMODE_DISABLE
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : FIFOThresholdvalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : FIFOThresholdvalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : MemBurstvalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : MemBurstvalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : PeriphBurstvalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : PeriphBurstvalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : Lockvalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : Lockvalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : Statevalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:335 - Argument : Statevalue: null
+2024-05-20 02:39:27,753 [INFO] Argument:325 - Argument : Parentvalue: null
+2024-05-20 02:39:27,754 [INFO] Argument:335 - Argument : Parentvalue: null
+2024-05-20 02:39:27,754 [INFO] Argument:325 - Argument : XferCpltCallbackvalue: null
+2024-05-20 02:39:27,754 [INFO] Argument:335 - Argument : XferCpltCallbackvalue: null
+2024-05-20 02:39:27,754 [INFO] Argument:325 - Argument : XferHalfCpltCallbackvalue: null
+2024-05-20 02:39:27,754 [INFO] Argument:335 - Argument : XferHalfCpltCallbackvalue: null
+2024-05-20 02:39:27,754 [INFO] Argument:325 - Argument : XferM1CpltCallbackvalue: null
+2024-05-20 02:39:27,754 [INFO] Argument:335 - Argument : XferM1CpltCallbackvalue: null
+2024-05-20 02:39:27,754 [INFO] Argument:325 - Argument : XferErrorCallbackvalue: null
+2024-05-20 02:39:27,754 [INFO] Argument:335 - Argument : XferErrorCallbackvalue: null
+2024-05-20 02:39:27,754 [INFO] Argument:325 - Argument : ErrorCodevalue: null
+2024-05-20 02:39:27,754 [INFO] Argument:335 - Argument : ErrorCodevalue: null
+2024-05-20 02:39:27,865 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/license.tmp_save
+2024-05-20 02:39:27,925 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/license.tmp
+2024-05-20 02:39:27,959 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/gpio.c_save
+2024-05-20 02:39:28,032 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/gpio.c
+2024-05-20 02:39:28,034 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/gpio.h_save
+2024-05-20 02:39:28,078 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/gpio.h
+2024-05-20 02:39:28,434 [INFO] Middleware:1439 - No code input for Bsp Dependency
+2024-05-20 02:39:28,435 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_inc.tmp_save
+2024-05-20 02:39:28,476 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_inc.tmp
+2024-05-20 02:39:28,477 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelInit.tmp_save
+2024-05-20 02:39:28,519 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelInit.tmp
+2024-05-20 02:39:28,519 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelStart.tmp_save
+2024-05-20 02:39:28,560 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelStart.tmp
+2024-05-20 02:39:28,561 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_typedefs.tmp_save
+2024-05-20 02:39:28,602 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_typedefs.tmp
+2024-05-20 02:39:28,603 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_vars.tmp_save
+2024-05-20 02:39:28,647 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_vars.tmp
+2024-05-20 02:39:28,648 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_pfp.tmp_save
+2024-05-20 02:39:28,688 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_pfp.tmp
+2024-05-20 02:39:28,689 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_obj_creat.tmp_save
+2024-05-20 02:39:28,732 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_obj_creat.tmp
+2024-05-20 02:39:28,733 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_default_thread.tmp_save
+2024-05-20 02:39:28,775 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_default_thread.tmp
+2024-05-20 02:39:28,776 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_threads.tmp_save
+2024-05-20 02:39:28,817 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_threads.tmp
+2024-05-20 02:39:28,820 [INFO] Middleware:1439 - No code input for Bsp Dependency
+2024-05-20 02:39:28,822 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_inc.tmp_save
+2024-05-20 02:39:28,863 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_inc.tmp
+2024-05-20 02:39:28,864 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelInit.tmp_save
+2024-05-20 02:39:28,904 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelInit.tmp
+2024-05-20 02:39:28,905 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelStart.tmp_save
+2024-05-20 02:39:28,946 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_kernelStart.tmp
+2024-05-20 02:39:28,947 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_typedefs.tmp_save
+2024-05-20 02:39:28,989 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_typedefs.tmp
+2024-05-20 02:39:28,990 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_vars.tmp_save
+2024-05-20 02:39:29,032 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_vars.tmp
+2024-05-20 02:39:29,032 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_pfp.tmp_save
+2024-05-20 02:39:29,072 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_pfp.tmp
+2024-05-20 02:39:29,073 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_obj_creat.tmp_save
+2024-05-20 02:39:29,114 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_obj_creat.tmp
+2024-05-20 02:39:29,114 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_default_thread.tmp_save
+2024-05-20 02:39:29,154 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_default_thread.tmp
+2024-05-20 02:39:29,155 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_threads.tmp_save
+2024-05-20 02:39:29,194 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/rtos_threads.tmp
+2024-05-20 02:39:29,195 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/FreeRTOSConfig.h_save
+2024-05-20 02:39:29,250 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/FreeRTOSConfig.h
+2024-05-20 02:39:29,250 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/freertos.c_save
+2024-05-20 02:39:29,302 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/freertos.c
+2024-05-20 02:39:29,332 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/dma.c_save
+2024-05-20 02:39:29,374 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/dma.c
+2024-05-20 02:39:29,375 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/dma.h_save
+2024-05-20 02:39:29,415 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/dma.h
+2024-05-20 02:39:29,418 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/tim.c_save
+2024-05-20 02:39:29,502 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/tim.c
+2024-05-20 02:39:29,503 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/tim.h_save
+2024-05-20 02:39:29,544 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/tim.h
+2024-05-20 02:39:29,546 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/usart.c_save
+2024-05-20 02:39:29,604 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/usart.c
+2024-05-20 02:39:29,605 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/usart.h_save
+2024-05-20 02:39:29,646 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/usart.h
+2024-05-20 02:39:29,653 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_it.c_save
+2024-05-20 02:39:29,707 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_it.c
+2024-05-20 02:39:29,708 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/stm32f4xx_it.h_save
+2024-05-20 02:39:29,749 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/stm32f4xx_it.h
+2024-05-20 02:39:29,752 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_hal_msp.c_save
+2024-05-20 02:39:29,808 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_hal_msp.c
+2024-05-20 02:39:29,808 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/system.tmp_save
+2024-05-20 02:39:29,847 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/MXTmpFiles/system.tmp
+2024-05-20 02:39:29,848 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_hal_timebase_tim.c_save
+2024-05-20 02:39:29,890 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/stm32f4xx_hal_timebase_tim.c
+2024-05-20 02:39:29,892 [INFO] CodeEngine:311 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/stm32f4xx_hal_conf.h_save
+2024-05-20 02:39:29,938 [INFO] CodeEngine:335 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/stm32f4xx_hal_conf.h
+2024-05-20 02:39:29,949 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Inc/main.h_save
+2024-05-20 02:39:30,004 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Inc/main.h
+2024-05-20 02:39:30,005 [INFO] CodeEngine:255 - oldGeneratedFile, /home/gunwon/dev/etc/MicroRos_24/Core/Src/main.c_save
+2024-05-20 02:39:30,063 [INFO] CodeEngine:279 - Generated code: /home/gunwon/dev/etc/MicroRos_24/Core/Src/main.c
+2024-05-20 02:39:30,399 [INFO] ProjectBuilder:3076 - Time for Copy HAL[0] : 40mS.
+2024-05-20 02:39:30,401 [INFO] ProjectBuilder:4485 - Project Generator version: 4.2.0-B44
+2024-05-20 02:39:30,558 [INFO] ConfigFileManager:1495 - The Die is : DIE419
+2024-05-20 02:39:33,379 [INFO] ProjectBuilder:4747 - Time for Generating toolchain IDE Files: 2978mS.
+2024-05-20 02:39:33,520 [INFO] ProjectBuilder:2947 - Time for Copy CMSIS : 140mS.
+2024-05-20 02:39:33,620 [INFO] ProjectBuilder:2947 - Time for Copy CMSIS : 100mS.

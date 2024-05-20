@@ -1,0 +1,17 @@
+[0.194s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs -- -j4 -l4
+[0.542s] [ 16%] [32m[1mLinking CXX executable stella_ahrs_node[0m
+[0.698s] /usr/bin/ld: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MW_AHRS_amd64.a(MW_serial.o): Relocations in generic ELF (EM: 62)
+[0.698s] /usr/bin/ld: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MW_AHRS_amd64.a(MW_serial.o): Relocations in generic ELF (EM: 62)
+[0.698s] /usr/bin/ld: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MW_AHRS_amd64.a(MW_serial.o): Relocations in generic ELF (EM: 62)
+[0.699s] /usr/bin/ld: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MW_AHRS_amd64.a(MW_serial.o): Relocations in generic ELF (EM: 62)
+[0.699s] /usr/bin/ld: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MW_AHRS_amd64.a(MW_serial.o): Relocations in generic ELF (EM: 62)
+[0.702s] /usr/bin/ld: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MW_AHRS_amd64.a(MW_serial.o): Relocations in generic ELF (EM: 62)
+[0.702s] /usr/bin/ld: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MW_AHRS_amd64.a(MW_serial.o): Relocations in generic ELF (EM: 62)
+[0.702s] /usr/bin/ld: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MW_AHRS_amd64.a(MW_serial.o): Relocations in generic ELF (EM: 62)
+[0.702s] /usr/bin/ld: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MW_AHRS_amd64.a(MW_serial.o): Relocations in generic ELF (EM: 62)
+[0.702s] /usr/bin/ld: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MW_AHRS_amd64.a: error adding symbols: file in wrong format
+[0.704s] collect2: error: ld returned 1 exit status
+[0.706s] make[2]: *** [CMakeFiles/stella_ahrs_node.dir/build.make:232: stella_ahrs_node] Error 1
+[0.709s] make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/stella_ahrs_node.dir/all] Error 2
+[0.709s] make: *** [Makefile:141: all] Error 2
+[0.976s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/stella_ahrs -- -j4 -l4

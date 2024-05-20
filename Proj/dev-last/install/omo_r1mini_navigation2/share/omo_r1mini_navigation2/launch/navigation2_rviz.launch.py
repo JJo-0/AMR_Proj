@@ -1,0 +1,1 @@
+/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/omo_r1mini_navigation2/launch/navigation2_rviz.launch.py

@@ -1,0 +1,28 @@
+-- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer
+-- Install configuration: ""
+-- Execute custom install script
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/config/omo_r1mini_lidar.lua
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/launch/cartographer.launch.py
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/launch/cartographer_rviz.launch.py
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/launch/occupancy_grid.launch.py
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/rviz/omo_r1mini_cartographer.rviz
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/ament_index/resource_index/package_run_dependencies/omo_r1mini_cartographer
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/ament_index/resource_index/parent_prefix_path/omo_r1mini_cartographer
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/environment/path.sh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/environment/path.dsv
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/local_setup.bash
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/local_setup.sh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/local_setup.zsh
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/local_setup.dsv
+-- Symlinking: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/package.dsv
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/ament_index/resource_index/packages/omo_r1mini_cartographer
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/cmake/omo_r1mini_cartographerConfig.cmake
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/cmake/omo_r1mini_cartographerConfig-version.cmake
+-- Up-to-date symlink: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/package.xml

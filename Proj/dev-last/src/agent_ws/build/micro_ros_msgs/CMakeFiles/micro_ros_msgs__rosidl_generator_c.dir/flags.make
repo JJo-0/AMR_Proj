@@ -6,5 +6,5 @@ C_FLAGS = -fPIC   -Wall -std=gnu11
 
 C_DEFINES = -DRCUTILS_ENABLE_FAULT_INJECTION -DROS_PACKAGE_NAME=\"micro_ros_msgs\" -Dmicro_ros_msgs__rosidl_generator_c_EXPORTS
 
-C_INCLUDES = -I/home/gunwon/dev/src/agent_ws/build/micro_ros_msgs/rosidl_generator_c -isystem /opt/ros/foxy/include 
+C_INCLUDES = -I/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_msgs/rosidl_generator_c -isystem /opt/ros/foxy/include 
 

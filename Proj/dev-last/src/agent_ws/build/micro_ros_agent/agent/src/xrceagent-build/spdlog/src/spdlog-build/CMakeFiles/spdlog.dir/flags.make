@@ -6,5 +6,5 @@ CXX_FLAGS = -O3 -DNDEBUG -fPIC   -std=c++11
 
 CXX_DEFINES = -DSPDLOG_COMPILED_LIB
 
-CXX_INCLUDES = -I/home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog/include 
+CXX_INCLUDES = -I/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog/include 
 

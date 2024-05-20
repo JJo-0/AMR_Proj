@@ -1,0 +1,52 @@
+[0.110s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/omo_r1mini_navigation2 -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2
+[0.389s] -- The C compiler identification is GNU 9.4.0
+[0.801s] -- The CXX compiler identification is GNU 9.4.0
+[0.832s] -- Check for working C compiler: /usr/bin/cc
+[1.168s] -- Check for working C compiler: /usr/bin/cc -- works
+[1.174s] -- Detecting C compiler ABI info
+[1.491s] -- Detecting C compiler ABI info - done
+[1.536s] -- Detecting C compile features
+[1.537s] -- Detecting C compile features - done
+[1.545s] -- Check for working CXX compiler: /usr/bin/c++
+[1.958s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[1.963s] -- Detecting CXX compiler ABI info
+[2.287s] -- Detecting CXX compiler ABI info - done
+[2.346s] -- Detecting CXX compile features
+[2.346s] -- Detecting CXX compile features - done
+[2.350s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[2.460s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[2.460s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[3.434s] -- Configuring done
+[3.466s] -- Generating done
+[3.475s] -- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2
+[3.491s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/omo_r1mini_navigation2 -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2
+[3.503s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2 -- -j4 -l4
+[3.692s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2 -- -j4 -l4
+[3.826s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2
+[3.881s] -- Install configuration: ""
+[3.881s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/launch
+[3.883s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/launch/navigation2_rviz.launch.py
+[3.884s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/launch/navigation2.launch.py
+[3.884s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/map
+[3.884s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/map/turtlebot3_world.pgm
+[3.884s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/map/turtlebot3_world.yaml
+[3.885s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/param
+[3.885s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/param/omo_r1mini.yaml
+[3.885s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/rviz
+[3.887s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/rviz/tb3_navigation2.rviz
+[3.888s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/ament_index/resource_index/package_run_dependencies/omo_r1mini_navigation2
+[3.888s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/ament_index/resource_index/parent_prefix_path/omo_r1mini_navigation2
+[3.888s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/environment/ament_prefix_path.sh
+[3.889s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/environment/ament_prefix_path.dsv
+[3.889s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/environment/path.sh
+[3.889s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/environment/path.dsv
+[3.889s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/local_setup.bash
+[3.889s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/local_setup.sh
+[3.889s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/local_setup.zsh
+[3.890s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/local_setup.dsv
+[3.890s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/package.dsv
+[3.892s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/ament_index/resource_index/packages/omo_r1mini_navigation2
+[3.892s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/cmake/omo_r1mini_navigation2Config.cmake
+[3.892s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/cmake/omo_r1mini_navigation2Config-version.cmake
+[3.897s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2/share/omo_r1mini_navigation2/package.xml
+[3.901s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2

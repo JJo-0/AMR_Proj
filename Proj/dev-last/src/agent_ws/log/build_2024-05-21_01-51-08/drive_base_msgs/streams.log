@@ -1,0 +1,301 @@
+[0.073s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/src/uros/drive_base/drive_base_msgs -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs
+[0.431s] -- The C compiler identification is GNU 9.4.0
+[0.683s] -- The CXX compiler identification is GNU 9.4.0
+[0.698s] -- Check for working C compiler: /usr/bin/cc
+[0.926s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.928s] -- Detecting C compiler ABI info
+[1.213s] -- Detecting C compiler ABI info - done
+[1.244s] -- Detecting C compile features
+[1.248s] -- Detecting C compile features - done
+[1.254s] -- Check for working CXX compiler: /usr/bin/c++
+[1.603s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[1.607s] -- Detecting CXX compiler ABI info
+[1.939s] -- Detecting CXX compiler ABI info - done
+[1.957s] -- Detecting CXX compile features
+[1.962s] -- Detecting CXX compile features - done
+[1.969s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[2.040s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[2.040s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[2.481s] -- Found std_msgs: 2.0.5 (/opt/ros/foxy/share/std_msgs/cmake)
+[2.569s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.586s] -- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[2.864s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[2.948s] -- Found FastRTPS: /opt/ros/foxy/include  
+[3.161s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.290s] -- Found rosidl_default_generators: 1.0.1 (/opt/ros/foxy/share/rosidl_default_generators/cmake)
+[3.419s] -- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+[3.831s] -- Found ament_cmake_cppcheck: 0.9.8 (/opt/ros/foxy/share/ament_cmake_cppcheck/cmake)
+[3.841s] -- Found ament_cmake_cpplint: 0.9.8 (/opt/ros/foxy/share/ament_cmake_cpplint/cmake)
+[3.854s] -- Found ament_cmake_uncrustify: 0.9.8 (/opt/ros/foxy/share/ament_cmake_uncrustify/cmake)
+[3.870s] -- Found ament_cmake_ros: 0.9.2 (/opt/ros/foxy/share/ament_cmake_ros/cmake)
+[4.289s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[4.402s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[4.475s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3.5") 
+[4.479s] -- Found python_cmake_module: 0.8.1 (/opt/ros/foxy/share/python_cmake_module/cmake)
+[4.542s] -- Found PythonLibs: /usr/lib/aarch64-linux-gnu/libpython3.8.so (found suitable version "3.8.10", minimum required is "3.5") 
+[4.543s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[4.543s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.8
+[4.543s] -- Using PYTHON_LIBRARIES: /usr/lib/aarch64-linux-gnu/libpython3.8.so
+[4.598s] -- Found PythonExtra: .so  
+[4.774s] -- Found ament_cmake_flake8: 0.9.8 (/opt/ros/foxy/share/ament_cmake_flake8/cmake)
+[4.781s] -- Found ament_cmake_pep257: 0.9.8 (/opt/ros/foxy/share/ament_cmake_pep257/cmake)
+[4.802s] -- Configuring done
+[4.916s] -- Generating done
+[4.919s] -- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs
+[4.958s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/src/uros/drive_base/drive_base_msgs -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs
+[4.964s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs -- -j4 -l4
+[5.080s] [  1%] [34m[1mGenerating C code for ROS interfaces[0m
+[5.086s] [35m[1mScanning dependencies of target drive_base_msgs__cpp[0m
+[5.141s] [  3%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[7.967s] [35m[1mScanning dependencies of target drive_base_msgs__rosidl_generator_c[0m
+[8.055s] [  5%] [32mBuilding C object CMakeFiles/drive_base_msgs__rosidl_generator_c.dir/rosidl_generator_c/drive_base_msgs/msg/detail/command_header__functions.c.o[0m
+[8.147s] [  7%] [32mBuilding C object CMakeFiles/drive_base_msgs__rosidl_generator_c.dir/rosidl_generator_c/drive_base_msgs/msg/detail/base_info__functions.c.o[0m
+[8.263s] [  9%] [32mBuilding C object CMakeFiles/drive_base_msgs__rosidl_generator_c.dir/rosidl_generator_c/drive_base_msgs/msg/detail/command_status__functions.c.o[0m
+[8.393s] [ 10%] [32mBuilding C object CMakeFiles/drive_base_msgs__rosidl_generator_c.dir/rosidl_generator_c/drive_base_msgs/msg/detail/trv_command__functions.c.o[0m
+[8.675s] [ 10%] Built target drive_base_msgs__cpp
+[8.702s] [ 12%] [32m[1mLinking C shared library libdrive_base_msgs__rosidl_generator_c.so[0m
+[8.757s] [ 14%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[8.766s] [ 16%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[8.766s] [ 18%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[8.963s] [ 18%] Built target drive_base_msgs__rosidl_generator_c
+[9.040s] [ 20%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[11.834s] [35m[1mScanning dependencies of target drive_base_msgs__rosidl_typesupport_cpp[0m
+[11.953s] [ 21%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/drive_base_msgs/msg/command_header__type_support.cpp.o[0m
+[12.603s] [35m[1mScanning dependencies of target drive_base_msgs__rosidl_typesupport_introspection_cpp[0m
+[12.680s] [ 23%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/drive_base_msgs/msg/detail/command_header__type_support.cpp.o[0m
+[12.765s] [35m[1mScanning dependencies of target drive_base_msgs__rosidl_typesupport_introspection_c[0m
+[12.830s] [35m[1mScanning dependencies of target drive_base_msgs__rosidl_typesupport_fastrtps_cpp[0m
+[12.910s] [ 25%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/drive_base_msgs/msg/detail/dds_fastrtps/command_header__type_support.cpp.o[0m
+[12.926s] [ 27%] [32mBuilding C object CMakeFiles/drive_base_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/drive_base_msgs/msg/detail/command_header__type_support.c.o[0m
+[13.212s] [ 29%] [32mBuilding C object CMakeFiles/drive_base_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/drive_base_msgs/msg/detail/base_info__type_support.c.o[0m
+[13.598s] [ 30%] [32mBuilding C object CMakeFiles/drive_base_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/drive_base_msgs/msg/detail/command_status__type_support.c.o[0m
+[14.070s] [ 32%] [32mBuilding C object CMakeFiles/drive_base_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/drive_base_msgs/msg/detail/trv_command__type_support.c.o[0m
+[14.353s] [ 34%] [32m[1mLinking C shared library libdrive_base_msgs__rosidl_typesupport_introspection_c.so[0m
+[14.546s] [ 36%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/drive_base_msgs/msg/base_info__type_support.cpp.o[0m
+[14.583s] [ 36%] Built target drive_base_msgs__rosidl_typesupport_introspection_c
+[14.651s] [ 38%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/drive_base_msgs/msg/detail/dds_fastrtps/base_info__type_support.cpp.o[0m
+[14.758s] [ 40%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/drive_base_msgs/msg/detail/base_info__type_support.cpp.o[0m
+[16.382s] [ 41%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/drive_base_msgs/msg/detail/command_status__type_support.cpp.o[0m
+[16.476s] [ 43%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/drive_base_msgs/msg/detail/trv_command__type_support.cpp.o[0m
+[16.535s] [ 45%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/drive_base_msgs/msg/command_status__type_support.cpp.o[0m
+[17.104s] [ 47%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/drive_base_msgs/msg/detail/dds_fastrtps/command_status__type_support.cpp.o[0m
+[17.516s] [ 49%] [32m[1mLinking CXX shared library libdrive_base_msgs__rosidl_typesupport_introspection_cpp.so[0m
+[17.728s] [ 49%] Built target drive_base_msgs__rosidl_typesupport_introspection_cpp
+[17.770s] [ 50%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/drive_base_msgs/msg/trv_command__type_support.cpp.o[0m
+[18.304s] [ 52%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/drive_base_msgs/msg/detail/dds_fastrtps/trv_command__type_support.cpp.o[0m
+[18.445s] [ 54%] [32m[1mLinking CXX shared library libdrive_base_msgs__rosidl_typesupport_cpp.so[0m
+[18.564s] [ 54%] Built target drive_base_msgs__rosidl_typesupport_cpp
+[19.593s] [ 56%] [32m[1mLinking CXX shared library libdrive_base_msgs__rosidl_typesupport_fastrtps_cpp.so[0m
+[19.987s] [ 56%] Built target drive_base_msgs__rosidl_typesupport_fastrtps_cpp
+[20.021s] [ 58%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[21.568s] [35m[1mScanning dependencies of target drive_base_msgs__rosidl_typesupport_c[0m
+[21.598s] [ 60%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/drive_base_msgs/msg/command_header__type_support.cpp.o[0m
+[21.679s] [ 61%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/drive_base_msgs/msg/command_status__type_support.cpp.o[0m
+[21.760s] [ 63%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/drive_base_msgs/msg/trv_command__type_support.cpp.o[0m
+[21.833s] [ 65%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/drive_base_msgs/msg/base_info__type_support.cpp.o[0m
+[21.909s] [ 67%] [32m[1mLinking CXX shared library libdrive_base_msgs__rosidl_typesupport_c.so[0m
+[22.003s] [ 67%] Built target drive_base_msgs__rosidl_typesupport_c
+[22.025s] [ 69%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[23.191s] [35m[1mScanning dependencies of target drive_base_msgs__rosidl_typesupport_fastrtps_c[0m
+[23.232s] [ 70%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/drive_base_msgs/msg/detail/command_header__type_support_c.cpp.o[0m
+[23.935s] [ 72%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/drive_base_msgs/msg/detail/trv_command__type_support_c.cpp.o[0m
+[24.655s] [ 74%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/drive_base_msgs/msg/detail/command_status__type_support_c.cpp.o[0m
+[25.443s] [ 76%] [32mBuilding CXX object CMakeFiles/drive_base_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/drive_base_msgs/msg/detail/base_info__type_support_c.cpp.o[0m
+[26.241s] [ 78%] [32m[1mLinking CXX shared library libdrive_base_msgs__rosidl_typesupport_fastrtps_c.so[0m
+[26.479s] [ 78%] Built target drive_base_msgs__rosidl_typesupport_fastrtps_c
+[26.506s] [35m[1mScanning dependencies of target drive_base_msgs[0m
+[26.529s] [ 78%] Built target drive_base_msgs
+[26.552s] [35m[1mScanning dependencies of target drive_base_msgs__py[0m
+[26.584s] [ 80%] [34m[1mGenerating Python code for ROS interfaces[0m
+[28.962s] [ 80%] Built target drive_base_msgs__py
+[28.983s] [35m[1mScanning dependencies of target drive_base_msgs__python[0m
+[29.037s] [ 81%] [32mBuilding C object CMakeFiles/drive_base_msgs__python.dir/rosidl_generator_py/drive_base_msgs/msg/_command_header_s.c.o[0m
+[29.226s] [ 83%] [32mBuilding C object CMakeFiles/drive_base_msgs__python.dir/rosidl_generator_py/drive_base_msgs/msg/_trv_command_s.c.o[0m
+[29.402s] [ 85%] [32mBuilding C object CMakeFiles/drive_base_msgs__python.dir/rosidl_generator_py/drive_base_msgs/msg/_command_status_s.c.o[0m
+[29.589s] [ 87%] [32mBuilding C object CMakeFiles/drive_base_msgs__python.dir/rosidl_generator_py/drive_base_msgs/msg/_base_info_s.c.o[0m
+[29.812s] [ 89%] [32m[1mLinking C shared library rosidl_generator_py/drive_base_msgs/libdrive_base_msgs__python.so[0m
+[29.926s] [ 89%] Built target drive_base_msgs__python
+[29.954s] [35m[1mScanning dependencies of target drive_base_msgs__rosidl_typesupport_c__pyext[0m
+[29.993s] [ 90%] [32mBuilding C object CMakeFiles/drive_base_msgs__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/drive_base_msgs/_drive_base_msgs_s.ep.rosidl_typesupport_c.c.o[0m
+[30.213s] [ 92%] [32m[1mLinking C shared library rosidl_generator_py/drive_base_msgs/drive_base_msgs_s__rosidl_typesupport_c.cpython-38-aarch64-linux-gnu.so[0m
+[30.308s] [ 92%] Built target drive_base_msgs__rosidl_typesupport_c__pyext
+[30.341s] [35m[1mScanning dependencies of target drive_base_msgs__rosidl_typesupport_introspection_c__pyext[0m
+[30.379s] [ 94%] [32mBuilding C object CMakeFiles/drive_base_msgs__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/drive_base_msgs/_drive_base_msgs_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[30.582s] [ 96%] [32m[1mLinking C shared library rosidl_generator_py/drive_base_msgs/drive_base_msgs_s__rosidl_typesupport_introspection_c.cpython-38-aarch64-linux-gnu.so[0m
+[30.675s] [ 96%] Built target drive_base_msgs__rosidl_typesupport_introspection_c__pyext
+[30.712s] [35m[1mScanning dependencies of target drive_base_msgs__rosidl_typesupport_fastrtps_c__pyext[0m
+[30.755s] [ 98%] [32mBuilding C object CMakeFiles/drive_base_msgs__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/drive_base_msgs/_drive_base_msgs_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[30.976s] [100%] [32m[1mLinking CXX shared library rosidl_generator_py/drive_base_msgs/drive_base_msgs_s__rosidl_typesupport_fastrtps_c.cpython-38-aarch64-linux-gnu.so[0m
+[31.186s] [100%] Built target drive_base_msgs__rosidl_typesupport_fastrtps_c__pyext
+[31.248s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs -- -j4 -l4
+[31.603s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs
+[31.638s] -- Install configuration: ""
+[31.639s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/ament_index/resource_index/rosidl_interfaces/drive_base_msgs
+[31.639s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs
+[31.639s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg
+[31.639s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/command_header.h
+[31.639s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/trv_command.h
+[31.640s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/base_info.h
+[31.640s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/rosidl_generator_c__visibility_control.h
+[31.641s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail
+[31.641s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__struct.h
+[31.641s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__functions.h
+[31.641s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__functions.h
+[31.641s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__struct.h
+[31.641s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__struct.h
+[31.642s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__functions.c
+[31.642s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__functions.h
+[31.642s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__type_support.h
+[31.642s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__functions.h
+[31.642s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__type_support.h
+[31.642s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__functions.c
+[31.642s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__functions.c
+[31.643s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__type_support.h
+[31.643s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__struct.h
+[31.643s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__functions.c
+[31.643s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__type_support.h
+[31.643s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/command_status.h
+[31.644s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/environment/library_path.sh
+[31.644s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/environment/library_path.dsv
+[31.645s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_generator_c.so
+[31.645s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_generator_c.so" to ""
+[31.646s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs
+[31.647s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg
+[31.647s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[31.647s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail
+[31.648s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__rosidl_typesupport_fastrtps_c.h
+[31.648s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__rosidl_typesupport_fastrtps_c.h
+[31.648s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__rosidl_typesupport_fastrtps_c.h
+[31.648s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__rosidl_typesupport_fastrtps_c.h
+[31.648s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_typesupport_fastrtps_c.so
+[31.648s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_typesupport_fastrtps_c.so" to ""
+[31.648s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs
+[31.648s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg
+[31.648s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail
+[31.648s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__rosidl_typesupport_fastrtps_cpp.hpp
+[31.649s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__rosidl_typesupport_fastrtps_cpp.hpp
+[31.649s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__rosidl_typesupport_fastrtps_cpp.hpp
+[31.649s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/dds_fastrtps
+[31.649s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__rosidl_typesupport_fastrtps_cpp.hpp
+[31.649s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[31.649s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_typesupport_fastrtps_cpp.so
+[31.650s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_typesupport_fastrtps_cpp.so" to ""
+[31.650s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs
+[31.650s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg
+[31.650s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[31.650s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail
+[31.650s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__type_support.c
+[31.650s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__rosidl_typesupport_introspection_c.h
+[31.651s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__rosidl_typesupport_introspection_c.h
+[31.651s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__type_support.c
+[31.651s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__rosidl_typesupport_introspection_c.h
+[31.652s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__rosidl_typesupport_introspection_c.h
+[31.652s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__type_support.c
+[31.652s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__type_support.c
+[31.652s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_typesupport_introspection_c.so
+[31.653s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_typesupport_introspection_c.so" to ""
+[31.653s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_typesupport_c.so
+[31.654s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_typesupport_c.so" to ""
+[31.654s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs
+[31.654s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg
+[31.654s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/command_status.hpp
+[31.654s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/rosidl_generator_cpp__visibility_control.hpp
+[31.654s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/trv_command.hpp
+[31.654s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/command_header.hpp
+[31.655s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail
+[31.655s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__builder.hpp
+[31.655s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__type_support.hpp
+[31.655s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__struct.hpp
+[31.655s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__struct.hpp
+[31.655s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__builder.hpp
+[31.655s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__type_support.hpp
+[31.656s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__traits.hpp
+[31.656s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__traits.hpp
+[31.656s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__type_support.hpp
+[31.656s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__builder.hpp
+[31.656s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__builder.hpp
+[31.656s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__type_support.hpp
+[31.657s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__traits.hpp
+[31.657s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__struct.hpp
+[31.657s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__struct.hpp
+[31.658s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__traits.hpp
+[31.659s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/base_info.hpp
+[31.660s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs
+[31.660s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg
+[31.660s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail
+[31.660s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__rosidl_typesupport_introspection_cpp.hpp
+[31.660s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__rosidl_typesupport_introspection_cpp.hpp
+[31.660s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__rosidl_typesupport_introspection_cpp.hpp
+[31.660s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_status__type_support.cpp
+[31.661s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/command_header__type_support.cpp
+[31.661s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__rosidl_typesupport_introspection_cpp.hpp
+[31.661s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/trv_command__type_support.cpp
+[31.661s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/include/drive_base_msgs/msg/detail/base_info__type_support.cpp
+[31.661s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_typesupport_introspection_cpp.so
+[31.662s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_typesupport_introspection_cpp.so" to ""
+[31.663s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_typesupport_cpp.so
+[31.663s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__rosidl_typesupport_cpp.so" to ""
+[31.663s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/environment/pythonpath.sh
+[31.663s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/environment/pythonpath.dsv
+[31.663s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/__init__.py
+[31.745s] Compiling '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/__init__.py'...
+[31.761s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/msg
+[31.761s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/msg/_command_status.py
+[31.762s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/msg/_command_header_s.c
+[31.762s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/msg/__init__.py
+[31.762s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/msg/_command_header.py
+[31.762s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/msg/_base_info.py
+[31.762s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/msg/_command_status_s.c
+[31.763s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/msg/_trv_command_s.c
+[31.763s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/msg/_trv_command.py
+[31.764s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/msg/_base_info_s.c
+[31.764s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/drive_base_msgs_s__rosidl_typesupport_fastrtps_c.cpython-38-aarch64-linux-gnu.so
+[31.764s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/drive_base_msgs_s__rosidl_typesupport_fastrtps_c.cpython-38-aarch64-linux-gnu.so" to ""
+[31.765s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/drive_base_msgs_s__rosidl_typesupport_introspection_c.cpython-38-aarch64-linux-gnu.so
+[31.766s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/drive_base_msgs_s__rosidl_typesupport_introspection_c.cpython-38-aarch64-linux-gnu.so" to ""
+[31.766s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/drive_base_msgs_s__rosidl_typesupport_c.cpython-38-aarch64-linux-gnu.so
+[31.767s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/python3.8/site-packages/drive_base_msgs/drive_base_msgs_s__rosidl_typesupport_c.cpython-38-aarch64-linux-gnu.so" to ""
+[31.767s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__python.so
+[31.768s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/lib/libdrive_base_msgs__python.so" to ""
+[31.768s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/msg/CommandHeader.idl
+[31.768s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/msg/BaseInfo.idl
+[31.769s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/msg/CommandStatus.idl
+[31.769s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/msg/TRVCommand.idl
+[31.769s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/msg/CommandHeader.msg
+[31.770s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/msg/BaseInfo.msg
+[31.770s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/msg/CommandStatus.msg
+[31.770s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/msg/TRVCommand.msg
+[31.771s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/ament_index/resource_index/package_run_dependencies/drive_base_msgs
+[31.771s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/ament_index/resource_index/parent_prefix_path/drive_base_msgs
+[31.771s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/environment/ament_prefix_path.sh
+[31.772s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/environment/ament_prefix_path.dsv
+[31.772s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/environment/path.sh
+[31.772s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/environment/path.dsv
+[31.772s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/local_setup.bash
+[31.773s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/local_setup.sh
+[31.773s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/local_setup.zsh
+[31.773s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/local_setup.dsv
+[31.773s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/package.dsv
+[31.775s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/ament_index/resource_index/packages/drive_base_msgs
+[31.775s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgs__rosidl_generator_cExport.cmake
+[31.775s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgs__rosidl_generator_cExport-noconfig.cmake
+[31.776s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgs__rosidl_typesupport_introspection_cExport.cmake
+[31.776s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgs__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[31.776s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgs__rosidl_typesupport_cExport.cmake
+[31.777s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgs__rosidl_typesupport_cExport-noconfig.cmake
+[31.777s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgs__rosidl_generator_cppExport.cmake
+[31.777s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgs__rosidl_typesupport_introspection_cppExport.cmake
+[31.778s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgs__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[31.778s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgs__rosidl_typesupport_cppExport.cmake
+[31.779s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgs__rosidl_typesupport_cppExport-noconfig.cmake
+[31.779s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/rosidl_cmake-extras.cmake
+[31.779s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/ament_cmake_export_dependencies-extras.cmake
+[31.779s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/ament_cmake_export_libraries-extras.cmake
+[31.780s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/ament_cmake_export_targets-extras.cmake
+[31.780s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/ament_cmake_export_include_directories-extras.cmake
+[31.780s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[31.781s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[31.781s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgsConfig.cmake
+[31.781s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/cmake/drive_base_msgsConfig-version.cmake
+[31.781s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/drive_base_msgs/share/drive_base_msgs/package.xml
+[31.791s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/drive_base_msgs

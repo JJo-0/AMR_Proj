@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/micro_ros_msgs/rosidl_generator_py/micro_ros_msgs/libmicro_ros_msgs__python.so" "TARGETS" "micro_ros_msgs__python" "ARCHIVE_DESTINATION" "lib" "LIBRARY_DESTINATION" "lib" "RUNTIME_DESTINATION" "bin")

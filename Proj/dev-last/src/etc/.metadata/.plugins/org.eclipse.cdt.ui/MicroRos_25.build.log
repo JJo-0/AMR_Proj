@@ -1,0 +1,6 @@
+15:25:26 **** Incremental Build of configuration Default for project MicroRos_25 ****
+make all 
+make: Nothing to be done for 'all'.
+
+15:25:26 Build Finished. 0 errors, 0 warnings. (took 636ms)
+

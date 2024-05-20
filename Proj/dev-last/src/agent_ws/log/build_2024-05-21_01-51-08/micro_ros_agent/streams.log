@@ -1,0 +1,619 @@
+[0.051s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent': AMENT_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/micro_ros_setup:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/articubot_one:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy LD_LIBRARY_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/src/uros/micro-ROS-Agent/micro_ros_agent -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent
+[0.268s] -- The C compiler identification is GNU 9.4.0
+[0.274s] -- Check for working C compiler: /usr/bin/cc
+[0.454s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.455s] -- Detecting C compiler ABI info
+[0.632s] -- Detecting C compiler ABI info - done
+[0.649s] -- Detecting C compile features
+[0.650s] -- Detecting C compile features - done
+[0.787s] -- The CXX compiler identification is GNU 9.4.0
+[0.798s] -- Check for working CXX compiler: /usr/bin/c++
+[1.010s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[1.011s] -- Detecting CXX compiler ABI info
+[1.209s] -- Detecting CXX compiler ABI info - done
+[1.228s] -- Detecting CXX compile features
+[1.229s] -- Detecting CXX compile features - done
+[1.327s] -- Configuring done
+[1.335s] -- Generating done
+[1.336s] -- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent
+[1.344s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent' returned '0': AMENT_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/micro_ros_setup:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/articubot_one:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy LD_LIBRARY_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/src/uros/micro-ROS-Agent/micro_ros_agent -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent
+[1.353s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent': AMENT_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/micro_ros_setup:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/articubot_one:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy LD_LIBRARY_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent -- -j4 -l4
+[1.473s] [35m[1mScanning dependencies of target xrceagent[0m
+[1.496s] [  6%] [34m[1mCreating directories for 'xrceagent'[0m
+[1.685s] [ 12%] [34m[1mPerforming download step (git clone) for 'xrceagent'[0m
+[1.747s] Cloning into 'xrceagent'...
+[3.886s] Switched to a new branch 'ros2'
+[3.886s] Branch 'ros2' set up to track remote branch 'ros2' from 'origin'.
+[4.020s] [ 18%] [34m[1mNo patch step for 'xrceagent'[0m
+[4.084s] [ 25%] [34m[1mPerforming update step for 'xrceagent'[0m
+[4.644s] Current branch ros2 is up to date.
+[4.728s] [ 31%] [34m[1mPerforming configure step for 'xrceagent'[0m
+[4.754s] loading initial cache file /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/tmp/xrceagent-cache-.cmake
+[4.893s] -- The C compiler identification is GNU 9.4.0
+[4.902s] -- Check for working C compiler: /usr/bin/cc
+[5.088s] -- Check for working C compiler: /usr/bin/cc -- works
+[5.089s] -- Detecting C compiler ABI info
+[5.289s] -- Detecting C compiler ABI info - done
+[5.306s] -- Detecting C compile features
+[5.307s] -- Detecting C compile features - done
+[5.433s] -- The CXX compiler identification is GNU 9.4.0
+[5.443s] -- Check for working CXX compiler: /usr/bin/c++
+[5.646s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[5.650s] -- Detecting CXX compiler ABI info
+[5.857s] -- Detecting CXX compiler ABI info - done
+[5.871s] -- Detecting CXX compile features
+[5.872s] -- Detecting CXX compile features - done
+[5.975s] -- Configuring done
+[5.983s] -- Generating done
+[5.985s] -- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build
+[6.039s] [ 37%] [34m[1mPerforming build step for 'xrceagent'[0m
+[6.164s] [35m[1mScanning dependencies of target spdlog[0m
+[6.202s] [  6%] [34m[1mCreating directories for 'spdlog'[0m
+[6.496s] [ 12%] [34m[1mPerforming download step (git clone) for 'spdlog'[0m
+[6.584s] Cloning into 'spdlog'...
+[15.919s] Note: switching to 'v1.9.2'.
+[15.919s] 
+[15.919s] You are in 'detached HEAD' state. You can look around, make experimental
+[15.919s] changes and commit them, and you can discard any commits you make in this
+[15.920s] state without impacting any branches by switching back to a branch.
+[15.920s] 
+[15.920s] If you want to create a new branch to retain commits you create, you may
+[15.920s] do so (now or later) by using -c with the switch command. Example:
+[15.920s] 
+[15.920s]   git switch -c <new-branch-name>
+[15.920s] 
+[15.920s] Or undo this operation with:
+[15.920s] 
+[15.920s]   git switch -
+[15.920s] 
+[15.920s] Turn off this advice by setting config variable advice.detachedHead to false
+[15.920s] 
+[15.921s] HEAD is now at eb322062 Bump version to 1.9.2
+[16.044s] [ 25%] [34m[1mPerforming update step for 'spdlog'[0m
+[16.044s] [ 25%] [34m[1mNo patch step for 'spdlog'[0m
+[16.106s] [ 31%] [34m[1mPerforming configure step for 'spdlog'[0m
+[16.126s] loading initial cache file /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/tmp/spdlog-cache-.cmake
+[16.258s] -- The CXX compiler identification is GNU 9.4.0
+[16.270s] -- Check for working CXX compiler: /usr/bin/c++
+[16.450s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[16.452s] -- Detecting CXX compiler ABI info
+[16.628s] -- Detecting CXX compiler ABI info - done
+[16.645s] -- Detecting CXX compile features
+[16.646s] -- Detecting CXX compile features - done
+[16.647s] -- Build spdlog: 1.9.2
+[16.651s] -- Looking for C++ include pthread.h
+[16.839s] -- Looking for C++ include pthread.h - found
+[16.840s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[17.031s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[17.031s] -- Looking for pthread_create in pthreads
+[17.185s] -- Looking for pthread_create in pthreads - not found
+[17.187s] -- Looking for pthread_create in pthread
+[17.374s] -- Looking for pthread_create in pthread - found
+[17.376s] -- Found Threads: TRUE  
+[17.377s] -- Build type: Release
+[17.378s] -- Generating example(s)
+[17.380s] -- Generating install
+[17.399s] -- Configuring done
+[17.411s] -- Generating done
+[17.412s] -- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build
+[17.452s] [ 37%] [34m[1mPerforming build step for 'spdlog'[0m
+[17.525s] [35m[1mScanning dependencies of target spdlog[0m
+[17.562s] [ 30%] [32mBuilding CXX object CMakeFiles/spdlog.dir/src/color_sinks.cpp.o[0m
+[17.562s] [ 30%] [32mBuilding CXX object CMakeFiles/spdlog.dir/src/spdlog.cpp.o[0m
+[17.564s] [ 30%] [32mBuilding CXX object CMakeFiles/spdlog.dir/src/stdout_sinks.cpp.o[0m
+[18.623s] [ 40%] [32mBuilding CXX object CMakeFiles/spdlog.dir/src/file_sinks.cpp.o[0m
+[21.732s] [ 50%] [32mBuilding CXX object CMakeFiles/spdlog.dir/src/async.cpp.o[0m
+[21.908s] [ 60%] [32mBuilding CXX object CMakeFiles/spdlog.dir/src/cfg.cpp.o[0m
+[22.766s] [ 70%] [32mBuilding CXX object CMakeFiles/spdlog.dir/src/fmt.cpp.o[0m
+[35.444s] [ 80%] [32m[1mLinking CXX static library libspdlog.a[0m
+[35.544s] [ 80%] Built target spdlog
+[35.568s] [35m[1mScanning dependencies of target example[0m
+[35.601s] [ 90%] [32mBuilding CXX object example/CMakeFiles/example.dir/example.cpp.o[0m
+[43.038s] [100%] [32m[1mLinking CXX executable example[0m
+[43.290s] [100%] Built target example
+[43.351s] [ 43%] [34m[1mPerforming install step for 'spdlog'[0m
+[43.453s] [ 80%] Built target spdlog
+[43.509s] [100%] Built target example
+[43.548s] [36mInstall the project...[0m
+[43.573s] -- Install configuration: "Release"
+[43.573s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include
+[43.574s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog
+[43.576s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/cfg
+[43.576s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/cfg/argv.h
+[43.576s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/cfg/helpers.h
+[43.577s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/cfg/env.h
+[43.577s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/cfg/helpers-inl.h
+[43.577s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/spdlog.h
+[43.577s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fwd.h
+[43.578s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/version.h
+[43.578s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/spdlog-inl.h
+[43.578s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/logger.h
+[43.578s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/stopwatch.h
+[43.578s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/async_logger.h
+[43.578s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/async_logger-inl.h
+[43.578s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details
+[43.578s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/log_msg.h
+[43.579s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/null_mutex.h
+[43.579s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/registry-inl.h
+[43.579s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/os.h
+[43.579s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/registry.h
+[43.579s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/periodic_worker.h
+[43.579s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/console_globals.h
+[43.579s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/fmt_helper.h
+[43.579s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/synchronous_factory.h
+[43.579s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/tcp_client-windows.h
+[43.579s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/windows_include.h
+[43.579s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/log_msg_buffer.h
+[43.579s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/os-inl.h
+[43.580s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/backtracer-inl.h
+[43.580s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/file_helper.h
+[43.580s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/mpmc_blocking_q.h
+[43.580s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/periodic_worker-inl.h
+[43.580s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/circular_q.h
+[43.580s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/thread_pool-inl.h
+[43.580s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/backtracer.h
+[43.580s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/file_helper-inl.h
+[43.581s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/log_msg_buffer-inl.h
+[43.581s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/log_msg-inl.h
+[43.581s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/thread_pool.h
+[43.581s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/details/tcp_client.h
+[43.581s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/pattern_formatter.h
+[43.581s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/async.h
+[43.582s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/formatter.h
+[43.582s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/logger-inl.h
+[43.582s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/common.h
+[43.582s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks
+[43.582s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/sink-inl.h
+[43.582s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/null_sink.h
+[43.583s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/qt_sinks.h
+[43.583s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/daily_file_sink.h
+[43.583s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/stdout_sinks-inl.h
+[43.583s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/stdout_color_sinks-inl.h
+[43.583s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/wincolor_sink.h
+[43.583s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/syslog_sink.h
+[43.584s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/android_sink.h
+[43.584s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/ringbuffer_sink.h
+[43.584s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/ostream_sink.h
+[43.584s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/dup_filter_sink.h
+[43.584s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/tcp_sink.h
+[43.584s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/ansicolor_sink.h
+[43.584s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/stdout_color_sinks.h
+[43.585s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/wincolor_sink-inl.h
+[43.585s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/mongo_sink.h
+[43.586s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/systemd_sink.h
+[43.586s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/base_sink-inl.h
+[43.586s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/sink.h
+[43.586s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/dist_sink.h
+[43.586s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/stdout_sinks.h
+[43.586s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/rotating_file_sink.h
+[43.587s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/rotating_file_sink-inl.h
+[43.587s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/ansicolor_sink-inl.h
+[43.587s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/basic_file_sink.h
+[43.587s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/win_eventlog_sink.h
+[43.587s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/base_sink.h
+[43.588s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/basic_file_sink-inl.h
+[43.588s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/msvc_sink.h
+[43.588s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/sinks/hourly_file_sink.h
+[43.588s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt
+[43.588s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bin_to_hex.h
+[43.588s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/ostr.h
+[43.588s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/xchar.h
+[43.588s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/fmt.h
+[43.589s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/compile.h
+[43.589s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/chrono.h
+[43.589s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/common-inl.h
+[43.589s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/tweakme.h
+[43.589s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/pattern_formatter-inl.h
+[43.590s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/lib/libspdlog.a
+[43.593s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled/
+[43.593s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//format.h
+[43.594s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//os.h
+[43.594s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//locale.h
+[43.594s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//ranges.h
+[43.594s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//core.h
+[43.595s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//ostream.h
+[43.595s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//printf.h
+[43.595s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//args.h
+[43.595s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//xchar.h
+[43.595s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//format-inl.h
+[43.596s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//color.h
+[43.596s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//compile.h
+[43.596s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/include/spdlog/fmt/bundled//chrono.h
+[43.596s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/lib/pkgconfig/spdlog.pc
+[43.597s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/lib/cmake/spdlog/spdlogConfigTargets.cmake
+[43.597s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/lib/cmake/spdlog/spdlogConfigTargets-release.cmake
+[43.597s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/lib/cmake/spdlog/spdlogConfig.cmake
+[43.598s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/temp_install/spdlog-1.9.2/lib/cmake/spdlog/spdlogConfigVersion.cmake
+[43.637s] [ 50%] [34m[1mCompleted 'spdlog'[0m
+[43.716s] [ 50%] Built target spdlog
+[43.737s] [35m[1mScanning dependencies of target uagent[0m
+[43.761s] [ 56%] [34m[1mCreating directories for 'uagent'[0m
+[43.934s] [ 62%] [34m[1mNo download step for 'uagent'[0m
+[43.996s] [ 75%] [34m[1mNo update step for 'uagent'[0m
+[43.996s] [ 75%] [34m[1mNo patch step for 'uagent'[0m
+[44.048s] [ 81%] [34m[1mPerforming configure step for 'uagent'[0m
+[44.072s] loading initial cache file /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/uagent-prefix/tmp/uagent-cache-.cmake
+[44.083s] -- Setting build type to 'Release' as none was specified.
+[44.138s] -- Found tinyxml2: /usr/lib/aarch64-linux-gnu/libtinyxml2.so  
+[44.311s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[44.315s] -- Looking for pthread.h
+[44.485s] -- Looking for pthread.h - found
+[44.485s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[44.648s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[44.648s] -- Looking for pthread_create in pthreads
+[44.790s] -- Looking for pthread_create in pthreads - not found
+[44.790s] -- Looking for pthread_create in pthread
+[44.945s] -- Looking for pthread_create in pthread - found
+[44.947s] -- Found Threads: TRUE  
+[44.954s] -- Configuring done
+[44.979s] -- Generating done
+[44.980s] -- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build
+[45.025s] [ 87%] [34m[1mPerforming build step for 'uagent'[0m
+[45.098s] [35m[1mScanning dependencies of target microxrcedds_agent[0m
+[45.300s] [  4%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/Agent.cpp.o[0m
+[45.303s] [  4%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/Root.cpp.o[0m
+[45.303s] [  7%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/AgentInstance.cpp.o[0m
+[45.309s] [  9%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/processor/Processor.cpp.o[0m
+[57.056s] [ 11%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/client/ProxyClient.cpp.o[0m
+[76.670s] [ 14%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/publisher/Publisher.cpp.o[0m
+[78.596s] [ 16%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/subscriber/Subscriber.cpp.o[0m
+[80.558s] [ 19%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/datawriter/DataWriter.cpp.o[0m
+[85.952s] [ 21%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/datareader/DataReader.cpp.o[0m
+[86.973s] [ 23%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/requester/Requester.cpp.o[0m
+[88.023s] [ 26%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/topic/Topic.cpp.o[0m
+[89.059s] [ 28%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/participant/Participant.cpp.o[0m
+[91.348s] [ 30%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/replier/Replier.cpp.o[0m
+[92.551s] [ 33%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/object/XRCEObject.cpp.o[0m
+[94.090s] [ 35%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/types/XRCETypes.cpp.o[0m
+[95.332s] [ 38%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/types/MessageHeader.cpp.o[0m
+[103.713s] [ 40%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/message/OutputMessage.cpp.o[0m
+[107.737s] [ 42%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/utils/ArgumentParser.cpp.o[0m
+[108.411s] [ 45%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/message/InputMessage.cpp.o[0m
+[109.433s] [ 47%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/Server.cpp.o[0m
+[110.468s] [ 50%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/types/SubMessageHeader.cpp.o[0m
+[111.056s] [ 52%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/stream_framing/StreamFramingProtocol.cpp.o[0m
+[111.902s] [ 54%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/custom/CustomAgent.cpp.o[0m
+[117.220s] [ 57%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/udp/UDPv6AgentLinux.cpp.o[0m
+[118.258s] [ 59%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/udp/UDPv4AgentLinux.cpp.o[0m
+[120.926s] [ 61%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/tcp/TCPv4AgentLinux.cpp.o[0m
+[127.005s] [ 64%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/tcp/TCPv6AgentLinux.cpp.o[0m
+[127.714s] [ 66%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/serial/SerialAgentLinux.cpp.o[0m
+[129.073s] [ 69%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/serial/TermiosAgentLinux.cpp.o[0m
+[138.922s] [ 71%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/serial/PseudoTerminalAgentLinux.cpp.o[0m
+[143.947s] [ 73%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/can/CanAgentLinux.cpp.o[0m
+[149.367s] [ 76%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/discovery/DiscoveryServerLinux.cpp.o[0m
+[154.632s] [ 78%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/discovery/DiscoveryServer.cpp.o[0m
+[155.872s] [ 80%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/types/TopicPubSubType.cpp.o[0m
+[158.593s] [ 83%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/xmlobjects/xmlobjects.cpp.o[0m
+[162.187s] [ 85%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/serial/MultiTermiosAgentLinux.cpp.o[0m
+[162.194s] [ 88%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/middleware/fast/FastEntities.cpp.o[0m
+[163.225s] [ 90%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/middleware/fast/FastMiddleware.cpp.o[0m
+[164.259s] [ 92%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/transport/serial/MultiSerialAgentLinux.cpp.o[0m
+[171.982s] [ 95%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/middleware/fastdds/FastDDSEntities.cpp.o[0m
+[175.585s] [ 97%] [32mBuilding CXX object CMakeFiles/microxrcedds_agent.dir/src/cpp/middleware/fastdds/FastDDSMiddleware.cpp.o[0m
+[190.778s] [100%] [32m[1mLinking CXX shared library libmicroxrcedds_agent.so[0m
+[191.481s] [100%] Built target microxrcedds_agent
+[191.543s] [34m[1mNo install step for 'uagent'[0m
+[191.596s] [34m[1mCompleted 'uagent'[0m
+[191.675s] Built target uagent
+[191.735s] [ 43%] [34m[1mPerforming install step for 'xrceagent'[0m
+[191.885s] [100%] Built target microxrcedds_agent
+[191.929s] [36mInstall the project...[0m
+[191.951s] -- Install configuration: "Release"
+[191.952s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/libmicroxrcedds_agent.so.2.4.1
+[191.958s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/libmicroxrcedds_agent.so.2.4
+[191.958s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/libmicroxrcedds_agent.so.2.4.1" to ""
+[191.959s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/libmicroxrcedds_agent.so
+[191.959s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent
+[191.959s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/replier
+[191.959s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/replier/Replier.hpp
+[191.959s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/Root.hpp
+[191.959s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/visibility.hpp
+[191.960s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/topic
+[191.960s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/topic/Topic.hpp
+[191.960s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/AgentInstance.hpp
+[191.960s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/message
+[191.960s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/message/InputMessage.hpp
+[191.960s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/message/Packet.hpp
+[191.960s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/message/OutputMessage.hpp
+[191.961s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/client
+[191.961s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/client/session
+[191.961s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/client/session/Session.hpp
+[191.961s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/client/session/stream
+[191.961s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/client/session/stream/OutputStream.hpp
+[191.961s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/client/session/stream/InputStream.hpp
+[191.961s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/client/session/SessionInfo.hpp
+[191.962s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/client/ProxyClient.hpp
+[191.962s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/logger
+[191.962s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/logger/Logger.hpp
+[191.962s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/p2p
+[191.962s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/p2p/InternalClient.hpp
+[191.962s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/p2p/InternalClientManager.hpp
+[191.962s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/datareader
+[191.963s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/datareader/DataReader.hpp
+[191.963s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/datawriter
+[191.963s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/datawriter/DataWriter.hpp
+[191.963s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/requester
+[191.963s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/requester/Requester.hpp
+[191.964s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/Agent.hpp
+[191.964s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/reader
+[191.964s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/reader/Reader.hpp
+[191.964s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/participant
+[191.965s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/participant/Participant.hpp
+[191.965s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport
+[191.965s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/discovery
+[191.965s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/discovery/DiscoveryServerWindows.hpp
+[191.965s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/discovery/DiscoveryServerLinux.hpp
+[191.966s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/discovery/DiscoveryServer.hpp
+[191.966s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/custom
+[191.966s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/custom/CustomAgent.hpp
+[191.966s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/TransportRc.hpp
+[191.966s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/SessionManager.hpp
+[191.966s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/p2p
+[191.966s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/p2p/AgentDiscovererLinux.hpp
+[191.967s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/p2p/AgentDiscoverer.hpp
+[191.967s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/udp
+[191.967s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/udp/UDPv6AgentLinux.hpp
+[191.967s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/udp/UDPv4AgentWindows.hpp
+[191.968s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/udp/UDPv6AgentWindows.hpp
+[191.968s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/udp/UDPv4AgentLinux.hpp
+[191.969s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/serial
+[191.969s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/serial/MultiSerialAgentLinux.hpp
+[191.969s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/serial/baud_rate_table_linux.h
+[191.969s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/serial/SerialAgentLinux.hpp
+[191.970s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/serial/PseudoTerminalAgentLinux.hpp
+[191.970s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/serial/TermiosAgentLinux.hpp
+[191.970s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/serial/MultiTermiosAgentLinux.hpp
+[191.970s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/Server.hpp
+[191.970s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/util
+[191.970s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/util/InterfaceLinux.hpp
+[191.970s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/util/InterfaceWindows.hpp
+[191.970s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/can
+[191.970s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/can/CanAgentLinux.hpp
+[191.971s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/endpoint
+[191.971s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/endpoint/IPv4EndPoint.hpp
+[191.971s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/endpoint/IPv6EndPoint.hpp
+[191.971s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/endpoint/SerialEndPoint.hpp
+[191.971s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/endpoint/CustomEndPoint.hpp
+[191.971s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/endpoint/MultiSerialEndPoint.hpp
+[191.971s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/endpoint/CanEndPoint.hpp
+[191.972s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/stream_framing
+[191.972s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/stream_framing/StreamFramingProtocol.hpp
+[191.972s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/tcp
+[191.972s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/tcp/TCPv4AgentWindows.hpp
+[191.972s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/tcp/TCPv4AgentLinux.hpp
+[191.972s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/tcp/TCPServerBase.hpp
+[191.972s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/tcp/TCPConnection.hpp
+[191.973s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/tcp/TCPv6AgentLinux.hpp
+[191.973s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/transport/tcp/TCPv6AgentWindows.hpp
+[191.973s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware
+[191.973s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware/fast
+[191.973s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware/fast/FastEntities.hpp
+[191.973s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware/fast/FastMiddleware.hpp
+[191.973s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware/Middleware.hpp
+[191.974s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware/fastdds
+[191.974s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware/fastdds/FastDDSMiddleware.hpp
+[191.974s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware/fastdds/FastDDSEntities.hpp
+[191.974s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware/ced
+[191.974s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware/ced/CedMiddleware.hpp
+[191.974s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware/ced/CedEntities.hpp
+[191.975s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware/utils
+[191.975s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/middleware/utils/Callbacks.hpp
+[191.975s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/scheduler
+[191.975s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/scheduler/Scheduler.hpp
+[191.975s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/scheduler/PacketScheduler.hpp
+[191.975s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/subscriber
+[191.975s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/subscriber/Subscriber.hpp
+[191.976s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/publisher
+[191.976s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/publisher/Publisher.hpp
+[191.976s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/processor
+[191.976s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/processor/Processor.hpp
+[191.976s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/utils
+[191.976s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/utils/TokenBucket.hpp
+[191.976s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/utils/ArgumentParser.hpp
+[191.977s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/utils/Color.hpp
+[191.977s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/utils/Functions.hpp
+[191.977s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/utils/Time.hpp
+[191.977s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/utils/SeqNum.hpp
+[191.977s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/utils/SharedMutex.hpp
+[191.977s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/utils/SharedMutexPriority.hpp
+[191.977s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/utils/Conversion.hpp
+[191.978s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/object
+[191.978s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/object/XRCEObject.hpp
+[191.978s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/types
+[191.978s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/types/MessageHeader.hpp
+[191.978s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/types/XRCETypes.hpp
+[191.979s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/types/Optional.hpp
+[191.979s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/types/SubMessageHeader.hpp
+[191.979s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/types/TopicPubSubType.hpp
+[191.980s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/microxrcedds_agent/cmake/microxrcedds_agentTargets.cmake
+[191.980s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/microxrcedds_agent/cmake/microxrcedds_agentTargets-release.cmake
+[191.980s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/uxr/agent/config.hpp
+[191.981s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/microxrcedds_agent/LICENSE
+[191.981s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/microxrcedds_agent/cmake/microxrcedds_agentConfig.cmake
+[191.981s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/microxrcedds_agent/cmake/microxrcedds_agentConfigVersion.cmake
+[191.981s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent
+[191.981s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib
+[191.981s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/libspdlog.a
+[191.984s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/cmake
+[191.984s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/cmake/spdlog
+[191.985s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/cmake/spdlog/spdlogConfig.cmake
+[191.985s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/cmake/spdlog/spdlogConfigVersion.cmake
+[191.985s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/cmake/spdlog/spdlogConfigTargets-release.cmake
+[191.985s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/cmake/spdlog/spdlogConfigTargets.cmake
+[191.985s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/pkgconfig
+[191.985s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/pkgconfig/spdlog.pc
+[191.985s] -- Up-to-date: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include
+[191.986s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog
+[191.986s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/cfg
+[191.986s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/cfg/argv.h
+[191.986s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/cfg/helpers.h
+[191.986s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/cfg/env.h
+[191.986s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/cfg/helpers-inl.h
+[191.986s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/spdlog.h
+[191.986s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fwd.h
+[191.987s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/version.h
+[191.987s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/spdlog-inl.h
+[191.987s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/logger.h
+[191.987s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/stopwatch.h
+[191.987s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/async_logger.h
+[191.987s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/async_logger-inl.h
+[191.987s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details
+[191.988s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/log_msg.h
+[191.988s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/null_mutex.h
+[191.988s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/registry-inl.h
+[191.988s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/os.h
+[191.988s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/registry.h
+[191.988s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/periodic_worker.h
+[191.988s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/console_globals.h
+[191.989s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/fmt_helper.h
+[191.989s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/synchronous_factory.h
+[191.989s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/tcp_client-windows.h
+[191.989s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/windows_include.h
+[191.989s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/log_msg_buffer.h
+[191.989s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/os-inl.h
+[191.989s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/backtracer-inl.h
+[191.990s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/file_helper.h
+[191.990s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/mpmc_blocking_q.h
+[191.990s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/periodic_worker-inl.h
+[191.990s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/circular_q.h
+[191.990s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/thread_pool-inl.h
+[191.990s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/backtracer.h
+[191.990s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/file_helper-inl.h
+[191.991s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/log_msg_buffer-inl.h
+[191.991s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/log_msg-inl.h
+[191.991s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/thread_pool.h
+[191.991s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/details/tcp_client.h
+[191.991s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/pattern_formatter.h
+[191.991s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/async.h
+[191.991s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/formatter.h
+[191.992s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/logger-inl.h
+[191.992s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/common.h
+[191.992s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks
+[191.992s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/sink-inl.h
+[191.992s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/null_sink.h
+[191.992s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/qt_sinks.h
+[191.992s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/daily_file_sink.h
+[191.993s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/stdout_sinks-inl.h
+[191.993s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/stdout_color_sinks-inl.h
+[191.993s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/wincolor_sink.h
+[191.993s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/syslog_sink.h
+[191.993s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/android_sink.h
+[191.993s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/ringbuffer_sink.h
+[191.993s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/ostream_sink.h
+[191.994s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/dup_filter_sink.h
+[191.994s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/tcp_sink.h
+[191.994s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/ansicolor_sink.h
+[191.994s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/stdout_color_sinks.h
+[191.994s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/wincolor_sink-inl.h
+[191.994s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/mongo_sink.h
+[191.994s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/systemd_sink.h
+[191.995s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/base_sink-inl.h
+[191.995s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/sink.h
+[191.995s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/dist_sink.h
+[191.995s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/stdout_sinks.h
+[191.995s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/rotating_file_sink.h
+[191.995s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/rotating_file_sink-inl.h
+[191.995s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/ansicolor_sink-inl.h
+[191.996s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/basic_file_sink.h
+[191.996s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/win_eventlog_sink.h
+[191.996s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/base_sink.h
+[191.996s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/basic_file_sink-inl.h
+[191.996s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/msvc_sink.h
+[191.996s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/sinks/hourly_file_sink.h
+[191.996s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt
+[191.997s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bin_to_hex.h
+[191.997s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/ostr.h
+[191.997s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled
+[191.997s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/format.h
+[191.997s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/os.h
+[191.998s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/locale.h
+[191.998s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/ranges.h
+[191.998s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/core.h
+[191.998s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/ostream.h
+[191.998s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/printf.h
+[191.998s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/args.h
+[191.999s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/xchar.h
+[191.999s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/format-inl.h
+[191.999s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/color.h
+[191.999s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/compile.h
+[191.999s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/bundled/chrono.h
+[192.000s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/xchar.h
+[192.000s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/fmt.h
+[192.000s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/compile.h
+[192.000s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/fmt/chrono.h
+[192.000s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/common-inl.h
+[192.000s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/tweakme.h
+[192.001s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/include/spdlog/pattern_formatter-inl.h
+[192.049s] [ 50%] [34m[1mCompleted 'xrceagent'[0m
+[192.121s] [ 50%] Built target xrceagent
+[192.150s] [35m[1mScanning dependencies of target micro_ros_agent[0m
+[192.176s] [ 56%] [34m[1mCreating directories for 'micro_ros_agent'[0m
+[192.360s] [ 62%] [34m[1mNo download step for 'micro_ros_agent'[0m
+[192.416s] [ 75%] [34m[1mNo patch step for 'micro_ros_agent'[0m
+[192.416s] [ 75%] [34m[1mNo update step for 'micro_ros_agent'[0m
+[192.478s] [ 81%] [34m[1mPerforming configure step for 'micro_ros_agent'[0m
+[192.498s] loading initial cache file /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent/micro_ros_agent-prefix/tmp/micro_ros_agent-cache-.cmake
+[192.507s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[192.561s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[192.561s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[193.149s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[193.180s] -- Looking for C++ include pthread.h
+[193.369s] -- Looking for C++ include pthread.h - found
+[193.369s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[193.561s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[193.561s] -- Looking for pthread_create in pthreads
+[193.713s] -- Looking for pthread_create in pthreads - not found
+[193.713s] -- Looking for pthread_create in pthread
+[193.896s] -- Looking for pthread_create in pthread - found
+[193.898s] -- Found Threads: TRUE  
+[193.904s] -- Found rosidl_cmake: 1.3.1 (/opt/ros/foxy/share/rosidl_cmake/cmake)
+[193.908s] -- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[193.963s] -- Found fastrtps_cmake_module: 1.0.4 (/opt/ros/foxy/share/fastrtps_cmake_module/cmake)
+[193.968s] -- Found rmw_dds_common: 1.0.3 (/opt/ros/foxy/share/rmw_dds_common/cmake)
+[194.029s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[194.154s] -- Found FastRTPS: /opt/ros/foxy/include  
+[194.296s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[194.353s] -- Found rmw_fastrtps_shared_cpp: 1.3.2 (/opt/ros/foxy/share/rmw_fastrtps_shared_cpp/cmake)
+[194.463s] -- Found ament_lint_auto: 0.9.8 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+[194.468s] -- Found ament_cmake_gtest: 0.9.12 (/opt/ros/foxy/share/ament_cmake_gtest/cmake)
+[194.469s] -- Found micro_ros_msgs: 1.0.0 (/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/share/micro_ros_msgs/cmake)
+[194.600s] -- Configuring done
+[194.611s] -- Generating done
+[194.613s] -- Build files have been written to: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent
+[194.668s] [ 87%] [34m[1mPerforming build step for 'micro_ros_agent'[0m
+[194.740s] [35m[1mScanning dependencies of target micro_ros_agent[0m
+[194.849s] [ 16%] [32mBuilding CXX object CMakeFiles/micro_ros_agent.dir/src/main.cpp.o[0m
+[194.850s] [ 33%] [32mBuilding CXX object CMakeFiles/micro_ros_agent.dir/src/agent/Agent.cpp.o[0m
+[195.877s] [ 50%] [32mBuilding CXX object CMakeFiles/micro_ros_agent.dir/src/agent/graph_manager/graph_typesupport.cpp.o[0m
+[196.912s] [ 66%] [32mBuilding CXX object CMakeFiles/micro_ros_agent.dir/src/agent/graph_manager/graph_manager.cpp.o[0m
+[200.849s] [ 83%] [32mBuilding CXX object CMakeFiles/micro_ros_agent.dir/src/agent/utils/demangle.cpp.o[0m
+[205.094s] [100%] [32m[1mLinking CXX executable micro_ros_agent[0m
+[205.859s] [100%] Built target micro_ros_agent
+[205.912s] [34m[1mNo install step for 'micro_ros_agent'[0m
+[205.972s] [34m[1mCompleted 'micro_ros_agent'[0m
+[206.051s] Built target micro_ros_agent
+[206.078s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent' returned '0': AMENT_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/micro_ros_setup:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/articubot_one:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy LD_LIBRARY_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent -- -j4 -l4
+[206.157s] Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent': AMENT_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/micro_ros_setup:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/articubot_one:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy LD_LIBRARY_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent
+[206.178s] -- Install configuration: ""
+[206.178s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/ament_index/resource_index/package_run_dependencies/micro_ros_agent
+[206.178s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/ament_index/resource_index/parent_prefix_path/micro_ros_agent
+[206.179s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/environment/ament_prefix_path.sh
+[206.179s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/environment/ament_prefix_path.dsv
+[206.179s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/environment/path.sh
+[206.180s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/environment/path.dsv
+[206.180s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/local_setup.bash
+[206.180s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/local_setup.sh
+[206.181s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/local_setup.zsh
+[206.181s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/local_setup.dsv
+[206.181s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/package.dsv
+[206.182s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/ament_index/resource_index/packages/micro_ros_agent
+[206.182s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/cmake/ament_cmake_export_dependencies-extras.cmake
+[206.182s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/cmake/micro_ros_agentConfig.cmake
+[206.182s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/cmake/micro_ros_agentConfig-version.cmake
+[206.183s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/package.xml
+[206.183s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/micro_ros_agent/micro_ros_agent
+[206.185s] -- Set runtime path of "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/lib/micro_ros_agent/micro_ros_agent" to ""
+[206.185s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/launch
+[206.186s] -- Installing: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_agent/share/micro_ros_agent/launch/micro_ros_agent_launch.py
+[206.193s] Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent' returned '0': AMENT_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/ydlidar_ros2_driver:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/stella_ahrs:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_navigation2:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_description:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/micro_ros_setup:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/articubot_one:/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy LD_LIBRARY_PATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/install/micro_ros_msgs/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/build/micro_ros_agent

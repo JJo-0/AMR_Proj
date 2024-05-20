@@ -1,0 +1,61 @@
+15:05:12 **** Incremental Build of configuration Default for project MicroRos_24 ****
+make all 
+arm-none-eabi-gcc -c -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DUSE_HAL_DRIVER -DSTM32F429xx -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include -Imicro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/freertos.d" -Wa,-a,-ad,-alms=build/freertos.lst Core/Src/freertos.c -o build/freertos.o
+Core/Src/freertos.c: In function 'StartDefaultTask':
+Core/Src/freertos.c:384:15: warning: unused variable 'ret_test' [-Wunused-variable]
+  384 |     rcl_ret_t ret_test = rcl_publish(&publisher_test, &msg_test, NULL);
+      |               ^~~~~~~~
+Core/Src/freertos.c:276:30: warning: unused variable 'submsg_test2' [-Wunused-variable]
+  276 |   std_msgs__msg__Int32_test3 submsg_test2;
+      |                              ^~~~~~~~~~~~
+Core/Src/freertos.c:275:22: warning: unused variable 'subscriber_test2' [-Wunused-variable]
+  275 |   rcl_subscription_t subscriber_test2;
+      |                      ^~~~~~~~~~~~~~~~
+Core/Src/freertos.c:273:30: warning: unused variable 'submsg_test1' [-Wunused-variable]
+  273 |   std_msgs__msg__Int32_test2 submsg_test1;
+      |                              ^~~~~~~~~~~~
+Core/Src/freertos.c:272:22: warning: unused variable 'subscriber_test1' [-Wunused-variable]
+  272 |   rcl_subscription_t subscriber_test1;
+      |                      ^~~~~~~~~~~~~~~~
+Core/Src/freertos.c:267:24: warning: variable 'msg' set but not used [-Wunused-but-set-variable]
+  267 |   std_msgs__msg__Int32 msg;
+      |                        ^~~
+Core/Src/freertos.c: In function 'messageCallback':
+Core/Src/freertos.c:512:36: warning: format '%s' expects argument of type 'char *', but argument 2 has type 'rosidl_runtime_c__String' [-Wformat=]
+  512 |                 printf("Received: %s\n", msg->dir_1);
+      |                                   ~^     ~~~~~~~~~~
+      |                                    |        |
+      |                                    char *   rosidl_runtime_c__String
+Core/Src/freertos.c: In function 'messageCallback_test1':
+Core/Src/freertos.c:517:36: warning: format '%d' expects argument of type 'int', but argument 2 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  517 |                 printf("Received: %d\n", msg->test_2);
+      |                                   ~^     ~~~~~~~~~~~
+      |                                    |        |
+      |                                    int      int32_t {aka long int}
+      |                                   %ld
+Core/Src/freertos.c: In function 'messageCallback_test2':
+Core/Src/freertos.c:522:36: warning: format '%d' expects argument of type 'int', but argument 2 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  522 |                 printf("Received: %d\n", msg->test_3);
+      |                                   ~^     ~~~~~~~~~~~
+      |                                    |        |
+      |                                    int      int32_t {aka long int}
+      |                                   %ld
+Core/Src/freertos.c: In function 'CAL_AngularSpeed':
+Core/Src/freertos.c:736:24: warning: unused variable 'wheel_rps' [-Wunused-variable]
+  736 |                 double wheel_rps = 0;
+      |                        ^~~~~~~~~
+Core/Src/freertos.c:735:24: warning: unused variable 'mps' [-Wunused-variable]
+  735 |                 double mps = 0;
+      |                        ^~~
+Core/Src/freertos.c:734:24: warning: unused variable 'half_ang' [-Wunused-variable]
+  734 |                 double half_ang = 0;
+      |                        ^~~~~~~~
+arm-none-eabi-gcc build/main.o build/gpio.o build/freertos.o build/dma.o build/usart.o build/tim.o build/syscalls.o build/stm32f4xx_it.o build/stm32f4xx_hal_msp.o build/stm32f4xx_hal_timebase_tim.o build/stm32f4xx_hal_rcc.o build/stm32f4xx_hal_rcc_ex.o build/stm32f4xx_hal_flash.o build/stm32f4xx_hal_flash_ex.o build/stm32f4xx_hal_flash_ramfunc.o build/stm32f4xx_hal_gpio.o build/stm32f4xx_hal_dma_ex.o build/stm32f4xx_hal_dma.o build/stm32f4xx_hal_pwr.o build/stm32f4xx_hal_pwr_ex.o build/stm32f4xx_hal_cortex.o build/stm32f4xx_hal.o build/stm32f4xx_hal_exti.o build/stm32f4xx_hal_tim.o build/stm32f4xx_hal_tim_ex.o build/stm32f4xx_hal_uart.o build/system_stm32f4xx.o build/croutine.o build/event_groups.o build/list.o build/queue.o build/stream_buffer.o build/tasks.o build/timers.o build/cmsis_os2.o build/heap_4.o build/port.o build/custom_memory_manager.o build/microros_allocators.o build/microros_time.o build/dma_transport.o build/startup_stm32f429xx.o  -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -specs=nano.specs -TSTM32F429ZITx_FLASH.ld  -lc -lm -lnosys  -Wl,-Map=build/MicroRos_5.map,--cref -Wl,--gc-sections micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/libmicroros.a -o build/MicroRos_5.elf
+arm-none-eabi-size build/MicroRos_5.elf
+   text	   data	    bss	    dec	    hex	filename
+  83324	    340	  70384	 154048	  259c0	build/MicroRos_5.elf
+arm-none-eabi-objcopy -O ihex build/MicroRos_5.elf build/MicroRos_5.hex
+arm-none-eabi-objcopy -O binary -S build/MicroRos_5.elf build/MicroRos_5.bin	
+
+15:05:13 Build Finished. 0 errors, 12 warnings. (took 1s.832ms)
+
