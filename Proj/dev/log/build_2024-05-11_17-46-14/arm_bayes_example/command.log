@@ -1,2 +1,0 @@
-Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/arm_bayes_example': /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Examples/ARM/arm_bayes_example -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/arm_bayes_example
-Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/arm_bayes_example' returned '1': /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/MicroRos_24/Drivers/CMSIS/DSP/Examples/ARM/arm_bayes_example -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/arm_bayes_example

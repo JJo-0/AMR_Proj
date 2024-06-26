@@ -1,4 +1,0 @@
-Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one -- -j4 -l4
-Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one -- -j4 -l4
-Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one
-Invoked command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR-Proj/AMR_Proj/Proj/dev/build/articubot_one

@@ -1,1 +1,0 @@
-Invoking command in '/desktop/AMR-Proj/AMR_Proj/Proj/dev/build/micro_ros_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake /desktop/AMR-Proj/AMR_Proj/Proj/dev/src/agent_ws/src/uros/micro_ros_msgs -DCMAKE_INSTALL_PREFIX=/desktop/AMR-Proj/AMR_Proj/Proj/dev/install/micro_ros_msgs
