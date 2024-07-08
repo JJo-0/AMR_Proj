@@ -206,113 +206,32 @@ uninstall/fast:
 	$(MAKE) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
 .PHONY : uninstall/fast
 
-mw/mw_ahrs.o: mw/mw_ahrs.cpp.o
+src/MwAHRS.o: src/MwAHRS.cpp.o
 
-.PHONY : mw/mw_ahrs.o
-
-# target to build an object file
-mw/mw_ahrs.cpp.o:
-	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.o
-.PHONY : mw/mw_ahrs.cpp.o
-
-mw/mw_ahrs.i: mw/mw_ahrs.cpp.i
-
-.PHONY : mw/mw_ahrs.i
-
-# target to preprocess a source file
-mw/mw_ahrs.cpp.i:
-	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.i
-.PHONY : mw/mw_ahrs.cpp.i
-
-mw/mw_ahrs.s: mw/mw_ahrs.cpp.s
-
-.PHONY : mw/mw_ahrs.s
-
-# target to generate assembly for a file
-mw/mw_ahrs.cpp.s:
-	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.s
-.PHONY : mw/mw_ahrs.cpp.s
-
-serial/list_ports_linux.o: serial/list_ports_linux.cc.o
-
-.PHONY : serial/list_ports_linux.o
+.PHONY : src/MwAHRS.o
 
 # target to build an object file
-serial/list_ports_linux.cc.o:
-	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.o
-.PHONY : serial/list_ports_linux.cc.o
+src/MwAHRS.cpp.o:
+	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.o
+.PHONY : src/MwAHRS.cpp.o
 
-serial/list_ports_linux.i: serial/list_ports_linux.cc.i
+src/MwAHRS.i: src/MwAHRS.cpp.i
 
-.PHONY : serial/list_ports_linux.i
-
-# target to preprocess a source file
-serial/list_ports_linux.cc.i:
-	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.i
-.PHONY : serial/list_ports_linux.cc.i
-
-serial/list_ports_linux.s: serial/list_ports_linux.cc.s
-
-.PHONY : serial/list_ports_linux.s
-
-# target to generate assembly for a file
-serial/list_ports_linux.cc.s:
-	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.s
-.PHONY : serial/list_ports_linux.cc.s
-
-serial/serial.o: serial/serial.cc.o
-
-.PHONY : serial/serial.o
-
-# target to build an object file
-serial/serial.cc.o:
-	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.o
-.PHONY : serial/serial.cc.o
-
-serial/serial.i: serial/serial.cc.i
-
-.PHONY : serial/serial.i
+.PHONY : src/MwAHRS.i
 
 # target to preprocess a source file
-serial/serial.cc.i:
-	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.i
-.PHONY : serial/serial.cc.i
+src/MwAHRS.cpp.i:
+	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.i
+.PHONY : src/MwAHRS.cpp.i
 
-serial/serial.s: serial/serial.cc.s
+src/MwAHRS.s: src/MwAHRS.cpp.s
 
-.PHONY : serial/serial.s
-
-# target to generate assembly for a file
-serial/serial.cc.s:
-	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.s
-.PHONY : serial/serial.cc.s
-
-serial/unix.o: serial/unix.cc.o
-
-.PHONY : serial/unix.o
-
-# target to build an object file
-serial/unix.cc.o:
-	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.o
-.PHONY : serial/unix.cc.o
-
-serial/unix.i: serial/unix.cc.i
-
-.PHONY : serial/unix.i
-
-# target to preprocess a source file
-serial/unix.cc.i:
-	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.i
-.PHONY : serial/unix.cc.i
-
-serial/unix.s: serial/unix.cc.s
-
-.PHONY : serial/unix.s
+.PHONY : src/MwAHRS.s
 
 # target to generate assembly for a file
-serial/unix.cc.s:
-	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.s
-.PHONY : serial/unix.cc.s
+src/MwAHRS.cpp.s:
+	$(MAKE) -f CMakeFiles/stella_ahrs_node.dir/build.make CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.s
+.PHONY : src/MwAHRS.cpp.s
 
 src/listener.o: src/listener.cpp.o
 
@@ -357,18 +276,9 @@ help:
 	@echo "... stella_ahrs_node"
 	@echo "... stella_ahrs_uninstall"
 	@echo "... uninstall"
-	@echo "... mw/mw_ahrs.o"
-	@echo "... mw/mw_ahrs.i"
-	@echo "... mw/mw_ahrs.s"
-	@echo "... serial/list_ports_linux.o"
-	@echo "... serial/list_ports_linux.i"
-	@echo "... serial/list_ports_linux.s"
-	@echo "... serial/serial.o"
-	@echo "... serial/serial.i"
-	@echo "... serial/serial.s"
-	@echo "... serial/unix.o"
-	@echo "... serial/unix.i"
-	@echo "... serial/unix.s"
+	@echo "... src/MwAHRS.o"
+	@echo "... src/MwAHRS.i"
+	@echo "... src/MwAHRS.s"
 	@echo "... src/listener.o"
 	@echo "... src/listener.i"
 	@echo "... src/listener.s"

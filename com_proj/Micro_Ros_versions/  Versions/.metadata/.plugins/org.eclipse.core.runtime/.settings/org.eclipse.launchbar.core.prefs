@@ -1,0 +1,9 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=linux
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MicroRos_24 Default,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MicroRos_25 Default,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MicroRos_26 Default,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MicroRos_27 Default,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MicroRos_28 Default
+eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MicroRos_24\ Default/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MicroRos_24\ Default/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MicroRos_26\ Default/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MicroRos_26\ Default/activeLaunchTarget=null\:---

@@ -1,0 +1,2537 @@
+ARM GAS  /tmp/ccaDI2zk.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"freertos.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.MX_FREERTOS_Init,"ax",%progbits
+  20              		.align	1
+  21              		.global	MX_FREERTOS_Init
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	MX_FREERTOS_Init:
+  27              	.LFB142:
+  28              		.file 1 "Core/Src/freertos.c"
+   1:Core/Src/freertos.c **** /* USER CODE BEGIN Header */
+   2:Core/Src/freertos.c **** /**
+   3:Core/Src/freertos.c ****   *********************  *********************************************************
+   4:Core/Src/freertos.c ****   * File Name          : freertos.c
+   5:Core/Src/freertos.c ****   * Description        : Code for freertos applications
+   6:Core/Src/freertos.c ****   ******************************************************************************
+   7:Core/Src/freertos.c ****   * @attention
+   8:Core/Src/freertos.c ****   *
+   9:Core/Src/freertos.c ****   * Copyright (c) 2024 STMicroelectronics.
+  10:Core/Src/freertos.c ****   * All rights reserved.
+  11:Core/Src/freertos.c ****   *
+  12:Core/Src/freertos.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  13:Core/Src/freertos.c ****   * in the root directory of this software component.
+  14:Core/Src/freertos.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Core/Src/freertos.c ****   *
+  16:Core/Src/freertos.c ****   ******************************************************************************
+  17:Core/Src/freertos.c ****   */
+  18:Core/Src/freertos.c **** /* USER CODE END Header */
+  19:Core/Src/freertos.c **** 
+  20:Core/Src/freertos.c **** /* Includes ------------------------------------------------------------------*/
+  21:Core/Src/freertos.c **** #include "FreeRTOS.h"
+  22:Core/Src/freertos.c **** #include "task.h"
+  23:Core/Src/freertos.c **** #include "main.h"
+  24:Core/Src/freertos.c **** #include "cmsis_os.h"
+  25:Core/Src/freertos.c **** 
+  26:Core/Src/freertos.c **** /* Private includes ----------------------------------------------------------*/
+  27:Core/Src/freertos.c **** /* USER CODE BEGIN Includes */
+  28:Core/Src/freertos.c **** #include <stdbool.h>
+  29:Core/Src/freertos.c **** #include <rcl/rcl.h>
+  30:Core/Src/freertos.c **** #include <rcl/error_handling.h>
+ARM GAS  /tmp/ccaDI2zk.s 			page 2
+
+
+  31:Core/Src/freertos.c **** #include <rclc/rclc.h>
+  32:Core/Src/freertos.c **** #include <rclc/executor.h>
+  33:Core/Src/freertos.c **** #include <uxr/client/transport.h>
+  34:Core/Src/freertos.c **** #include <rmw_microxrcedds_c/config.h>
+  35:Core/Src/freertos.c **** #include <rmw_microros/rmw_microros.h>
+  36:Core/Src/freertos.c **** 
+  37:Core/Src/freertos.c **** #include <std_msgs/msg/int32.h>
+  38:Core/Src/freertos.c **** #include <std_msgs/msg/u_int16.h>
+  39:Core/Src/freertos.c **** #include <std_msgs/msg/string.h>
+  40:Core/Src/freertos.c **** #include <geometry_msgs/msg/twist.h>
+  41:Core/Src/freertos.c **** #include <geometry_msgs/msg/detail/twist__struct.h>
+  42:Core/Src/freertos.c **** #include <nav_msgs/msg/odometry.h>
+  43:Core/Src/freertos.c **** #include <std_msgs/msg/float32.h>
+  44:Core/Src/freertos.c **** #include <std_msgs/msg/float64.h>
+  45:Core/Src/freertos.c **** 
+  46:Core/Src/freertos.c **** #include "usart.h"
+  47:Core/Src/freertos.c **** #include "tim.h"
+  48:Core/Src/freertos.c **** 
+  49:Core/Src/freertos.c **** #include <math.h>
+  50:Core/Src/freertos.c **** /* USER CODE END Includes */
+  51:Core/Src/freertos.c **** 
+  52:Core/Src/freertos.c **** /* Private typedef -----------------------------------------------------------*/
+  53:Core/Src/freertos.c **** typedef StaticTask_t osStaticThreadDef_t;
+  54:Core/Src/freertos.c **** /* USER CODE BEGIN PTD */
+  55:Core/Src/freertos.c **** 
+  56:Core/Src/freertos.c **** /* USER CODE END PTD */
+  57:Core/Src/freertos.c **** 
+  58:Core/Src/freertos.c **** /* Private define ------------------------------------------------------------*/
+  59:Core/Src/freertos.c **** /* USER CODE BEGIN PD */
+  60:Core/Src/freertos.c **** 
+  61:Core/Src/freertos.c **** /* USER CODE END PD */
+  62:Core/Src/freertos.c **** 
+  63:Core/Src/freertos.c **** /* Private macro -------------------------------------------------------------*/
+  64:Core/Src/freertos.c **** /* USER CODE BEGIN PM */
+  65:Core/Src/freertos.c **** 
+  66:Core/Src/freertos.c **** /* USER CODE END PM */
+  67:Core/Src/freertos.c **** 
+  68:Core/Src/freertos.c **** /* Private variables ---------------------------------------------------------*/
+  69:Core/Src/freertos.c **** /* USER CODE BEGIN Variables */
+  70:Core/Src/freertos.c **** 
+  71:Core/Src/freertos.c **** #define _USE_MATH_DEFINES
+  72:Core/Src/freertos.c **** 
+  73:Core/Src/freertos.c **** char Run_State;
+  74:Core/Src/freertos.c **** char Motor_State;
+  75:Core/Src/freertos.c **** char Run_Dir;
+  76:Core/Src/freertos.c **** 
+  77:Core/Src/freertos.c **** 
+  78:Core/Src/freertos.c **** // 선속도와 각속도의 모든 값을 변수에 저장
+  79:Core/Src/freertos.c **** float linear_velocity_x;
+  80:Core/Src/freertos.c **** float linear_velocity_y;
+  81:Core/Src/freertos.c **** float linear_velocity_z;
+  82:Core/Src/freertos.c **** 
+  83:Core/Src/freertos.c **** float angular_velocity_x;
+  84:Core/Src/freertos.c **** float angular_velocity_y;
+  85:Core/Src/freertos.c **** float angular_velocity_z;
+  86:Core/Src/freertos.c **** 
+  87:Core/Src/freertos.c **** int m1_hall=0, m2_hall=0;
+ARM GAS  /tmp/ccaDI2zk.s 			page 3
+
+
+  88:Core/Src/freertos.c **** 
+  89:Core/Src/freertos.c **** int m1_rev=0, m2_rev=0;
+  90:Core/Src/freertos.c **** int m1_deg=0, m2_deg=0;
+  91:Core/Src/freertos.c **** int m1_deg_10=0, m2_deg_10=0;
+  92:Core/Src/freertos.c **** int m1_deg_10_p=0, m2_deg_10_p=0;
+  93:Core/Src/freertos.c **** int m1_deg_1_10=0, m2_deg_1_10=0;
+  94:Core/Src/freertos.c **** int m1_rpm=0, m2_rpm=0;
+  95:Core/Src/freertos.c **** int m1_rpm_p=0, m2_rpm_p=0;
+  96:Core/Src/freertos.c **** int m1_rpm_p_10=0, m2_rpm_p_10=0;
+  97:Core/Src/freertos.c **** 
+  98:Core/Src/freertos.c **** int hall1 = 0, hall2 = 0;
+  99:Core/Src/freertos.c **** 
+ 100:Core/Src/freertos.c **** typedef struct{
+ 101:Core/Src/freertos.c **** 	double vx, vy, vz;
+ 102:Core/Src/freertos.c **** } Twist_value;
+ 103:Core/Src/freertos.c **** Twist_value Linear;
+ 104:Core/Src/freertos.c **** Twist_value Angular;
+ 105:Core/Src/freertos.c **** 
+ 106:Core/Src/freertos.c **** int m_mode = 0; // 0: stop, 1: straight & turn left, 2: straight & turn right
+ 107:Core/Src/freertos.c **** 
+ 108:Core/Src/freertos.c **** double angle;
+ 109:Core/Src/freertos.c **** 
+ 110:Core/Src/freertos.c **** int timeout = 10000000;
+ 111:Core/Src/freertos.c **** 
+ 112:Core/Src/freertos.c **** /* USER CODE END Variables */
+ 113:Core/Src/freertos.c **** /* Definitions for defaultTask */
+ 114:Core/Src/freertos.c **** osThreadId_t defaultTaskHandle;
+ 115:Core/Src/freertos.c **** uint32_t defaultTaskBuffer[ 3000 ];
+ 116:Core/Src/freertos.c **** osStaticThreadDef_t defaultTaskControlBlock;
+ 117:Core/Src/freertos.c **** const osThreadAttr_t defaultTask_attributes = {
+ 118:Core/Src/freertos.c ****   .name = "defaultTask",
+ 119:Core/Src/freertos.c ****   .cb_mem = &defaultTaskControlBlock,
+ 120:Core/Src/freertos.c ****   .cb_size = sizeof(defaultTaskControlBlock),
+ 121:Core/Src/freertos.c ****   .stack_mem = &defaultTaskBuffer[0],
+ 122:Core/Src/freertos.c ****   .stack_size = sizeof(defaultTaskBuffer),
+ 123:Core/Src/freertos.c ****   .priority = (osPriority_t) osPriorityNormal,
+ 124:Core/Src/freertos.c **** };
+ 125:Core/Src/freertos.c **** 
+ 126:Core/Src/freertos.c **** /* Private function prototypes -----------------------------------------------*/
+ 127:Core/Src/freertos.c **** /* USER CODE BEGIN FunctionPrototypes */
+ 128:Core/Src/freertos.c **** bool cubemx_transport_open(struct uxrCustomTransport * transport);
+ 129:Core/Src/freertos.c **** bool cubemx_transport_close(struct uxrCustomTransport * transport);
+ 130:Core/Src/freertos.c **** size_t cubemx_transport_write(struct uxrCustomTransport* transport, const uint8_t * buf, size_t len
+ 131:Core/Src/freertos.c **** size_t cubemx_transport_read(struct uxrCustomTransport* transport, uint8_t* buf, size_t len, int ti
+ 132:Core/Src/freertos.c **** 
+ 133:Core/Src/freertos.c **** void * microros_allocate(size_t size, void * state);
+ 134:Core/Src/freertos.c **** void microros_deallocate(void * pointer, void * state);
+ 135:Core/Src/freertos.c **** void * microros_reallocate(void * pointer, size_t size, void * state);
+ 136:Core/Src/freertos.c **** void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element, void * state);
+ 137:Core/Src/freertos.c **** 
+ 138:Core/Src/freertos.c **** void messageCallback(const void *msgin);
+ 139:Core/Src/freertos.c **** void messageCallback_test1(const void *msgin);
+ 140:Core/Src/freertos.c **** void messageCallback_test2(const void *msgin);
+ 141:Core/Src/freertos.c **** void twist_subscription_callback(const void * msgin);
+ 142:Core/Src/freertos.c **** 
+ 143:Core/Src/freertos.c **** //my motor test functions
+ 144:Core/Src/freertos.c **** 
+ARM GAS  /tmp/ccaDI2zk.s 			page 4
+
+
+ 145:Core/Src/freertos.c **** void RUN_DIR(char);
+ 146:Core/Src/freertos.c **** 
+ 147:Core/Src/freertos.c **** void RUN_RB(char);
+ 148:Core/Src/freertos.c **** void MOTOR_SS(char);
+ 149:Core/Src/freertos.c **** 
+ 150:Core/Src/freertos.c **** double MOTOR_CAL_LINE_PWM(double,double,double);
+ 151:Core/Src/freertos.c **** 
+ 152:Core/Src/freertos.c **** void PWM_L(double);
+ 153:Core/Src/freertos.c **** void PWM_R(double);
+ 154:Core/Src/freertos.c **** 
+ 155:Core/Src/freertos.c **** double CAL_LinearSpeed(double, double, double);
+ 156:Core/Src/freertos.c **** double CAL_AngularSpeed(double x, double y, double z);
+ 157:Core/Src/freertos.c **** 
+ 158:Core/Src/freertos.c **** double TURN(double ang);
+ 159:Core/Src/freertos.c **** void MOTION_MODE(double lx, double ly, double lz, double ax, double ay, double az);
+ 160:Core/Src/freertos.c **** 
+ 161:Core/Src/freertos.c **** /* USER CODE END FunctionPrototypes */
+ 162:Core/Src/freertos.c **** 
+ 163:Core/Src/freertos.c **** void StartDefaultTask(void *argument);
+ 164:Core/Src/freertos.c **** 
+ 165:Core/Src/freertos.c **** void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
+ 166:Core/Src/freertos.c **** 
+ 167:Core/Src/freertos.c **** /**
+ 168:Core/Src/freertos.c ****   * @brief  FreeRTOS initialization
+ 169:Core/Src/freertos.c ****   * @param  None
+ 170:Core/Src/freertos.c ****   * @retval None
+ 171:Core/Src/freertos.c ****   */
+ 172:Core/Src/freertos.c **** void MX_FREERTOS_Init(void) {
+  29              		.loc 1 172 29 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+ 173:Core/Src/freertos.c ****   /* USER CODE BEGIN Init */
+ 174:Core/Src/freertos.c **** 
+ 175:Core/Src/freertos.c ****   /* USER CODE END Init */
+ 176:Core/Src/freertos.c **** 
+ 177:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_MUTEX */
+ 178:Core/Src/freertos.c ****   /* add mutexes, ... */
+ 179:Core/Src/freertos.c ****   /* USER CODE END RTOS_MUTEX */
+ 180:Core/Src/freertos.c **** 
+ 181:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_SEMAPHORES */
+ 182:Core/Src/freertos.c ****   /* add semaphores, ... */
+ 183:Core/Src/freertos.c ****   /* USER CODE END RTOS_SEMAPHORES */
+ 184:Core/Src/freertos.c **** 
+ 185:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_TIMERS */
+ 186:Core/Src/freertos.c ****   /* start timers, add new ones, ... */
+ 187:Core/Src/freertos.c ****   /* USER CODE END RTOS_TIMERS */
+ 188:Core/Src/freertos.c **** 
+ 189:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_QUEUES */
+ 190:Core/Src/freertos.c ****   /* add queues, ... */
+ 191:Core/Src/freertos.c ****   /* USER CODE END RTOS_QUEUES */
+ 192:Core/Src/freertos.c **** 
+ARM GAS  /tmp/ccaDI2zk.s 			page 5
+
+
+ 193:Core/Src/freertos.c ****   /* Create the thread(s) */
+ 194:Core/Src/freertos.c ****   /* creation of defaultTask */
+ 195:Core/Src/freertos.c ****   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  38              		.loc 1 195 3 view .LVU1
+  39              		.loc 1 195 23 is_stmt 0 view .LVU2
+  40 0002 044A     		ldr	r2, .L3
+  41 0004 0021     		movs	r1, #0
+  42 0006 0448     		ldr	r0, .L3+4
+  43 0008 FFF7FEFF 		bl	osThreadNew
+  44              	.LVL0:
+  45              		.loc 1 195 21 view .LVU3
+  46 000c 034B     		ldr	r3, .L3+8
+  47 000e 1860     		str	r0, [r3]
+ 196:Core/Src/freertos.c **** 
+ 197:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_THREADS */
+ 198:Core/Src/freertos.c ****   /* add threads, ... */
+ 199:Core/Src/freertos.c ****   /* USER CODE END RTOS_THREADS */
+ 200:Core/Src/freertos.c **** 
+ 201:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_EVENTS */
+ 202:Core/Src/freertos.c ****   /* add events, ... */
+ 203:Core/Src/freertos.c ****   /* USER CODE END RTOS_EVENTS */
+ 204:Core/Src/freertos.c **** 
+ 205:Core/Src/freertos.c **** }
+  48              		.loc 1 205 1 view .LVU4
+  49 0010 08BD     		pop	{r3, pc}
+  50              	.L4:
+  51 0012 00BF     		.align	2
+  52              	.L3:
+  53 0014 00000000 		.word	.LANCHOR0
+  54 0018 00000000 		.word	StartDefaultTask
+  55 001c 00000000 		.word	.LANCHOR1
+  56              		.cfi_endproc
+  57              	.LFE142:
+  59              		.section	.text.RUN_INIT,"ax",%progbits
+  60              		.align	1
+  61              		.global	RUN_INIT
+  62              		.syntax unified
+  63              		.thumb
+  64              		.thumb_func
+  66              	RUN_INIT:
+  67              	.LFB145:
+ 206:Core/Src/freertos.c **** 
+ 207:Core/Src/freertos.c **** /* USER CODE BEGIN Header_StartDefaultTask */
+ 208:Core/Src/freertos.c **** /**
+ 209:Core/Src/freertos.c ****   * @brief  Function implementing the defaultTask thread.
+ 210:Core/Src/freertos.c ****   * @param  argument: Not used
+ 211:Core/Src/freertos.c ****   * @retval None
+ 212:Core/Src/freertos.c ****   */
+ 213:Core/Src/freertos.c **** /* USER CODE END Header_StartDefaultTask */
+ 214:Core/Src/freertos.c **** void StartDefaultTask(void *argument)
+ 215:Core/Src/freertos.c **** {
+ 216:Core/Src/freertos.c ****   /* USER CODE BEGIN StartDefaultTask */
+ 217:Core/Src/freertos.c ****   /* USER CODE BEGIN 5 */
+ 218:Core/Src/freertos.c **** 
+ 219:Core/Src/freertos.c ****   // micro-ROS configuration
+ 220:Core/Src/freertos.c **** 
+ 221:Core/Src/freertos.c ****   rmw_uros_set_custom_transport(
+ARM GAS  /tmp/ccaDI2zk.s 			page 6
+
+
+ 222:Core/Src/freertos.c ****     true,
+ 223:Core/Src/freertos.c ****     (void *) &huart3,
+ 224:Core/Src/freertos.c ****     cubemx_transport_open,
+ 225:Core/Src/freertos.c ****     cubemx_transport_close,
+ 226:Core/Src/freertos.c ****     cubemx_transport_write,
+ 227:Core/Src/freertos.c ****     cubemx_transport_read);
+ 228:Core/Src/freertos.c **** 
+ 229:Core/Src/freertos.c ****   rcl_allocator_t freeRTOS_allocator = rcutils_get_zero_initialized_allocator();
+ 230:Core/Src/freertos.c ****   freeRTOS_allocator.allocate = microros_allocate;
+ 231:Core/Src/freertos.c ****   freeRTOS_allocator.deallocate = microros_deallocate;
+ 232:Core/Src/freertos.c ****   freeRTOS_allocator.reallocate = microros_reallocate;
+ 233:Core/Src/freertos.c ****   freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
+ 234:Core/Src/freertos.c **** 
+ 235:Core/Src/freertos.c ****   if (!rcutils_set_default_allocator(&freeRTOS_allocator)) {
+ 236:Core/Src/freertos.c ****       printf("Error on default allocators (line %d)\n", __LINE__); 
+ 237:Core/Src/freertos.c ****   }
+ 238:Core/Src/freertos.c **** 
+ 239:Core/Src/freertos.c ****   // micro-ROS app
+ 240:Core/Src/freertos.c ****   // create publisher
+ 241:Core/Src/freertos.c ****   rcl_publisher_t publisher_1;
+ 242:Core/Src/freertos.c ****   std_msgs__msg__Int32_pub1 pubmsg_1;
+ 243:Core/Src/freertos.c **** 
+ 244:Core/Src/freertos.c ****   rcl_publisher_t publisher_2;
+ 245:Core/Src/freertos.c ****   std_msgs__msg__Int32_pub2 pubmsg_2;
+ 246:Core/Src/freertos.c ****   // create subscriber
+ 247:Core/Src/freertos.c ****   rcl_subscription_t subscriber_2;
+ 248:Core/Src/freertos.c ****   geometry_msgs__msg__Twist submsg_2;
+ 249:Core/Src/freertos.c **** 
+ 250:Core/Src/freertos.c ****   // node
+ 251:Core/Src/freertos.c ****   rclc_support_t support;
+ 252:Core/Src/freertos.c ****   rcl_allocator_t allocator;
+ 253:Core/Src/freertos.c ****   rcl_node_t node;
+ 254:Core/Src/freertos.c **** 
+ 255:Core/Src/freertos.c ****   allocator = rcl_get_default_allocator();
+ 256:Core/Src/freertos.c **** 
+ 257:Core/Src/freertos.c ****   //create init_options
+ 258:Core/Src/freertos.c ****   rclc_support_init(&support, 0, NULL, &allocator);
+ 259:Core/Src/freertos.c **** 
+ 260:Core/Src/freertos.c **** 
+ 261:Core/Src/freertos.c **** 
+ 262:Core/Src/freertos.c ****   // create node
+ 263:Core/Src/freertos.c ****   rclc_node_init_default(&node, "cubemx_node", "", &support);
+ 264:Core/Src/freertos.c **** 
+ 265:Core/Src/freertos.c ****   // create publisher_2
+ 266:Core/Src/freertos.c ****   rclc_publisher_init_default(
+ 267:Core/Src/freertos.c ****     &publisher_1,
+ 268:Core/Src/freertos.c ****     &node,
+ 269:Core/Src/freertos.c ****     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+ 270:Core/Src/freertos.c ****     "r_enc");
+ 271:Core/Src/freertos.c **** 
+ 272:Core/Src/freertos.c ****   	  // r_wheel_vel
+ 273:Core/Src/freertos.c ****   // create publisher_3
+ 274:Core/Src/freertos.c ****   rclc_publisher_init_default(
+ 275:Core/Src/freertos.c ****     &publisher_2,
+ 276:Core/Src/freertos.c ****     &node,
+ 277:Core/Src/freertos.c ****     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+ 278:Core/Src/freertos.c ****     "l_enc");
+ARM GAS  /tmp/ccaDI2zk.s 			page 7
+
+
+ 279:Core/Src/freertos.c **** 
+ 280:Core/Src/freertos.c ****   	  //l_enc
+ 281:Core/Src/freertos.c **** 
+ 282:Core/Src/freertos.c ****   // create subscriber_test1
+ 283:Core/Src/freertos.c ****   rclc_subscription_init_default(
+ 284:Core/Src/freertos.c ****       &subscriber_2,
+ 285:Core/Src/freertos.c ****       &node,
+ 286:Core/Src/freertos.c ****       ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, Twist),
+ 287:Core/Src/freertos.c ****       "diffbot_base_controller/cmd_vel_unstamped");
+ 288:Core/Src/freertos.c **** 
+ 289:Core/Src/freertos.c ****   // add subscriber to executor
+ 290:Core/Src/freertos.c ****   rclc_executor_t executor;
+ 291:Core/Src/freertos.c ****   rclc_executor_init(&executor, &support.context, 1, &allocator);
+ 292:Core/Src/freertos.c **** 
+ 293:Core/Src/freertos.c ****   rclc_executor_add_subscription(&executor, &subscriber_2, &submsg_2, &twist_subscription_callback,
+ 294:Core/Src/freertos.c **** 
+ 295:Core/Src/freertos.c ****   pubmsg_1.hall_1 = 0;
+ 296:Core/Src/freertos.c ****   pubmsg_2.hall_2 = 0;
+ 297:Core/Src/freertos.c **** 
+ 298:Core/Src/freertos.c ****   for(;;)
+ 299:Core/Src/freertos.c ****   {
+ 300:Core/Src/freertos.c ****     // publish message
+ 301:Core/Src/freertos.c **** 	 rcl_ret_t ret_3 = rcl_publish(&publisher_2, &pubmsg_2, NULL);
+ 302:Core/Src/freertos.c **** 	 rcl_ret_t ret_2 = rcl_publish(&publisher_1, &pubmsg_1, NULL);
+ 303:Core/Src/freertos.c ****     if (ret_2 != RCL_RET_OK)
+ 304:Core/Src/freertos.c ****     {
+ 305:Core/Src/freertos.c ****       printf("Error publishing (line %d)\n", __LINE__);
+ 306:Core/Src/freertos.c ****     }
+ 307:Core/Src/freertos.c ****     if (ret_3 != RCL_RET_OK)
+ 308:Core/Src/freertos.c ****     {
+ 309:Core/Src/freertos.c ****       printf("Error publishing (line %d)\n", __LINE__);
+ 310:Core/Src/freertos.c ****     }
+ 311:Core/Src/freertos.c **** 
+ 312:Core/Src/freertos.c ****     // subscribe message
+ 313:Core/Src/freertos.c **** 
+ 314:Core/Src/freertos.c ****     // hall pulse count
+ 315:Core/Src/freertos.c **** 	pubmsg_1.hall_1 = hall1;
+ 316:Core/Src/freertos.c **** 	pubmsg_2.hall_2 = hall2;
+ 317:Core/Src/freertos.c **** 
+ 318:Core/Src/freertos.c ****     // reset the hall sensor data
+ 319:Core/Src/freertos.c **** 	hall1 = 0;
+ 320:Core/Src/freertos.c **** 	hall2 = 0;
+ 321:Core/Src/freertos.c **** 
+ 322:Core/Src/freertos.c **** 	// 좌회전
+ 323:Core/Src/freertos.c **** 	if(m_mode == 1){
+ 324:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 325:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 326:Core/Src/freertos.c **** 	}
+ 327:Core/Src/freertos.c **** 	// 우회전
+ 328:Core/Src/freertos.c **** 	else if(m_mode == 2){
+ 329:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 330:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 331:Core/Src/freertos.c **** 	}
+ 332:Core/Src/freertos.c **** 	else {
+ 333:Core/Src/freertos.c **** 		// robot stop
+ 334:Core/Src/freertos.c **** 		Run_State = 'B';
+ 335:Core/Src/freertos.c **** 	}
+ARM GAS  /tmp/ccaDI2zk.s 			page 8
+
+
+ 336:Core/Src/freertos.c **** 	// Motor activate
+ 337:Core/Src/freertos.c ****     RUN_DIR(Run_Dir);
+ 338:Core/Src/freertos.c ****     RUN_RB(Run_State);
+ 339:Core/Src/freertos.c ****     MOTOR_SS(Motor_State);
+ 340:Core/Src/freertos.c **** 
+ 341:Core/Src/freertos.c ****     rclc_executor_spin_some(&executor, timeout);
+ 342:Core/Src/freertos.c **** 
+ 343:Core/Src/freertos.c ****         osDelay(10);
+ 344:Core/Src/freertos.c ****       }
+ 345:Core/Src/freertos.c ****   /* USER CODE END StartDefaultTask */
+ 346:Core/Src/freertos.c **** }
+ 347:Core/Src/freertos.c **** 
+ 348:Core/Src/freertos.c **** /* Private application code --------------------------------------------------*/
+ 349:Core/Src/freertos.c **** /* USER CODE BEGIN Application */
+ 350:Core/Src/freertos.c **** 
+ 351:Core/Src/freertos.c **** 	// 기본 ?��?��(default task) ?��?��?�� 구독 콜백 ?��?��
+ 352:Core/Src/freertos.c **** 	void twist_subscription_callback(const void * msgin)
+ 353:Core/Src/freertos.c **** 	{
+ 354:Core/Src/freertos.c **** 	    const geometry_msgs__msg__Twist * msg = (const geometry_msgs__msg__Twist *)msgin;
+ 355:Core/Src/freertos.c **** 
+ 356:Core/Src/freertos.c **** 	    HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+ 357:Core/Src/freertos.c **** 
+ 358:Core/Src/freertos.c **** 		Linear.vx = msg->linear.x;
+ 359:Core/Src/freertos.c **** 		Linear.vy = msg->linear.y;
+ 360:Core/Src/freertos.c **** 		Linear.vz = msg->linear.z;
+ 361:Core/Src/freertos.c **** 
+ 362:Core/Src/freertos.c **** 		Angular.vx = msg->angular.x;
+ 363:Core/Src/freertos.c **** 		Angular.vy = msg->angular.y;
+ 364:Core/Src/freertos.c **** 		Angular.vz = msg->angular.z;
+ 365:Core/Src/freertos.c **** 
+ 366:Core/Src/freertos.c **** 		MOTION_MODE(Linear.vx, Linear.vy, Linear.vz, Angular.vx, Angular.vy, Angular.vz);
+ 367:Core/Src/freertos.c **** 	}
+ 368:Core/Src/freertos.c **** 
+ 369:Core/Src/freertos.c **** 	// Motor function
+ 370:Core/Src/freertos.c **** 	void RUN_INIT(void){
+  68              		.loc 1 370 21 is_stmt 1 view -0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 0
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72 0000 10B5     		push	{r4, lr}
+  73              	.LCFI1:
+  74              		.cfi_def_cfa_offset 8
+  75              		.cfi_offset 4, -8
+  76              		.cfi_offset 14, -4
+ 371:Core/Src/freertos.c **** 		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, SET);	// Motor1 RUN/BRK - BRK
+  77              		.loc 1 371 5 view .LVU6
+  78 0002 0C4C     		ldr	r4, .L7
+  79 0004 0122     		movs	r2, #1
+  80 0006 4FF40051 		mov	r1, #8192
+  81 000a 2046     		mov	r0, r4
+  82 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
+  83              	.LVL1:
+ 372:Core/Src/freertos.c **** 		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, SET);	// Motor1 START/STOP - STOP
+  84              		.loc 1 372 5 view .LVU7
+  85 0010 0122     		movs	r2, #1
+  86 0012 4FF48041 		mov	r1, #16384
+  87 0016 2046     		mov	r0, r4
+ARM GAS  /tmp/ccaDI2zk.s 			page 9
+
+
+  88 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  89              	.LVL2:
+ 373:Core/Src/freertos.c **** 	  	  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, SET);	// Motor2 RUN/BRK - BRK
+  90              		.loc 1 373 7 view .LVU8
+  91 001c 0122     		movs	r2, #1
+  92 001e 8021     		movs	r1, #128
+  93 0020 0548     		ldr	r0, .L7+4
+  94 0022 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  95              	.LVL3:
+ 374:Core/Src/freertos.c **** 	  	  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);	// Motor2 START/STOP - STOP
+  96              		.loc 1 374 7 view .LVU9
+  97 0026 0122     		movs	r2, #1
+  98 0028 0821     		movs	r1, #8
+  99 002a 0448     		ldr	r0, .L7+8
+ 100 002c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 101              	.LVL4:
+ 375:Core/Src/freertos.c **** 	}
+ 102              		.loc 1 375 2 is_stmt 0 view .LVU10
+ 103 0030 10BD     		pop	{r4, pc}
+ 104              	.L8:
+ 105 0032 00BF     		.align	2
+ 106              	.L7:
+ 107 0034 00140240 		.word	1073878016
+ 108 0038 000C0240 		.word	1073875968
+ 109 003c 00100240 		.word	1073876992
+ 110              		.cfi_endproc
+ 111              	.LFE145:
+ 113              		.section	.text.RUN_DIR,"ax",%progbits
+ 114              		.align	1
+ 115              		.global	RUN_DIR
+ 116              		.syntax unified
+ 117              		.thumb
+ 118              		.thumb_func
+ 120              	RUN_DIR:
+ 121              	.LVL5:
+ 122              	.LFB146:
+ 376:Core/Src/freertos.c **** 
+ 377:Core/Src/freertos.c **** 	void RUN_DIR(char dir){
+ 123              		.loc 1 377 24 is_stmt 1 view -0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 0
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127              		.loc 1 377 24 is_stmt 0 view .LVU12
+ 128 0000 10B5     		push	{r4, lr}
+ 129              	.LCFI2:
+ 130              		.cfi_def_cfa_offset 8
+ 131              		.cfi_offset 4, -8
+ 132              		.cfi_offset 14, -4
+ 378:Core/Src/freertos.c **** 		if(dir == 'F'){			// Front
+ 133              		.loc 1 378 3 is_stmt 1 view .LVU13
+ 134 0002 4638     		subs	r0, r0, #70
+ 135              	.LVL6:
+ 136              		.loc 1 378 3 is_stmt 0 view .LVU14
+ 137 0004 0C28     		cmp	r0, #12
+ 138 0006 14D8     		bhi	.L9
+ 139 0008 DFE800F0 		tbb	[pc, r0]
+ 140              	.L12:
+ARM GAS  /tmp/ccaDI2zk.s 			page 10
+
+
+ 141 000c 07       		.byte	(.L15-.L12)/2
+ 142 000d 13       		.byte	(.L9-.L12)/2
+ 143 000e 13       		.byte	(.L9-.L12)/2
+ 144 000f 13       		.byte	(.L9-.L12)/2
+ 145 0010 13       		.byte	(.L9-.L12)/2
+ 146 0011 13       		.byte	(.L9-.L12)/2
+ 147 0012 21       		.byte	(.L14-.L12)/2
+ 148 0013 13       		.byte	(.L9-.L12)/2
+ 149 0014 13       		.byte	(.L9-.L12)/2
+ 150 0015 14       		.byte	(.L13-.L12)/2
+ 151 0016 13       		.byte	(.L9-.L12)/2
+ 152 0017 13       		.byte	(.L9-.L12)/2
+ 153 0018 2E       		.byte	(.L11-.L12)/2
+ 154 0019 00       		.p2align 1
+ 155              	.L15:
+ 379:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, SET);		// Motor1 DIR - CW
+ 156              		.loc 1 379 4 is_stmt 1 view .LVU15
+ 157 001a 1A4C     		ldr	r4, .L18
+ 158 001c 0122     		movs	r2, #1
+ 159 001e 4FF48051 		mov	r1, #4096
+ 160 0022 2046     		mov	r0, r4
+ 161 0024 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 162              	.LVL7:
+ 380:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, RESET);	// Motor2 DIR - CCW
+ 163              		.loc 1 380 7 view .LVU16
+ 164 0028 0022     		movs	r2, #0
+ 165 002a 0421     		movs	r1, #4
+ 166 002c 2046     		mov	r0, r4
+ 167 002e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 168              	.LVL8:
+ 169              	.L9:
+ 381:Core/Src/freertos.c **** 		}
+ 382:Core/Src/freertos.c **** 		else if(dir == 'O'){	// Back
+ 383:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, RESET);		// Motor1 DIR - CCW
+ 384:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+ 385:Core/Src/freertos.c **** 		}
+ 386:Core/Src/freertos.c **** 		else if(dir == 'L'){	// Left
+ 387:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, SET);		// Motor1 DIR - CW
+ 388:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+ 389:Core/Src/freertos.c **** 		}
+ 390:Core/Src/freertos.c **** 		else if(dir == 'R'){	// Right
+ 391:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, RESET);		// Motor1 DIR - CCW
+ 392:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, RESET);	// Motor2 DIR - CCW
+ 393:Core/Src/freertos.c **** 		}
+ 394:Core/Src/freertos.c **** 	}
+ 170              		.loc 1 394 2 is_stmt 0 view .LVU17
+ 171 0032 10BD     		pop	{r4, pc}
+ 172              	.L13:
+ 383:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+ 173              		.loc 1 383 4 is_stmt 1 view .LVU18
+ 174 0034 134C     		ldr	r4, .L18
+ 175 0036 0022     		movs	r2, #0
+ 176 0038 4FF48051 		mov	r1, #4096
+ 177 003c 2046     		mov	r0, r4
+ 178 003e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 179              	.LVL9:
+ 384:Core/Src/freertos.c **** 		}
+ARM GAS  /tmp/ccaDI2zk.s 			page 11
+
+
+ 180              		.loc 1 384 7 view .LVU19
+ 181 0042 0122     		movs	r2, #1
+ 182 0044 0421     		movs	r1, #4
+ 183 0046 2046     		mov	r0, r4
+ 184 0048 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 185              	.LVL10:
+ 186 004c F1E7     		b	.L9
+ 187              	.L14:
+ 387:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+ 188              		.loc 1 387 4 view .LVU20
+ 189 004e 0D4C     		ldr	r4, .L18
+ 190 0050 0122     		movs	r2, #1
+ 191 0052 4FF48051 		mov	r1, #4096
+ 192 0056 2046     		mov	r0, r4
+ 193 0058 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 194              	.LVL11:
+ 388:Core/Src/freertos.c **** 		}
+ 195              		.loc 1 388 7 view .LVU21
+ 196 005c 0122     		movs	r2, #1
+ 197 005e 0421     		movs	r1, #4
+ 198 0060 2046     		mov	r0, r4
+ 199 0062 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 200              	.LVL12:
+ 201 0066 E4E7     		b	.L9
+ 202              	.L11:
+ 391:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, RESET);	// Motor2 DIR - CCW
+ 203              		.loc 1 391 4 view .LVU22
+ 204 0068 064C     		ldr	r4, .L18
+ 205 006a 0022     		movs	r2, #0
+ 206 006c 4FF48051 		mov	r1, #4096
+ 207 0070 2046     		mov	r0, r4
+ 208 0072 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 209              	.LVL13:
+ 392:Core/Src/freertos.c **** 		}
+ 210              		.loc 1 392 7 view .LVU23
+ 211 0076 0022     		movs	r2, #0
+ 212 0078 0421     		movs	r1, #4
+ 213 007a 2046     		mov	r0, r4
+ 214 007c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 215              	.LVL14:
+ 216              		.loc 1 394 2 is_stmt 0 view .LVU24
+ 217 0080 D7E7     		b	.L9
+ 218              	.L19:
+ 219 0082 00BF     		.align	2
+ 220              	.L18:
+ 221 0084 00140240 		.word	1073878016
+ 222              		.cfi_endproc
+ 223              	.LFE146:
+ 225              		.section	.text.RUN_RB,"ax",%progbits
+ 226              		.align	1
+ 227              		.global	RUN_RB
+ 228              		.syntax unified
+ 229              		.thumb
+ 230              		.thumb_func
+ 232              	RUN_RB:
+ 233              	.LVL15:
+ 234              	.LFB147:
+ARM GAS  /tmp/ccaDI2zk.s 			page 12
+
+
+ 395:Core/Src/freertos.c **** 
+ 396:Core/Src/freertos.c **** 	void RUN_RB(char runstate){
+ 235              		.loc 1 396 28 is_stmt 1 view -0
+ 236              		.cfi_startproc
+ 237              		@ args = 0, pretend = 0, frame = 0
+ 238              		@ frame_needed = 0, uses_anonymous_args = 0
+ 239              		.loc 1 396 28 is_stmt 0 view .LVU26
+ 240 0000 08B5     		push	{r3, lr}
+ 241              	.LCFI3:
+ 242              		.cfi_def_cfa_offset 8
+ 243              		.cfi_offset 3, -8
+ 244              		.cfi_offset 14, -4
+ 397:Core/Src/freertos.c **** 		if(runstate == 'U'){
+ 245              		.loc 1 397 3 is_stmt 1 view .LVU27
+ 246              		.loc 1 397 5 is_stmt 0 view .LVU28
+ 247 0002 5528     		cmp	r0, #85
+ 248 0004 02D0     		beq	.L24
+ 398:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, RESET);	// Motor1 RUN/BRK - RUN
+ 399:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, RESET);	// Motor2 RUN/BRK - RUN
+ 400:Core/Src/freertos.c **** 		}
+ 401:Core/Src/freertos.c **** 		else if(runstate == 'B'){
+ 249              		.loc 1 401 8 is_stmt 1 view .LVU29
+ 250              		.loc 1 401 10 is_stmt 0 view .LVU30
+ 251 0006 4228     		cmp	r0, #66
+ 252 0008 0CD0     		beq	.L25
+ 253              	.LVL16:
+ 254              	.L20:
+ 402:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, SET);	// Motor1 RUN/BRK - BRK
+ 403:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, SET);	// Motor2 RUN/BRK - BRK
+ 404:Core/Src/freertos.c **** 		}
+ 405:Core/Src/freertos.c **** 	}
+ 255              		.loc 1 405 2 view .LVU31
+ 256 000a 08BD     		pop	{r3, pc}
+ 257              	.LVL17:
+ 258              	.L24:
+ 398:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, RESET);	// Motor1 RUN/BRK - RUN
+ 259              		.loc 1 398 4 is_stmt 1 view .LVU32
+ 260 000c 0022     		movs	r2, #0
+ 261 000e 4FF40051 		mov	r1, #8192
+ 262 0012 0A48     		ldr	r0, .L26
+ 263              	.LVL18:
+ 398:Core/Src/freertos.c **** 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, RESET);	// Motor1 RUN/BRK - RUN
+ 264              		.loc 1 398 4 is_stmt 0 view .LVU33
+ 265 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 266              	.LVL19:
+ 399:Core/Src/freertos.c **** 		}
+ 267              		.loc 1 399 4 is_stmt 1 view .LVU34
+ 268 0018 0022     		movs	r2, #0
+ 269 001a 8021     		movs	r1, #128
+ 270 001c 0848     		ldr	r0, .L26+4
+ 271 001e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 272              	.LVL20:
+ 273 0022 F2E7     		b	.L20
+ 274              	.LVL21:
+ 275              	.L25:
+ 402:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, SET);	// Motor1 RUN/BRK - BRK
+ 276              		.loc 1 402 8 view .LVU35
+ARM GAS  /tmp/ccaDI2zk.s 			page 13
+
+
+ 277 0024 0122     		movs	r2, #1
+ 278 0026 4FF40051 		mov	r1, #8192
+ 279 002a 0448     		ldr	r0, .L26
+ 280              	.LVL22:
+ 402:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, SET);	// Motor1 RUN/BRK - BRK
+ 281              		.loc 1 402 8 is_stmt 0 view .LVU36
+ 282 002c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 283              	.LVL23:
+ 403:Core/Src/freertos.c **** 		}
+ 284              		.loc 1 403 8 is_stmt 1 view .LVU37
+ 285 0030 0122     		movs	r2, #1
+ 286 0032 8021     		movs	r1, #128
+ 287 0034 0248     		ldr	r0, .L26+4
+ 288 0036 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 289              	.LVL24:
+ 290              		.loc 1 405 2 is_stmt 0 view .LVU38
+ 291 003a E6E7     		b	.L20
+ 292              	.L27:
+ 293              		.align	2
+ 294              	.L26:
+ 295 003c 00140240 		.word	1073878016
+ 296 0040 000C0240 		.word	1073875968
+ 297              		.cfi_endproc
+ 298              	.LFE147:
+ 300              		.section	.text.MOTOR_SS,"ax",%progbits
+ 301              		.align	1
+ 302              		.global	MOTOR_SS
+ 303              		.syntax unified
+ 304              		.thumb
+ 305              		.thumb_func
+ 307              	MOTOR_SS:
+ 308              	.LVL25:
+ 309              	.LFB148:
+ 406:Core/Src/freertos.c **** 
+ 407:Core/Src/freertos.c **** 	void MOTOR_SS(char motorstate){
+ 310              		.loc 1 407 32 is_stmt 1 view -0
+ 311              		.cfi_startproc
+ 312              		@ args = 0, pretend = 0, frame = 0
+ 313              		@ frame_needed = 0, uses_anonymous_args = 0
+ 314              		.loc 1 407 32 is_stmt 0 view .LVU40
+ 315 0000 08B5     		push	{r3, lr}
+ 316              	.LCFI4:
+ 317              		.cfi_def_cfa_offset 8
+ 318              		.cfi_offset 3, -8
+ 319              		.cfi_offset 14, -4
+ 408:Core/Src/freertos.c **** 		if(motorstate == 'T'){
+ 320              		.loc 1 408 3 is_stmt 1 view .LVU41
+ 321              		.loc 1 408 5 is_stmt 0 view .LVU42
+ 322 0002 5428     		cmp	r0, #84
+ 323 0004 02D0     		beq	.L32
+ 409:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, RESET);	// Motor1 START/STOP - START
+ 410:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);	// Motor2 START/STOP - START
+ 411:Core/Src/freertos.c **** 		}
+ 412:Core/Src/freertos.c **** 		else if(motorstate == 'P'){
+ 324              		.loc 1 412 8 is_stmt 1 view .LVU43
+ 325              		.loc 1 412 10 is_stmt 0 view .LVU44
+ 326 0006 5028     		cmp	r0, #80
+ARM GAS  /tmp/ccaDI2zk.s 			page 14
+
+
+ 327 0008 0CD0     		beq	.L33
+ 328              	.LVL26:
+ 329              	.L28:
+ 413:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, SET);	// Motor1 START/STOP - STOP
+ 414:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);	// Motor2 START/STOP - STOP
+ 415:Core/Src/freertos.c **** 		}
+ 416:Core/Src/freertos.c **** 	}
+ 330              		.loc 1 416 2 view .LVU45
+ 331 000a 08BD     		pop	{r3, pc}
+ 332              	.LVL27:
+ 333              	.L32:
+ 409:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, RESET);	// Motor1 START/STOP - START
+ 334              		.loc 1 409 7 is_stmt 1 view .LVU46
+ 335 000c 0022     		movs	r2, #0
+ 336 000e 4FF48041 		mov	r1, #16384
+ 337 0012 0A48     		ldr	r0, .L34
+ 338              	.LVL28:
+ 409:Core/Src/freertos.c **** 		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, RESET);	// Motor1 START/STOP - START
+ 339              		.loc 1 409 7 is_stmt 0 view .LVU47
+ 340 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 341              	.LVL29:
+ 410:Core/Src/freertos.c **** 		}
+ 342              		.loc 1 410 7 is_stmt 1 view .LVU48
+ 343 0018 0022     		movs	r2, #0
+ 344 001a 0821     		movs	r1, #8
+ 345 001c 0848     		ldr	r0, .L34+4
+ 346 001e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 347              	.LVL30:
+ 348 0022 F2E7     		b	.L28
+ 349              	.LVL31:
+ 350              	.L33:
+ 413:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, SET);	// Motor1 START/STOP - STOP
+ 351              		.loc 1 413 8 view .LVU49
+ 352 0024 0122     		movs	r2, #1
+ 353 0026 4FF48041 		mov	r1, #16384
+ 354 002a 0448     		ldr	r0, .L34
+ 355              	.LVL32:
+ 413:Core/Src/freertos.c **** 		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, SET);	// Motor1 START/STOP - STOP
+ 356              		.loc 1 413 8 is_stmt 0 view .LVU50
+ 357 002c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 358              	.LVL33:
+ 414:Core/Src/freertos.c **** 		}
+ 359              		.loc 1 414 8 is_stmt 1 view .LVU51
+ 360 0030 0122     		movs	r2, #1
+ 361 0032 0821     		movs	r1, #8
+ 362 0034 0248     		ldr	r0, .L34+4
+ 363 0036 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 364              	.LVL34:
+ 365              		.loc 1 416 2 is_stmt 0 view .LVU52
+ 366 003a E6E7     		b	.L28
+ 367              	.L35:
+ 368              		.align	2
+ 369              	.L34:
+ 370 003c 00140240 		.word	1073878016
+ 371 0040 00100240 		.word	1073876992
+ 372              		.cfi_endproc
+ 373              	.LFE148:
+ARM GAS  /tmp/ccaDI2zk.s 			page 15
+
+
+ 375              		.section	.text.HAL_TIM_IC_CaptureCallback,"ax",%progbits
+ 376              		.align	1
+ 377              		.global	HAL_TIM_IC_CaptureCallback
+ 378              		.syntax unified
+ 379              		.thumb
+ 380              		.thumb_func
+ 382              	HAL_TIM_IC_CaptureCallback:
+ 383              	.LVL35:
+ 384              	.LFB149:
+ 417:Core/Src/freertos.c **** 
+ 418:Core/Src/freertos.c **** 	void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+ 419:Core/Src/freertos.c **** 	{
+ 385              		.loc 1 419 2 is_stmt 1 view -0
+ 386              		.cfi_startproc
+ 387              		@ args = 0, pretend = 0, frame = 0
+ 388              		@ frame_needed = 0, uses_anonymous_args = 0
+ 389              		.loc 1 419 2 is_stmt 0 view .LVU54
+ 390 0000 10B5     		push	{r4, lr}
+ 391              	.LCFI5:
+ 392              		.cfi_def_cfa_offset 8
+ 393              		.cfi_offset 4, -8
+ 394              		.cfi_offset 14, -4
+ 395 0002 0446     		mov	r4, r0
+ 420:Core/Src/freertos.c **** 		if ( htim->Instance == TIM2){
+ 396              		.loc 1 420 3 is_stmt 1 view .LVU55
+ 397              		.loc 1 420 12 is_stmt 0 view .LVU56
+ 398 0004 0368     		ldr	r3, [r0]
+ 399              		.loc 1 420 6 view .LVU57
+ 400 0006 B3F1804F 		cmp	r3, #1073741824
+ 401 000a 04D0     		beq	.L42
+ 402              	.LVL36:
+ 403              	.L37:
+ 421:Core/Src/freertos.c **** 			// Motor1
+ 422:Core/Src/freertos.c **** 			if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+ 423:Core/Src/freertos.c **** 			{
+ 424:Core/Src/freertos.c **** 				// - CW
+ 425:Core/Src/freertos.c **** 				if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_12) == 1){
+ 426:Core/Src/freertos.c **** 					hall1 = hall1 + 1;
+ 427:Core/Src/freertos.c **** 				}
+ 428:Core/Src/freertos.c **** 				// - CCW
+ 429:Core/Src/freertos.c **** 				else if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_12) == 0){
+ 430:Core/Src/freertos.c **** 					hall1 = hall1 - 1;
+ 431:Core/Src/freertos.c **** 				}
+ 432:Core/Src/freertos.c **** 			}
+ 433:Core/Src/freertos.c **** 		}
+ 434:Core/Src/freertos.c **** 		if ( htim->Instance == TIM5){
+ 404              		.loc 1 434 3 is_stmt 1 view .LVU58
+ 405              		.loc 1 434 12 is_stmt 0 view .LVU59
+ 406 000c 2268     		ldr	r2, [r4]
+ 407              		.loc 1 434 6 view .LVU60
+ 408 000e 1C4B     		ldr	r3, .L44
+ 409 0010 9A42     		cmp	r2, r3
+ 410 0012 1BD0     		beq	.L43
+ 411              	.L36:
+ 435:Core/Src/freertos.c **** 
+ 436:Core/Src/freertos.c **** 					// Motor2
+ 437:Core/Src/freertos.c **** 			if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+ARM GAS  /tmp/ccaDI2zk.s 			page 16
+
+
+ 438:Core/Src/freertos.c **** 			{
+ 439:Core/Src/freertos.c **** 				// - CW
+ 440:Core/Src/freertos.c **** 				if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_2) == 1){
+ 441:Core/Src/freertos.c **** 					hall2 = hall2 - 1;
+ 442:Core/Src/freertos.c **** 				}
+ 443:Core/Src/freertos.c **** 				// - CCW
+ 444:Core/Src/freertos.c **** 				else if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_2) == 0){
+ 445:Core/Src/freertos.c **** 					hall2 = hall2 + 1;
+ 446:Core/Src/freertos.c **** 				}
+ 447:Core/Src/freertos.c **** 			}
+ 448:Core/Src/freertos.c **** 		}
+ 449:Core/Src/freertos.c **** 	}
+ 412              		.loc 1 449 2 view .LVU61
+ 413 0014 10BD     		pop	{r4, pc}
+ 414              	.LVL37:
+ 415              	.L42:
+ 422:Core/Src/freertos.c **** 			{
+ 416              		.loc 1 422 4 is_stmt 1 view .LVU62
+ 422:Core/Src/freertos.c **** 			{
+ 417              		.loc 1 422 11 is_stmt 0 view .LVU63
+ 418 0016 037F     		ldrb	r3, [r0, #28]	@ zero_extendqisi2
+ 422:Core/Src/freertos.c **** 			{
+ 419              		.loc 1 422 6 view .LVU64
+ 420 0018 012B     		cmp	r3, #1
+ 421 001a F7D1     		bne	.L37
+ 425:Core/Src/freertos.c **** 					hall1 = hall1 + 1;
+ 422              		.loc 1 425 5 is_stmt 1 view .LVU65
+ 425:Core/Src/freertos.c **** 					hall1 = hall1 + 1;
+ 423              		.loc 1 425 8 is_stmt 0 view .LVU66
+ 424 001c 4FF48051 		mov	r1, #4096
+ 425 0020 1848     		ldr	r0, .L44+4
+ 426              	.LVL38:
+ 425:Core/Src/freertos.c **** 					hall1 = hall1 + 1;
+ 427              		.loc 1 425 8 view .LVU67
+ 428 0022 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 429              	.LVL39:
+ 425:Core/Src/freertos.c **** 					hall1 = hall1 + 1;
+ 430              		.loc 1 425 7 view .LVU68
+ 431 0026 0128     		cmp	r0, #1
+ 432 0028 04D1     		bne	.L38
+ 426:Core/Src/freertos.c **** 				}
+ 433              		.loc 1 426 6 is_stmt 1 view .LVU69
+ 426:Core/Src/freertos.c **** 				}
+ 434              		.loc 1 426 20 is_stmt 0 view .LVU70
+ 435 002a 174A     		ldr	r2, .L44+8
+ 436 002c 1368     		ldr	r3, [r2]
+ 437 002e 0133     		adds	r3, r3, #1
+ 426:Core/Src/freertos.c **** 				}
+ 438              		.loc 1 426 12 view .LVU71
+ 439 0030 1360     		str	r3, [r2]
+ 440 0032 EBE7     		b	.L37
+ 441              	.L38:
+ 429:Core/Src/freertos.c **** 					hall1 = hall1 - 1;
+ 442              		.loc 1 429 10 is_stmt 1 view .LVU72
+ 429:Core/Src/freertos.c **** 					hall1 = hall1 - 1;
+ 443              		.loc 1 429 13 is_stmt 0 view .LVU73
+ 444 0034 4FF48051 		mov	r1, #4096
+ARM GAS  /tmp/ccaDI2zk.s 			page 17
+
+
+ 445 0038 1248     		ldr	r0, .L44+4
+ 446 003a FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 447              	.LVL40:
+ 429:Core/Src/freertos.c **** 					hall1 = hall1 - 1;
+ 448              		.loc 1 429 12 view .LVU74
+ 449 003e 0028     		cmp	r0, #0
+ 450 0040 E4D1     		bne	.L37
+ 430:Core/Src/freertos.c **** 				}
+ 451              		.loc 1 430 6 is_stmt 1 view .LVU75
+ 430:Core/Src/freertos.c **** 				}
+ 452              		.loc 1 430 20 is_stmt 0 view .LVU76
+ 453 0042 114A     		ldr	r2, .L44+8
+ 454 0044 1368     		ldr	r3, [r2]
+ 455 0046 013B     		subs	r3, r3, #1
+ 430:Core/Src/freertos.c **** 				}
+ 456              		.loc 1 430 12 view .LVU77
+ 457 0048 1360     		str	r3, [r2]
+ 458 004a DFE7     		b	.L37
+ 459              	.L43:
+ 437:Core/Src/freertos.c **** 			{
+ 460              		.loc 1 437 4 is_stmt 1 view .LVU78
+ 437:Core/Src/freertos.c **** 			{
+ 461              		.loc 1 437 11 is_stmt 0 view .LVU79
+ 462 004c 237F     		ldrb	r3, [r4, #28]	@ zero_extendqisi2
+ 437:Core/Src/freertos.c **** 			{
+ 463              		.loc 1 437 6 view .LVU80
+ 464 004e 012B     		cmp	r3, #1
+ 465 0050 E0D1     		bne	.L36
+ 440:Core/Src/freertos.c **** 					hall2 = hall2 - 1;
+ 466              		.loc 1 440 5 is_stmt 1 view .LVU81
+ 440:Core/Src/freertos.c **** 					hall2 = hall2 - 1;
+ 467              		.loc 1 440 8 is_stmt 0 view .LVU82
+ 468 0052 0421     		movs	r1, #4
+ 469 0054 0B48     		ldr	r0, .L44+4
+ 470 0056 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 471              	.LVL41:
+ 440:Core/Src/freertos.c **** 					hall2 = hall2 - 1;
+ 472              		.loc 1 440 7 view .LVU83
+ 473 005a 0128     		cmp	r0, #1
+ 474 005c 04D1     		bne	.L40
+ 441:Core/Src/freertos.c **** 				}
+ 475              		.loc 1 441 6 is_stmt 1 view .LVU84
+ 441:Core/Src/freertos.c **** 				}
+ 476              		.loc 1 441 20 is_stmt 0 view .LVU85
+ 477 005e 0B4A     		ldr	r2, .L44+12
+ 478 0060 1368     		ldr	r3, [r2]
+ 479 0062 013B     		subs	r3, r3, #1
+ 441:Core/Src/freertos.c **** 				}
+ 480              		.loc 1 441 12 view .LVU86
+ 481 0064 1360     		str	r3, [r2]
+ 482 0066 D5E7     		b	.L36
+ 483              	.L40:
+ 444:Core/Src/freertos.c **** 					hall2 = hall2 + 1;
+ 484              		.loc 1 444 10 is_stmt 1 view .LVU87
+ 444:Core/Src/freertos.c **** 					hall2 = hall2 + 1;
+ 485              		.loc 1 444 13 is_stmt 0 view .LVU88
+ 486 0068 0421     		movs	r1, #4
+ARM GAS  /tmp/ccaDI2zk.s 			page 18
+
+
+ 487 006a 0648     		ldr	r0, .L44+4
+ 488 006c FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 489              	.LVL42:
+ 444:Core/Src/freertos.c **** 					hall2 = hall2 + 1;
+ 490              		.loc 1 444 12 view .LVU89
+ 491 0070 0028     		cmp	r0, #0
+ 492 0072 CFD1     		bne	.L36
+ 445:Core/Src/freertos.c **** 				}
+ 493              		.loc 1 445 6 is_stmt 1 view .LVU90
+ 445:Core/Src/freertos.c **** 				}
+ 494              		.loc 1 445 20 is_stmt 0 view .LVU91
+ 495 0074 054A     		ldr	r2, .L44+12
+ 496 0076 1368     		ldr	r3, [r2]
+ 497 0078 0133     		adds	r3, r3, #1
+ 445:Core/Src/freertos.c **** 				}
+ 498              		.loc 1 445 12 view .LVU92
+ 499 007a 1360     		str	r3, [r2]
+ 500              		.loc 1 449 2 view .LVU93
+ 501 007c CAE7     		b	.L36
+ 502              	.L45:
+ 503 007e 00BF     		.align	2
+ 504              	.L44:
+ 505 0080 000C0040 		.word	1073744896
+ 506 0084 00140240 		.word	1073878016
+ 507 0088 00000000 		.word	.LANCHOR2
+ 508 008c 00000000 		.word	.LANCHOR3
+ 509              		.cfi_endproc
+ 510              	.LFE149:
+ 512              		.global	__aeabi_d2iz
+ 513              		.section	.text.PWM_R,"ax",%progbits
+ 514              		.align	1
+ 515              		.global	PWM_R
+ 516              		.syntax unified
+ 517              		.thumb
+ 518              		.thumb_func
+ 520              	PWM_R:
+ 521              	.LVL43:
+ 522              	.LFB150:
+ 450:Core/Src/freertos.c **** 
+ 451:Core/Src/freertos.c **** 
+ 452:Core/Src/freertos.c **** 	void PWM_R(double duty){
+ 523              		.loc 1 452 25 is_stmt 1 view -0
+ 524              		.cfi_startproc
+ 525              		@ args = 0, pretend = 0, frame = 0
+ 526              		@ frame_needed = 0, uses_anonymous_args = 0
+ 527              		.loc 1 452 25 is_stmt 0 view .LVU95
+ 528 0000 08B5     		push	{r3, lr}
+ 529              	.LCFI6:
+ 530              		.cfi_def_cfa_offset 8
+ 531              		.cfi_offset 3, -8
+ 532              		.cfi_offset 14, -4
+ 533 0002 51EC100B 		vmov	r0, r1, d0
+ 453:Core/Src/freertos.c **** 		__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, (int)duty-1);
+ 534              		.loc 1 453 3 is_stmt 1 view .LVU96
+ 535 0006 FFF7FEFF 		bl	__aeabi_d2iz
+ 536              	.LVL44:
+ 537              		.loc 1 453 3 is_stmt 0 view .LVU97
+ARM GAS  /tmp/ccaDI2zk.s 			page 19
+
+
+ 538 000a 024B     		ldr	r3, .L48
+ 539 000c 1B68     		ldr	r3, [r3]
+ 540 000e 0138     		subs	r0, r0, #1
+ 541 0010 5863     		str	r0, [r3, #52]
+ 454:Core/Src/freertos.c **** 	}
+ 542              		.loc 1 454 2 view .LVU98
+ 543 0012 08BD     		pop	{r3, pc}
+ 544              	.L49:
+ 545              		.align	2
+ 546              	.L48:
+ 547 0014 00000000 		.word	htim4
+ 548              		.cfi_endproc
+ 549              	.LFE150:
+ 551              		.section	.text.PWM_L,"ax",%progbits
+ 552              		.align	1
+ 553              		.global	PWM_L
+ 554              		.syntax unified
+ 555              		.thumb
+ 556              		.thumb_func
+ 558              	PWM_L:
+ 559              	.LVL45:
+ 560              	.LFB151:
+ 455:Core/Src/freertos.c **** 	void PWM_L(double duty){
+ 561              		.loc 1 455 25 is_stmt 1 view -0
+ 562              		.cfi_startproc
+ 563              		@ args = 0, pretend = 0, frame = 0
+ 564              		@ frame_needed = 0, uses_anonymous_args = 0
+ 565              		.loc 1 455 25 is_stmt 0 view .LVU100
+ 566 0000 08B5     		push	{r3, lr}
+ 567              	.LCFI7:
+ 568              		.cfi_def_cfa_offset 8
+ 569              		.cfi_offset 3, -8
+ 570              		.cfi_offset 14, -4
+ 571 0002 51EC100B 		vmov	r0, r1, d0
+ 456:Core/Src/freertos.c **** 		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, (int)duty-1);
+ 572              		.loc 1 456 3 is_stmt 1 view .LVU101
+ 573 0006 FFF7FEFF 		bl	__aeabi_d2iz
+ 574              	.LVL46:
+ 575              		.loc 1 456 3 is_stmt 0 view .LVU102
+ 576 000a 024B     		ldr	r3, .L52
+ 577 000c 1B68     		ldr	r3, [r3]
+ 578 000e 0138     		subs	r0, r0, #1
+ 579 0010 5863     		str	r0, [r3, #52]
+ 457:Core/Src/freertos.c **** 	}
+ 580              		.loc 1 457 2 view .LVU103
+ 581 0012 08BD     		pop	{r3, pc}
+ 582              	.L53:
+ 583              		.align	2
+ 584              	.L52:
+ 585 0014 00000000 		.word	htim3
+ 586              		.cfi_endproc
+ 587              	.LFE151:
+ 589              		.global	__aeabi_dcmplt
+ 590              		.global	__aeabi_dmul
+ 591              		.section	.text.CAL_LinearSpeed,"ax",%progbits
+ 592              		.align	1
+ 593              		.global	CAL_LinearSpeed
+ARM GAS  /tmp/ccaDI2zk.s 			page 20
+
+
+ 594              		.syntax unified
+ 595              		.thumb
+ 596              		.thumb_func
+ 598              	CAL_LinearSpeed:
+ 599              	.LVL47:
+ 600              	.LFB152:
+ 458:Core/Src/freertos.c **** 
+ 459:Core/Src/freertos.c **** 	// Calculate the final speed.
+ 460:Core/Src/freertos.c **** 	double CAL_LinearSpeed(double x, double y, double z)
+ 461:Core/Src/freertos.c **** 	{
+ 601              		.loc 1 461 2 is_stmt 1 view -0
+ 602              		.cfi_startproc
+ 603              		@ args = 0, pretend = 0, frame = 0
+ 604              		@ frame_needed = 0, uses_anonymous_args = 0
+ 605              		.loc 1 461 2 is_stmt 0 view .LVU105
+ 606 0000 38B5     		push	{r3, r4, r5, lr}
+ 607              	.LCFI8:
+ 608              		.cfi_def_cfa_offset 16
+ 609              		.cfi_offset 3, -16
+ 610              		.cfi_offset 4, -12
+ 611              		.cfi_offset 5, -8
+ 612              		.cfi_offset 14, -4
+ 613 0002 55EC104B 		vmov	r4, r5, d0
+ 462:Core/Src/freertos.c **** 		double distance = 0;
+ 614              		.loc 1 462 3 is_stmt 1 view .LVU106
+ 615              	.LVL48:
+ 463:Core/Src/freertos.c **** 		double duty_percent = 0;
+ 616              		.loc 1 463 3 view .LVU107
+ 464:Core/Src/freertos.c **** 
+ 465:Core/Src/freertos.c **** 		if(x < 0){
+ 617              		.loc 1 465 3 view .LVU108
+ 618              		.loc 1 465 5 is_stmt 0 view .LVU109
+ 619 0006 0022     		movs	r2, #0
+ 620 0008 0023     		movs	r3, #0
+ 621 000a 10EE100A 		vmov	r0, s0	@ int
+ 622 000e 2946     		mov	r1, r5
+ 623 0010 FFF7FEFF 		bl	__aeabi_dcmplt
+ 624              	.LVL49:
+ 625              		.loc 1 465 5 view .LVU110
+ 626 0014 48B9     		cbnz	r0, .L59
+ 627              	.LVL50:
+ 628              	.L55:
+ 466:Core/Src/freertos.c **** 			distance = -x;
+ 467:Core/Src/freertos.c **** 		}
+ 468:Core/Src/freertos.c **** 		else{
+ 469:Core/Src/freertos.c **** 			distance = x;
+ 470:Core/Src/freertos.c **** 		}
+ 471:Core/Src/freertos.c **** 
+ 472:Core/Src/freertos.c **** 		duty_percent = distance * (20.0/(0.0965*M_PI));
+ 629              		.loc 1 472 3 is_stmt 1 view .LVU111
+ 630              		.loc 1 472 16 is_stmt 0 view .LVU112
+ 631 0016 08A3     		adr	r3, .L60
+ 632 0018 D3E90023 		ldrd	r2, [r3]
+ 633 001c 2046     		mov	r0, r4
+ 634 001e 2946     		mov	r1, r5
+ 635 0020 FFF7FEFF 		bl	__aeabi_dmul
+ 636              	.LVL51:
+ARM GAS  /tmp/ccaDI2zk.s 			page 21
+
+
+ 473:Core/Src/freertos.c **** 
+ 474:Core/Src/freertos.c **** 		return duty_percent;
+ 637              		.loc 1 474 3 is_stmt 1 view .LVU113
+ 475:Core/Src/freertos.c **** 	}
+ 638              		.loc 1 475 2 is_stmt 0 view .LVU114
+ 639 0024 41EC100B 		vmov	d0, r0, r1
+ 640 0028 38BD     		pop	{r3, r4, r5, pc}
+ 641              	.LVL52:
+ 642              	.L59:
+ 466:Core/Src/freertos.c **** 			distance = -x;
+ 643              		.loc 1 466 4 is_stmt 1 view .LVU115
+ 466:Core/Src/freertos.c **** 			distance = -x;
+ 644              		.loc 1 466 13 is_stmt 0 view .LVU116
+ 645 002a 05F10043 		add	r3, r5, #-2147483648
+ 646 002e 1D46     		mov	r5, r3
+ 647              	.LVL53:
+ 466:Core/Src/freertos.c **** 			distance = -x;
+ 648              		.loc 1 466 13 view .LVU117
+ 649 0030 F1E7     		b	.L55
+ 650              	.L61:
+ 651 0032 00BFAFF3 		.align	3
+ 651      0080
+ 652              	.L60:
+ 653 0038 DE7A0C39 		.word	957119198
+ 654 003c 247E5040 		.word	1079016996
+ 655              		.cfi_endproc
+ 656              	.LFE152:
+ 658              		.global	__aeabi_ddiv
+ 659              		.section	.text.CAL_AngularSpeed,"ax",%progbits
+ 660              		.align	1
+ 661              		.global	CAL_AngularSpeed
+ 662              		.syntax unified
+ 663              		.thumb
+ 664              		.thumb_func
+ 666              	CAL_AngularSpeed:
+ 667              	.LVL54:
+ 668              	.LFB153:
+ 476:Core/Src/freertos.c **** 
+ 477:Core/Src/freertos.c **** 	double CAL_AngularSpeed(double x, double y, double z)
+ 478:Core/Src/freertos.c **** 	{
+ 669              		.loc 1 478 2 is_stmt 1 view -0
+ 670              		.cfi_startproc
+ 671              		@ args = 0, pretend = 0, frame = 0
+ 672              		@ frame_needed = 0, uses_anonymous_args = 0
+ 673              		.loc 1 478 2 is_stmt 0 view .LVU119
+ 674 0000 08B5     		push	{r3, lr}
+ 675              	.LCFI9:
+ 676              		.cfi_def_cfa_offset 8
+ 677              		.cfi_offset 3, -8
+ 678              		.cfi_offset 14, -4
+ 679 0002 51EC120B 		vmov	r0, r1, d2
+ 479:Core/Src/freertos.c **** 		double wheel_pwm = 0;
+ 680              		.loc 1 479 3 is_stmt 1 view .LVU120
+ 681              	.LVL55:
+ 480:Core/Src/freertos.c **** 
+ 481:Core/Src/freertos.c **** 		wheel_pwm = (100*0.38*z)/(5*M_PI*0.0965*2);
+ 682              		.loc 1 481 3 view .LVU121
+ARM GAS  /tmp/ccaDI2zk.s 			page 22
+
+
+ 683              		.loc 1 481 24 is_stmt 0 view .LVU122
+ 684 0006 0022     		movs	r2, #0
+ 685 0008 074B     		ldr	r3, .L64+8
+ 686 000a FFF7FEFF 		bl	__aeabi_dmul
+ 687              	.LVL56:
+ 688              		.loc 1 481 13 view .LVU123
+ 689 000e 04A3     		adr	r3, .L64
+ 690 0010 D3E90023 		ldrd	r2, [r3]
+ 691 0014 FFF7FEFF 		bl	__aeabi_ddiv
+ 692              	.LVL57:
+ 482:Core/Src/freertos.c **** 
+ 483:Core/Src/freertos.c **** 		return wheel_pwm;
+ 693              		.loc 1 483 3 is_stmt 1 view .LVU124
+ 484:Core/Src/freertos.c **** 	}
+ 694              		.loc 1 484 2 is_stmt 0 view .LVU125
+ 695 0018 41EC100B 		vmov	d0, r0, r1
+ 696 001c 08BD     		pop	{r3, pc}
+ 697              	.L65:
+ 698 001e 00BF     		.align	3
+ 699              	.L64:
+ 700 0020 F5E846DA 		.word	-632887051
+ 701 0024 CA400840 		.word	1074282698
+ 702 0028 00004340 		.word	1078132736
+ 703              		.cfi_endproc
+ 704              	.LFE153:
+ 706              		.section	.rodata.StartDefaultTask.str1.4,"aMS",%progbits,1
+ 707              		.align	2
+ 708              	.LC0:
+ 709 0000 4572726F 		.ascii	"Error on default allocators (line %d)\012\000"
+ 709      72206F6E 
+ 709      20646566 
+ 709      61756C74 
+ 709      20616C6C 
+ 710 0027 00       		.align	2
+ 711              	.LC1:
+ 712 0028 00       		.ascii	"\000"
+ 713 0029 000000   		.align	2
+ 714              	.LC2:
+ 715 002c 63756265 		.ascii	"cubemx_node\000"
+ 715      6D785F6E 
+ 715      6F646500 
+ 716              		.align	2
+ 717              	.LC3:
+ 718 0038 725F656E 		.ascii	"r_enc\000"
+ 718      6300
+ 719 003e 0000     		.align	2
+ 720              	.LC4:
+ 721 0040 6C5F656E 		.ascii	"l_enc\000"
+ 721      6300
+ 722 0046 0000     		.align	2
+ 723              	.LC5:
+ 724 0048 64696666 		.ascii	"diffbot_base_controller/cmd_vel_unstamped\000"
+ 724      626F745F 
+ 724      62617365 
+ 724      5F636F6E 
+ 724      74726F6C 
+ 725 0072 0000     		.align	2
+ARM GAS  /tmp/ccaDI2zk.s 			page 23
+
+
+ 726              	.LC6:
+ 727 0074 4572726F 		.ascii	"Error publishing (line %d)\012\000"
+ 727      72207075 
+ 727      626C6973 
+ 727      68696E67 
+ 727      20286C69 
+ 728              		.global	__aeabi_dadd
+ 729              		.global	__aeabi_dsub
+ 730              		.section	.text.StartDefaultTask,"ax",%progbits
+ 731              		.align	1
+ 732              		.global	StartDefaultTask
+ 733              		.syntax unified
+ 734              		.thumb
+ 735              		.thumb_func
+ 737              	StartDefaultTask:
+ 738              	.LVL58:
+ 739              	.LFB143:
+ 215:Core/Src/freertos.c ****   /* USER CODE BEGIN StartDefaultTask */
+ 740              		.loc 1 215 1 is_stmt 1 view -0
+ 741              		.cfi_startproc
+ 742              		@ args = 0, pretend = 0, frame = 328
+ 743              		@ frame_needed = 0, uses_anonymous_args = 0
+ 215:Core/Src/freertos.c ****   /* USER CODE BEGIN StartDefaultTask */
+ 744              		.loc 1 215 1 is_stmt 0 view .LVU127
+ 745 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 746              	.LCFI10:
+ 747              		.cfi_def_cfa_offset 20
+ 748              		.cfi_offset 4, -20
+ 749              		.cfi_offset 5, -16
+ 750              		.cfi_offset 6, -12
+ 751              		.cfi_offset 7, -8
+ 752              		.cfi_offset 14, -4
+ 753 0002 D5B0     		sub	sp, sp, #340
+ 754              	.LCFI11:
+ 755              		.cfi_def_cfa_offset 360
+ 221:Core/Src/freertos.c ****     true,
+ 756              		.loc 1 221 3 is_stmt 1 view .LVU128
+ 757 0004 8A4B     		ldr	r3, .L80
+ 758 0006 0193     		str	r3, [sp, #4]
+ 759 0008 8A4B     		ldr	r3, .L80+4
+ 760 000a 0093     		str	r3, [sp]
+ 761 000c 8A4B     		ldr	r3, .L80+8
+ 762 000e 8B4A     		ldr	r2, .L80+12
+ 763 0010 8B49     		ldr	r1, .L80+16
+ 764 0012 0120     		movs	r0, #1
+ 765              	.LVL59:
+ 221:Core/Src/freertos.c ****     true,
+ 766              		.loc 1 221 3 is_stmt 0 view .LVU129
+ 767 0014 FFF7FEFF 		bl	rmw_uros_set_custom_transport
+ 768              	.LVL60:
+ 229:Core/Src/freertos.c ****   freeRTOS_allocator.allocate = microros_allocate;
+ 769              		.loc 1 229 3 is_stmt 1 view .LVU130
+ 229:Core/Src/freertos.c ****   freeRTOS_allocator.allocate = microros_allocate;
+ 770              		.loc 1 229 40 is_stmt 0 view .LVU131
+ 771 0018 4FA8     		add	r0, sp, #316
+ 772 001a FFF7FEFF 		bl	rcutils_get_zero_initialized_allocator
+ 773              	.LVL61:
+ARM GAS  /tmp/ccaDI2zk.s 			page 24
+
+
+ 230:Core/Src/freertos.c ****   freeRTOS_allocator.deallocate = microros_deallocate;
+ 774              		.loc 1 230 3 is_stmt 1 view .LVU132
+ 230:Core/Src/freertos.c ****   freeRTOS_allocator.deallocate = microros_deallocate;
+ 775              		.loc 1 230 31 is_stmt 0 view .LVU133
+ 776 001e 894B     		ldr	r3, .L80+20
+ 777 0020 4F93     		str	r3, [sp, #316]
+ 231:Core/Src/freertos.c ****   freeRTOS_allocator.reallocate = microros_reallocate;
+ 778              		.loc 1 231 3 is_stmt 1 view .LVU134
+ 231:Core/Src/freertos.c ****   freeRTOS_allocator.reallocate = microros_reallocate;
+ 779              		.loc 1 231 33 is_stmt 0 view .LVU135
+ 780 0022 894B     		ldr	r3, .L80+24
+ 781 0024 5093     		str	r3, [sp, #320]
+ 232:Core/Src/freertos.c ****   freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
+ 782              		.loc 1 232 3 is_stmt 1 view .LVU136
+ 232:Core/Src/freertos.c ****   freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
+ 783              		.loc 1 232 33 is_stmt 0 view .LVU137
+ 784 0026 894B     		ldr	r3, .L80+28
+ 785 0028 5193     		str	r3, [sp, #324]
+ 233:Core/Src/freertos.c **** 
+ 786              		.loc 1 233 3 is_stmt 1 view .LVU138
+ 233:Core/Src/freertos.c **** 
+ 787              		.loc 1 233 36 is_stmt 0 view .LVU139
+ 788 002a 894B     		ldr	r3, .L80+32
+ 789 002c 5293     		str	r3, [sp, #328]
+ 235:Core/Src/freertos.c ****       printf("Error on default allocators (line %d)\n", __LINE__); 
+ 790              		.loc 1 235 3 is_stmt 1 view .LVU140
+ 235:Core/Src/freertos.c ****       printf("Error on default allocators (line %d)\n", __LINE__); 
+ 791              		.loc 1 235 8 is_stmt 0 view .LVU141
+ 792 002e 4FA8     		add	r0, sp, #316
+ 793 0030 FFF7FEFF 		bl	rcutils_set_default_allocator
+ 794              	.LVL62:
+ 235:Core/Src/freertos.c ****       printf("Error on default allocators (line %d)\n", __LINE__); 
+ 795              		.loc 1 235 6 view .LVU142
+ 796 0034 0028     		cmp	r0, #0
+ 797 0036 3DD0     		beq	.L75
+ 798              	.L67:
+ 241:Core/Src/freertos.c ****   std_msgs__msg__Int32_pub1 pubmsg_1;
+ 799              		.loc 1 241 3 is_stmt 1 view .LVU143
+ 242:Core/Src/freertos.c **** 
+ 800              		.loc 1 242 3 view .LVU144
+ 244:Core/Src/freertos.c ****   std_msgs__msg__Int32_pub2 pubmsg_2;
+ 801              		.loc 1 244 3 view .LVU145
+ 245:Core/Src/freertos.c ****   // create subscriber
+ 802              		.loc 1 245 3 view .LVU146
+ 247:Core/Src/freertos.c ****   geometry_msgs__msg__Twist submsg_2;
+ 803              		.loc 1 247 3 view .LVU147
+ 248:Core/Src/freertos.c **** 
+ 804              		.loc 1 248 3 view .LVU148
+ 251:Core/Src/freertos.c ****   rcl_allocator_t allocator;
+ 805              		.loc 1 251 3 view .LVU149
+ 252:Core/Src/freertos.c ****   rcl_node_t node;
+ 806              		.loc 1 252 3 view .LVU150
+ 253:Core/Src/freertos.c **** 
+ 807              		.loc 1 253 3 view .LVU151
+ 255:Core/Src/freertos.c **** 
+ 808              		.loc 1 255 3 view .LVU152
+ 255:Core/Src/freertos.c **** 
+ARM GAS  /tmp/ccaDI2zk.s 			page 25
+
+
+ 809              		.loc 1 255 15 is_stmt 0 view .LVU153
+ 810 0038 02A8     		add	r0, sp, #8
+ 811 003a FFF7FEFF 		bl	rcutils_get_default_allocator
+ 812              	.LVL63:
+ 813 003e 2BAD     		add	r5, sp, #172
+ 814 0040 02AC     		add	r4, sp, #8
+ 815 0042 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 816 0044 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 817 0046 2368     		ldr	r3, [r4]
+ 818 0048 2B60     		str	r3, [r5]
+ 258:Core/Src/freertos.c **** 
+ 819              		.loc 1 258 3 is_stmt 1 view .LVU154
+ 820 004a 2BAB     		add	r3, sp, #172
+ 821 004c 0022     		movs	r2, #0
+ 822 004e 1146     		mov	r1, r2
+ 823 0050 30A8     		add	r0, sp, #192
+ 824 0052 FFF7FEFF 		bl	rclc_support_init
+ 825              	.LVL64:
+ 263:Core/Src/freertos.c **** 
+ 826              		.loc 1 263 3 view .LVU155
+ 827 0056 30AB     		add	r3, sp, #192
+ 828 0058 7E4A     		ldr	r2, .L80+36
+ 829 005a 7F49     		ldr	r1, .L80+40
+ 830 005c 29A8     		add	r0, sp, #164
+ 831 005e FFF7FEFF 		bl	rclc_node_init_default
+ 832              	.LVL65:
+ 266:Core/Src/freertos.c ****     &publisher_1,
+ 833              		.loc 1 266 3 view .LVU156
+ 834 0062 FFF7FEFF 		bl	rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__Int32
+ 835              	.LVL66:
+ 836 0066 0246     		mov	r2, r0
+ 837 0068 7C4B     		ldr	r3, .L80+44
+ 838 006a 29A9     		add	r1, sp, #164
+ 839 006c 4EA8     		add	r0, sp, #312
+ 840 006e FFF7FEFF 		bl	rclc_publisher_init_default
+ 841              	.LVL67:
+ 274:Core/Src/freertos.c ****     &publisher_2,
+ 842              		.loc 1 274 3 view .LVU157
+ 843 0072 FFF7FEFF 		bl	rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__Int32
+ 844              	.LVL68:
+ 845 0076 0246     		mov	r2, r0
+ 846 0078 794B     		ldr	r3, .L80+48
+ 847 007a 29A9     		add	r1, sp, #164
+ 848 007c 4CA8     		add	r0, sp, #304
+ 849 007e FFF7FEFF 		bl	rclc_publisher_init_default
+ 850              	.LVL69:
+ 283:Core/Src/freertos.c ****       &subscriber_2,
+ 851              		.loc 1 283 3 view .LVU158
+ 852 0082 FFF7FEFF 		bl	rosidl_typesupport_c__get_message_type_support_handle__geometry_msgs__msg__Twist
+ 853              	.LVL70:
+ 854 0086 0246     		mov	r2, r0
+ 855 0088 764B     		ldr	r3, .L80+52
+ 856 008a 29A9     		add	r1, sp, #164
+ 857 008c 4AA8     		add	r0, sp, #296
+ 858 008e FFF7FEFF 		bl	rclc_subscription_init_default
+ 859              	.LVL71:
+ 290:Core/Src/freertos.c ****   rclc_executor_init(&executor, &support.context, 1, &allocator);
+ARM GAS  /tmp/ccaDI2zk.s 			page 26
+
+
+ 860              		.loc 1 290 3 view .LVU159
+ 291:Core/Src/freertos.c **** 
+ 861              		.loc 1 291 3 view .LVU160
+ 862 0092 2BAB     		add	r3, sp, #172
+ 863 0094 0122     		movs	r2, #1
+ 864 0096 31A9     		add	r1, sp, #196
+ 865 0098 08A8     		add	r0, sp, #32
+ 866 009a FFF7FEFF 		bl	rclc_executor_init
+ 867              	.LVL72:
+ 293:Core/Src/freertos.c **** 
+ 868              		.loc 1 293 3 view .LVU161
+ 869 009e 0024     		movs	r4, #0
+ 870 00a0 0094     		str	r4, [sp]
+ 871 00a2 714B     		ldr	r3, .L80+56
+ 872 00a4 3EAA     		add	r2, sp, #248
+ 873 00a6 4AA9     		add	r1, sp, #296
+ 874 00a8 08A8     		add	r0, sp, #32
+ 875 00aa FFF7FEFF 		bl	rclc_executor_add_subscription
+ 876              	.LVL73:
+ 295:Core/Src/freertos.c ****   pubmsg_2.hall_2 = 0;
+ 877              		.loc 1 295 3 view .LVU162
+ 295:Core/Src/freertos.c ****   pubmsg_2.hall_2 = 0;
+ 878              		.loc 1 295 19 is_stmt 0 view .LVU163
+ 879 00ae 4D94     		str	r4, [sp, #308]
+ 296:Core/Src/freertos.c **** 
+ 880              		.loc 1 296 3 is_stmt 1 view .LVU164
+ 296:Core/Src/freertos.c **** 
+ 881              		.loc 1 296 19 is_stmt 0 view .LVU165
+ 882 00b0 4B94     		str	r4, [sp, #300]
+ 883 00b2 5FE0     		b	.L73
+ 884              	.L75:
+ 236:Core/Src/freertos.c ****   }
+ 885              		.loc 1 236 7 is_stmt 1 view .LVU166
+ 886 00b4 EC21     		movs	r1, #236
+ 887 00b6 6D48     		ldr	r0, .L80+60
+ 888 00b8 FFF7FEFF 		bl	printf
+ 889              	.LVL74:
+ 890 00bc BCE7     		b	.L67
+ 891              	.LVL75:
+ 892              	.L76:
+ 893              	.LBB2:
+ 305:Core/Src/freertos.c ****     }
+ 894              		.loc 1 305 7 view .LVU167
+ 895 00be 40F23111 		movw	r1, #305
+ 896 00c2 6B48     		ldr	r0, .L80+64
+ 897              	.LVL76:
+ 305:Core/Src/freertos.c ****     }
+ 898              		.loc 1 305 7 is_stmt 0 view .LVU168
+ 899 00c4 FFF7FEFF 		bl	printf
+ 900              	.LVL77:
+ 901 00c8 61E0     		b	.L68
+ 902              	.L77:
+ 309:Core/Src/freertos.c ****     }
+ 903              		.loc 1 309 7 is_stmt 1 view .LVU169
+ 904 00ca 40F23511 		movw	r1, #309
+ 905 00ce 6848     		ldr	r0, .L80+64
+ 906 00d0 FFF7FEFF 		bl	printf
+ARM GAS  /tmp/ccaDI2zk.s 			page 27
+
+
+ 907              	.LVL78:
+ 908 00d4 5DE0     		b	.L69
+ 909              	.L78:
+ 324:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 910              		.loc 1 324 3 view .LVU170
+ 324:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 911              		.loc 1 324 9 is_stmt 0 view .LVU171
+ 912 00d6 674D     		ldr	r5, .L80+68
+ 913 00d8 95ED042B 		vldr.64	d2, [r5, #16]
+ 914 00dc 95ED021B 		vldr.64	d1, [r5, #8]
+ 915 00e0 95ED000B 		vldr.64	d0, [r5]
+ 916 00e4 FFF7FEFF 		bl	CAL_LinearSpeed
+ 917              	.LVL79:
+ 918 00e8 57EC106B 		vmov	r6, r7, d0
+ 324:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 919              		.loc 1 324 60 view .LVU172
+ 920 00ec 624C     		ldr	r4, .L80+72
+ 921              	.LVL80:
+ 324:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 922              		.loc 1 324 60 view .LVU173
+ 923 00ee 94ED042B 		vldr.64	d2, [r4, #16]
+ 924 00f2 94ED021B 		vldr.64	d1, [r4, #8]
+ 925 00f6 94ED000B 		vldr.64	d0, [r4]
+ 926 00fa FFF7FEFF 		bl	CAL_AngularSpeed
+ 927              	.LVL81:
+ 928 00fe 53EC102B 		vmov	r2, r3, d0
+ 324:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 929              		.loc 1 324 3 view .LVU174
+ 930 0102 3046     		mov	r0, r6
+ 931 0104 3946     		mov	r1, r7
+ 932 0106 FFF7FEFF 		bl	__aeabi_dadd
+ 933              	.LVL82:
+ 934 010a 41EC100B 		vmov	d0, r0, r1
+ 935 010e FFF7FEFF 		bl	PWM_R
+ 936              	.LVL83:
+ 325:Core/Src/freertos.c **** 	}
+ 937              		.loc 1 325 3 is_stmt 1 view .LVU175
+ 325:Core/Src/freertos.c **** 	}
+ 938              		.loc 1 325 9 is_stmt 0 view .LVU176
+ 939 0112 95ED042B 		vldr.64	d2, [r5, #16]
+ 940 0116 95ED021B 		vldr.64	d1, [r5, #8]
+ 941 011a 95ED000B 		vldr.64	d0, [r5]
+ 942 011e FFF7FEFF 		bl	CAL_LinearSpeed
+ 943              	.LVL84:
+ 944 0122 57EC106B 		vmov	r6, r7, d0
+ 325:Core/Src/freertos.c **** 	}
+ 945              		.loc 1 325 60 view .LVU177
+ 946 0126 94ED042B 		vldr.64	d2, [r4, #16]
+ 947 012a 94ED021B 		vldr.64	d1, [r4, #8]
+ 948 012e 94ED000B 		vldr.64	d0, [r4]
+ 949 0132 FFF7FEFF 		bl	CAL_AngularSpeed
+ 950              	.LVL85:
+ 951 0136 53EC102B 		vmov	r2, r3, d0
+ 325:Core/Src/freertos.c **** 	}
+ 952              		.loc 1 325 3 view .LVU178
+ 953 013a 3046     		mov	r0, r6
+ 954 013c 3946     		mov	r1, r7
+ARM GAS  /tmp/ccaDI2zk.s 			page 28
+
+
+ 955 013e FFF7FEFF 		bl	__aeabi_dsub
+ 956              	.LVL86:
+ 957 0142 41EC100B 		vmov	d0, r0, r1
+ 958 0146 FFF7FEFF 		bl	PWM_L
+ 959              	.LVL87:
+ 960              	.L71:
+ 337:Core/Src/freertos.c ****     RUN_RB(Run_State);
+ 961              		.loc 1 337 5 is_stmt 1 view .LVU179
+ 962 014a 4C4B     		ldr	r3, .L80+76
+ 963 014c 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 964 014e FFF7FEFF 		bl	RUN_DIR
+ 965              	.LVL88:
+ 338:Core/Src/freertos.c ****     MOTOR_SS(Motor_State);
+ 966              		.loc 1 338 5 view .LVU180
+ 967 0152 4B4B     		ldr	r3, .L80+80
+ 968 0154 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 969 0156 FFF7FEFF 		bl	RUN_RB
+ 970              	.LVL89:
+ 339:Core/Src/freertos.c **** 
+ 971              		.loc 1 339 5 view .LVU181
+ 972 015a 4A4B     		ldr	r3, .L80+84
+ 973 015c 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 974 015e FFF7FEFF 		bl	MOTOR_SS
+ 975              	.LVL90:
+ 341:Core/Src/freertos.c **** 
+ 976              		.loc 1 341 5 view .LVU182
+ 977 0162 494B     		ldr	r3, .L80+88
+ 978 0164 1A68     		ldr	r2, [r3]
+ 979 0166 D317     		asrs	r3, r2, #31
+ 980 0168 08A8     		add	r0, sp, #32
+ 981 016a FFF7FEFF 		bl	rclc_executor_spin_some
+ 982              	.LVL91:
+ 343:Core/Src/freertos.c ****       }
+ 983              		.loc 1 343 9 view .LVU183
+ 984 016e 0A20     		movs	r0, #10
+ 985 0170 FFF7FEFF 		bl	osDelay
+ 986              	.LVL92:
+ 987              	.LBE2:
+ 298:Core/Src/freertos.c ****   {
+ 988              		.loc 1 298 3 view .LVU184
+ 989              	.L73:
+ 298:Core/Src/freertos.c ****   {
+ 990              		.loc 1 298 3 view .LVU185
+ 991              	.LBB3:
+ 301:Core/Src/freertos.c **** 	 rcl_ret_t ret_2 = rcl_publish(&publisher_1, &pubmsg_1, NULL);
+ 992              		.loc 1 301 3 view .LVU186
+ 301:Core/Src/freertos.c **** 	 rcl_ret_t ret_2 = rcl_publish(&publisher_1, &pubmsg_1, NULL);
+ 993              		.loc 1 301 21 is_stmt 0 view .LVU187
+ 994 0174 0022     		movs	r2, #0
+ 995 0176 4BA9     		add	r1, sp, #300
+ 996 0178 4CA8     		add	r0, sp, #304
+ 997 017a FFF7FEFF 		bl	rcl_publish
+ 998              	.LVL93:
+ 999 017e 0446     		mov	r4, r0
+ 1000              	.LVL94:
+ 302:Core/Src/freertos.c ****     if (ret_2 != RCL_RET_OK)
+ 1001              		.loc 1 302 3 is_stmt 1 view .LVU188
+ARM GAS  /tmp/ccaDI2zk.s 			page 29
+
+
+ 302:Core/Src/freertos.c ****     if (ret_2 != RCL_RET_OK)
+ 1002              		.loc 1 302 21 is_stmt 0 view .LVU189
+ 1003 0180 0022     		movs	r2, #0
+ 1004 0182 4DA9     		add	r1, sp, #308
+ 1005 0184 4EA8     		add	r0, sp, #312
+ 1006              	.LVL95:
+ 302:Core/Src/freertos.c ****     if (ret_2 != RCL_RET_OK)
+ 1007              		.loc 1 302 21 view .LVU190
+ 1008 0186 FFF7FEFF 		bl	rcl_publish
+ 1009              	.LVL96:
+ 303:Core/Src/freertos.c ****     {
+ 1010              		.loc 1 303 5 is_stmt 1 view .LVU191
+ 303:Core/Src/freertos.c ****     {
+ 1011              		.loc 1 303 8 is_stmt 0 view .LVU192
+ 1012 018a 0028     		cmp	r0, #0
+ 1013 018c 97D1     		bne	.L76
+ 1014              	.LVL97:
+ 1015              	.L68:
+ 307:Core/Src/freertos.c ****     {
+ 1016              		.loc 1 307 5 is_stmt 1 view .LVU193
+ 307:Core/Src/freertos.c ****     {
+ 1017              		.loc 1 307 8 is_stmt 0 view .LVU194
+ 1018 018e 002C     		cmp	r4, #0
+ 1019 0190 9BD1     		bne	.L77
+ 1020              	.L69:
+ 315:Core/Src/freertos.c **** 	pubmsg_2.hall_2 = hall2;
+ 1021              		.loc 1 315 2 is_stmt 1 view .LVU195
+ 315:Core/Src/freertos.c **** 	pubmsg_2.hall_2 = hall2;
+ 1022              		.loc 1 315 18 is_stmt 0 view .LVU196
+ 1023 0192 3E49     		ldr	r1, .L80+92
+ 1024 0194 0B68     		ldr	r3, [r1]
+ 1025 0196 4D93     		str	r3, [sp, #308]
+ 316:Core/Src/freertos.c **** 
+ 1026              		.loc 1 316 2 is_stmt 1 view .LVU197
+ 316:Core/Src/freertos.c **** 
+ 1027              		.loc 1 316 18 is_stmt 0 view .LVU198
+ 1028 0198 3D4B     		ldr	r3, .L80+96
+ 1029 019a 1A68     		ldr	r2, [r3]
+ 1030 019c 4B92     		str	r2, [sp, #300]
+ 319:Core/Src/freertos.c **** 	hall2 = 0;
+ 1031              		.loc 1 319 2 is_stmt 1 view .LVU199
+ 319:Core/Src/freertos.c **** 	hall2 = 0;
+ 1032              		.loc 1 319 8 is_stmt 0 view .LVU200
+ 1033 019e 0022     		movs	r2, #0
+ 1034 01a0 0A60     		str	r2, [r1]
+ 320:Core/Src/freertos.c **** 
+ 1035              		.loc 1 320 2 is_stmt 1 view .LVU201
+ 320:Core/Src/freertos.c **** 
+ 1036              		.loc 1 320 8 is_stmt 0 view .LVU202
+ 1037 01a2 1A60     		str	r2, [r3]
+ 323:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1038              		.loc 1 323 2 is_stmt 1 view .LVU203
+ 323:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1039              		.loc 1 323 12 is_stmt 0 view .LVU204
+ 1040 01a4 3B4B     		ldr	r3, .L80+100
+ 1041 01a6 1B68     		ldr	r3, [r3]
+ 323:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ARM GAS  /tmp/ccaDI2zk.s 			page 30
+
+
+ 1042              		.loc 1 323 4 view .LVU205
+ 1043 01a8 012B     		cmp	r3, #1
+ 1044 01aa 94D0     		beq	.L78
+ 328:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1045              		.loc 1 328 7 is_stmt 1 view .LVU206
+ 328:Core/Src/freertos.c **** 		PWM_R(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) - CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1046              		.loc 1 328 9 is_stmt 0 view .LVU207
+ 1047 01ac 022B     		cmp	r3, #2
+ 1048 01ae 03D0     		beq	.L79
+ 334:Core/Src/freertos.c **** 	}
+ 1049              		.loc 1 334 3 is_stmt 1 view .LVU208
+ 334:Core/Src/freertos.c **** 	}
+ 1050              		.loc 1 334 13 is_stmt 0 view .LVU209
+ 1051 01b0 334B     		ldr	r3, .L80+80
+ 1052 01b2 4222     		movs	r2, #66
+ 1053 01b4 1A70     		strb	r2, [r3]
+ 1054 01b6 C8E7     		b	.L71
+ 1055              	.L79:
+ 329:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1056              		.loc 1 329 3 is_stmt 1 view .LVU210
+ 329:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1057              		.loc 1 329 9 is_stmt 0 view .LVU211
+ 1058 01b8 2E4D     		ldr	r5, .L80+68
+ 1059 01ba 95ED042B 		vldr.64	d2, [r5, #16]
+ 1060 01be 95ED021B 		vldr.64	d1, [r5, #8]
+ 1061 01c2 95ED000B 		vldr.64	d0, [r5]
+ 1062 01c6 FFF7FEFF 		bl	CAL_LinearSpeed
+ 1063              	.LVL98:
+ 1064 01ca 57EC106B 		vmov	r6, r7, d0
+ 329:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1065              		.loc 1 329 60 view .LVU212
+ 1066 01ce 2A4C     		ldr	r4, .L80+72
+ 1067              	.LVL99:
+ 329:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1068              		.loc 1 329 60 view .LVU213
+ 1069 01d0 94ED042B 		vldr.64	d2, [r4, #16]
+ 1070 01d4 94ED021B 		vldr.64	d1, [r4, #8]
+ 1071 01d8 94ED000B 		vldr.64	d0, [r4]
+ 1072 01dc FFF7FEFF 		bl	CAL_AngularSpeed
+ 1073              	.LVL100:
+ 1074 01e0 53EC102B 		vmov	r2, r3, d0
+ 329:Core/Src/freertos.c **** 		PWM_L(CAL_LinearSpeed(Linear.vx, Linear.vy, Linear.vz) + CAL_AngularSpeed(Angular.vx, Angular.vy,
+ 1075              		.loc 1 329 3 view .LVU214
+ 1076 01e4 3046     		mov	r0, r6
+ 1077 01e6 3946     		mov	r1, r7
+ 1078 01e8 FFF7FEFF 		bl	__aeabi_dsub
+ 1079              	.LVL101:
+ 1080 01ec 41EC100B 		vmov	d0, r0, r1
+ 1081 01f0 FFF7FEFF 		bl	PWM_R
+ 1082              	.LVL102:
+ 330:Core/Src/freertos.c **** 	}
+ 1083              		.loc 1 330 3 is_stmt 1 view .LVU215
+ 330:Core/Src/freertos.c **** 	}
+ 1084              		.loc 1 330 9 is_stmt 0 view .LVU216
+ 1085 01f4 95ED042B 		vldr.64	d2, [r5, #16]
+ 1086 01f8 95ED021B 		vldr.64	d1, [r5, #8]
+ 1087 01fc 95ED000B 		vldr.64	d0, [r5]
+ARM GAS  /tmp/ccaDI2zk.s 			page 31
+
+
+ 1088 0200 FFF7FEFF 		bl	CAL_LinearSpeed
+ 1089              	.LVL103:
+ 1090 0204 57EC106B 		vmov	r6, r7, d0
+ 330:Core/Src/freertos.c **** 	}
+ 1091              		.loc 1 330 60 view .LVU217
+ 1092 0208 94ED042B 		vldr.64	d2, [r4, #16]
+ 1093 020c 94ED021B 		vldr.64	d1, [r4, #8]
+ 1094 0210 94ED000B 		vldr.64	d0, [r4]
+ 1095 0214 FFF7FEFF 		bl	CAL_AngularSpeed
+ 1096              	.LVL104:
+ 1097 0218 53EC102B 		vmov	r2, r3, d0
+ 330:Core/Src/freertos.c **** 	}
+ 1098              		.loc 1 330 3 view .LVU218
+ 1099 021c 3046     		mov	r0, r6
+ 1100 021e 3946     		mov	r1, r7
+ 1101 0220 FFF7FEFF 		bl	__aeabi_dadd
+ 1102              	.LVL105:
+ 1103 0224 41EC100B 		vmov	d0, r0, r1
+ 1104 0228 FFF7FEFF 		bl	PWM_L
+ 1105              	.LVL106:
+ 1106 022c 8DE7     		b	.L71
+ 1107              	.L81:
+ 1108 022e 00BF     		.align	2
+ 1109              	.L80:
+ 1110 0230 00000000 		.word	cubemx_transport_read
+ 1111 0234 00000000 		.word	cubemx_transport_write
+ 1112 0238 00000000 		.word	cubemx_transport_close
+ 1113 023c 00000000 		.word	cubemx_transport_open
+ 1114 0240 00000000 		.word	huart3
+ 1115 0244 00000000 		.word	microros_allocate
+ 1116 0248 00000000 		.word	microros_deallocate
+ 1117 024c 00000000 		.word	microros_reallocate
+ 1118 0250 00000000 		.word	microros_zero_allocate
+ 1119 0254 28000000 		.word	.LC1
+ 1120 0258 2C000000 		.word	.LC2
+ 1121 025c 38000000 		.word	.LC3
+ 1122 0260 40000000 		.word	.LC4
+ 1123 0264 48000000 		.word	.LC5
+ 1124 0268 00000000 		.word	twist_subscription_callback
+ 1125 026c 00000000 		.word	.LC0
+ 1126 0270 74000000 		.word	.LC6
+ 1127 0274 00000000 		.word	.LANCHOR5
+ 1128 0278 00000000 		.word	.LANCHOR6
+ 1129 027c 00000000 		.word	.LANCHOR8
+ 1130 0280 00000000 		.word	.LANCHOR7
+ 1131 0284 00000000 		.word	.LANCHOR9
+ 1132 0288 00000000 		.word	.LANCHOR10
+ 1133 028c 00000000 		.word	.LANCHOR2
+ 1134 0290 00000000 		.word	.LANCHOR3
+ 1135 0294 00000000 		.word	.LANCHOR4
+ 1136              	.LBE3:
+ 1137              		.cfi_endproc
+ 1138              	.LFE143:
+ 1140              		.global	__aeabi_dcmpeq
+ 1141              		.section	.text.MOTION_MODE,"ax",%progbits
+ 1142              		.align	1
+ 1143              		.global	MOTION_MODE
+ARM GAS  /tmp/ccaDI2zk.s 			page 32
+
+
+ 1144              		.syntax unified
+ 1145              		.thumb
+ 1146              		.thumb_func
+ 1148              	MOTION_MODE:
+ 1149              	.LVL107:
+ 1150              	.LFB154:
+ 485:Core/Src/freertos.c **** 
+ 486:Core/Src/freertos.c **** 	void MOTION_MODE(double lx, double ly, double lz, double ax, double ay, double az)
+ 487:Core/Src/freertos.c **** 	{
+ 1151              		.loc 1 487 2 is_stmt 1 view -0
+ 1152              		.cfi_startproc
+ 1153              		@ args = 0, pretend = 0, frame = 0
+ 1154              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1155              		.loc 1 487 2 is_stmt 0 view .LVU220
+ 1156 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1157              	.LCFI12:
+ 1158              		.cfi_def_cfa_offset 24
+ 1159              		.cfi_offset 3, -24
+ 1160              		.cfi_offset 4, -20
+ 1161              		.cfi_offset 5, -16
+ 1162              		.cfi_offset 6, -12
+ 1163              		.cfi_offset 7, -8
+ 1164              		.cfi_offset 14, -4
+ 1165 0002 51EC100B 		vmov	r0, r1, d0
+ 1166 0006 57EC116B 		vmov	r6, r7, d1
+ 1167 000a 55EC154B 		vmov	r4, r5, d5
+ 488:Core/Src/freertos.c **** 	    if(lx == 0 && ly == 0) {
+ 1168              		.loc 1 488 6 is_stmt 1 view .LVU221
+ 1169              		.loc 1 488 8 is_stmt 0 view .LVU222
+ 1170 000e 0022     		movs	r2, #0
+ 1171 0010 0023     		movs	r3, #0
+ 1172 0012 FFF7FEFF 		bl	__aeabi_dcmpeq
+ 1173              	.LVL108:
+ 1174              		.loc 1 488 8 view .LVU223
+ 1175 0016 50B1     		cbz	r0, .L83
+ 1176              		.loc 1 488 17 discriminator 1 view .LVU224
+ 1177 0018 0022     		movs	r2, #0
+ 1178 001a 0023     		movs	r3, #0
+ 1179 001c 3046     		mov	r0, r6
+ 1180 001e 3946     		mov	r1, r7
+ 1181 0020 FFF7FEFF 		bl	__aeabi_dcmpeq
+ 1182              	.LVL109:
+ 1183 0024 18B1     		cbz	r0, .L83
+ 489:Core/Src/freertos.c **** 	        m_mode = 0; // 정지
+ 1184              		.loc 1 489 10 is_stmt 1 view .LVU225
+ 1185              		.loc 1 489 17 is_stmt 0 view .LVU226
+ 1186 0026 094B     		ldr	r3, .L95
+ 1187 0028 0022     		movs	r2, #0
+ 1188 002a 1A60     		str	r2, [r3]
+ 1189 002c 09E0     		b	.L82
+ 1190              	.L83:
+ 490:Core/Src/freertos.c **** 	    }
+ 491:Core/Src/freertos.c **** 	    else {
+ 492:Core/Src/freertos.c **** 	    	if(az < 0){
+ 1191              		.loc 1 492 7 is_stmt 1 view .LVU227
+ 1192              		.loc 1 492 9 is_stmt 0 view .LVU228
+ 1193 002e 0022     		movs	r2, #0
+ARM GAS  /tmp/ccaDI2zk.s 			page 33
+
+
+ 1194 0030 0023     		movs	r3, #0
+ 1195 0032 2046     		mov	r0, r4
+ 1196 0034 2946     		mov	r1, r5
+ 1197 0036 FFF7FEFF 		bl	__aeabi_dcmplt
+ 1198              	.LVL110:
+ 1199 003a 18B9     		cbnz	r0, .L94
+ 493:Core/Src/freertos.c **** 		        m_mode = 2;
+ 494:Core/Src/freertos.c **** 	    	}
+ 495:Core/Src/freertos.c **** 	    	else{
+ 496:Core/Src/freertos.c **** 	    		m_mode = 1;
+ 1200              		.loc 1 496 8 is_stmt 1 view .LVU229
+ 1201              		.loc 1 496 15 is_stmt 0 view .LVU230
+ 1202 003c 034B     		ldr	r3, .L95
+ 1203 003e 0122     		movs	r2, #1
+ 1204 0040 1A60     		str	r2, [r3]
+ 1205              	.L82:
+ 497:Core/Src/freertos.c **** 	    	}
+ 498:Core/Src/freertos.c **** 	    }
+ 499:Core/Src/freertos.c **** 	}
+ 1206              		.loc 1 499 2 view .LVU231
+ 1207 0042 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1208              	.LVL111:
+ 1209              	.L94:
+ 493:Core/Src/freertos.c **** 		        m_mode = 2;
+ 1210              		.loc 1 493 11 is_stmt 1 view .LVU232
+ 493:Core/Src/freertos.c **** 		        m_mode = 2;
+ 1211              		.loc 1 493 18 is_stmt 0 view .LVU233
+ 1212 0044 014B     		ldr	r3, .L95
+ 1213 0046 0222     		movs	r2, #2
+ 1214 0048 1A60     		str	r2, [r3]
+ 1215 004a FAE7     		b	.L82
+ 1216              	.L96:
+ 1217              		.align	2
+ 1218              	.L95:
+ 1219 004c 00000000 		.word	.LANCHOR4
+ 1220              		.cfi_endproc
+ 1221              	.LFE154:
+ 1223              		.section	.text.twist_subscription_callback,"ax",%progbits
+ 1224              		.align	1
+ 1225              		.global	twist_subscription_callback
+ 1226              		.syntax unified
+ 1227              		.thumb
+ 1228              		.thumb_func
+ 1230              	twist_subscription_callback:
+ 1231              	.LVL112:
+ 1232              	.LFB144:
+ 353:Core/Src/freertos.c **** 	    const geometry_msgs__msg__Twist * msg = (const geometry_msgs__msg__Twist *)msgin;
+ 1233              		.loc 1 353 2 is_stmt 1 view -0
+ 1234              		.cfi_startproc
+ 1235              		@ args = 0, pretend = 0, frame = 0
+ 1236              		@ frame_needed = 0, uses_anonymous_args = 0
+ 353:Core/Src/freertos.c **** 	    const geometry_msgs__msg__Twist * msg = (const geometry_msgs__msg__Twist *)msgin;
+ 1237              		.loc 1 353 2 is_stmt 0 view .LVU235
+ 1238 0000 10B5     		push	{r4, lr}
+ 1239              	.LCFI13:
+ 1240              		.cfi_def_cfa_offset 8
+ 1241              		.cfi_offset 4, -8
+ARM GAS  /tmp/ccaDI2zk.s 			page 34
+
+
+ 1242              		.cfi_offset 14, -4
+ 1243 0002 0446     		mov	r4, r0
+ 354:Core/Src/freertos.c **** 
+ 1244              		.loc 1 354 6 is_stmt 1 view .LVU236
+ 1245              	.LVL113:
+ 356:Core/Src/freertos.c **** 
+ 1246              		.loc 1 356 6 view .LVU237
+ 1247 0004 4FF40061 		mov	r1, #2048
+ 1248 0008 0F48     		ldr	r0, .L99
+ 1249              	.LVL114:
+ 356:Core/Src/freertos.c **** 
+ 1250              		.loc 1 356 6 is_stmt 0 view .LVU238
+ 1251 000a FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 1252              	.LVL115:
+ 358:Core/Src/freertos.c **** 		Linear.vy = msg->linear.y;
+ 1253              		.loc 1 358 3 is_stmt 1 view .LVU239
+ 358:Core/Src/freertos.c **** 		Linear.vy = msg->linear.y;
+ 1254              		.loc 1 358 26 is_stmt 0 view .LVU240
+ 1255 000e 94ED000B 		vldr.64	d0, [r4]
+ 358:Core/Src/freertos.c **** 		Linear.vy = msg->linear.y;
+ 1256              		.loc 1 358 13 view .LVU241
+ 1257 0012 0E4B     		ldr	r3, .L99+4
+ 1258 0014 83ED000B 		vstr.64	d0, [r3]
+ 359:Core/Src/freertos.c **** 		Linear.vz = msg->linear.z;
+ 1259              		.loc 1 359 3 is_stmt 1 view .LVU242
+ 359:Core/Src/freertos.c **** 		Linear.vz = msg->linear.z;
+ 1260              		.loc 1 359 26 is_stmt 0 view .LVU243
+ 1261 0018 94ED021B 		vldr.64	d1, [r4, #8]
+ 359:Core/Src/freertos.c **** 		Linear.vz = msg->linear.z;
+ 1262              		.loc 1 359 13 view .LVU244
+ 1263 001c 83ED021B 		vstr.64	d1, [r3, #8]
+ 360:Core/Src/freertos.c **** 
+ 1264              		.loc 1 360 3 is_stmt 1 view .LVU245
+ 360:Core/Src/freertos.c **** 
+ 1265              		.loc 1 360 26 is_stmt 0 view .LVU246
+ 1266 0020 94ED042B 		vldr.64	d2, [r4, #16]
+ 360:Core/Src/freertos.c **** 
+ 1267              		.loc 1 360 13 view .LVU247
+ 1268 0024 83ED042B 		vstr.64	d2, [r3, #16]
+ 362:Core/Src/freertos.c **** 		Angular.vy = msg->angular.y;
+ 1269              		.loc 1 362 3 is_stmt 1 view .LVU248
+ 362:Core/Src/freertos.c **** 		Angular.vy = msg->angular.y;
+ 1270              		.loc 1 362 28 is_stmt 0 view .LVU249
+ 1271 0028 94ED063B 		vldr.64	d3, [r4, #24]
+ 362:Core/Src/freertos.c **** 		Angular.vy = msg->angular.y;
+ 1272              		.loc 1 362 14 view .LVU250
+ 1273 002c 084B     		ldr	r3, .L99+8
+ 1274 002e 83ED003B 		vstr.64	d3, [r3]
+ 363:Core/Src/freertos.c **** 		Angular.vz = msg->angular.z;
+ 1275              		.loc 1 363 3 is_stmt 1 view .LVU251
+ 363:Core/Src/freertos.c **** 		Angular.vz = msg->angular.z;
+ 1276              		.loc 1 363 28 is_stmt 0 view .LVU252
+ 1277 0032 94ED084B 		vldr.64	d4, [r4, #32]
+ 363:Core/Src/freertos.c **** 		Angular.vz = msg->angular.z;
+ 1278              		.loc 1 363 14 view .LVU253
+ 1279 0036 83ED024B 		vstr.64	d4, [r3, #8]
+ 364:Core/Src/freertos.c **** 
+ARM GAS  /tmp/ccaDI2zk.s 			page 35
+
+
+ 1280              		.loc 1 364 3 is_stmt 1 view .LVU254
+ 364:Core/Src/freertos.c **** 
+ 1281              		.loc 1 364 28 is_stmt 0 view .LVU255
+ 1282 003a 94ED0A5B 		vldr.64	d5, [r4, #40]
+ 364:Core/Src/freertos.c **** 
+ 1283              		.loc 1 364 14 view .LVU256
+ 1284 003e 83ED045B 		vstr.64	d5, [r3, #16]
+ 366:Core/Src/freertos.c **** 	}
+ 1285              		.loc 1 366 3 is_stmt 1 view .LVU257
+ 1286 0042 FFF7FEFF 		bl	MOTION_MODE
+ 1287              	.LVL116:
+ 367:Core/Src/freertos.c **** 
+ 1288              		.loc 1 367 2 is_stmt 0 view .LVU258
+ 1289 0046 10BD     		pop	{r4, pc}
+ 1290              	.LVL117:
+ 1291              	.L100:
+ 367:Core/Src/freertos.c **** 
+ 1292              		.loc 1 367 2 view .LVU259
+ 1293              		.align	2
+ 1294              	.L99:
+ 1295 0048 00040240 		.word	1073873920
+ 1296 004c 00000000 		.word	.LANCHOR5
+ 1297 0050 00000000 		.word	.LANCHOR6
+ 1298              		.cfi_endproc
+ 1299              	.LFE144:
+ 1301              		.global	defaultTask_attributes
+ 1302              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 1303              		.align	2
+ 1304              	.LC7:
+ 1305 0000 64656661 		.ascii	"defaultTask\000"
+ 1305      756C7454 
+ 1305      61736B00 
+ 1306              		.global	defaultTaskControlBlock
+ 1307              		.global	defaultTaskBuffer
+ 1308              		.global	defaultTaskHandle
+ 1309              		.global	timeout
+ 1310              		.global	angle
+ 1311              		.global	m_mode
+ 1312              		.global	Angular
+ 1313              		.global	Linear
+ 1314              		.global	hall2
+ 1315              		.global	hall1
+ 1316              		.global	m2_rpm_p_10
+ 1317              		.global	m1_rpm_p_10
+ 1318              		.global	m2_rpm_p
+ 1319              		.global	m1_rpm_p
+ 1320              		.global	m2_rpm
+ 1321              		.global	m1_rpm
+ 1322              		.global	m2_deg_1_10
+ 1323              		.global	m1_deg_1_10
+ 1324              		.global	m2_deg_10_p
+ 1325              		.global	m1_deg_10_p
+ 1326              		.global	m2_deg_10
+ 1327              		.global	m1_deg_10
+ 1328              		.global	m2_deg
+ 1329              		.global	m1_deg
+ 1330              		.global	m2_rev
+ARM GAS  /tmp/ccaDI2zk.s 			page 36
+
+
+ 1331              		.global	m1_rev
+ 1332              		.global	m2_hall
+ 1333              		.global	m1_hall
+ 1334              		.global	angular_velocity_z
+ 1335              		.global	angular_velocity_y
+ 1336              		.global	angular_velocity_x
+ 1337              		.global	linear_velocity_z
+ 1338              		.global	linear_velocity_y
+ 1339              		.global	linear_velocity_x
+ 1340              		.global	Run_Dir
+ 1341              		.global	Motor_State
+ 1342              		.global	Run_State
+ 1343              		.section	.bss.Angular,"aw",%nobits
+ 1344              		.align	3
+ 1345              		.set	.LANCHOR6,. + 0
+ 1348              	Angular:
+ 1349 0000 00000000 		.space	24
+ 1349      00000000 
+ 1349      00000000 
+ 1349      00000000 
+ 1349      00000000 
+ 1350              		.section	.bss.Linear,"aw",%nobits
+ 1351              		.align	3
+ 1352              		.set	.LANCHOR5,. + 0
+ 1355              	Linear:
+ 1356 0000 00000000 		.space	24
+ 1356      00000000 
+ 1356      00000000 
+ 1356      00000000 
+ 1356      00000000 
+ 1357              		.section	.bss.Motor_State,"aw",%nobits
+ 1358              		.set	.LANCHOR9,. + 0
+ 1361              	Motor_State:
+ 1362 0000 00       		.space	1
+ 1363              		.section	.bss.Run_Dir,"aw",%nobits
+ 1364              		.set	.LANCHOR8,. + 0
+ 1367              	Run_Dir:
+ 1368 0000 00       		.space	1
+ 1369              		.section	.bss.Run_State,"aw",%nobits
+ 1370              		.set	.LANCHOR7,. + 0
+ 1373              	Run_State:
+ 1374 0000 00       		.space	1
+ 1375              		.section	.bss.angle,"aw",%nobits
+ 1376              		.align	3
+ 1379              	angle:
+ 1380 0000 00000000 		.space	8
+ 1380      00000000 
+ 1381              		.section	.bss.angular_velocity_x,"aw",%nobits
+ 1382              		.align	2
+ 1385              	angular_velocity_x:
+ 1386 0000 00000000 		.space	4
+ 1387              		.section	.bss.angular_velocity_y,"aw",%nobits
+ 1388              		.align	2
+ 1391              	angular_velocity_y:
+ 1392 0000 00000000 		.space	4
+ 1393              		.section	.bss.angular_velocity_z,"aw",%nobits
+ 1394              		.align	2
+ARM GAS  /tmp/ccaDI2zk.s 			page 37
+
+
+ 1397              	angular_velocity_z:
+ 1398 0000 00000000 		.space	4
+ 1399              		.section	.bss.defaultTaskBuffer,"aw",%nobits
+ 1400              		.align	2
+ 1403              	defaultTaskBuffer:
+ 1404 0000 00000000 		.space	12000
+ 1404      00000000 
+ 1404      00000000 
+ 1404      00000000 
+ 1404      00000000 
+ 1405              		.section	.bss.defaultTaskControlBlock,"aw",%nobits
+ 1406              		.align	2
+ 1409              	defaultTaskControlBlock:
+ 1410 0000 00000000 		.space	92
+ 1410      00000000 
+ 1410      00000000 
+ 1410      00000000 
+ 1410      00000000 
+ 1411              		.section	.bss.defaultTaskHandle,"aw",%nobits
+ 1412              		.align	2
+ 1413              		.set	.LANCHOR1,. + 0
+ 1416              	defaultTaskHandle:
+ 1417 0000 00000000 		.space	4
+ 1418              		.section	.bss.hall1,"aw",%nobits
+ 1419              		.align	2
+ 1420              		.set	.LANCHOR2,. + 0
+ 1423              	hall1:
+ 1424 0000 00000000 		.space	4
+ 1425              		.section	.bss.hall2,"aw",%nobits
+ 1426              		.align	2
+ 1427              		.set	.LANCHOR3,. + 0
+ 1430              	hall2:
+ 1431 0000 00000000 		.space	4
+ 1432              		.section	.bss.linear_velocity_x,"aw",%nobits
+ 1433              		.align	2
+ 1436              	linear_velocity_x:
+ 1437 0000 00000000 		.space	4
+ 1438              		.section	.bss.linear_velocity_y,"aw",%nobits
+ 1439              		.align	2
+ 1442              	linear_velocity_y:
+ 1443 0000 00000000 		.space	4
+ 1444              		.section	.bss.linear_velocity_z,"aw",%nobits
+ 1445              		.align	2
+ 1448              	linear_velocity_z:
+ 1449 0000 00000000 		.space	4
+ 1450              		.section	.bss.m1_deg,"aw",%nobits
+ 1451              		.align	2
+ 1454              	m1_deg:
+ 1455 0000 00000000 		.space	4
+ 1456              		.section	.bss.m1_deg_10,"aw",%nobits
+ 1457              		.align	2
+ 1460              	m1_deg_10:
+ 1461 0000 00000000 		.space	4
+ 1462              		.section	.bss.m1_deg_10_p,"aw",%nobits
+ 1463              		.align	2
+ 1466              	m1_deg_10_p:
+ 1467 0000 00000000 		.space	4
+ARM GAS  /tmp/ccaDI2zk.s 			page 38
+
+
+ 1468              		.section	.bss.m1_deg_1_10,"aw",%nobits
+ 1469              		.align	2
+ 1472              	m1_deg_1_10:
+ 1473 0000 00000000 		.space	4
+ 1474              		.section	.bss.m1_hall,"aw",%nobits
+ 1475              		.align	2
+ 1478              	m1_hall:
+ 1479 0000 00000000 		.space	4
+ 1480              		.section	.bss.m1_rev,"aw",%nobits
+ 1481              		.align	2
+ 1484              	m1_rev:
+ 1485 0000 00000000 		.space	4
+ 1486              		.section	.bss.m1_rpm,"aw",%nobits
+ 1487              		.align	2
+ 1490              	m1_rpm:
+ 1491 0000 00000000 		.space	4
+ 1492              		.section	.bss.m1_rpm_p,"aw",%nobits
+ 1493              		.align	2
+ 1496              	m1_rpm_p:
+ 1497 0000 00000000 		.space	4
+ 1498              		.section	.bss.m1_rpm_p_10,"aw",%nobits
+ 1499              		.align	2
+ 1502              	m1_rpm_p_10:
+ 1503 0000 00000000 		.space	4
+ 1504              		.section	.bss.m2_deg,"aw",%nobits
+ 1505              		.align	2
+ 1508              	m2_deg:
+ 1509 0000 00000000 		.space	4
+ 1510              		.section	.bss.m2_deg_10,"aw",%nobits
+ 1511              		.align	2
+ 1514              	m2_deg_10:
+ 1515 0000 00000000 		.space	4
+ 1516              		.section	.bss.m2_deg_10_p,"aw",%nobits
+ 1517              		.align	2
+ 1520              	m2_deg_10_p:
+ 1521 0000 00000000 		.space	4
+ 1522              		.section	.bss.m2_deg_1_10,"aw",%nobits
+ 1523              		.align	2
+ 1526              	m2_deg_1_10:
+ 1527 0000 00000000 		.space	4
+ 1528              		.section	.bss.m2_hall,"aw",%nobits
+ 1529              		.align	2
+ 1532              	m2_hall:
+ 1533 0000 00000000 		.space	4
+ 1534              		.section	.bss.m2_rev,"aw",%nobits
+ 1535              		.align	2
+ 1538              	m2_rev:
+ 1539 0000 00000000 		.space	4
+ 1540              		.section	.bss.m2_rpm,"aw",%nobits
+ 1541              		.align	2
+ 1544              	m2_rpm:
+ 1545 0000 00000000 		.space	4
+ 1546              		.section	.bss.m2_rpm_p,"aw",%nobits
+ 1547              		.align	2
+ 1550              	m2_rpm_p:
+ 1551 0000 00000000 		.space	4
+ 1552              		.section	.bss.m2_rpm_p_10,"aw",%nobits
+ARM GAS  /tmp/ccaDI2zk.s 			page 39
+
+
+ 1553              		.align	2
+ 1556              	m2_rpm_p_10:
+ 1557 0000 00000000 		.space	4
+ 1558              		.section	.bss.m_mode,"aw",%nobits
+ 1559              		.align	2
+ 1560              		.set	.LANCHOR4,. + 0
+ 1563              	m_mode:
+ 1564 0000 00000000 		.space	4
+ 1565              		.section	.data.timeout,"aw"
+ 1566              		.align	2
+ 1567              		.set	.LANCHOR10,. + 0
+ 1570              	timeout:
+ 1571 0000 80969800 		.word	10000000
+ 1572              		.section	.rodata.defaultTask_attributes,"a"
+ 1573              		.align	2
+ 1574              		.set	.LANCHOR0,. + 0
+ 1577              	defaultTask_attributes:
+ 1578 0000 00000000 		.word	.LC7
+ 1579 0004 00000000 		.space	4
+ 1580 0008 00000000 		.word	defaultTaskControlBlock
+ 1581 000c 5C000000 		.word	92
+ 1582 0010 00000000 		.word	defaultTaskBuffer
+ 1583 0014 E02E0000 		.word	12000
+ 1584 0018 18000000 		.word	24
+ 1585 001c 00000000 		.space	8
+ 1585      00000000 
+ 1586              		.text
+ 1587              	.Letext0:
+ 1588              		.file 2 "/opt/st/stm32cubeide_1.14.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-
+ 1589              		.file 3 "/opt/st/stm32cubeide_1.14.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-
+ 1590              		.file 4 "/opt/st/stm32cubeide_1.14.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-
+ 1591              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h"
+ 1592              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h"
+ 1593              		.file 7 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
+ 1594              		.file 8 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
+ 1595              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 1596              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 1597              		.file 11 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 1598              		.file 12 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+ 1599              		.file 13 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 1600              		.file 14 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+ 1601              		.file 15 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcutils
+ 1602              		.file 16 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/all
+ 1603              		.file 17 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw/ret
+ 1604              		.file 18 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcutils
+ 1605              		.file 19 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw/typ
+ 1606              		.file 20 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/typ
+ 1607              		.file 21 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/ini
+ 1608              		.file 22 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/con
+ 1609              		.file 23 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/nod
+ 1610              		.file 24 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rosidl_
+ 1611              		.file 25 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/pub
+ 1612              		.file 26 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/sub
+ 1613              		.file 27 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/cli
+ 1614              		.file 28 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/gua
+ 1615              		.file 29 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/ser
+ 1616              		.file 30 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/tim
+ARM GAS  /tmp/ccaDI2zk.s 			page 40
+
+
+ 1617              		.file 31 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw/qos
+ 1618              		.file 32 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/tim
+ 1619              		.file 33 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/eve
+ 1620              		.file 34 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/wai
+ 1621              		.file 35 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/ty
+ 1622              		.file 36 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/ex
+ 1623              		.file 37 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/ex
+ 1624              		.file 38 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/uxr/cli
+ 1625              		.file 39 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/uxr/cli
+ 1626              		.file 40 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/uxr/cli
+ 1627              		.file 41 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/std_msg
+ 1628              		.file 42 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/geometr
+ 1629              		.file 43 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/geometr
+ 1630              		.file 44 "Core/Inc/usart.h"
+ 1631              		.file 45 "Core/Inc/tim.h"
+ 1632              		.file 46 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/su
+ 1633              		.file 47 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/geometr
+ 1634              		.file 48 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/pu
+ 1635              		.file 49 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/std_msg
+ 1636              		.file 50 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/no
+ 1637              		.file 51 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/in
+ 1638              		.file 52 "/opt/st/stm32cubeide_1.14.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for
+ 1639              		.file 53 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw_mic
+ARM GAS  /tmp/ccaDI2zk.s 			page 41
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 freertos.c
+     /tmp/ccaDI2zk.s:20     .text.MX_FREERTOS_Init:0000000000000000 $t
+     /tmp/ccaDI2zk.s:26     .text.MX_FREERTOS_Init:0000000000000000 MX_FREERTOS_Init
+     /tmp/ccaDI2zk.s:53     .text.MX_FREERTOS_Init:0000000000000014 $d
+     /tmp/ccaDI2zk.s:737    .text.StartDefaultTask:0000000000000000 StartDefaultTask
+     /tmp/ccaDI2zk.s:60     .text.RUN_INIT:0000000000000000 $t
+     /tmp/ccaDI2zk.s:66     .text.RUN_INIT:0000000000000000 RUN_INIT
+     /tmp/ccaDI2zk.s:107    .text.RUN_INIT:0000000000000034 $d
+     /tmp/ccaDI2zk.s:114    .text.RUN_DIR:0000000000000000 $t
+     /tmp/ccaDI2zk.s:120    .text.RUN_DIR:0000000000000000 RUN_DIR
+     /tmp/ccaDI2zk.s:141    .text.RUN_DIR:000000000000000c $d
+     /tmp/ccaDI2zk.s:221    .text.RUN_DIR:0000000000000084 $d
+     /tmp/ccaDI2zk.s:226    .text.RUN_RB:0000000000000000 $t
+     /tmp/ccaDI2zk.s:232    .text.RUN_RB:0000000000000000 RUN_RB
+     /tmp/ccaDI2zk.s:295    .text.RUN_RB:000000000000003c $d
+     /tmp/ccaDI2zk.s:301    .text.MOTOR_SS:0000000000000000 $t
+     /tmp/ccaDI2zk.s:307    .text.MOTOR_SS:0000000000000000 MOTOR_SS
+     /tmp/ccaDI2zk.s:370    .text.MOTOR_SS:000000000000003c $d
+     /tmp/ccaDI2zk.s:376    .text.HAL_TIM_IC_CaptureCallback:0000000000000000 $t
+     /tmp/ccaDI2zk.s:382    .text.HAL_TIM_IC_CaptureCallback:0000000000000000 HAL_TIM_IC_CaptureCallback
+     /tmp/ccaDI2zk.s:505    .text.HAL_TIM_IC_CaptureCallback:0000000000000080 $d
+     /tmp/ccaDI2zk.s:514    .text.PWM_R:0000000000000000 $t
+     /tmp/ccaDI2zk.s:520    .text.PWM_R:0000000000000000 PWM_R
+     /tmp/ccaDI2zk.s:547    .text.PWM_R:0000000000000014 $d
+     /tmp/ccaDI2zk.s:552    .text.PWM_L:0000000000000000 $t
+     /tmp/ccaDI2zk.s:558    .text.PWM_L:0000000000000000 PWM_L
+     /tmp/ccaDI2zk.s:585    .text.PWM_L:0000000000000014 $d
+     /tmp/ccaDI2zk.s:592    .text.CAL_LinearSpeed:0000000000000000 $t
+     /tmp/ccaDI2zk.s:598    .text.CAL_LinearSpeed:0000000000000000 CAL_LinearSpeed
+     /tmp/ccaDI2zk.s:653    .text.CAL_LinearSpeed:0000000000000038 $d
+     /tmp/ccaDI2zk.s:660    .text.CAL_AngularSpeed:0000000000000000 $t
+     /tmp/ccaDI2zk.s:666    .text.CAL_AngularSpeed:0000000000000000 CAL_AngularSpeed
+     /tmp/ccaDI2zk.s:700    .text.CAL_AngularSpeed:0000000000000020 $d
+     /tmp/ccaDI2zk.s:707    .rodata.StartDefaultTask.str1.4:0000000000000000 $d
+     /tmp/ccaDI2zk.s:731    .text.StartDefaultTask:0000000000000000 $t
+     /tmp/ccaDI2zk.s:1110   .text.StartDefaultTask:0000000000000230 $d
+     /tmp/ccaDI2zk.s:1230   .text.twist_subscription_callback:0000000000000000 twist_subscription_callback
+     /tmp/ccaDI2zk.s:1142   .text.MOTION_MODE:0000000000000000 $t
+     /tmp/ccaDI2zk.s:1148   .text.MOTION_MODE:0000000000000000 MOTION_MODE
+     /tmp/ccaDI2zk.s:1219   .text.MOTION_MODE:000000000000004c $d
+     /tmp/ccaDI2zk.s:1224   .text.twist_subscription_callback:0000000000000000 $t
+     /tmp/ccaDI2zk.s:1295   .text.twist_subscription_callback:0000000000000048 $d
+     /tmp/ccaDI2zk.s:1577   .rodata.defaultTask_attributes:0000000000000000 defaultTask_attributes
+     /tmp/ccaDI2zk.s:1303   .rodata.str1.4:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1409   .bss.defaultTaskControlBlock:0000000000000000 defaultTaskControlBlock
+     /tmp/ccaDI2zk.s:1403   .bss.defaultTaskBuffer:0000000000000000 defaultTaskBuffer
+     /tmp/ccaDI2zk.s:1416   .bss.defaultTaskHandle:0000000000000000 defaultTaskHandle
+     /tmp/ccaDI2zk.s:1570   .data.timeout:0000000000000000 timeout
+     /tmp/ccaDI2zk.s:1379   .bss.angle:0000000000000000 angle
+     /tmp/ccaDI2zk.s:1563   .bss.m_mode:0000000000000000 m_mode
+     /tmp/ccaDI2zk.s:1348   .bss.Angular:0000000000000000 Angular
+     /tmp/ccaDI2zk.s:1355   .bss.Linear:0000000000000000 Linear
+     /tmp/ccaDI2zk.s:1430   .bss.hall2:0000000000000000 hall2
+     /tmp/ccaDI2zk.s:1423   .bss.hall1:0000000000000000 hall1
+     /tmp/ccaDI2zk.s:1556   .bss.m2_rpm_p_10:0000000000000000 m2_rpm_p_10
+     /tmp/ccaDI2zk.s:1502   .bss.m1_rpm_p_10:0000000000000000 m1_rpm_p_10
+ARM GAS  /tmp/ccaDI2zk.s 			page 42
+
+
+     /tmp/ccaDI2zk.s:1550   .bss.m2_rpm_p:0000000000000000 m2_rpm_p
+     /tmp/ccaDI2zk.s:1496   .bss.m1_rpm_p:0000000000000000 m1_rpm_p
+     /tmp/ccaDI2zk.s:1544   .bss.m2_rpm:0000000000000000 m2_rpm
+     /tmp/ccaDI2zk.s:1490   .bss.m1_rpm:0000000000000000 m1_rpm
+     /tmp/ccaDI2zk.s:1526   .bss.m2_deg_1_10:0000000000000000 m2_deg_1_10
+     /tmp/ccaDI2zk.s:1472   .bss.m1_deg_1_10:0000000000000000 m1_deg_1_10
+     /tmp/ccaDI2zk.s:1520   .bss.m2_deg_10_p:0000000000000000 m2_deg_10_p
+     /tmp/ccaDI2zk.s:1466   .bss.m1_deg_10_p:0000000000000000 m1_deg_10_p
+     /tmp/ccaDI2zk.s:1514   .bss.m2_deg_10:0000000000000000 m2_deg_10
+     /tmp/ccaDI2zk.s:1460   .bss.m1_deg_10:0000000000000000 m1_deg_10
+     /tmp/ccaDI2zk.s:1508   .bss.m2_deg:0000000000000000 m2_deg
+     /tmp/ccaDI2zk.s:1454   .bss.m1_deg:0000000000000000 m1_deg
+     /tmp/ccaDI2zk.s:1538   .bss.m2_rev:0000000000000000 m2_rev
+     /tmp/ccaDI2zk.s:1484   .bss.m1_rev:0000000000000000 m1_rev
+     /tmp/ccaDI2zk.s:1532   .bss.m2_hall:0000000000000000 m2_hall
+     /tmp/ccaDI2zk.s:1478   .bss.m1_hall:0000000000000000 m1_hall
+     /tmp/ccaDI2zk.s:1397   .bss.angular_velocity_z:0000000000000000 angular_velocity_z
+     /tmp/ccaDI2zk.s:1391   .bss.angular_velocity_y:0000000000000000 angular_velocity_y
+     /tmp/ccaDI2zk.s:1385   .bss.angular_velocity_x:0000000000000000 angular_velocity_x
+     /tmp/ccaDI2zk.s:1448   .bss.linear_velocity_z:0000000000000000 linear_velocity_z
+     /tmp/ccaDI2zk.s:1442   .bss.linear_velocity_y:0000000000000000 linear_velocity_y
+     /tmp/ccaDI2zk.s:1436   .bss.linear_velocity_x:0000000000000000 linear_velocity_x
+     /tmp/ccaDI2zk.s:1367   .bss.Run_Dir:0000000000000000 Run_Dir
+     /tmp/ccaDI2zk.s:1361   .bss.Motor_State:0000000000000000 Motor_State
+     /tmp/ccaDI2zk.s:1373   .bss.Run_State:0000000000000000 Run_State
+     /tmp/ccaDI2zk.s:1344   .bss.Angular:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1351   .bss.Linear:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1362   .bss.Motor_State:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1368   .bss.Run_Dir:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1374   .bss.Run_State:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1376   .bss.angle:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1382   .bss.angular_velocity_x:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1388   .bss.angular_velocity_y:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1394   .bss.angular_velocity_z:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1400   .bss.defaultTaskBuffer:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1406   .bss.defaultTaskControlBlock:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1412   .bss.defaultTaskHandle:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1419   .bss.hall1:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1426   .bss.hall2:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1433   .bss.linear_velocity_x:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1439   .bss.linear_velocity_y:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1445   .bss.linear_velocity_z:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1451   .bss.m1_deg:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1457   .bss.m1_deg_10:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1463   .bss.m1_deg_10_p:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1469   .bss.m1_deg_1_10:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1475   .bss.m1_hall:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1481   .bss.m1_rev:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1487   .bss.m1_rpm:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1493   .bss.m1_rpm_p:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1499   .bss.m1_rpm_p_10:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1505   .bss.m2_deg:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1511   .bss.m2_deg_10:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1517   .bss.m2_deg_10_p:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1523   .bss.m2_deg_1_10:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1529   .bss.m2_hall:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1535   .bss.m2_rev:0000000000000000 $d
+ARM GAS  /tmp/ccaDI2zk.s 			page 43
+
+
+     /tmp/ccaDI2zk.s:1541   .bss.m2_rpm:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1547   .bss.m2_rpm_p:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1553   .bss.m2_rpm_p_10:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1559   .bss.m_mode:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1566   .data.timeout:0000000000000000 $d
+     /tmp/ccaDI2zk.s:1573   .rodata.defaultTask_attributes:0000000000000000 $d
+     /tmp/ccaDI2zk.s:154    .text.RUN_DIR:0000000000000019 $d
+     /tmp/ccaDI2zk.s:154    .text.RUN_DIR:000000000000001a $t
+
+UNDEFINED SYMBOLS
+osThreadNew
+HAL_GPIO_WritePin
+HAL_GPIO_ReadPin
+__aeabi_d2iz
+htim4
+htim3
+__aeabi_dcmplt
+__aeabi_dmul
+__aeabi_ddiv
+__aeabi_dadd
+__aeabi_dsub
+rmw_uros_set_custom_transport
+rcutils_get_zero_initialized_allocator
+rcutils_set_default_allocator
+rcutils_get_default_allocator
+rclc_support_init
+rclc_node_init_default
+rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__Int32
+rclc_publisher_init_default
+rosidl_typesupport_c__get_message_type_support_handle__geometry_msgs__msg__Twist
+rclc_subscription_init_default
+rclc_executor_init
+rclc_executor_add_subscription
+printf
+rclc_executor_spin_some
+osDelay
+rcl_publish
+cubemx_transport_read
+cubemx_transport_write
+cubemx_transport_close
+cubemx_transport_open
+huart3
+microros_allocate
+microros_deallocate
+microros_reallocate
+microros_zero_allocate
+__aeabi_dcmpeq
+HAL_GPIO_TogglePin

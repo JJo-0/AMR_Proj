@@ -1,44 +1,43 @@
-import rclpy
-from rclpy.node import Node
-from rclpy.logging import get_logger
-from rclpy.parameter import Parameter
-from time import sleep
-import time
-import copy
-import math
-import os
-from geometry_msgs.msg import Twist, Pose, Point, Vector3, Quaternion, TransformStamped
-from nav_msgs.msg import Odometry
-from sensor_msgs.msg import Imu, JointState
-from tf2_ros import TransformBroadcaster
-from std_msgs.msg import Int32
+import rclpy  # ROS 2 Python 클라이언트를 불러옴
+from rclpy.node import Node  # 노드 생성 및 관리
+from rclpy.logging import get_logger  # 로그 기능 사용
+from rclpy.parameter import Parameter  # 파라미터 관리
+from time import sleep  # 일시 정지 기능 사용
+import time  # 시간 관련 기능 사용
+import copy  # 객체 복사 기능 사용
+import math  # 수학 함수 사용
+import os  # OS 관련 기능 사용
+from geometry_msgs.msg import Twist, Pose, Point, Vector3, Quaternion, TransformStamped  # 메시지 타입 불러옴
+from nav_msgs.msg import Odometry  # 메시지 타입 불러옴
+from sensor_msgs.msg import Imu, JointState  # 메시지 타입 불러옴
+from tf2_ros import TransformBroadcaster  # 좌표 변환 브로드캐스터
+from std_msgs.msg import Int32, Float64  # 메시지 타입 불러옴
 
-
+# 로봇의 위치 정보를 저장하는 클래스
 class OdomPose(object):
-    x = 0.0
-    y = 0.0
-    theta = 0.0
-    timestamp = 0
-    pre_timestamp = 0
+    x = 0.0  # x 좌표
+    y = 0.0  # y 좌표
+    theta = 0.0  # 회전 각도
+    timestamp = 0  # 현재 시간
+    pre_timestamp = 0  # 이전 시간
 
-
+# 로봇의 속도 정보를 저장하는 클래스
 class OdomVel(object):
-    x = 0.0
-    y = 0.0
-    w = 0.0
+    x = 0.0  # x 방향 속도
+    y = 0.0  # y 방향 속도
+    w = 0.0  # 각속도
 
-
+# 조인트 상태를 저장하는 클래스
 class Joint(object):
-    joint_name = ['wheel_left_joint', 'wheel_right_joint']
-    joint_pos = [0.0, 0.0]
-    joint_vel = [0.0, 0.0]
+    joint_name = ['wheel_left_joint', 'wheel_right_joint']  # 조인트 이름
+    joint_pos = [0.0, 0.0]  # 조인트 위치
+    joint_vel = [0.0, 0.0]  # 조인트 속도
 
-
+# 오일러 각을 쿼터니언으로 변환하는 함수
 def quaternion_from_euler(roll, pitch, yaw):
     """
   Converts euler roll, pitch, yaw to quaternion (w in last place)
   quat = [x, y, z, w]
-  Bellow should be replaced when porting for ROS 2 Python tf_conversions is done.
   """
     cy = math.cos(yaw * 0.5)
     sy = math.sin(yaw * 0.5)
@@ -55,57 +54,59 @@ def quaternion_from_euler(roll, pitch, yaw):
 
     return q
 
-
+# 로봇의 동작을 제어하는 클래스
 class OMOR1MiniNode(Node):
     def __init__(self):
         super().__init__('omo_r1mini_motor_setting')
-        # Declare parameters from YAML
+        # YAML 파일에서 파라미터 선언
         self.declare_parameters(
             namespace='',
             parameters=[
                 ('motor.gear_ratio', None),
                 ('sensor.enc_pulse', None),
             ])
-        # Get parameter values
+        # 파라미터 값 불러오기
         self.gear_ratio = 20.0
         self.wheel_separation = 0.76
         self.wheel_radius = 0.193
         self.enc_pulse = 16384.0
 
-        print('GEAR RATIO:\t\t%s' % (self.gear_ratio))  # 1:20
-        print('WHEEL SEPARATION:\t%s' % (self.wheel_separation))  # 0.76
-        print('WHEEL RADIUS:\t\t%s' % (self.wheel_radius))  # 0.193
-        print('ENC_PULSES:\t\t%s' % (self.enc_pulse))  # 240
+        print('GEAR RATIO:\t\t%s' % (self.gear_ratio))  # 기어비 출력
+        print('WHEEL SEPARATION:\t%s' % (self.wheel_separation))  # 바퀴 간 거리 출력
+        print('WHEEL RADIUS:\t\t%s' % (self.wheel_radius))  # 바퀴 반지름 출력
+        print('ENC_PULSES:\t\t%s' % (self.enc_pulse))  # 엔코더 펄스 출력
 
         self.distance_per_pulse = 2 * math.pi * self.wheel_radius / (self.enc_pulse/self.gear_ratio)
-        print('DISTANCE PER PULSE \t:%s' % (self.distance_per_pulse))
+        print('DISTANCE PER PULSE \t:%s' % (self.distance_per_pulse))  # 펄스 당 거리 출력
 
         self.odom_pose = OdomPose()
-        self.odom_pose.timestamp = self.get_clock().now()
-        self.odom_pose.pre_timestamp = self.get_clock().now()
+        self.odom_pose.timestamp = self.get_clock().now()  # 현재 시간 저장
+        self.odom_pose.pre_timestamp = self.get_clock().now()  # 이전 시간 저장
         self.odom_vel = OdomVel()
         self.joint = Joint()
 
         self.l_enc = 0.0
         self.r_enc = 0.0
-        self.linear_acceleration_x = 0.0
-        self.linear_acceleration_y = 0.0
-        self.linear_acceleration_z = 0.0
+        self.yaw = 0.0
+        self.pitch = 0.0
+        self.roll = 0.0
 
-        # Set subscriber
+        # 구독자 설정
         self.subEnc = self.create_subscription(Int32, 'enc', self.RsvEnc, 10)
-        # self.subIMU = self.create_subscription(Imu, 'imu/data', self.RsvImu, 10)
+        self.subIMU = self.create_subscription(Imu, 'imu/data', self.RsvImu, 10)
+        self.subYaw = self.create_subscription(Float64, 'imu/yaw', self.RsvYaw, 10)
         self.pub_CmdVelMsg = self.create_publisher(Twist, 'diffbot_base_controller/cmd_vel_unstamped', 10)
 
-        # Set publisher
+        # 퍼블리셔 설정
         self.pub_JointStates = self.create_publisher(JointState, 'joint_states', 10)
         self.pub_Odom = self.create_publisher(Odometry, 'odom', 10)
         self.pub_OdomTF = TransformBroadcaster(self)
         self.pub_pose = self.create_publisher(Pose, 'pose', 10)
 
-        # Set timer proc
+        # 타이머 프로세스 설정
         self.timerProc = self.create_timer(0.01, self.update_robot)
 
+    # 엔코더 값을 수신하는 콜백 함수
     def RsvEnc(self, msg):
         if msg.data % 100 == 0:
             self.r_enc = (msg.data % 1000000)/100
@@ -124,16 +125,16 @@ class OMOR1MiniNode(Node):
             self.r_enc = -1 * self.r_enc
             self.l_enc = -1 * self.l_enc
 
-        print("enc : ", msg.data)
-        print("r_enc : ", self.r_enc)
-        print("l_enc : ", self.l_enc)
-
+    # IMU 데이터를 수신하는 콜백 함수
     def RsvImu(self, msg):
-        self.linear_acceleration_x = msg.linear_acceleration.x
-        self.linear_acceleration_y = msg.linear_acceleration.y
-        self.linear_acceleration_z = msg.linear_acceleration.z
+        self.querternion_to_euler(msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w)
         # print("orientation : ", msg.orientation.x)
 
+    # Yaw 값을 수신하는 콜백 함수
+    def RsvYaw(self, msg):
+        print(msg.data /180.0 * math.pi)
+
+    # 오도메트리 업데이트 함수
     def update_odometry(self, odo_l, odo_r, trans_vel, orient_vel):
         self.odom_pose.timestamp = self.get_clock().now()
         dt = (self.odom_pose.timestamp - self.odom_pose.pre_timestamp).nanoseconds * 1e-9
@@ -153,7 +154,7 @@ class OMOR1MiniNode(Node):
         self.odom_vel.w = orient_vel
 
         timestamp_now = self.get_clock().now().to_msg()
-        # Set odometry data
+        # 오도메트리 데이터 설정
         odom = Odometry()
         odom.header.frame_id = "odom"
         odom.child_frame_id = "base_footprint"
@@ -172,7 +173,7 @@ class OMOR1MiniNode(Node):
 
         self.pub_Odom.publish(odom)
 
-        # Set odomTF data
+        # odomTF 데이터 설정
         odom_tf = TransformStamped()
         odom_tf.header.frame_id = odom.header.frame_id
         odom_tf.child_frame_id = odom.child_frame_id
@@ -184,14 +185,32 @@ class OMOR1MiniNode(Node):
         odom_tf.transform.rotation = odom.pose.pose.orientation
         self.pub_OdomTF.sendTransform(odom_tf)
 
-    def updatePoseStates(self, roll, pitch, yaw):
-        # Added to publish pose orientation of IMU
+    # 자세 상태 업데이트 함수
+    def updatePoseStates(self):
         pose = Pose()
-        pose.orientation.x = roll
-        pose.orientation.y = pitch
-        pose.orientation.z = yaw
+        pose.orientation.x = self.roll
+        pose.orientation.y = self.pitch
+        pose.orientation.z = self.yaw
         self.pub_pose.publish(pose)
 
+    # 쿼터니언을 오일러 각으로 변환하는 함수
+    def querternion_to_euler(self, x, y, z, w):
+        sinr_cosp = 2* (w* x + y * z)
+        cosr_cosp = 1 - 2* (x * x + y * y)
+        self.roll = math.atan2(sinr_cosp,cosr_cosp)
+
+        sinp = 2 * (w * y - z * x)
+        if abs(sinp) >= 1:
+            self.pitch = math.copysign(math.pi / 2, sinp)
+        else:
+            self.pitch = math.asin(sinp)
+
+        siny_cosp = 2 * (w * z + x * y)
+        cosy_cosp = 1 - 2 * (y * y + z * z)
+        self.yaw = math.atan2(siny_cosp, cosy_cosp)
+        print(self.yaw)
+
+    # 조인트 상태 업데이트 함수
     def updateJointStates(self, odo_l, odo_r, trans_vel, orient_vel):
         odo_l /= 1000.
         odo_r /= 1000.
@@ -216,23 +235,18 @@ class OMOR1MiniNode(Node):
         joint_states.effort = []
         self.pub_JointStates.publish(joint_states)
 
+    # 로봇 업데이트 함수
     def update_robot(self):
-        # 데이터 불러오기
-        # with open('l_enc.pkl', 'rb') as file:
-        #   loaded_data = pickle.load(file)
-        odo_l = self.distance_per_pulse * self.l_enc  # 이런 구조 가능한지 모르겠다.....
-        odo_r = self.distance_per_pulse * self.r_enc
-        trans_vel = (odo_r + odo_l) / 2.0  # 현재 velocity를 받아야 함.
-        orient_vel = (odo_r - odo_l) / self.wheel_radius
-        roll_imu = self.linear_acceleration_x
-        pitch_imu = self.linear_acceleration_y
-        yaw_imu = self.linear_acceleration_z
+        odo_l = self.distance_per_pulse * self.l_enc  # 좌측 엔코더 값으로 이동 거리 계산
+        odo_r = self.distance_per_pulse * self.r_enc  # 우측 엔코더 값으로 이동 거리 계산
+        trans_vel = (odo_r + odo_l) / 2.0  # 직선 속도 계산
+        orient_vel = (odo_r - odo_l) / self.wheel_separation  # 회전 속도 계산
 
-        self.update_odometry(odo_l, odo_r, trans_vel, orient_vel)
-        self.updateJointStates(odo_l, odo_r, trans_vel, orient_vel)
-        self.updatePoseStates(roll_imu, pitch_imu, yaw_imu)
+        self.update_odometry(odo_l, odo_r, trans_vel, orient_vel)  # 오도메트리 업데이트
+        self.updateJointStates(odo_l, odo_r, trans_vel, orient_vel)  # 조인트 상태 업데이트
+        self.updatePoseStates()  # 자세 상태 업데이트
 
-
+# 메인 함수
 def main(args=None):
     rclpy.init(args=args)
     omoR1MiniNode = OMOR1MiniNode()
@@ -240,7 +254,6 @@ def main(args=None):
 
     omoR1MiniNode.destroy_node()
     rclpy.shutdown()
-
 
 if __name__ == '__main__':
     main()

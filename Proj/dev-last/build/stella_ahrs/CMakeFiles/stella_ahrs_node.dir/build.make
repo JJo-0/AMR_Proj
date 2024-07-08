@@ -70,121 +70,49 @@ CMakeFiles/stella_ahrs_node.dir/src/listener.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stella_ahrs_node.dir/src/listener.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp -o CMakeFiles/stella_ahrs_node.dir/src/listener.cpp.s
 
-CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.o: CMakeFiles/stella_ahrs_node.dir/flags.make
-CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.o: /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/serial/list_ports_linux.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/desktop/AMR_Proj/Proj/dev-last/build/stella_ahrs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.o -c /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/serial/list_ports_linux.cc
+CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.o: CMakeFiles/stella_ahrs_node.dir/flags.make
+CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.o: /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/MwAHRS.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/desktop/AMR_Proj/Proj/dev-last/build/stella_ahrs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.o -c /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/MwAHRS.cpp
 
-CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/serial/list_ports_linux.cc > CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.i
+CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/MwAHRS.cpp > CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.i
 
-CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/serial/list_ports_linux.cc -o CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.s
-
-CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.o: CMakeFiles/stella_ahrs_node.dir/flags.make
-CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.o: /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/serial/serial.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/desktop/AMR_Proj/Proj/dev-last/build/stella_ahrs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.o -c /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/serial/serial.cc
-
-CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/serial/serial.cc > CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.i
-
-CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/serial/serial.cc -o CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.s
-
-CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.o: CMakeFiles/stella_ahrs_node.dir/flags.make
-CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.o: /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/serial/unix.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/desktop/AMR_Proj/Proj/dev-last/build/stella_ahrs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.o -c /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/serial/unix.cc
-
-CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/serial/unix.cc > CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.i
-
-CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/serial/unix.cc -o CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.s
-
-CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.o: CMakeFiles/stella_ahrs_node.dir/flags.make
-CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.o: /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/mw/mw_ahrs.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/desktop/AMR_Proj/Proj/dev-last/build/stella_ahrs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.o -c /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/mw/mw_ahrs.cpp
-
-CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/mw/mw_ahrs.cpp > CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.i
-
-CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/mw/mw_ahrs.cpp -o CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.s
+CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/MwAHRS.cpp -o CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.s
 
 # Object files for target stella_ahrs_node
 stella_ahrs_node_OBJECTS = \
 "CMakeFiles/stella_ahrs_node.dir/src/listener.cpp.o" \
-"CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.o" \
-"CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.o" \
-"CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.o" \
-"CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.o"
+"CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.o"
 
 # External object files for target stella_ahrs_node
 stella_ahrs_node_EXTERNAL_OBJECTS =
 
 stella_ahrs_node: CMakeFiles/stella_ahrs_node.dir/src/listener.cpp.o
-stella_ahrs_node: CMakeFiles/stella_ahrs_node.dir/serial/list_ports_linux.cc.o
-stella_ahrs_node: CMakeFiles/stella_ahrs_node.dir/serial/serial.cc.o
-stella_ahrs_node: CMakeFiles/stella_ahrs_node.dir/serial/unix.cc.o
-stella_ahrs_node: CMakeFiles/stella_ahrs_node.dir/mw/mw_ahrs.cpp.o
+stella_ahrs_node: CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.o
 stella_ahrs_node: CMakeFiles/stella_ahrs_node.dir/build.make
+stella_ahrs_node: /opt/ros/foxy/lib/librclcpp.so
 stella_ahrs_node: /opt/ros/foxy/lib/libsensor_msgs__rosidl_typesupport_introspection_c.so
 stella_ahrs_node: /opt/ros/foxy/lib/libsensor_msgs__rosidl_typesupport_c.so
 stella_ahrs_node: /opt/ros/foxy/lib/libsensor_msgs__rosidl_typesupport_introspection_cpp.so
 stella_ahrs_node: /opt/ros/foxy/lib/libsensor_msgs__rosidl_typesupport_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libstatic_transform_broadcaster_node.so
-stella_ahrs_node: /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MW_AHRS_arm64.a
-stella_ahrs_node: /opt/ros/foxy/lib/libsensor_msgs__rosidl_generator_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libtf2_ros.so
 stella_ahrs_node: /opt/ros/foxy/lib/libtf2.so
-stella_ahrs_node: /opt/ros/foxy/lib/libmessage_filters.so
-stella_ahrs_node: /opt/ros/foxy/lib/librclcpp_action.so
-stella_ahrs_node: /opt/ros/foxy/lib/librcl_action.so
-stella_ahrs_node: /opt/ros/foxy/lib/libtf2_msgs__rosidl_typesupport_introspection_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libtf2_msgs__rosidl_generator_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libtf2_msgs__rosidl_typesupport_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libtf2_msgs__rosidl_typesupport_introspection_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libtf2_msgs__rosidl_typesupport_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libgeometry_msgs__rosidl_typesupport_introspection_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libgeometry_msgs__rosidl_generator_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libgeometry_msgs__rosidl_typesupport_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libgeometry_msgs__rosidl_typesupport_introspection_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libgeometry_msgs__rosidl_typesupport_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libaction_msgs__rosidl_typesupport_introspection_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libaction_msgs__rosidl_generator_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libaction_msgs__rosidl_typesupport_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libaction_msgs__rosidl_typesupport_introspection_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libaction_msgs__rosidl_typesupport_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libunique_identifier_msgs__rosidl_typesupport_introspection_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libunique_identifier_msgs__rosidl_generator_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libunique_identifier_msgs__rosidl_typesupport_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libunique_identifier_msgs__rosidl_typesupport_introspection_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libunique_identifier_msgs__rosidl_typesupport_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libcomponent_manager.so
-stella_ahrs_node: /opt/ros/foxy/lib/librclcpp.so
+stella_ahrs_node: /desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/lib/MwAHRS.a
 stella_ahrs_node: /opt/ros/foxy/lib/liblibstatistics_collector.so
 stella_ahrs_node: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_c.so
 stella_ahrs_node: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_generator_c.so
 stella_ahrs_node: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_c.so
 stella_ahrs_node: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_cpp.so
 stella_ahrs_node: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libstd_msgs__rosidl_generator_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
 stella_ahrs_node: /opt/ros/foxy/lib/librcl.so
+stella_ahrs_node: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so
+stella_ahrs_node: /opt/ros/foxy/lib/librcl_interfaces__rosidl_generator_c.so
+stella_ahrs_node: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_c.so
+stella_ahrs_node: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so
+stella_ahrs_node: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_cpp.so
 stella_ahrs_node: /opt/ros/foxy/lib/librmw_implementation.so
 stella_ahrs_node: /opt/ros/foxy/lib/librmw.so
 stella_ahrs_node: /opt/ros/foxy/lib/librcl_logging_spdlog.so
@@ -202,19 +130,17 @@ stella_ahrs_node: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_c.so
 stella_ahrs_node: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so
 stella_ahrs_node: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
 stella_ahrs_node: /opt/ros/foxy/lib/libtracetools.so
-stella_ahrs_node: /opt/ros/foxy/lib/libament_index_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libclass_loader.so
-stella_ahrs_node: /opt/ros/foxy/lib/x86_64-linux-gnu/libconsole_bridge.so.1.0
-stella_ahrs_node: /opt/ros/foxy/lib/libcomposition_interfaces__rosidl_typesupport_introspection_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libcomposition_interfaces__rosidl_generator_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libcomposition_interfaces__rosidl_typesupport_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/libcomposition_interfaces__rosidl_typesupport_introspection_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/libcomposition_interfaces__rosidl_typesupport_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/librcl_interfaces__rosidl_generator_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_c.so
-stella_ahrs_node: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so
-stella_ahrs_node: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_cpp.so
+stella_ahrs_node: /opt/ros/foxy/lib/libsensor_msgs__rosidl_generator_c.so
+stella_ahrs_node: /opt/ros/foxy/lib/libgeometry_msgs__rosidl_typesupport_introspection_c.so
+stella_ahrs_node: /opt/ros/foxy/lib/libgeometry_msgs__rosidl_generator_c.so
+stella_ahrs_node: /opt/ros/foxy/lib/libgeometry_msgs__rosidl_typesupport_c.so
+stella_ahrs_node: /opt/ros/foxy/lib/libgeometry_msgs__rosidl_typesupport_introspection_cpp.so
+stella_ahrs_node: /opt/ros/foxy/lib/libgeometry_msgs__rosidl_typesupport_cpp.so
+stella_ahrs_node: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
+stella_ahrs_node: /opt/ros/foxy/lib/libstd_msgs__rosidl_generator_c.so
+stella_ahrs_node: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_c.so
+stella_ahrs_node: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+stella_ahrs_node: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
 stella_ahrs_node: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
 stella_ahrs_node: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
 stella_ahrs_node: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
@@ -227,8 +153,9 @@ stella_ahrs_node: /opt/ros/foxy/lib/librosidl_typesupport_c.so
 stella_ahrs_node: /opt/ros/foxy/lib/librcpputils.so
 stella_ahrs_node: /opt/ros/foxy/lib/librosidl_runtime_c.so
 stella_ahrs_node: /opt/ros/foxy/lib/librcutils.so
+stella_ahrs_node: /opt/ros/foxy/lib/x86_64-linux-gnu/libconsole_bridge.so.1.0
 stella_ahrs_node: CMakeFiles/stella_ahrs_node.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/desktop/AMR_Proj/Proj/dev-last/build/stella_ahrs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable stella_ahrs_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/desktop/AMR_Proj/Proj/dev-last/build/stella_ahrs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable stella_ahrs_node"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/stella_ahrs_node.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

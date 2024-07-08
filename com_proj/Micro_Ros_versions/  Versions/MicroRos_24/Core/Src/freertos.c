@@ -1,0 +1,983 @@
+/* USER CODE BEGIN Header */
+/**
+  *********************  *********************************************************
+  * File Name          : freertos.c
+  * Description        : Code for freertos applications
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2024 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
+/* Includes ------------------------------------------------------------------*/
+#include "FreeRTOS.h"
+#include "task.h"
+#include "main.h"
+#include "cmsis_os.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include <stdbool.h>
+#include <rcl/rcl.h>
+#include <rcl/error_handling.h>
+#include <rclc/rclc.h>
+#include <rclc/executor.h>
+#include <uxr/client/transport.h>
+#include <rmw_microxrcedds_c/config.h>
+#include <rmw_microros/rmw_microros.h>
+
+#include <std_msgs/msg/int32.h>
+#include <std_msgs/msg/u_int16.h>
+#include <std_msgs/msg/string.h>
+#include <geometry_msgs/msg/twist.h>
+#include <geometry_msgs/msg/detail/twist__struct.h>
+#include <nav_msgs/msg/odometry.h>
+#include <std_msgs/msg/float32.h>
+#include <std_msgs/msg/float64.h>
+
+#include "usart.h"
+#include "tim.h"
+
+//#include "math.h"
+#include <math.h>
+/* USER CODE END Includes */
+
+/* Private typedef -----------------------------------------------------------*/
+typedef StaticTask_t osStaticThreadDef_t;
+/* USER CODE BEGIN PTD */
+
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+/* USER CODE BEGIN Variables */
+/*
+char Run_State = 'B';
+char Motor_State = 'T';
+char Run_Dir = 'F';
+*/
+
+#define _USE_MATH_DEFINES
+
+char Run_State;
+char Motor_State;
+char Run_Dir;
+
+
+// 선속도와 각속도의 모든 값을 변수에 저장
+float linear_velocity_x;
+float linear_velocity_y;
+float linear_velocity_z;
+
+float angular_velocity_x;
+float angular_velocity_y;
+float angular_velocity_z;
+
+int m1_hall=0, m2_hall=0;
+
+int m1_rev=0, m2_rev=0;
+int m1_deg=0, m2_deg=0;
+int m1_deg_10=0, m2_deg_10=0;
+int m1_deg_10_p=0, m2_deg_10_p=0;
+int m1_deg_1_10=0, m2_deg_1_10=0;
+int m1_rpm=0, m2_rpm=0;
+int m1_rpm_p=0, m2_rpm_p=0;
+int m1_rpm_p_10=0, m2_rpm_p_10=0;
+
+//std_msgs__msg__Int32 msg;
+int hall1 = 0, hall2 = 0;
+
+typedef struct{
+	double vx, vy, vz;
+} Twist_value;
+/*
+Twist_value Linear = {0, 0, 0};
+Twist_value Angular = {0, 0, 0};*/
+Twist_value Linear;
+Twist_value Angular;
+
+
+//int count_sec = 0;
+//int turn_flag = 0;
+int m_mode = 0; // 0: stop, 1: straight, 2: rotation mode
+
+double angle;
+
+int timeout = 10000000;
+
+/* USER CODE END Variables */
+/* Definitions for defaultTask */
+osThreadId_t defaultTaskHandle;
+uint32_t defaultTaskBuffer[ 3000 ];
+osStaticThreadDef_t defaultTaskControlBlock;
+const osThreadAttr_t defaultTask_attributes = {
+  .name = "defaultTask",
+  .cb_mem = &defaultTaskControlBlock,
+  .cb_size = sizeof(defaultTaskControlBlock),
+  .stack_mem = &defaultTaskBuffer[0],
+  .stack_size = sizeof(defaultTaskBuffer),
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
+/* Private function prototypes -----------------------------------------------*/
+/* USER CODE BEGIN FunctionPrototypes */
+bool cubemx_transport_open(struct uxrCustomTransport * transport);
+bool cubemx_transport_close(struct uxrCustomTransport * transport);
+size_t cubemx_transport_write(struct uxrCustomTransport* transport, const uint8_t * buf, size_t len, uint8_t * err);
+size_t cubemx_transport_read(struct uxrCustomTransport* transport, uint8_t* buf, size_t len, int timeout, uint8_t* err);
+
+void * microros_allocate(size_t size, void * state);
+void microros_deallocate(void * pointer, void * state);
+void * microros_reallocate(void * pointer, size_t size, void * state);
+void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element, void * state);
+
+void messageCallback(const void *msgin);
+void messageCallback_test1(const void *msgin);
+void messageCallback_test2(const void *msgin);
+void twist_subscription_callback(const void * msgin);
+
+
+//my motor test functions
+
+//int MOTION_MODE(double x, double y, double z);
+
+void RUN_DIR(char);
+
+void RUN_RB(char);
+void MOTOR_SS(char);
+
+double MOTOR_CAL_LINE_PWM(double,double,double);
+
+void PWM_L(double);
+void PWM_R(double);
+
+double CAL_FINALSPEED(double, double, double);
+double CAL_ANG(double, double, double);
+
+//void TURN(double);
+
+double TURN(double ang);
+//int MOTION_MODE(double, double, double);
+//void MOTION_MODE(double, double, double);
+void MOTION_MODE(double lx, double ly, double lz, double ax, double ay, double az);
+
+
+
+
+
+
+/* USER CODE END FunctionPrototypes */
+
+void StartDefaultTask(void *argument);
+
+void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
+
+/**
+  * @brief  FreeRTOS initialization
+  * @param  None
+  * @retval None
+  */
+void MX_FREERTOS_Init(void) {
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
+  /* USER CODE BEGIN RTOS_MUTEX */
+  /* add mutexes, ... */
+  /* USER CODE END RTOS_MUTEX */
+
+  /* USER CODE BEGIN RTOS_SEMAPHORES */
+  /* add semaphores, ... */
+  /* USER CODE END RTOS_SEMAPHORES */
+
+  /* USER CODE BEGIN RTOS_TIMERS */
+  /* start timers, add new ones, ... */
+  /* USER CODE END RTOS_TIMERS */
+
+  /* USER CODE BEGIN RTOS_QUEUES */
+  /* add queues, ... */
+  /* USER CODE END RTOS_QUEUES */
+
+  /* Create the thread(s) */
+  /* creation of defaultTask */
+  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+
+  /* USER CODE BEGIN RTOS_THREADS */
+  /* add threads, ... */
+  /* USER CODE END RTOS_THREADS */
+
+  /* USER CODE BEGIN RTOS_EVENTS */
+  /* add events, ... */
+  /* USER CODE END RTOS_EVENTS */
+
+}
+
+/* USER CODE BEGIN Header_StartDefaultTask */
+/**
+  * @brief  Function implementing the defaultTask thread.
+  * @param  argument: Not used
+  * @retval None
+  */
+/* USER CODE END Header_StartDefaultTask */
+void StartDefaultTask(void *argument)
+{
+  /* USER CODE BEGIN StartDefaultTask */
+  /* USER CODE BEGIN 5 */
+
+  // micro-ROS configuration
+
+  rmw_uros_set_custom_transport(
+    true,
+    (void *) &huart3,
+    cubemx_transport_open,
+    cubemx_transport_close,
+    cubemx_transport_write,
+    cubemx_transport_read);
+
+  rcl_allocator_t freeRTOS_allocator = rcutils_get_zero_initialized_allocator();
+  freeRTOS_allocator.allocate = microros_allocate;
+  freeRTOS_allocator.deallocate = microros_deallocate;
+  freeRTOS_allocator.reallocate = microros_reallocate;
+  freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
+
+  if (!rcutils_set_default_allocator(&freeRTOS_allocator)) {
+      printf("Error on default allocators (line %d)\n", __LINE__); 
+  }
+
+  // micro-ROS app
+
+  rcl_publisher_t publisher;
+  std_msgs__msg__Int32 msg;
+//test
+  rcl_publisher_t publisher_test;
+  std_msgs__msg__Int32_test1 msg_test;
+
+  rcl_subscription_t subscriber_test1;
+  std_msgs__msg__Int32_test2 submsg_test1;
+
+  rcl_subscription_t subscriber_test2;
+  std_msgs__msg__Int32_test3 submsg_test2;
+//
+  rcl_publisher_t publisher_1;
+  std_msgs__msg__Int32_pub1 pubmsg_1;
+
+  rcl_publisher_t publisher_2;
+  std_msgs__msg__Int32_pub2 pubmsg_2;
+
+  rcl_subscription_t subscriber_2;
+//  std_msgs__msg__String_sub1 submsg_1;
+  geometry_msgs__msg__Twist submsg_2;
+//  geometry_msgs__msg__Twist * submsg_2_1;
+
+  rclc_support_t support;
+  rcl_allocator_t allocator;
+  rcl_node_t node;
+
+  allocator = rcl_get_default_allocator();
+
+  //create init_options
+  rclc_support_init(&support, 0, NULL, &allocator);
+
+
+
+  // create node
+  rclc_node_init_default(&node, "cubemx_node", "", &support);
+
+  // create publisher example
+  rclc_publisher_init_default(
+    &publisher,
+    &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+    "cubemx_publisher");
+
+
+  // create publisher_2
+  rclc_publisher_init_default(
+    &publisher_1,
+    &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+    "r_enc");
+
+  	  // r_wheel_vel
+  // create publisher_3
+  rclc_publisher_init_default(
+    &publisher_2,
+    &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+    "l_enc");
+
+  	  //l_enc
+  // create publisher_test
+  rclc_publisher_init_default(
+    &publisher_test,
+    &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+    "cubemx_publisher_test");
+
+  // create subscriber_test1
+  rclc_subscription_init_default(
+      &subscriber_2,
+      &node,
+//      ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, twist),
+      ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, Twist),
+      "diffbot_base_controller/cmd_vel_unstamped");
+
+  // create subscriber_test2
+/*  rclc_subscription_init_default(
+      &subscriber_test2,
+      &node,
+      ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+//	    "cubemx_publisher_test");
+        "r_wheel_vel");*/
+
+  // create subscriber
+/*  rclc_subscription_init_default(
+      &subscriber_1,
+      &node,
+      ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, String),
+      "r_wheel_vel_String");*/
+
+
+
+
+  // add subscriber to executor
+  rclc_executor_t executor;
+  rclc_executor_init(&executor, &support.context, 1, &allocator);
+//  rclc_executor_add_subscription(&executor, &subscriber_1, &submsg_1, &messageCallback, ON_NEW_DATA);
+
+//  rclc_executor_add_subscription(&executor, &subscriber_test1, &submsg_test1, &messageCallback_test1, ON_NEW_DATA);
+//  rclc_executor_add_subscription(&executor, &subscriber_1, &submsg_test2, &twist_subscription_callback, ON_NEW_DATA);
+  rclc_executor_add_subscription(&executor, &subscriber_2, &submsg_2, &twist_subscription_callback, ON_NEW_DATA);
+
+  msg.data = 0;
+  pubmsg_1.hall_1 = 0;
+  pubmsg_2.hall_2 = 0;
+
+
+//  RUN_INIT();
+
+
+  for(;;)
+  {
+    // publish message
+//    rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
+	 rcl_ret_t ret_3 = rcl_publish(&publisher_2, &pubmsg_2, NULL);
+	 rcl_ret_t ret_2 = rcl_publish(&publisher_1, &pubmsg_1, NULL);
+//    rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
+    rcl_ret_t ret_test = rcl_publish(&publisher_test, &msg_test, NULL);
+/*    if (ret != RCL_RET_OK)
+    {
+      printf("Error publishing (line %d)\n", __LINE__); 
+    }*/
+    if (ret_2 != RCL_RET_OK)
+    {
+      printf("Error publishing (line %d)\n", __LINE__);
+    }
+    if (ret_3 != RCL_RET_OK)
+    {
+      printf("Error publishing (line %d)\n", __LINE__);
+    }
+
+
+
+
+    // subscribe message
+//    rclc_executor_spin(&executor);
+//    rclc_executor_spin_some(&executor, timeout);
+//    rclc_executor_spin_one_period(&executor, timeout);
+
+    // hall pulse count
+	pubmsg_1.hall_1 = hall1;
+	pubmsg_2.hall_2 = hall2;
+
+    // reset the hall sensor data
+	hall1 = 0;
+	hall2 = 0;
+
+/*
+	Linear.vx = submsg_2_1->linear.x;
+	Linear.vy = submsg_2_1->linear.y;
+	Linear.vz = submsg_2_1->linear.z;*/
+
+/*	Linear.vx = submsg_2.linear.x;
+	Linear.vy = submsg_2.linear.y;
+	Linear.vz = submsg_2.linear.z;*/
+
+	// move the robot.
+//	MOTION_MODE(Linear.vx, Linear.vy, Linear.vz);
+
+	if(m_mode == 0){
+		// robot stop
+		Run_State = 'B';
+//		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, SET);	// Motor1 RUN/BRK - BRK
+//		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, SET);	// Motor2 RUN/BRK - BRK
+	}
+	else if(m_mode == 1){
+		// robot move straight
+		if(Linear.vx >0){
+			Run_Dir = 'F';
+			Run_State = 'U';
+			PWM_R(CAL_FINALSPEED(Linear.vx, Linear.vy, Linear.vz));
+			PWM_L(CAL_FINALSPEED(Linear.vx, Linear.vy, Linear.vz));
+		}
+		else if (Linear.vx < 0)
+		{
+			Run_Dir = 'O';
+			Run_State = 'U';
+			PWM_R(CAL_FINALSPEED(Linear.vx, Linear.vy, Linear.vz));
+			PWM_L(CAL_FINALSPEED(Linear.vx, Linear.vy, Linear.vz));
+		}
+
+
+
+	}
+	else if(m_mode == 2){
+		// robot move rotation
+		if(Linear.vx==0 && Linear.vy==0){
+			if(Angular.vz > 0){
+				Run_Dir = 'L';
+				Run_State = 'U';
+			}
+			else if(Angular.vz < 0){
+				Run_Dir = 'R';
+				Run_State = 'U';
+			}
+			PWM_R(TURN(Angular.vz));
+			PWM_L(TURN(Angular.vz));
+		}
+
+
+
+
+
+
+
+
+
+		/*
+		angle = CAL_ANG(Linear.vx, Linear.vy, Linear.vz);
+		TURN(angle);*/
+	}
+
+	// Motor activate
+//    RUN_DIR('F');
+//    RUN_RB('U');
+    RUN_DIR(Run_Dir);
+    RUN_RB(Run_State);
+    MOTOR_SS(Motor_State);
+
+    rclc_executor_spin_some(&executor, timeout);
+
+        osDelay(10);
+      }
+  /* USER CODE END StartDefaultTask */
+}
+
+/* Private application code --------------------------------------------------*/
+/* USER CODE BEGIN Application */
+
+	// 기본 ?��?��(default task) ?��?��?�� 구독 콜백 ?��?��
+	void messageCallback(const void *msgin) {
+		const std_msgs__msg__String_sub1 *msg = (const std_msgs__msg__String_sub1 *)msgin;
+		printf("Received: %s\n", msg->dir_1);
+	}
+
+	void messageCallback_test1(const void *msgin) {
+		const std_msgs__msg__Int32_test2 *msg = (const std_msgs__msg__Int32_test2 *)msgin;
+		printf("Received: %d\n", msg->test_2);
+	}
+
+	void messageCallback_test2(const void *msgin) {
+		const std_msgs__msg__Int32_test3 *msg = (const std_msgs__msg__Int32_test3 *)msgin;
+		printf("Received: %d\n", msg->test_3);
+	}
+
+	void twist_subscription_callback(const void * msgin)
+	{
+	    const geometry_msgs__msg__Twist * msg = (const geometry_msgs__msg__Twist *)msgin;
+
+	    HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+
+/*		Run_State = 'U';
+		Run_Dir = 'F';
+		Motor_State = 'T';*/
+
+//    	m_mode = 1;
+
+/*	    if(m_mode == 0){
+	    	m_mode = 1;
+	    }
+	    else{
+	    	m_mode =0;
+	    }*/
+
+	    // 선속도와 각속도의 모든 값을 변수에 저장
+/*	    float linear_velocity_x = msg->linear.x;
+	    float linear_velocity_y = msg->linear.y;
+	    float linear_velocity_z = msg->linear.z;
+
+	    float angular_velocity_x = msg->angular.x;
+	    float angular_velocity_y = msg->angular.y;
+	    float angular_velocity_z = msg->angular.z;*/
+
+
+/*		Linear.vx = submsg_2.linear.x;
+		Linear.vy = submsg_2.linear.y;
+		Linear.vz = submsg_2.linear.z;
+
+		Angular.vx = submsg_2.angular.x;
+		Angular.vy = submsg_2.angular.y;
+		Angular.vz = submsg_2.angular.z;*/
+
+	    // 선속도와 각속도의 모든 값을 변수에 저장
+/*	    linear_velocity_x = msg->linear.x;
+	    linear_velocity_y = msg->linear.y;
+	    linear_velocity_z = msg->linear.z;
+
+	    angular_velocity_x = msg->angular.x;
+	    angular_velocity_y = msg->angular.y;
+	    angular_velocity_z = msg->angular.z;*/
+
+
+		Linear.vx = msg->linear.x;
+		Linear.vy = msg->linear.y;
+		Linear.vz = msg->linear.z;
+
+		Angular.vx = msg->angular.x;
+		Angular.vy = msg->angular.y;
+		Angular.vz = msg->angular.z;
+
+		MOTION_MODE(Linear.vx, Linear.vy, Linear.vz, Angular.vx, Angular.vy, Angular.vz);
+/*		if(Linear.vy != 0)	m_mode = 2;
+		else if(Linear.vy == 0){
+			if(Linear.vx == 0)	m_mode = 0;
+			else		m_mode = 1;
+		}*/
+
+
+
+
+	    // 저장된 값을 출력
+/*	    printf("Received Twist - Linear Velocity (X: %f, Y: %f, Z: %f), Angular Velocity (X: %f, Y: %f, Z: %f)\n",
+	           linear_velocity_x, linear_velocity_y, linear_velocity_z,
+	           angular_velocity_x, angular_velocity_y, angular_velocity_z);*/
+
+	    // MOTION_MODE 함수를 호출하여 m_mode 설정
+//		m_mode = MOTION_MODE(linear_velocity_x, linear_velocity_y, linear_velocity_z);
+//		MOTION_MODE(Linear.vx, Linear.vy, Linear.vz);
+//		m_mode = MOTION_MODE(Linear.vx, Linear.vy, Linear.vz);
+//		m_mode = 1;
+	}
+
+	// Motor function
+	void RUN_INIT(void){
+		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, SET);	// Motor1 RUN/BRK - BRK
+		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, SET);	// Motor1 START/STOP - STOP
+	  	  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, SET);	// Motor2 RUN/BRK - BRK
+	  	  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);	// Motor2 START/STOP - STOP
+	}
+
+
+	void RUN_DIR(char dir){
+
+		if(dir == 'F'){			// Front
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, SET);		// Motor1 DIR - CW
+		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, RESET);	// Motor2 DIR - CCW
+		}
+		else if(dir == 'O'){	// Back
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, RESET);		// Motor1 DIR - CCW
+		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+		}
+		else if(dir == 'L'){	// Left
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, SET);		// Motor1 DIR - CW
+		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+		}
+		else if(dir == 'R'){	// Right
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, RESET);		// Motor1 DIR - CCW
+		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, RESET);	// Motor2 DIR - CCW
+		}
+	}
+
+	void RUN_RB(char runstate){
+
+		if(runstate == 'U'){
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, RESET);	// Motor1 RUN/BRK - RUN
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, RESET);	// Motor2 RUN/BRK - RUN
+		}
+		else if(runstate == 'B'){
+		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, SET);	// Motor1 RUN/BRK - BRK
+		  	  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, SET);	// Motor2 RUN/BRK - BRK
+		}
+	}
+
+	void MOTOR_SS(char motorstate){
+
+		if(motorstate == 'T'){
+		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, RESET);	// Motor1 START/STOP - START
+		    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);	// Motor2 START/STOP - START
+		}
+		else if(motorstate == 'P'){
+		  	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, SET);	// Motor1 START/STOP - STOP
+		  	  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);	// Motor2 START/STOP - STOP
+		}
+	}
+
+	void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+	{
+		if ( htim->Instance == TIM2){
+
+			// Motor1
+			if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+			{
+				// - CW
+				if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_12) == 1){
+					hall1 = hall1 + 1;
+				}
+				// - CCW
+				else if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_12) == 0){
+					hall1 = hall1 - 1;
+				}
+			}
+		}
+
+		if ( htim->Instance == TIM5){
+
+					// Motor2
+			if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+			{
+				// - CW
+				if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_2) == 1){
+					hall2 = hall2 - 1;
+				}
+				// - CCW
+				else if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_2) == 0){
+					hall2 = hall2 + 1;
+				}
+			}
+		}
+
+//			if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+//			{
+				/*
+				// Motor2
+				if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+				{
+					// - CW
+					if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_2) == 1){
+						hall2 = hall2 - 1;
+					}
+					// - CCW
+					else if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_2) == 0){
+						hall2 = hall2 + 1;
+					}
+				}
+				*/
+/*
+				 // Motor2
+				if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+				{
+					// - CW
+					if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_2) == 1){
+						hall2 = hall2 + 1;
+					}
+					// - CCW
+					else if(HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_2) == 0){
+						hall2 = hall2 - 1;
+					}
+				}
+
+			}*/
+
+
+
+
+	}
+
+/*	void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+	{
+		if( htim->Instance == TIM3 ){
+			if(turn_flag == 1){
+				count_sec++;
+			}
+		}
+*/
+
+	void PWM_R(double duty){
+		__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, (int)duty-1);
+	}
+	void PWM_L(double duty){
+		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, (int)duty-1);
+	}
+
+	// Calculate the final speed.
+	double CAL_FINALSPEED(double x, double y, double z)
+	{
+		double distance = 0;
+		double duty_percent = 0;
+
+		if(x < 0){
+			distance = -x;
+		}
+		else{
+			distance = x;
+		}
+
+
+
+//		distance = abs(x);
+//		distance = sqrt(pow(x,2));
+//		distance = x;
+		duty_percent = distance * (20.0/(0.0965*M_PI));
+
+		return duty_percent;
+	}
+
+	// Calculate the angle at which the robot should turn.
+	/*
+	double CAL_ANG(double x, double y, double z)
+	{
+		double ang = 0;
+
+		// Find the rotation angle of the robot.
+		if(x==0 && y>0)	ang = M_PI/2;
+		else if(x==0 && y<0)	ang = -(M_PI/2);
+		else		angle = atan2(x,y);
+
+		if(x>0 && y>0)		ang = angle;
+		else if(x<0 && y>0)	ang = abs(angle)+(M_PI/2);
+		else if(x>0 && y<0)	ang = angle;
+		else if(x<0 && y<0)	ang = angle - M_PI;
+
+		return ang;
+	}*/
+	/*
+	double CAL_ANG(double x, double y, double z)
+	{
+	    double ang = 0;
+
+	    if(x==0 && y>0)	ang = M_PI/2;
+	    else if(x==0 && y<0)	ang = -(M_PI/2);
+	    else		ang = atan2(y, x); // 변경된 부분
+
+	    if(x>0 && y>0)		ang = ang;
+	    else if(x<0 && y>0)	ang = fabs(ang)+(M_PI/2);
+	    else if(x>0 && y<0)	ang = ang;
+	    else if(x<0 && y<0)	ang = ang - M_PI;
+
+	    return ang;
+	}
+*/
+
+
+/*
+ *
+ *
+	void TURN(double ang)
+	{
+		double half_ang = 0;
+		double mps = 0;
+		double wheel_rps = 0;
+		double wheel_pwm = 0;
+
+		if(ang>0){
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, SET);		// Motor1 DIR - CW
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+
+		}
+		else if(ang<0){
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, RESET);		// Motor1 DIR - CCW
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, RESET);	// Motor2 DIR - CCW
+		}
+
+		half_ang = ang / 2.0;
+		mps = 0.76 * half_ang;
+		wheel_rps = mps / 0.193;
+		wheel_pwm = (wheel_rps / (M_PI * 100)) * 100;
+
+
+		PWM_R((int)wheel_pwm);
+		PWM_L((int)wheel_pwm);
+		*/
+
+		/*
+		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1,(int)wheel_pwm);
+		__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1,(int)wheel_pwm);
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		// When the robot rotates, the motor duty ratio is fixed at 30%.
+/*		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1,30-1);
+		__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1,30-1);
+
+
+		if(ang>0){
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, SET);		// Motor1 DIR - CW
+		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+		}
+		else if(ang<0){
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, RESET);		// Motor1 DIR - CCW
+		    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, RESET);	// Motor2 DIR - CCW
+		}*/
+
+//	}
+
+
+	double TURN(double ang)
+	{
+		double half_ang = 0;
+		double mps = 0;
+		double wheel_rps = 0;
+		double wheel_pwm = 0;
+
+/*		if(ang>0){
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, SET);		// Motor1 DIR - CW
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, SET);	// Motor2 DIR - CW
+
+		}
+		else if(ang<0){
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_12, RESET);		// Motor1 DIR - CCW
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2, RESET);	// Motor2 DIR - CCW
+		}*/
+
+		half_ang = fabs(ang) / 2.0;
+		mps = 0.76 * half_ang;
+		wheel_rps = mps / 0.193;
+		wheel_pwm = (wheel_rps / (M_PI * 100)) * 100;
+
+		return wheel_pwm;
+	}
+
+	void MOTION_MODE(double lx, double ly, double lz, double ax, double ay, double az)
+	{
+	    // 회전 모드
+	    if(az != 0) {
+	        m_mode = 2; // 회전
+	    }
+	    // 직진 또는 정지 모드
+	    else if(lx == 0 && ly == 0) {
+	        m_mode = 0; // 정지
+	    }
+	    else {
+	        m_mode = 1; // 직진
+	    }
+	}
+
+/*
+	void MOTION_MODE(double lx, double ly, double lz, double ax, double ay, double az)
+	{
+		if(az != 0)	m_mode = 2;
+		else if(ly == 0){
+			if(lx == 0)	m_mode = 0;
+			else		m_mode = 1;
+		}
+	}
+	*/
+/*
+	void MOTION_MODE(double lx, double ly, double lz, double ax, double ay, double az)
+		{
+			if(y != 0)	m_mode = 2;
+			else if(y == 0){
+				if(x == 0)	m_mode = 0;
+				else		m_mode = 1;
+			}
+		}*/
+/*
+	int MOTION_MODE(double x, double y, double z)
+	{
+		if(y != 0)	return 2;
+		else if(y == 0){
+			if(x == 0)	return 0;
+			else		return 1;
+		}
+	}
+*/
+	/*
+	int MOTION_MODE(double x, double y, double z)
+	{
+	    if(y != 0)	return 2;
+	    if(x == 0)	return 0;
+	    return 1;
+	}
+*/
+
+
+
+
+
+
+
+
+/*	double MOTOR_CAL_LINE_PWM(double x, double y, double z){
+	}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* USER CODE END Application */
+
