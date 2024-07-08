@@ -1,0 +1,43 @@
+'xrceagent'에 복제합니다...
+새로 만든 'ros2' 브랜치로 전환합니다
+'spdlog'에 복제합니다...
+Note: switching to 'v1.9.2'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD의 현재 위치는 eb322062 Bump version to 1.9.2
+In file included from [01m[K/home/gunwon/dev/src/agent_ws/install/micro_ros_msgs/include/micro_ros_msgs/msg/graph.hpp:8[m[K,
+                 from [01m[K/home/gunwon/dev/src/agent_ws/src/uros/micro-ROS-Agent/micro_ros_agent/include/agent/graph_manager/graph_manager.hpp:55[m[K,
+                 from [01m[K/home/gunwon/dev/src/agent_ws/src/uros/micro-ROS-Agent/micro_ros_agent/include/agent/Agent.hpp:22[m[K,
+                 from [01m[K/home/gunwon/dev/src/agent_ws/src/uros/micro-ROS-Agent/micro_ros_agent/src/agent/Agent.cpp:18[m[K:
+[01m[K/home/gunwon/dev/src/agent_ws/install/micro_ros_msgs/include/micro_ros_msgs/msg/detail/graph__builder.hpp:28:4:[m[K [01;31m[Kinternal compiler error: [m[K세그멘테이션 오류
+   28 |   {[01;31m[K}[m[K
+      |    [01;31m[K^[m[K
+0x7f17f2a4908f ???
+	/build/glibc-wuryBv/glibc-2.31/signal/../sysdeps/unix/sysv/linux/x86_64/sigaction.c:0
+0x7f17f2a2a082 __libc_start_main
+	../csu/libc-start.c:308
+Please submit a full bug report,
+with preprocessed source if appropriate.
+Please include the complete backtrace with any bug report.
+See <file:///usr/share/doc/gcc-9/README.Bugs> for instructions.
+make[5]: *** [CMakeFiles/micro_ros_agent.dir/build.make:76: CMakeFiles/micro_ros_agent.dir/src/agent/Agent.cpp.o] 오류 1
+make[5]: *** 끝나지 않은 작업을 기다리고 있습니다....
+make[4]: *** [CMakeFiles/Makefile2:78: CMakeFiles/micro_ros_agent.dir/all] 오류 2
+make[3]: *** [Makefile:141: all] 오류 2
+make[2]: *** [CMakeFiles/micro_ros_agent.dir/build.make:113: micro_ros_agent-prefix/src/micro_ros_agent-stamp/micro_ros_agent-build] 오류 2
+make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/micro_ros_agent.dir/all] 오류 2
+make: *** [Makefile:84: all] 오류 2

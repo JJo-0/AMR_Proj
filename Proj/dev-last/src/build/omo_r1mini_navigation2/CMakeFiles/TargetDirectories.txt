@@ -1,0 +1,9 @@
+/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_navigation2/CMakeFiles/install/strip.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_navigation2/CMakeFiles/install.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_navigation2/CMakeFiles/list_install_components.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_navigation2/CMakeFiles/rebuild_cache.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_navigation2/CMakeFiles/edit_cache.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_navigation2/CMakeFiles/test.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_navigation2/CMakeFiles/install/local.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_navigation2/CMakeFiles/omo_r1mini_navigation2_uninstall.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_navigation2/CMakeFiles/uninstall.dir

@@ -1,0 +1,50 @@
+[0.056s] Invoking command in '/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_cartographer': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake /desktop/AMR_Proj/Proj/dev-last/src/omo_r1mini_cartographer -DCMAKE_INSTALL_PREFIX=/desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer
+[0.186s] -- The C compiler identification is GNU 9.4.0
+[0.365s] -- The CXX compiler identification is GNU 9.4.0
+[0.376s] -- Check for working C compiler: /usr/bin/cc
+[0.528s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.530s] -- Detecting C compiler ABI info
+[0.672s] -- Detecting C compiler ABI info - done
+[0.687s] -- Detecting C compile features
+[0.688s] -- Detecting C compile features - done
+[0.698s] -- Check for working CXX compiler: /usr/bin/c++
+[0.855s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.856s] -- Detecting CXX compiler ABI info
+[1.039s] -- Detecting CXX compiler ABI info - done
+[1.055s] -- Detecting CXX compile features
+[1.056s] -- Detecting CXX compile features - done
+[1.062s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[1.102s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[1.103s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.597s] -- Configuring done
+[1.597s] -- Generating done
+[1.597s] -- Build files have been written to: /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_cartographer
+[1.621s] Invoked command in '/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_cartographer' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake /desktop/AMR_Proj/Proj/dev-last/src/omo_r1mini_cartographer -DCMAKE_INSTALL_PREFIX=/desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer
+[1.628s] Invoking command in '/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_cartographer': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_cartographer -- -j4 -l4
+[1.711s] Invoked command in '/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_cartographer' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --build /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_cartographer -- -j4 -l4
+[1.780s] Invoking command in '/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_cartographer': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_cartographer
+[1.801s] -- Install configuration: ""
+[1.802s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/config
+[1.802s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/config/omo_r1mini_lidar.lua
+[1.802s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/launch
+[1.802s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/launch/cartographer_rviz.launch.py
+[1.802s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/launch/cartographer.launch.py
+[1.802s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/launch/occupancy_grid.launch.py
+[1.802s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/rviz
+[1.802s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/rviz/omo_r1mini_cartographer.rviz
+[1.803s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/ament_index/resource_index/package_run_dependencies/omo_r1mini_cartographer
+[1.803s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/ament_index/resource_index/parent_prefix_path/omo_r1mini_cartographer
+[1.806s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/environment/ament_prefix_path.sh
+[1.806s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/environment/ament_prefix_path.dsv
+[1.807s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/environment/path.sh
+[1.807s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/environment/path.dsv
+[1.808s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/local_setup.bash
+[1.808s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/local_setup.sh
+[1.808s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/local_setup.zsh
+[1.808s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/local_setup.dsv
+[1.808s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/package.dsv
+[1.808s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/ament_index/resource_index/packages/omo_r1mini_cartographer
+[1.809s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/cmake/omo_r1mini_cartographerConfig.cmake
+[1.810s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/cmake/omo_r1mini_cartographerConfig-version.cmake
+[1.810s] -- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_cartographer/share/omo_r1mini_cartographer/package.xml
+[1.824s] Invoked command in '/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_cartographer' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/desktop/AMR_Proj/Proj/dev-last/install/omo_r1mini_bringup:/opt/ros/foxy /usr/bin/cmake --install /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_cartographer

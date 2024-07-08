@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver
+CMAKE_SOURCE_DIR = /desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver
+CMAKE_BINARY_DIR = /desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver
 
 # Utility rule file for ydlidar_ros2_driver_uninstall.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_d
 include CMakeFiles/ydlidar_ros2_driver_uninstall.dir/progress.make
 
 CMakeFiles/ydlidar_ros2_driver_uninstall:
-	/usr/bin/cmake -P /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
+	/usr/bin/cmake -P /desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
 
 ydlidar_ros2_driver_uninstall: CMakeFiles/ydlidar_ros2_driver_uninstall
 ydlidar_ros2_driver_uninstall: CMakeFiles/ydlidar_ros2_driver_uninstall.dir/build.make
@@ -71,6 +71,6 @@ CMakeFiles/ydlidar_ros2_driver_uninstall.dir/clean:
 .PHONY : CMakeFiles/ydlidar_ros2_driver_uninstall.dir/clean
 
 CMakeFiles/ydlidar_ros2_driver_uninstall.dir/depend:
-	cd /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/CMakeFiles/ydlidar_ros2_driver_uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver /desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver /desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver /desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver /desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/CMakeFiles/ydlidar_ros2_driver_uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ydlidar_ros2_driver_uninstall.dir/depend
 

@@ -1,1 +1,0 @@
-ament_cmake_symlink_install_targets("TARGET_FILES" "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/micro_ros_msgs/libmicro_ros_msgs__rosidl_typesupport_fastrtps_cpp.so" "TARGETS" "micro_ros_msgs__rosidl_typesupport_fastrtps_cpp" "ARCHIVE_DESTINATION" "lib" "LIBRARY_DESTINATION" "lib" "RUNTIME_DESTINATION" "bin")

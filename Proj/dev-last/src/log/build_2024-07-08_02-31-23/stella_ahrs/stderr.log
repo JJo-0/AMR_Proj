@@ -1,0 +1,11 @@
+[01m[K/desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:[m[K In function ‘[01m[Kvoid* AHRS_thread(void*)[m[K’:
+[01m[K/desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:49:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   49 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:4:25:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Karg[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+    4 | void *AHRS_thread([01;35m[Kvoid *arg[m[K)
+      |                   [01;35m[K~~~~~~^~~[m[K
+[01m[K/desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:52:26:[m[K [01;35m[Kwarning: [m[KISO C++ forbids converting a string constant to ‘[01m[Kchar*[m[K’ [[01;35m[K-Wwrite-strings[m[K]
+   52 |         if(MW_SerialOpen([01;35m[K"/dev/ttyUSB0"[m[K, 115200) < 0)
+      |                          [01;35m[K^~~~~~~~~~~~~~[m[K

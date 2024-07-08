@@ -1,0 +1,62 @@
+Performing C++ SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e7b8b/fast && make[6]: 디렉터리 '/home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build/CMakeFiles/CMakeTmp' 들어감
+/usr/bin/make -f CMakeFiles/cmTC_e7b8b.dir/build.make CMakeFiles/cmTC_e7b8b.dir/build
+make[7]: 디렉터리 '/home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build/CMakeFiles/CMakeTmp' 들어감
+Building CXX object CMakeFiles/cmTC_e7b8b.dir/src.cxx.o
+/usr/bin/c++    -DCMAKE_HAVE_LIBC_PTHREAD -fPIE   -std=c++11 -o CMakeFiles/cmTC_e7b8b.dir/src.cxx.o -c /home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_e7b8b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e7b8b.dir/link.txt --verbose=1
+/usr/bin/c++   -DCMAKE_HAVE_LIBC_PTHREAD    CMakeFiles/cmTC_e7b8b.dir/src.cxx.o  -o cmTC_e7b8b 
+/usr/bin/ld: CMakeFiles/cmTC_e7b8b.dir/src.cxx.o: in function `main':
+src.cxx:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.cxx:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.cxx:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[7]: *** [CMakeFiles/cmTC_e7b8b.dir/build.make:87: cmTC_e7b8b] 오류 1
+make[7]: 디렉터리 '/home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build/CMakeFiles/CMakeTmp' 나감
+make[6]: *** [Makefile:121: cmTC_e7b8b/fast] 오류 2
+make[6]: 디렉터리 '/home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build/CMakeFiles/CMakeTmp' 나감
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_88aee/fast && make[6]: 디렉터리 '/home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build/CMakeFiles/CMakeTmp' 들어감
+/usr/bin/make -f CMakeFiles/cmTC_88aee.dir/build.make CMakeFiles/cmTC_88aee.dir/build
+make[7]: 디렉터리 '/home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build/CMakeFiles/CMakeTmp' 들어감
+Building CXX object CMakeFiles/cmTC_88aee.dir/CheckFunctionExists.cxx.o
+/usr/bin/c++    -DCHECK_FUNCTION_EXISTS=pthread_create -fPIE   -std=c++11 -o CMakeFiles/cmTC_88aee.dir/CheckFunctionExists.cxx.o -c /home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_88aee
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_88aee.dir/link.txt --verbose=1
+/usr/bin/c++   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_88aee.dir/CheckFunctionExists.cxx.o  -o cmTC_88aee  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[7]: *** [CMakeFiles/cmTC_88aee.dir/build.make:87: cmTC_88aee] 오류 1
+make[7]: 디렉터리 '/home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build/CMakeFiles/CMakeTmp' 나감
+make[6]: *** [Makefile:121: cmTC_88aee/fast] 오류 2
+make[6]: 디렉터리 '/home/gunwon/dev/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog-build/CMakeFiles/CMakeTmp' 나감
+
+
+

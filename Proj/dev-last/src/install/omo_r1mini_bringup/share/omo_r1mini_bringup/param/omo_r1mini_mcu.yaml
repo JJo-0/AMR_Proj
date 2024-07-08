@@ -1,0 +1,17 @@
+omo_r1mini_mcu_node:
+  ros__parameters:
+    wheel:
+      separation: 0.76
+      radius: 0.193
+
+    motor:
+      gear_ratio: 20.0
+
+    sensor:
+      enc_pulse: 240.0
+
+diff_drive_controller:
+  ros__parameters:
+    odometry:
+      frame_id: "odom"
+      child_frame_id: "base_footprint"

@@ -1,8 +1,8 @@
-# Install script for directory: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/omo_r1mini_cartographer
+# Install script for directory: /desktop/AMR_Proj/Proj/dev-last/src/omo_r1mini_cartographer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer")
+  set(CMAKE_INSTALL_PREFIX "/desktop/AMR_Proj/Proj/dev-last/install/omo_r1mini_cartographer")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,7 +38,70 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_symlink_install/ament_cmake_symlink_install.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/omo_r1mini_cartographer" TYPE DIRECTORY FILES
+    "/desktop/AMR_Proj/Proj/dev-last/src/omo_r1mini_cartographer/config"
+    "/desktop/AMR_Proj/Proj/dev-last/src/omo_r1mini_cartographer/launch"
+    "/desktop/AMR_Proj/Proj/dev-last/src/omo_r1mini_cartographer/rviz"
+    )
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/omo_r1mini_cartographer")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/parent_prefix_path" TYPE FILE FILES "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/omo_r1mini_cartographer")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/omo_r1mini_cartographer/environment" TYPE FILE FILES "/opt/ros/foxy/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/omo_r1mini_cartographer/environment" TYPE FILE FILES "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_environment_hooks/ament_prefix_path.dsv")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/omo_r1mini_cartographer/environment" TYPE FILE FILES "/opt/ros/foxy/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/omo_r1mini_cartographer/environment" TYPE FILE FILES "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_environment_hooks/path.dsv")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/omo_r1mini_cartographer" TYPE FILE FILES "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_environment_hooks/local_setup.bash")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/omo_r1mini_cartographer" TYPE FILE FILES "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_environment_hooks/local_setup.sh")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/omo_r1mini_cartographer" TYPE FILE FILES "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_environment_hooks/local_setup.zsh")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/omo_r1mini_cartographer" TYPE FILE FILES "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_environment_hooks/local_setup.dsv")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/omo_r1mini_cartographer" TYPE FILE FILES "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_environment_hooks/package.dsv")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/packages" TYPE FILE FILES "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_index/share/ament_index/resource_index/packages/omo_r1mini_cartographer")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/omo_r1mini_cartographer/cmake" TYPE FILE FILES
+    "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_core/omo_r1mini_cartographerConfig.cmake"
+    "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/ament_cmake_core/omo_r1mini_cartographerConfig-version.cmake"
+    )
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/omo_r1mini_cartographer" TYPE FILE FILES "/desktop/AMR_Proj/Proj/dev-last/src/omo_r1mini_cartographer/package.xml")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -49,5 +112,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_cartographer/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

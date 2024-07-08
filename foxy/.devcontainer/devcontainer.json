@@ -1,5 +1,5 @@
 {
-  "name": "foxy",
+  "name": "ros:foxy",
   "dockerFile": "Dockerfile",
   "runArgs": [
     "--privileged", 

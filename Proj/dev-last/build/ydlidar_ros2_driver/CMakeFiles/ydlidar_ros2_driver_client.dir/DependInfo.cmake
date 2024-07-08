@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver/src/ydlidar_ros2_driver_client.cpp" "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/CMakeFiles/ydlidar_ros2_driver_client.dir/src/ydlidar_ros2_driver_client.cpp.o"
+  "/desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver/src/ydlidar_ros2_driver_client.cpp" "/desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/CMakeFiles/ydlidar_ros2_driver_client.dir/src/ydlidar_ros2_driver_client.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,8 +17,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver"
-  "/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver/src"
+  "/desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver"
+  "/desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver/src"
   "/usr/local/include/src"
   "/opt/ros/foxy/include"
   )

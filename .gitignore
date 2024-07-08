@@ -15,5 +15,29 @@
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
-.ionide
-s
+.ionides
+
+# Ignore build directories
+com_proj/dev_src_0708/build/
+Proj/dev/build/
+Proj/dev-last/build/
+
+# Ignore install directories
+com_proj/dev_src_0708/install/
+Proj/dev/install/
+Proj/dev-last/install/
+
+# Ignore log directories
+Proj/dev-last/log/
+
+# Ignore specific directories within the project
+Proj/dev/ds4_driver/
+Proj/dev/ds4drv/
+Proj/driver/YDLidar-SDK/
+Proj/etc/agent_ws/
+Proj/etc/MicroRos_14/
+Proj/etc/stella_ahrs/
+
+# Ignore temporary or cache files
+*.pyc
+__pycache__/

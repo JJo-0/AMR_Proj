@@ -1,9 +1,0 @@
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/micro_ros_setup/CMakeFiles/install/strip.dir
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/micro_ros_setup/CMakeFiles/install/local.dir
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/micro_ros_setup/CMakeFiles/edit_cache.dir
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/micro_ros_setup/CMakeFiles/test.dir
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/micro_ros_setup/CMakeFiles/install.dir
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/micro_ros_setup/CMakeFiles/list_install_components.dir
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/micro_ros_setup/CMakeFiles/rebuild_cache.dir
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/micro_ros_setup/CMakeFiles/micro_ros_setup_uninstall.dir
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/micro_ros_setup/CMakeFiles/uninstall.dir

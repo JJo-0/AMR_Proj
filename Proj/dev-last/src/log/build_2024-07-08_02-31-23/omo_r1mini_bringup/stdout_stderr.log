@@ -1,0 +1,49 @@
+running egg_info
+creating ../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info
+writing ../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/PKG-INFO
+writing dependency_links to ../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/dependency_links.txt
+writing entry points to ../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/entry_points.txt
+writing requirements to ../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/requires.txt
+writing top-level names to ../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/top_level.txt
+writing manifest file '../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/SOURCES.txt'
+reading manifest file '../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/SOURCES.txt'
+writing manifest file '../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/build
+creating /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/build/lib
+creating /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup
+copying omo_r1mini_bringup/__init__.py -> /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup
+creating /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts
+copying omo_r1mini_bringup/scripts/omo_r1mini_motor_setting_node.py -> /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts
+copying omo_r1mini_bringup/scripts/omo_r1mini_mcu_node.py -> /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts
+copying omo_r1mini_bringup/scripts/__init__.py -> /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts
+running install
+running install_lib
+creating /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup
+creating /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts
+copying /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts/omo_r1mini_motor_setting_node.py -> /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts
+copying /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts/omo_r1mini_mcu_node.py -> /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts
+copying /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/scripts/__init__.py -> /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts
+copying /desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/build/lib/omo_r1mini_bringup/__init__.py -> /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup
+byte-compiling /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts/omo_r1mini_motor_setting_node.py to omo_r1mini_motor_setting_node.cpython-38.pyc
+byte-compiling /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts/omo_r1mini_mcu_node.py to omo_r1mini_mcu_node.cpython-38.pyc
+byte-compiling /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts/__init__.py to __init__.cpython-38.pyc
+byte-compiling /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/__init__.py to __init__.cpython-38.pyc
+running install_data
+creating /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/share/ament_index
+creating /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/share/ament_index/resource_index
+creating /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/share/ament_index/resource_index/packages
+copying resource/omo_r1mini_bringup -> /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/share/ament_index/resource_index/packages
+copying package.xml -> /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/share/omo_r1mini_bringup
+creating /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/share/omo_r1mini_bringup/launch
+copying launch/omo_r1mini_motor_setting.launch.py -> /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/share/omo_r1mini_bringup/launch
+copying launch/omo_r1mini_mcu.launch.py -> /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/share/omo_r1mini_bringup/launch
+creating /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/share/omo_r1mini_bringup/param
+copying param/omo_r1mini_mcu.yaml -> /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/share/omo_r1mini_bringup/param
+running install_egg_info
+Copying ../build/omo_r1mini_bringup/omo_r1mini_bringup.egg-info to /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup-0.0.1-py3.8.egg-info
+running install_scripts
+Installing omo_r1mini_mcu_node script to /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/omo_r1mini_bringup
+Installing omo_r1mini_motor_setting_node script to /desktop/AMR_Proj/Proj/dev-last/src/install/omo_r1mini_bringup/lib/omo_r1mini_bringup
+writing list of installed files to '/desktop/AMR_Proj/Proj/dev-last/src/build/omo_r1mini_bringup/install.log'

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/omo_r1mini_navigation2
+CMAKE_SOURCE_DIR = /desktop/AMR_Proj/Proj/dev-last/src/omo_r1mini_navigation2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2
+CMAKE_BINARY_DIR = /desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2
 
 # Utility rule file for uninstall.
 
@@ -67,6 +67,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/omo_r1mini_navigation2 /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/omo_r1mini_navigation2 /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2 /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2 /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /desktop/AMR_Proj/Proj/dev-last/src/omo_r1mini_navigation2 /desktop/AMR_Proj/Proj/dev-last/src/omo_r1mini_navigation2 /desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2 /desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2 /desktop/AMR_Proj/Proj/dev-last/build/omo_r1mini_navigation2/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/uninstall.dir/depend
 

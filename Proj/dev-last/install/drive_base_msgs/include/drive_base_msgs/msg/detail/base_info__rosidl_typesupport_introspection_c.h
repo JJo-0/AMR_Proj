@@ -1,1 +1,0 @@
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/drive_base_msgs/rosidl_typesupport_introspection_c/drive_base_msgs/msg/detail/base_info__rosidl_typesupport_introspection_c.h

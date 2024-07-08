@@ -1,1 +1,0 @@
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/drive_base_msgs/rosidl_typesupport_fastrtps_cpp/drive_base_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h

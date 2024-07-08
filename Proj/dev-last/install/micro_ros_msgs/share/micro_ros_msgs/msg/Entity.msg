@@ -1,1 +1,0 @@
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/agent_ws/src/uros/micro_ros_msgs/msg/Entity.msg

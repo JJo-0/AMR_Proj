@@ -1,0 +1,76 @@
+-- The C compiler identification is GNU 9.4.0
+-- The CXX compiler identification is GNU 9.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Found rclcpp: 2.4.3 (/opt/ros/foxy/share/rclcpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+-- Found FastRTPS: /opt/ros/foxy/include  
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found sensor_msgs: 2.0.5 (/opt/ros/foxy/share/sensor_msgs/cmake)
+-- Found tf2: 0.13.14 (/opt/ros/foxy/share/tf2/cmake)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /desktop/AMR_Proj/Proj/dev-last/src/build/stella_ahrs
+[35m[1mScanning dependencies of target stella_ahrs_node[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/stella_ahrs_node.dir/src/listener.cpp.o[0m
+[ 66%] [32mBuilding CXX object CMakeFiles/stella_ahrs_node.dir/src/MwAHRS.cpp.o[0m
+[01m[K/desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:[m[K In function ‘[01m[Kvoid* AHRS_thread(void*)[m[K’:
+[01m[K/desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:49:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   49 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:4:25:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Karg[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+    4 | void *AHRS_thread([01;35m[Kvoid *arg[m[K)
+      |                   [01;35m[K~~~~~~^~~[m[K
+[01m[K/desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/desktop/AMR_Proj/Proj/dev-last/src/stella_ahrs/src/listener.cpp:52:26:[m[K [01;35m[Kwarning: [m[KISO C++ forbids converting a string constant to ‘[01m[Kchar*[m[K’ [[01;35m[K-Wwrite-strings[m[K]
+   52 |         if(MW_SerialOpen([01;35m[K"/dev/ttyUSB0"[m[K, 115200) < 0)
+      |                          [01;35m[K^~~~~~~~~~~~~~[m[K
+[100%] [32m[1mLinking CXX executable stella_ahrs_node[0m
+[100%] Built target stella_ahrs_node
+-- Install configuration: ""
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs//launch
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs//launch/stella_ahrs_launch.py
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/lib/stella_ahrs/stella_ahrs_node
+-- Set runtime path of "/desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/lib/stella_ahrs/stella_ahrs_node" to ""
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/ament_index/resource_index/package_run_dependencies/stella_ahrs
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/ament_index/resource_index/parent_prefix_path/stella_ahrs
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/environment/ament_prefix_path.sh
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/environment/ament_prefix_path.dsv
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/environment/path.sh
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/environment/path.dsv
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/local_setup.bash
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/local_setup.sh
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/local_setup.zsh
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/local_setup.dsv
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/package.dsv
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/ament_index/resource_index/packages/stella_ahrs
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/cmake/stella_ahrsConfig.cmake
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/cmake/stella_ahrsConfig-version.cmake
+-- Installing: /desktop/AMR_Proj/Proj/dev-last/src/install/stella_ahrs/share/stella_ahrs/package.xml

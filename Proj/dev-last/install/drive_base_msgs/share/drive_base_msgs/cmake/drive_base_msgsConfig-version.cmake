@@ -1,1 +1,0 @@
-/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/drive_base_msgs/ament_cmake_core/drive_base_msgsConfig-version.cmake

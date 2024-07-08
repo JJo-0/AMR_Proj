@@ -17,47 +17,35 @@ endif()
 ################################################################################
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
-find_package(geometry_msgs REQUIRED)
 find_package(tf2 REQUIRED)
-find_package(tf2_ros REQUIRED)
-find_package(tf2_msgs REQUIRED)
 
 ################################################################################
 # Build
 ################################################################################
 include_directories(
-  "${PROJECT_SOURCE_DIR}/include/mw"
-  "${PROJECT_SOURCE_DIR}/include/serial"
+  include
+    ${catkin_INCLUDE_DIRS}
+    
 )
 
-add_executable(${PROJECT_NAME}_node src/listener.cpp serial/list_ports_linux.cc serial/serial.cc serial/unix.cc mw/mw_ahrs.cpp)
+
+
+add_executable(${PROJECT_NAME}_node src/listener.cpp src/MwAHRS.cpp)
 ament_target_dependencies(stella_ahrs_node
-"rclcpp"
-"std_msgs"
-"sensor_msgs"
-"geometry_msgs"
-"tf2"
-"tf2_ros"
-"tf2_msgs"
+  "rclcpp"
+  "sensor_msgs"
+  "tf2"
 )
 
-
-target_link_libraries(${PROJECT_NAME}_node ${CMAKE_CURRENT_SOURCE_DIR}/lib/MW_AHRS_arm64.a)
+target_link_libraries(${PROJECT_NAME}_node ${CMAKE_CURRENT_SOURCE_DIR}/lib/MwAHRS.a)
 
 ################################################################################
 # Install
 ################################################################################
-
-
 install(
   DIRECTORY launch
   DESTINATION share/${PROJECT_NAME}/
-)
-
-install(
-  DIRECTORY rviz DESTINATION share/${PROJECT_NAME}
 )
 
 install(TARGETS

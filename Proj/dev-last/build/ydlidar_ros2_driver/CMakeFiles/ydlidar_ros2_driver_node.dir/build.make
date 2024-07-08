@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver
+CMAKE_SOURCE_DIR = /desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver
+CMAKE_BINARY_DIR = /desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ydlidar_ros2_driver_node.dir/depend.make
@@ -58,17 +58,17 @@ include CMakeFiles/ydlidar_ros2_driver_node.dir/progress.make
 include CMakeFiles/ydlidar_ros2_driver_node.dir/flags.make
 
 CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.o: CMakeFiles/ydlidar_ros2_driver_node.dir/flags.make
-CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.o: /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver/src/ydlidar_ros2_driver_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.o -c /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver/src/ydlidar_ros2_driver_node.cpp
+CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.o: /desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver/src/ydlidar_ros2_driver_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.o -c /desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver/src/ydlidar_ros2_driver_node.cpp
 
 CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver/src/ydlidar_ros2_driver_node.cpp > CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver/src/ydlidar_ros2_driver_node.cpp > CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.i
 
 CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver/src/ydlidar_ros2_driver_node.cpp -o CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver/src/ydlidar_ros2_driver_node.cpp -o CMakeFiles/ydlidar_ros2_driver_node.dir/src/ydlidar_ros2_driver_node.cpp.s
 
 # Object files for target ydlidar_ros2_driver_node
 ydlidar_ros2_driver_node_OBJECTS = \
@@ -107,7 +107,7 @@ ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesuppor
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librmw_implementation.so
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librmw.so
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librcl_logging_spdlog.so
-ydlidar_ros2_driver_node: /usr/lib/aarch64-linux-gnu/libspdlog.so.1.5.0
+ydlidar_ros2_driver_node: /usr/lib/x86_64-linux-gnu/libspdlog.so.1.5.0
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librcl_yaml_param_parser.so
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/libyaml.so
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so
@@ -147,7 +147,7 @@ ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librcpputils.so
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librosidl_runtime_c.so
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librcutils.so
 ydlidar_ros2_driver_node: CMakeFiles/ydlidar_ros2_driver_node.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ydlidar_ros2_driver_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ydlidar_ros2_driver_node"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ydlidar_ros2_driver_node.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -160,6 +160,6 @@ CMakeFiles/ydlidar_ros2_driver_node.dir/clean:
 .PHONY : CMakeFiles/ydlidar_ros2_driver_node.dir/clean
 
 CMakeFiles/ydlidar_ros2_driver_node.dir/depend:
-	cd /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver /desktop/AMR-Proj/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/CMakeFiles/ydlidar_ros2_driver_node.dir/DependInfo.cmake --color=$(COLOR)
+	cd /desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver /desktop/AMR_Proj/Proj/dev-last/src/ydlidar_ros2_driver /desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver /desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver /desktop/AMR_Proj/Proj/dev-last/build/ydlidar_ros2_driver/CMakeFiles/ydlidar_ros2_driver_node.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ydlidar_ros2_driver_node.dir/depend
 

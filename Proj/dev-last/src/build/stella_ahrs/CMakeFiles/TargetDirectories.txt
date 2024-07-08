@@ -1,0 +1,10 @@
+/desktop/AMR_Proj/Proj/dev-last/src/build/stella_ahrs/CMakeFiles/install/strip.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/stella_ahrs/CMakeFiles/install/local.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/stella_ahrs/CMakeFiles/edit_cache.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/stella_ahrs/CMakeFiles/test.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/stella_ahrs/CMakeFiles/install.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/stella_ahrs/CMakeFiles/list_install_components.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/stella_ahrs/CMakeFiles/rebuild_cache.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/stella_ahrs/CMakeFiles/stella_ahrs_node.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/stella_ahrs/CMakeFiles/stella_ahrs_uninstall.dir
+/desktop/AMR_Proj/Proj/dev-last/src/build/stella_ahrs/CMakeFiles/uninstall.dir
