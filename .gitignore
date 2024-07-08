@@ -41,3 +41,6 @@ Proj/etc/stella_ahrs/
 # Ignore temporary or cache files
 *.pyc
 __pycache__/
+
+# Ignore metadata directories
+com_proj/Micro_Ros_versions/Versions/.metadata/
