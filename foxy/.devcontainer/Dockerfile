@@ -8,7 +8,11 @@
 # 
 #########################################################################
 
+#cpu architecture : x86_64 (ex. laptop, desktop)
 FROM ros:foxy
+
+#cpu architecture : aaarch64, arm64 (ex raspberry pi 5, Jetson nano)
+#FROM arm64v8/ros:foxy
 
 # APT 설정을 non-interactive 모드로 변경하여 사용자 입력 대기 상태를 방지합니다.
 ENV DEBIAN_FRONTEND=noninteractive
