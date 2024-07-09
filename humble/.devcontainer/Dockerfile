@@ -23,6 +23,7 @@ RUN apt-get update \
     nano \
     x11-apps \
     ros-humble-desktop \
+    ros-humble-rviz2 \
     ros-humble-xacro \
     ros-humble-ros2-control \
     ros-humble-ros2-controllers \
