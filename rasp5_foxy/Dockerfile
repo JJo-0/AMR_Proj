@@ -9,10 +9,10 @@
 #########################################################################
 
 #cpu architecture : x86_64 (ex. laptop, desktop)
-FROM ros:foxy
+#FROM ros:foxy
 
 #cpu architecture : aaarch64, arm64 (ex raspberry pi 5, Jetson nano)
-#FROM arm64v8/ros:foxy
+FROM arm64v8/ros:foxy
 
 # APT 설정을 non-interactive 모드로 변경하여 사용자 입력 대기 상태를 방지합니다.
 ENV DEBIAN_FRONTEND=noninteractive
@@ -84,10 +84,6 @@ RUN rosdep update
 
 # Source the ROS setup file
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
-RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/src/agent_ws/install/setup.bash" >> ~/.bashrc
-RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/install/setup.bash" >> ~/.bashrc
-RUN echo "sudo chmod 666 /dev/ttyUSB0 && sudo chmod 666 /dev/ttyUSB1 && sudo chmod 666 /dev/ttyACM0" >> ~/.bashrc
-
 
 # Raspberry pi 5 does not have a GPU, so we need to force software rendering
 ENV LIBGL_ALWAYS_SOFTWARE=1
