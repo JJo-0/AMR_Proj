@@ -44,7 +44,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
-
 # Install language
 RUN apt-get update && apt-get install -y locales tzdata \
     && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
@@ -57,7 +56,6 @@ RUN apt-get update && apt-get install -y locales tzdata \
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
-
 
 # rosdep 초기화 및 업데이트
 RUN rosdep init && rosdep update
