@@ -157,7 +157,7 @@ class GPIOControlApp(QWidget):
 
     # GPIO 초기화 메소드
     def initGPIO(self):
-        self.chip = gpiod.Chip('gpiochip0')
+        self.chip = gpiod.Chip('0')  # 'gpiochip0'을 '0'으로 변경
         self.pin23 = self.chip.get_line(23)
         self.pin24 = self.chip.get_line(24)
         self.pin23.request(consumer='app', type=gpiod.LINE_REQ_DIR_OUT)
