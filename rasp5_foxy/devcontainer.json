@@ -1,5 +1,5 @@
 {
-  "name": "debian-bookworm-desktop:develop",
+  "name": "ros:foxy",
   "dockerFile": "Dockerfile",
   "runArgs": [
     "--privileged", 
