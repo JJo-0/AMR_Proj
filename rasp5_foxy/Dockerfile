@@ -14,7 +14,8 @@ FROM kasmweb/debian-bookworm-desktop:develop
 ENV DEBIAN_FRONTEND=noninteractive
 
 # apt-get 관련 잠재적 권한 문제 해결
-RUN mkdir -p /var/lib/apt/lists/partial && chmod -R 755 /var/lib/apt/lists
+RUN mkdir -p /var/lib/apt/lists/partial
+RUN chmod -R 755 /var/lib/apt/lists
 
 # Example of installing programs
 RUN apt-get update \
