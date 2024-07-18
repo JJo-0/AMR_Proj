@@ -19,7 +19,7 @@ RUN apt-get update \
     nano \
     x11-apps \
     git \ 
-    colcon-common-extensions \
+    colcon \
     wget \
     libx11-dev \
     libxrandr-dev \
@@ -27,7 +27,7 @@ RUN apt-get update \
     libtinyxml2-dev \
     python3-pip \
     python3-rosdep2 \
-    python3-vcstool \
+    python3-vcstools \
     python3-flake8 \
     python3-flake8-docstrings \
     python3-flake8-blind-except \
