@@ -20,7 +20,6 @@ RUN apt-get update \
     x11-apps \
     git \ 
     colcon-common-extensions \
-    vcstool \
     wget \
     libx11-dev \
     libxrandr-dev \
