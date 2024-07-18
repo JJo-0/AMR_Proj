@@ -13,6 +13,9 @@ FROM kasmweb/debian-bookworm-desktop:develop
 # APT 설정을 non-interactive 모드로 변경하여 사용자 입력 대기 상태를 방지합니다.
 ENV DEBIAN_FRONTEND=noninteractive
 
+# apt-get 관련 잠재적 권한 문제 해결
+RUN mkdir -p /var/lib/apt/lists/partial && chmod -R 755 /var/lib/apt/lists
+
 # Example of installing programs
 RUN apt-get update \
     && apt-get install -y \
