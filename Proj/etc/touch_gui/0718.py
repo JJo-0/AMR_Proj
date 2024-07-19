@@ -15,11 +15,9 @@ import time
 class ControlPanel(QWidget):
     def __init__(self, node, parent=None):
         super(ControlPanel, self).__init__(parent)
-        self.node = node
-
-        # 시리얼 통신 설정
-        self.ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
-        self.startDistanceThread()
+        self.node = node  # ROS 노드를 저장하는 변수
+        self.setup_serial_connection('/dev/ttyUSB0', 115200)  # 시리얼 연결 설정
+        self.init_ui()  # UI 컴포넌트 초기화
 
         # 메인 레이아웃 설정
         main_layout = QHBoxLayout()  # 전체 레이아웃을 가로로 설정
@@ -82,12 +80,10 @@ class ControlPanel(QWidget):
         main_layout.addLayout(right_layout)
         self.setLayout(main_layout)  # 위젯에 메인 레이아웃 설정
 
-        # 리프트 제어 버튼 이벤트 연결
+        # 버튼 클릭 이벤트 연결
         self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10"))
         self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11"))
         self.lift_preset_button.clicked.connect(self.move_to_preset_height)
-
-        # 버튼 클릭 이벤트 연결
         self.lift_up_button.pressed.connect(self.start_lift_up)  # 리프트 올리기 버튼 누름 이벤트 연결
         self.lift_up_button.released.connect(self.stop_lift)  # 리프트 올리기 버튼 놓음 이벤트 연결
         self.lift_down_button.pressed.connect(self.start_lift_down)  # 리프트 내리기 버튼 누름 이벤트 연결
@@ -102,6 +98,7 @@ class ControlPanel(QWidget):
         self.velocity_sub = self.node.create_subscription(Odometry, '/odom', self.update_velocity, 10)  # 로봇 속도 구독자
         self.imu_sub = self.node.create_subscription(Imu, '/imu', self.update_imu, 10)  # IMU 데이터 구독자
         self.slam_sub = self.node.create_subscription(Float32, '/slam_remaining_distance', self.update_slam, 10)  # SLAM 거리 구독자
+        self.start_serial_read_thread()  # 시리얼 읽기 스레드 시작
 
         # 상태 정보 초기화
         self.velocity = None
@@ -113,66 +110,72 @@ class ControlPanel(QWidget):
         self.lift_timer = QTimer()
         self.lift_timer.timeout.connect(self.send_lift_command)  # 타이머 타임아웃 시 명령 전송
         self.current_lift_command = None  # 현재 리프트 명령 초기화
+    
+    def setup_serial_connection(self, port, baud_rate): #시리얼 포트 함수
+        try:
+            self.ser = serial.Serial(port, baud_rate, timeout=1)  # 시리얼 포트 오픈
+            self.ser.reset_input_buffer()  # 입력 버퍼 초기화
+            self.log_to_terminal(f"시리얼 ok")  # 연결 시 터미널에 로그 출력
+        except serial.SerialException as e:
+            self.log_to_terminal(f"시리얼 연결 오류: {str(e)}")  # 연결 오류가 있을 경우 터미널에 로그 출력
+            self.ser = None
+    
+    def init_ui(self):
+        # 여기에 UI 컴포넌트 및 레이아웃 초기화 코드 추가
+        pass
 
-    def send_lift_command(self, command):
-        self.ser.write(f"{command}\n".encode('utf-8'))
-        self.log_to_terminal(f"Sent command to Arduino: {command}")
+    def start_serial_read_thread(self): # 시리얼 수신 스레드
+        if self.ser:
+            self.read_thread = Thread(target=self.read_from_serial)  # 시리얼 데이터 읽기를 위한 스레드 생성
+            self.read_thread.start()  # 스레드 시작
+
+    def send_lift_command(self, command): # 시리얼 송신
+        if self.ser:
+            try:
+                self.ser.write(f"{command}\n".encode('utf-8'))  # 아두이노로 명령어 전송
+                self.log_to_terminal(f"Arduino Send: {command}")
+            except serial.SerialException as e:
+                self.log_to_terminal(f"Error Arduino Sending : {str(e)}")  # 명령 전송 실패시 로그 출력
+
+    def read_from_serial(self): # 시리얼 스레드 수신
+        while True:
+            if self.ser and self.ser.in_waiting > 0:
+                line = self.ser.readline().decode('utf-8').rstrip()  # 시리얼로부터 데이터 읽기
+                self.process_serial_data(line)  # 읽은 데이터 처리
+
+    def process_serial_data(self, data): # 시리얼 데이터 처리 (아두이노 수신 값)
+        if data.startswith("E_"):
+            status = int(data.split("_")[1])
+            if status == 1:
+                self.emergency_pub.publish(Int32(data=1))  # 정상 상태 발행
+            elif status == 0:
+                self.emergency_pub.publish(Int32(data=0))  # 비상 상태 발행
+            self.log_to_terminal(f"Arduino received : {data}")
 
     def move_to_preset_height(self): # 미리 설정된 높이로 이동
         presets = ['L_20', 'L_21', 'L_22']
         for cmd in presets:
             self.send_lift_command(cmd)
             time.sleep(1)  # 임시로 설정된 대기 시간
-    
-    def update_status(self, msg):
-        status = msg.data
-        if status == "E_1":
-            self.emergency_pub.publish(Int32(data=1))
-        elif status == "E_0":
-            self.emergency_pub.publish(Int32(data=0))
-        self.log_to_terminal(f"Update Status: {status}")
-
         
     def start_lift_up(self):
         self.log_to_terminal("Start Lift Up")
         self.current_lift_command = "up"
         self.lift_timer.start(100)
-        self.update_distance_label()
 
     def start_lift_down(self):
         self.log_to_terminal("Start Lift Down")
         self.current_lift_command = "down"
         self.lift_timer.start(100)
-        self.update_distance_label()
 
     def stop_lift(self):
         self.log_to_terminal("Stop Lift")
         self.current_lift_command = None
         self.lift_timer.stop()
 
-
     def update_distance_label(self):
         distance = self.sensor.distance * 100
         self.distance_label.setText(f"Distance: {distance:.2f} cm")
-
-    def startDistanceThread(self):
-        self.distanceThread = Thread(target=self.updateDistance)
-        self.distanceThread.start()
-
-    def updateDistance(self):
-        while self.distanceThreadActive:
-            distance = self.sensor.distance * 100
-            self.distance_label.setText(f"Distance: {distance:.2f} cm")
-            time.sleep(0.1)
-
-    def closeEvent(self, event):
-        self.distanceThreadActive = False
-        if hasattr(self, 'distanceThread'):
-            self.distanceThread.join()
-        self.pin23.close()
-        self.pin24.close()
-        self.sensor.close()
-        event.accept()
 
     def toggle_navigation(self):
         nav_state = "enabled" if self.toggle_nav_button.isChecked() else "disabled"
