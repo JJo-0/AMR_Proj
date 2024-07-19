@@ -17,7 +17,7 @@ class ControlPanel(QWidget):
         super(ControlPanel, self).__init__(parent)
         self.node = node  # ROS 노드를 저장하는 변수
         # self.setup_serial_connection('/dev/ttyACM0', 115200)  # 시리얼 연결 설정
-        self.init_ui()  # UI 컴포넌트 초기화
+        # self.init_ui()  # UI 컴포넌트 초기화
 
         # 메인 레이아웃 설정
         main_layout = QHBoxLayout()  # 전체 레이아웃을 가로로 설정
@@ -37,13 +37,29 @@ class ControlPanel(QWidget):
         # 오른쪽 버튼 레이아웃 (세로로 배치)
         right_layout = QVBoxLayout()
 
+        # 레이아웃 조정하여 사전 설정 높이 버튼 추가
+        preset_heights_group = QGroupBox("Preset Heights")  # 사전 설정 높이를 위한 새 그룹 생성
+        preset_heights_layout = QVBoxLayout()  # 사전 설정 높이 버튼을 위한 세로 레이아웃
+        # 세 개의 사전 설정 높이 버튼 생성
+        height1_button = QPushButton("1번 높이")
+        height2_button = QPushButton("2번 높이")
+        height3_button = QPushButton("3번 높이")
+        # 버튼 스타일 설정
+        height1_button.setStyleSheet("font-size: 18px; height: 50px;")
+        height2_button.setStyleSheet("font-size: 18px; height: 50px;")
+        height3_button.setStyleSheet("font-size: 18px; height: 50px;")
+        # 그룹에 레이아웃 설정
+        preset_heights_group.setLayout(preset_heights_layout)
+        # 오른쪽 레이아웃에 사전 설정 높이 그룹 추가
+        right_layout.addWidget(preset_heights_group)
+
         # 리프트 제어 그룹박스
         lift_group = QGroupBox("Lift Control")
         lift_layout = QVBoxLayout()
         self.lift_up_button = QPushButton("Lift Up")
-        self.lift_up_button.setStyleSheet("font-size: 24px; height: 100px;")
+        self.lift_up_button.setStyleSheet("font-size: 18px; height: 50px;")
         self.lift_down_button = QPushButton("Lift Down")
-        self.lift_down_button.setStyleSheet("font-size: 24px; height: 100px;")
+        self.lift_down_button.setStyleSheet("font-size: 18px; height: 50px;")
         lift_layout.addWidget(self.lift_up_button)
         lift_layout.addWidget(self.lift_down_button)
         lift_group.setLayout(lift_layout)
@@ -81,6 +97,9 @@ class ControlPanel(QWidget):
         self.setLayout(main_layout)  # 위젯에 메인 레이아웃 설정
 
         # 버튼 클릭 이벤트 연결
+        height1_button.clicked.connect(lambda: self.send_lift_command("L_20"))
+        height2_button.clicked.connect(lambda: self.send_lift_command("L_21"))
+        height3_button.clicked.connect(lambda: self.send_lift_command("L_22"))
         self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10"))
         self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11"))
         # self.lift_preset_button.clicked.connect(self.move_to_preset_height)
@@ -98,7 +117,7 @@ class ControlPanel(QWidget):
         self.velocity_sub = self.node.create_subscription(Odometry, '/odom', self.update_velocity, 10)  # 로봇 속도 구독자
         self.imu_sub = self.node.create_subscription(Imu, '/imu', self.update_imu, 10)  # IMU 데이터 구독자
         self.slam_sub = self.node.create_subscription(Float32, '/slam_remaining_distance', self.update_slam, 10)  # SLAM 거리 구독자
-        self.start_serial_read_thread()  # 시리얼 읽기 스레드 시작
+        # self.start_serial_read_thread()  # 시리얼 읽기 스레드 시작
 
         # 상태 정보 초기화
         self.velocity = None
@@ -108,7 +127,7 @@ class ControlPanel(QWidget):
 
         # QTimer 설정
         self.lift_timer = QTimer()
-        self.lift_timer.timeout.connect(self.send_lift_command)  # 타이머 타임아웃 시 명령 전송
+        # self.lift_timer.timeout.connect(self.send_lift_command)  # 타이머 타임아웃 시 명령 전송
         self.current_lift_command = None  # 현재 리프트 명령 초기화
     
     # def setup_serial_connection(self, port, baud_rate): #시리얼 포트 함수
@@ -155,33 +174,29 @@ class ControlPanel(QWidget):
     def move_to_preset_height(self): # 미리 설정된 높이로 이동
         presets = ['L_20', 'L_21', 'L_22']
         for cmd in presets:
-            self.send_lift_command(cmd)
+            self.send_lift_command(cmd) # 각 높이 설정 명령을 시리얼로 전송
             time.sleep(1)  # 임시로 설정된 대기 시간
 
-    def start_lift_up(self):
-        self.log_to_terminal("Start Lift Up")
-        self.current_lift_command = "up"
-        self.lift_timer.start(100)
+    def start_lift_up(self): # lift up 함수
+        self.log_to_terminal("Start Lift Up") # 터미널에 로그 출력
+        self.current_lift_command = "up" # 현재 명령을 'down'으로 설정
+        self.lift_timer.start(100) # 100ms 간격으로 lift_timer를 시작
 
-    def start_lift_down(self):
+    def start_lift_down(self): # lift down 함수
         self.log_to_terminal("Start Lift Down")
         self.current_lift_command = "down"
         self.lift_timer.start(100)
 
-    def stop_lift(self):
+    def stop_lift(self): # lift stop 함수
         self.log_to_terminal("Stop Lift")
-        self.current_lift_command = None
+        self.current_lift_command = None # 현재 명령을 None으로 초기화
         self.lift_timer.stop()
 
-    def update_distance_label(self):
-        distance = self.sensor.distance * 100
-        self.distance_label.setText(f"Distance: {distance:.2f} cm")
-
-    def toggle_navigation(self):
+    def toggle_navigation(self): # navigation toggle 함수
         nav_state = "enabled" if self.toggle_nav_button.isChecked() else "disabled"
-        self.log_to_terminal(f"Navigation {nav_state}")
+        self.log_to_terminal(f"Navigation {nav_state}") # 터미널에 상태 로그 출력
 
-    def update_status(self, msg):
+    def update_status(self, msg): # ROS에서 상태 업데이트 메시지를 받아 처리하는 함수
         status = msg.data
         self.log_to_terminal(f"Update Status: {status}")
         if status == "normal":
@@ -197,20 +212,20 @@ class ControlPanel(QWidget):
             self.status_color_label.setStyleSheet("background-color: black;")
             self.status_info_label.setText("No Signal")
 
-    def update_velocity(self, msg):
+    def update_velocity(self, msg): # Robot velocity 업데이트 함수
         self.velocity = msg.twist.twist.linear.x
         self.log_to_terminal(f"Update Velocity: {self.velocity}")
 
-    def update_imu(self, msg):
+    def update_imu(self, msg): # IMU 업데이트 함수
         self.imu_orientation = msg.orientation.z
         self.log_to_terminal(f"Update IMU: {self.imu_orientation}")
 
-    def update_slam(self, msg):
+    def update_slam(self, msg): # SLAM 거리 업데이트 함수
         self.slam_distance = msg.data
         self.log_to_terminal(f"Update SLAM: {self.slam_distance}")
         self.eta = self.calculate_eta()
 
-    def calculate_eta(self):
+    def calculate_eta(self): # ETA 계산 함수 (예상 도착 시간)
         if self.velocity and self.slam_distance:
             return self.slam_distance / self.velocity
         return None
@@ -219,7 +234,7 @@ class ControlPanel(QWidget):
         self.terminal_output.append(message)
         self.terminal_output.ensureCursorVisible()
 
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow): # 터미널 로그를 추가하는 함수
     def __init__(self, node):
         super(MainWindow, self).__init__()
         self.setWindowTitle("Robot Control Panel")
