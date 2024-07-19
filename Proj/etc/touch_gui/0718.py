@@ -37,31 +37,37 @@ class ControlPanel(QWidget):
         # 오른쪽 버튼 레이아웃 (세로로 배치)
         right_layout = QVBoxLayout()
 
+        # 리프트 제어 그룹박스
+        lift_group = QGroupBox("Lift Control")
+        lift_layout = QHBoxLayout() # 리프트 제어 버튼들 가로
+
         # 레이아웃 조정하여 사전 설정 높이 버튼 추가
         preset_heights_group = QGroupBox("Preset Heights")  # 사전 설정 높이를 위한 새 그룹 생성
         preset_heights_layout = QVBoxLayout()  # 사전 설정 높이 버튼을 위한 세로 레이아웃
         # 세 개의 사전 설정 높이 버튼 생성
-        height1_button = QPushButton("1번 높이")
-        height2_button = QPushButton("2번 높이")
-        height3_button = QPushButton("3번 높이")
+        self.height1_button = QPushButton("1번 높이")
+        self.height2_button = QPushButton("2번 높이")
+        self.height3_button = QPushButton("3번 높이")
         # 버튼 스타일 설정
-        height1_button.setStyleSheet("font-size: 18px; height: 50px;")
-        height2_button.setStyleSheet("font-size: 18px; height: 50px;")
-        height3_button.setStyleSheet("font-size: 18px; height: 50px;")
+        self.height1_button.setStyleSheet("font-size: 18px; height: 50px;")
+        self.height2_button.setStyleSheet("font-size: 18px; height: 50px;")
+        self.height3_button.setStyleSheet("font-size: 18px; height: 50px;")
         # 그룹에 레이아웃 설정
         preset_heights_group.setLayout(preset_heights_layout)
         # 오른쪽 레이아웃에 사전 설정 높이 그룹 추가
-        right_layout.addWidget(preset_heights_group)
+        lift_layout.addWidget(preset_heights_group)
 
-        # 리프트 제어 그룹박스
-        lift_group = QGroupBox("Lift Control")
-        lift_layout = QVBoxLayout()
+        updown_group = QGroupBox("Lift Up/Down")  # 리프트 올리기, 내리기 버튼을 위한 새 그룹 생성
+        updown_layout = QVBoxLayout()  # 리프트 올리기, 내리기 버튼을 위한 세로 레이아웃
         self.lift_up_button = QPushButton("Lift Up")
-        self.lift_up_button.setStyleSheet("font-size: 18px; height: 50px;")
         self.lift_down_button = QPushButton("Lift Down")
+        self.lift_up_button.setStyleSheet("font-size: 18px; height: 50px;")
         self.lift_down_button.setStyleSheet("font-size: 18px; height: 50px;")
-        lift_layout.addWidget(self.lift_up_button)
-        lift_layout.addWidget(self.lift_down_button)
+        updown_layout.addWidget(self.lift_up_button)
+        updown_layout.addWidget(self.lift_down_button)
+        updown_group.setLayout(updown_layout)
+        lift_layout.addWidget(updown_group)
+
         lift_group.setLayout(lift_layout)
         right_layout.addWidget(lift_group)
 
