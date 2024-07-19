@@ -2,13 +2,14 @@ import sys
 import serial
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit
 from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtGui import QIcon
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 from sensor_msgs.msg import Imu
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseStamped
-from std_msgs.msg import Int32, Float32
+from std_msgs.msg import Int32, Float32, Twist
 from threading import Thread
 import time
 
@@ -29,10 +30,32 @@ class ControlPanel(QWidget):
         left_layout.addWidget(self.map_label)  # 왼쪽 레이아웃에 맵 영역 추가
 
         # 터미널 출력 영역 추가
+        left_bottom_layout = QHBoxLayout()
+
         self.terminal_output = QTextEdit()
         self.terminal_output.setReadOnly(True)
         self.terminal_output.setStyleSheet("background-color: black; color: white;")
-        left_layout.addWidget(self.terminal_output)
+        left_bottom_layout.addWidget(self.terminal_output)
+
+        # 방향 제어를 위한 그룹 박스 추가
+        move_control_group = QGroupBox("Movement Control")
+        move_layout = QVBoxLayout()
+        self.up_button = QPushButton(QIcon("up_arrow.png"), "") # 상, 하, 좌, 우 버튼 추가
+        self.down_button = QPushButton(QIcon("down_arrow.png"), "")
+        self.left_button = QPushButton(QIcon("left_arrow.png"), "")
+        self.right_button = QPushButton(QIcon("right_arrow.png"), "")
+        self.up_button.clicked.connect(lambda: self.send_movement_command("up"))
+        self.down_button.clicked.connect(lambda: self.send_movement_command("down"))
+        self.left_button.clicked.connect(lambda: self.send_movement_command("left"))
+        self.right_button.clicked.connect(lambda: self.send_movement_command("right"))
+        move_layout.addWidget(self.up_button)
+        move_layout.addWidget(self.down_button)
+        move_layout.addWidget(self.left_button)
+        move_layout.addWidget(self.right_button)
+        move_control_group.setLayout(move_layout)
+        left_bottom_layout.addWidget(move_control_group)
+
+        left_layout.addLayout(left_bottom_layout)  # 왼쪽 레이아웃에 방향 제어 그룹 추가
 
         # 오른쪽 버튼 레이아웃 (세로로 배치)
         right_layout = QVBoxLayout()
@@ -235,6 +258,20 @@ class ControlPanel(QWidget):
         if self.velocity and self.slam_distance:
             return self.slam_distance / self.velocity
         return None
+
+    def send_movement_command(self, direction):
+        # 여기에서 ROS 메시지를 통해 로봇 이동 명령을 보냅니다.
+        # 이는 rclpy를 사용하여 구현됩니다. 예를 들어:
+        msg = Twist()
+        if direction == "up":
+            msg.linear.x = 1.0
+        elif direction == "down":
+            msg.linear.x = -1.0
+        elif direction == "left":
+            msg.angular.z = 1.0
+        elif direction == "right":
+            msg.angular.z = -1.0
+        self.velocity_publisher.publish(msg)
 
     def log_to_terminal(self, message):
         self.terminal_output.append(message)
