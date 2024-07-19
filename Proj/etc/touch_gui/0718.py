@@ -103,9 +103,9 @@ class ControlPanel(QWidget):
         self.setLayout(main_layout)  # 위젯에 메인 레이아웃 설정
 
         # 버튼 클릭 이벤트 연결
-        height1_button.clicked.connect(lambda: self.send_lift_command("L_20"))
-        height2_button.clicked.connect(lambda: self.send_lift_command("L_21"))
-        height3_button.clicked.connect(lambda: self.send_lift_command("L_22"))
+        self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20"))
+        self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21"))
+        self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22"))
         self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10"))
         self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11"))
         # self.lift_preset_button.clicked.connect(self.move_to_preset_height)
