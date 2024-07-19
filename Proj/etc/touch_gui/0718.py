@@ -8,7 +8,6 @@ from std_msgs.msg import String
 from sensor_msgs.msg import Imu
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseStamped
-from gpiozero import DigitalOutputDevice, DistanceSensor
 from threading import Thread
 import time
 
