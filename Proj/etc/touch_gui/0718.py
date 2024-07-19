@@ -48,14 +48,14 @@ class ControlPanel(QWidget):
         self.height1_button = QPushButton("1번 높이")
         self.height2_button = QPushButton("2번 높이")
         self.height3_button = QPushButton("3번 높이")
-        # 버튼 스타일 설정
-        self.height1_button.setStyleSheet("font-size: 18px; height: 50px;")
+        self.height1_button.setStyleSheet("font-size: 18px; height: 50px;") # 버튼 스타일 설정
         self.height2_button.setStyleSheet("font-size: 18px; height: 50px;")
         self.height3_button.setStyleSheet("font-size: 18px; height: 50px;")
-        # 그룹에 레이아웃 설정
-        preset_heights_group.setLayout(preset_heights_layout)
-        # 오른쪽 레이아웃에 사전 설정 높이 그룹 추가
-        lift_layout.addWidget(preset_heights_group)
+        preset_heights_layout.addWidget(self.height1_button) # 레이아웃에 버튼 추가
+        preset_heights_layout.addWidget(self.height2_button)
+        preset_heights_layout.addWidget(self.height3_button)
+        preset_heights_group.setLayout(preset_heights_layout) # 그룹에 레이아웃 설정
+        lift_layout.addWidget(preset_heights_group) # 오른쪽 레이아웃에 사전 설정 높이 그룹 추가
 
         updown_group = QGroupBox("Lift Up/Down")  # 리프트 올리기, 내리기 버튼을 위한 새 그룹 생성
         updown_layout = QVBoxLayout()  # 리프트 올리기, 내리기 버튼을 위한 세로 레이아웃
