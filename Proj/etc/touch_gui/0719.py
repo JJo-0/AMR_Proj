@@ -8,8 +8,8 @@ from rclpy.node import Node
 from std_msgs.msg import String
 from sensor_msgs.msg import Imu
 from nav_msgs.msg import Odometry
-from geometry_msgs.msg import PoseStamped
-from std_msgs.msg import Int32, Float32, Twist
+from geometry_msgs.msg import PoseStamped, Twist
+from std_msgs.msg import Int32, Float32
 from threading import Thread
 import time
 
