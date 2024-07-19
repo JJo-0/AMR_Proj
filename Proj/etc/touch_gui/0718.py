@@ -45,9 +45,9 @@ class ControlPanel(QWidget):
         preset_heights_group = QGroupBox("Preset Heights")  # 사전 설정 높이를 위한 새 그룹 생성
         preset_heights_layout = QVBoxLayout()  # 사전 설정 높이 버튼을 위한 세로 레이아웃
         # 세 개의 사전 설정 높이 버튼 생성
-        self.height1_button = QPushButton("1번 높이")
-        self.height2_button = QPushButton("2번 높이")
-        self.height3_button = QPushButton("3번 높이")
+        self.height1_button = QPushButton("1 Height")
+        self.height2_button = QPushButton("2 Height")
+        self.height3_button = QPushButton("3 Height")
         self.height1_button.setStyleSheet("font-size: 18px; height: 50px;") # 버튼 스타일 설정
         self.height2_button.setStyleSheet("font-size: 18px; height: 50px;")
         self.height3_button.setStyleSheet("font-size: 18px; height: 50px;")
