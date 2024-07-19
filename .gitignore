@@ -16,6 +16,7 @@
 # Ignore all local history of files
 .history
 .ionides
+.metadata
 
 # Ignore build directories
 com_proj/dev_src_0708/build/

@@ -1,4 +1,5 @@
 import sys
+import serial
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit
 from PyQt5.QtCore import Qt, QTimer
 import rclpy
@@ -16,8 +17,8 @@ class ControlPanel(QWidget):
         super(ControlPanel, self).__init__(parent)
         self.node = node
 
-        # GPIO 초기화
-        self.initGPIO()
+        # 시리얼 통신 설정
+        self.ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
         self.startDistanceThread()
 
         # 메인 레이아웃 설정
@@ -45,10 +46,8 @@ class ControlPanel(QWidget):
         self.lift_up_button.setStyleSheet("font-size: 24px; height: 100px;")
         self.lift_down_button = QPushButton("Lift Down")
         self.lift_down_button.setStyleSheet("font-size: 24px; height: 100px;")
-        self.distance_label = QLabel("Distance: -- cm")
         lift_layout.addWidget(self.lift_up_button)
         lift_layout.addWidget(self.lift_down_button)
-        lift_layout.addWidget(self.distance_label)
         lift_group.setLayout(lift_layout)
         right_layout.addWidget(lift_group)
 
@@ -81,8 +80,12 @@ class ControlPanel(QWidget):
         # 왼쪽, 오른쪽 레이아웃을 메인 레이아웃에 추가
         main_layout.addLayout(left_layout)
         main_layout.addLayout(right_layout)
-
         self.setLayout(main_layout)  # 위젯에 메인 레이아웃 설정
+
+        # 리프트 제어 버튼 이벤트 연결
+        self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10"))
+        self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11"))
+        self.lift_preset_button.clicked.connect(self.move_to_preset_height)
 
         # 버튼 클릭 이벤트 연결
         self.lift_up_button.pressed.connect(self.start_lift_up)  # 리프트 올리기 버튼 누름 이벤트 연결
@@ -92,6 +95,7 @@ class ControlPanel(QWidget):
         self.toggle_nav_button.clicked.connect(self.toggle_navigation)  # 네비게이션 토글 버튼 클릭 이벤트 연결
 
         # ROS 퍼블리셔 및 구독자 설정
+        self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)  # 비상정지 시그널 퍼블리셔 (1 : 평시 상태, 0 : 비상정지 명령)
         self.lift_pub = self.node.create_publisher(String, '/lift_command', 10)  # 리프트 명령 퍼블리셔
         self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 명령 퍼블리셔
         self.status_sub = self.node.create_subscription(String, '/robot_status', self.update_status, 10)  # 로봇 상태 구독자
@@ -110,12 +114,25 @@ class ControlPanel(QWidget):
         self.lift_timer.timeout.connect(self.send_lift_command)  # 타이머 타임아웃 시 명령 전송
         self.current_lift_command = None  # 현재 리프트 명령 초기화
 
-    def initGPIO(self):
-        self.pin23 = DigitalOutputDevice(23)
-        self.pin24 = DigitalOutputDevice(24)
-        self.sensor = DistanceSensor(echo=27, trigger=17)
-        self.distanceThreadActive = True
+    def send_lift_command(self, command):
+        self.ser.write(f"{command}\n".encode('utf-8'))
+        self.log_to_terminal(f"Sent command to Arduino: {command}")
 
+    def move_to_preset_height(self): # 미리 설정된 높이로 이동
+        presets = ['L_20', 'L_21', 'L_22']
+        for cmd in presets:
+            self.send_lift_command(cmd)
+            time.sleep(1)  # 임시로 설정된 대기 시간
+    
+    def update_status(self, msg):
+        status = msg.data
+        if status == "E_1":
+            self.emergency_pub.publish(Int32(data=1))
+        elif status == "E_0":
+            self.emergency_pub.publish(Int32(data=0))
+        self.log_to_terminal(f"Update Status: {status}")
+
+        
     def start_lift_up(self):
         self.log_to_terminal("Start Lift Up")
         self.current_lift_command = "up"
@@ -133,13 +150,6 @@ class ControlPanel(QWidget):
         self.current_lift_command = None
         self.lift_timer.stop()
 
-    def send_lift_command(self):
-        if self.current_lift_command:
-            msg = String()
-            msg.data = self.current_lift_command
-            self.lift_pub.publish(msg)
-            if self.current_lift_command in ["up", "down"]:
-                self.update_distance_label()
 
     def update_distance_label(self):
         distance = self.sensor.distance * 100
