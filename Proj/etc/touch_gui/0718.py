@@ -8,6 +8,7 @@ from std_msgs.msg import String
 from sensor_msgs.msg import Imu
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseStamped
+from std_msgs.msg import Int32, Float32
 from threading import Thread
 import time
 
@@ -15,7 +16,7 @@ class ControlPanel(QWidget):
     def __init__(self, node, parent=None):
         super(ControlPanel, self).__init__(parent)
         self.node = node  # ROS 노드를 저장하는 변수
-        self.setup_serial_connection('/dev/ttyACM0', 115200)  # 시리얼 연결 설정
+        #   self.setup_serial_connection('/dev/ttyACM0', 115200)  # 시리얼 연결 설정
         self.init_ui()  # UI 컴포넌트 초기화
 
         # 메인 레이아웃 설정
@@ -82,7 +83,7 @@ class ControlPanel(QWidget):
         # 버튼 클릭 이벤트 연결
         self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10"))
         self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11"))
-        self.lift_preset_button.clicked.connect(self.move_to_preset_height)
+        #   self.lift_preset_button.clicked.connect(self.move_to_preset_height)
         self.lift_up_button.pressed.connect(self.start_lift_up)  # 리프트 올리기 버튼 누름 이벤트 연결
         self.lift_up_button.released.connect(self.stop_lift)  # 리프트 올리기 버튼 놓음 이벤트 연결
         self.lift_down_button.pressed.connect(self.start_lift_down)  # 리프트 내리기 버튼 누름 이벤트 연결
