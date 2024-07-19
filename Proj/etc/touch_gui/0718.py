@@ -15,7 +15,7 @@ class ControlPanel(QWidget):
     def __init__(self, node, parent=None):
         super(ControlPanel, self).__init__(parent)
         self.node = node  # ROS 노드를 저장하는 변수
-        self.setup_serial_connection('/dev/ttyUSB0', 115200)  # 시리얼 연결 설정
+        self.setup_serial_connection('/dev/ttyACM0', 115200)  # 시리얼 연결 설정
         self.init_ui()  # UI 컴포넌트 초기화
 
         # 메인 레이아웃 설정
