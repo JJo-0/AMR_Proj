@@ -1,7 +1,8 @@
 import sys
 import serial
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QCheckBox
-from PyQt5.QtCore import Qt, QTimer
+import subprocess
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout
+from PyQt5.QtCore import Qt, QTimer, QThread, pyqtSignal
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
@@ -11,6 +12,25 @@ from geometry_msgs.msg import PoseStamped, Twist
 from std_msgs.msg import Int32, Float32
 from threading import Thread
 import time
+
+class WiFiChecker(QThread):
+    wifi_status_signal = pyqtSignal(str)
+
+    def run(self):
+        while True:
+            status = self.check_wifi_connection()
+            self.wifi_status_signal.emit(status)
+            time.sleep(10)
+
+    def check_wifi_connection(self):
+        try:
+            result = subprocess.run(['ping', '-c', '1', '8.8.8.8'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            if result.returncode == 0:
+                return "Connected"
+            else:
+                return "Disconnected"
+        except Exception as e:
+            return "Error"
 
 class ControlPanel(QWidget):
     def __init__(self, node, parent=None):
@@ -43,12 +63,19 @@ class ControlPanel(QWidget):
         self.imu_sub = self.node.create_subscription(Imu, '/imu', self.update_imu, 10)
         self.slam_sub = self.node.create_subscription(Float32, '/slam_remaining_distance', self.update_slam, 10)
 
+        # WiFi Checker 스레드 시작
+        self.wifi_checker = WiFiChecker()
+        self.wifi_checker.wifi_status_signal.connect(self.update_wifi_status)
+        self.wifi_checker.start()
+
     def setup_serial_connection(self, port, baud_rate):  # 시리얼 연결 설정 함수
         try:
             self.ser = serial.Serial(port, baud_rate, timeout=1)  # 시리얼 포트 연결
             self.ser.reset_input_buffer()  # 입력 버퍼 리셋
+            self.update_status_label("Arduino Connection", "Connected", "green")
             self.log_to_terminal(f"[Serial Connected] : {port} @ {baud_rate}")  # 연결 성공 로그 출력
         except serial.SerialException as e:
+            self.update_status_label("Arduino Connection", "Error", "red")
             self.log_to_terminal(f"[Serial Connected Failed] : {str(e)}")  # 연결 실패 로그 출력
             self.ser = None
 
@@ -90,13 +117,35 @@ class ControlPanel(QWidget):
         self.right_button.clicked.connect(lambda: self.send_movement_command("right"))
         self.stop_button.clicked.connect(lambda: self.send_movement_command("stop"))
 
-        # 비상정지 토글 스위치 추가
-        self.emergency_stop_switch = QToolButton()
-        self.emergency_stop_switch.setCheckable(True)
-        self.emergency_stop_switch.setText("Emergency Stop")
-        self.emergency_stop_switch.setStyleSheet("font-size: 18px; height: 50px;")
-        self.emergency_stop_switch.clicked.connect(self.handle_emergency_stop)
-        move_layout.addWidget(self.emergency_stop_switch, 3, 1, 1, 2)
+        # 비상정지 버튼 추가
+        self.emergency_stop_group = QGroupBox("Emergency Stop")
+        emergency_layout = QGridLayout()
+        self.emergency_stop_button1 = QToolButton()
+        self.emergency_stop_button2 = QToolButton()
+        self.emergency_stop_button3 = QToolButton()
+
+        self.emergency_stop_button1.setCheckable(True)
+        self.emergency_stop_button2.setCheckable(True)
+        self.emergency_stop_button3.setCheckable(True)
+
+        self.emergency_stop_button1.setText("EMS 1")
+        self.emergency_stop_button2.setText("EMS 2")
+        self.emergency_stop_button3.setText("EMS 3")
+
+        self.emergency_stop_button1.setStyleSheet("font-size: 24px; height: 100px;")
+        self.emergency_stop_button2.setStyleSheet("font-size: 24px; height: 100px;")
+        self.emergency_stop_button3.setStyleSheet("font-size: 24px; height: 100px;")
+
+        self.emergency_stop_button1.clicked.connect(self.handle_emergency_stop)
+        self.emergency_stop_button2.clicked.connect(self.handle_emergency_stop)
+        self.emergency_stop_button3.clicked.connect(self.handle_emergency_stop)
+
+        emergency_layout.addWidget(self.emergency_stop_button1, 0, 0)
+        emergency_layout.addWidget(self.emergency_stop_button2, 0, 1)
+        emergency_layout.addWidget(self.emergency_stop_button3, 0, 2)
+
+        self.emergency_stop_group.setLayout(emergency_layout)
+        left_layout.addWidget(self.emergency_stop_group)
 
         left_layout.addWidget(move_control_group)
         main_layout.addLayout(left_layout)
@@ -118,9 +167,9 @@ class ControlPanel(QWidget):
         self.height1_button.setStyleSheet("font-size: 18px; height: 50px;")
         self.height2_button.setStyleSheet("font-size: 18px; height: 50px;")
         self.height3_button.setStyleSheet("font-size: 18px; height: 50px;") 
-        self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20"))
-        self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21"))
-        self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22"))
+        self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))
+        self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))
+        self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))
 
         updown_group = QGroupBox("Lift Up/Down")
         updown_layout = QVBoxLayout()
@@ -128,9 +177,9 @@ class ControlPanel(QWidget):
         self.lift_down_button = QPushButton("Lift Down")
         self.lift_up_button.setStyleSheet("font-size: 18px; height: 50px;")
         self.lift_down_button.setStyleSheet("font-size: 18px; height: 50px;")
-        self.lift_up_button.pressed.connect(lambda: self.start_lift("L_10", "Start Lift Up"))
+        self.lift_up_button.pressed.connect(lambda: self.start_lift("L_10", "Lift Up"))
         self.lift_up_button.released.connect(self.stop_lift)
-        self.lift_down_button.pressed.connect(lambda: self.start_lift("L_11", "Start Lift Down"))
+        self.lift_down_button.pressed.connect(lambda: self.start_lift("L_11", "Lift Down"))
         self.lift_down_button.released.connect(self.stop_lift)
         updown_layout.addWidget(self.lift_up_button)
         updown_layout.addWidget(self.lift_down_button)
@@ -154,15 +203,27 @@ class ControlPanel(QWidget):
         # 로봇 상태 표시 그룹 설정
         status_group = QGroupBox("Robot Status")
         status_layout = QVBoxLayout()
-        status_box_layout = QHBoxLayout()
-        self.status_color_label = QLabel()
-        self.status_color_label.setFixedSize(30, 30)
-        self.status_color_label.setStyleSheet("background-color: black;")
-        self.status_info_label = QLabel("No Signal")
-        self.status_info_label.setStyleSheet("font-size: 18px;")
-        status_box_layout.addWidget(self.status_color_label)
-        status_box_layout.addWidget(self.status_info_label)
-        status_layout.addLayout(status_box_layout)
+
+        self.status_labels = {
+            "Arduino Connection": QLabel(),
+            "ROS Connection": QLabel(),
+            "EMS Signal": QLabel(),
+            "Lift Signal": QLabel(),
+            "Navigation Status": QLabel(),
+            "WiFi Connection": QLabel()
+        }
+
+        for label in self.status_labels.values():
+            label.setStyleSheet("font-size: 18px; background-color: black; color: white; padding: 5px;")
+            status_layout.addWidget(label)
+
+        self.update_status_label("Arduino Connection", "-", "black")
+        self.update_status_label("ROS Connection", "-", "black")
+        self.update_status_label("EMS Signal", "-", "black")
+        self.update_status_label("Lift Signal", "-", "black")
+        self.update_status_label("Navigation Status", "Idle", "black")
+        self.update_status_label("WiFi Connection", "Disconnected", "black")
+
         status_group.setLayout(status_layout)
         right_layout.addWidget(status_group)
 
@@ -177,11 +238,13 @@ class ControlPanel(QWidget):
             self.read_thread.start()  # 스레드 시작
             self.log_to_terminal("시리얼 읽기 스레드 시작")  # 스레드 시작 로그 출력
 
-    def send_lift_command(self, command):  # 리프트 명령 전송
+    def send_lift_command(self, command, label):  # 리프트 명령 전송
+        self.update_status_label("Lift Signal", label, "green")
         if self.ser:
             try:
                 self.ser.write(f"{command}\n".encode('utf-8'))  # 시리얼 포트로 명령 전송
                 self.log_to_terminal(f"[Arduino Send] : {command}")
+                QTimer.singleShot(5000, lambda: self.update_status_label("Lift Signal", "-", "black"))
             except serial.SerialException as e:
                 self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")  # 명령 전송 실패 로그 출력
 
@@ -196,47 +259,58 @@ class ControlPanel(QWidget):
             status = int(data.split("_")[1])
             if status == 1:
                 self.emergency_pub.publish(Int32(data=1))  # 비상 상태 해제
-                self.emergency_stop_switch.setChecked(False)  # 비상정지 해제 상태로 설정
+                self.update_status_label("EMS Signal", "Good: 1", "green")
             elif status == 0:
                 self.emergency_pub.publish(Int32(data=0))  # 비상 상태 설정
-                self.emergency_stop_switch.setChecked(True)  # 비상정지 설정 상태로 설정
+                self.update_status_label("EMS Signal", "Emergency: 0", "red")
             self.log_to_terminal(f"Arduino received : EMS_{data}")
 
     def move_to_preset_height(self, command, log_message):  # 미리 설정된 높이로 이동
-        self.send_lift_command(command)
+        self.send_lift_command(command, log_message)
         self.log_to_terminal(log_message)
 
     def start_lift(self, command, log_message):  # 리프트 이동 시작 (올리기/내리기)
+        self.update_status_label("Lift Signal", log_message, "green")
         self.log_to_terminal(log_message)
         self.current_lift_command = command
-        self.lift_timer.timeout.connect(lambda: self.send_lift_command(self.current_lift_command))
+        self.lift_timer.timeout.connect(lambda: self.send_lift_command(self.current_lift_command, log_message))
         self.lift_timer.start(100)
-        self.log_to_terminal("Lift Timer Start")  # QTimer 시작 로그 출력
+        self.log_to_terminal("Lift Timer 시작됨")  # QTimer 시작 로그 출력
 
     def stop_lift(self):  # 리프트 멈추기
         self.log_to_terminal("Stop Lift")
         self.current_lift_command = None
         self.lift_timer.stop()
+        QTimer.singleShot(5000, lambda: self.update_status_label("Lift Signal", "-", "black"))
 
     def toggle_navigation(self):  # 네비게이션 토글
-        nav_state = "enabled" if self.toggle_nav_button.isChecked() else "disabled"
+        nav_state = "Navigating" if self.toggle_nav_button.isChecked() else "Idle"
+        color = "green" if self.toggle_nav_button.isChecked() else "black"
+        self.update_status_label("Navigation Status", nav_state, color)
         self.log_to_terminal(f"Navigation {nav_state}")
 
     def update_status(self, msg):  # ROS로부터 로봇 상태 업데이트
         status = msg.data
         self.log_to_terminal(f"Update Status: {status}")
         if status == "normal":
-            self.status_color_label.setStyleSheet("background-color: green;")
-            self.status_info_label.setText(f"Velocity: {self.velocity if self.velocity is not None else ''}\n"
-                                           f"IMU: {self.imu_orientation if self.imu_orientation is not None else ''}\n"
-                                           f"SLAM: {self.slam_distance if self.slam_distance is not None else ''}\n"
-                                           f"ETA: {self.eta if self.eta is not None else ''}")
+            self.update_status_label("Arduino Connection", "Connected", "green")
+            self.update_status_label("ROS Connection", "Connected", "green")
+            self.update_status_label("WiFi Connection", "Connected", "green")
+            self.update_status_label("Navigation Status", "Navigating", "green")
         elif status == "emergency":
-            self.status_color_label.setStyleSheet("background-color: red;")
-            self.status_info_label.setText("Emergency Stop")
+            self.update_status_label("Arduino Connection", "Error", "red")
+            self.update_status_label("ROS Connection", "Error", "red")
+            self.update_status_label("WiFi Connection", "Disconnected", "black")
+            self.update_status_label("Navigation Status", "Error", "red")
         else:
-            self.status_color_label.setStyleSheet("background-color: black;")
-            self.status_info_label.setText("No Signal")
+            self.update_status_label("Arduino Connection", "-", "black")
+            self.update_status_label("ROS Connection", "-", "black")
+            self.update_status_label("WiFi Connection", "Disconnected", "black")
+            self.update_status_label("Navigation Status", "Idle", "black")
+
+    def update_wifi_status(self, status):
+        color = "green" if status == "Connected" else "black"
+        self.update_status_label("WiFi Connection", status, color)
 
     def update_velocity(self, msg):  # ROS로부터 속도 업데이트
         self.velocity = msg.twist.twist.linear.x
@@ -272,10 +346,21 @@ class ControlPanel(QWidget):
         self.node.create_publisher(Twist, '/cmd_vel', 10).publish(msg)  # 이동 명령 전송
 
     def handle_emergency_stop(self):  # 비상 정지 스위치 핸들러
-        if self.emergency_stop_switch.isChecked():
+        sender = self.sender()
+        if sender.isChecked():
             self.emergency_pub.publish(Int32(data=0))  # 비상 상태 설정
+            if self.ser:
+                try:
+                    self.ser.write("E_0\n".encode('utf-8'))
+                except serial.SerialException as e:
+                    self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")  # 명령 전송 실패 로그 출력
         else:
             self.emergency_pub.publish(Int32(data=1))  # 비상 상태 해제
+            if self.ser:
+                try :
+                    self.ser.write("E_1\n".encode('utf-8'))
+                except serial.SerialException as e:
+                    self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")  # 명령 전송 실패 로그 출력
 
 
     def log_to_terminal(self, message):  # 터미널에 로그 출력
