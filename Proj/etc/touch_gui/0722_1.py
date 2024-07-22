@@ -10,7 +10,7 @@ from sensor_msgs.msg import Imu
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseStamped, Twist
 from std_msgs.msg import Int32, Float32
-from threading import Thread
+from threading import Thread, Lock
 import time
 
 class ControlPanel(QWidget):
@@ -34,6 +34,9 @@ class ControlPanel(QWidget):
             "Arduino Connection": QLabel()
         }
 
+        self.serial_buffer = []
+        self.serial_lock = Lock()
+
         self.init_ui()  # UI 초기화
 
         # UI 초기화 후에 로그 출력
@@ -41,6 +44,7 @@ class ControlPanel(QWidget):
 
         self.setup_serial_connection('/dev/ttyACM0', 115200)  # 시리얼 포트 연결 설정
         self.start_serial_read_thread()  # 시리얼 읽기 스레드 시작
+        self.start_serial_process_thread()  # 시리얼 처리 스레드 시작
 
         # ROS 통신 설정
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)
@@ -173,8 +177,9 @@ class ControlPanel(QWidget):
 
         for key, label in self.status_labels.items():
             label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
-        status_layout.addWidget(QLabel(key))
-        status_layout.addWidget(label)
+            status_layout.addWidget(QLabel(key))
+            status_layout.addWidget(label)
+
         self.update_status_label("EMS Signal", "-", "black")
         self.update_status_label("Lift Signal", "-", "black")
         self.update_status_label("Arduino Connection", "Disconnected", "black")
@@ -198,6 +203,10 @@ class ControlPanel(QWidget):
             self.read_thread.start()  # 스레드 시작
             self.log_to_terminal("Serial Reading Thread Start")  # 스레드 시작 로그 출력
 
+    def start_serial_process_thread(self):  # 시리얼 처리 스레드 시작
+        self.process_thread = Thread(target=self.process_serial_buffer)
+        self.process_thread.start()
+
     def send_lift_command(self, command, label):  # 리프트 명령 전송
         self.update_status_label("Lift Signal", label, "green")
         if self.ser:
@@ -212,7 +221,16 @@ class ControlPanel(QWidget):
         while True:
             if self.ser and self.ser.in_waiting > 0:
                 line = self.ser.readline().decode('utf-8').rstrip()  # 시리얼 포트로부터 데이터 읽기
-                self.process_serial_data(line)  # 읽은 데이터 처리
+                with self.serial_lock:
+                    self.serial_buffer.append(line)
+
+    def process_serial_buffer(self):
+        while True:
+            with self.serial_lock:
+                if self.serial_buffer:
+                    data = self.serial_buffer.pop(0)
+                    self.process_serial_data(data)
+            time.sleep(0.1)  # 데이터 처리 주기 조절
 
     def process_serial_data(self, data):  # 시리얼 데이터 처리
         if data.startswith("E_"):
