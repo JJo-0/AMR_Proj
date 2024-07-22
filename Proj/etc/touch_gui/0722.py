@@ -30,8 +30,8 @@ class ControlPanel(QWidget):
         self.init_ui()  # UI 초기화
        
         # UI 초기화 후에 로그 출력
-        self.log_to_terminal("ROS 노드 초기화 성공")  # ROS 노드 초기화 로그 출력
-       
+        self.log_to_terminal("UI Set Success!")  # ROS 노드 초기화 로그 출력
+
         self.setup_serial_connection('/dev/ttyACM0', 115200)  # 시리얼 포트 연결 설정
         self.start_serial_read_thread()  # 시리얼 읽기 스레드 시작
 
@@ -48,9 +48,9 @@ class ControlPanel(QWidget):
         try:
             self.ser = serial.Serial(port, baud_rate, timeout=1)  # 시리얼 포트 연결
             self.ser.reset_input_buffer()  # 입력 버퍼 리셋
-            self.log_to_terminal(f"시리얼 연결 성공: {port} @ {baud_rate}")  # 연결 성공 로그 출력
+            self.log_to_terminal(f"Serial Connected : {port} @ {baud_rate}")  # 연결 성공 로그 출력
         except serial.SerialException as e:
-            self.log_to_terminal(f"시리얼 연결 실패: {str(e)}")  # 연결 실패 로그 출력
+            self.log_to_terminal(f"ERROR Serial Connected Failed : {str(e)}")  # 연결 실패 로그 출력
             self.ser = None
    
     def init_ui(self):
@@ -267,16 +267,21 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.setWindowTitle("Robot Control Panel")
 
-        # 화면 크기 설정
+        # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
         screen_geometry = QApplication.primaryScreen().geometry()
-        available_geometry = QApplication.primaryScreen().availableGeometry()
-        screen_width = int(available_geometry.width() * 21 / 24)
-        screen_height = int(available_geometry.height() * 23 / 24)
-        self.setGeometry(0, 0, screen_width, screen_height)
+        screen_width = screen_geometry.width()
+        screen_height = screen_geometry.height()
 
-        # 컨트롤 패널 추가
+        # 메인 윈도우의 크기를 화면 해상도의 90%로 설정
+        window_width = int(screen_width * 0.9)
+        window_height = int(screen_height * 0.9)
+        self.setGeometry(0, 0, window_width, window_height)
+
+
+        # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
-       
+        self.control_panel.setFixedSize(window_width, window_height)
+
         # 메인 레이아웃 설정
         main_layout = QVBoxLayout()
         main_layout.addWidget(self.control_panel)
@@ -285,10 +290,13 @@ class MainWindow(QMainWindow):
         container.setLayout(main_layout)
         self.setCentralWidget(container)
 
-        # 초기 크기 설정
-        self.control_panel.map_label.setFixedSize(int(screen_width * 2 / 3), int(screen_height * 2 / 3))
-        self.control_panel.terminal_output.setFixedSize(int(screen_width * 13 / 30), int(screen_height * 3 / 10))
-        self.control_panel.setFixedSize(screen_width, screen_height)
+        # 컨트롤 패널 내부의 레이아웃 크기 조정
+        self.control_panel.adjust_layouts(window_width, window_height)
+
+        # # 초기 크기 설정
+        # self.control_panel.map_label.setFixedSize(int(screen_width * 2 / 3), int(screen_height * 2 / 3))
+        # self.control_panel.terminal_output.setFixedSize(int(screen_width * 13 / 30), int(screen_height * 3 / 10))
+        # self.control_panel.setFixedSize(screen_width, screen_height)
 
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화
