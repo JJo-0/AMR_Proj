@@ -24,7 +24,7 @@ class SerialReader(QThread):  # 시리얼 읽기 스레드 클래스
         while self.running:  # 실행 중일 때
             try:
                 if self.ser and self.ser.in_waiting > 0:  # 시리얼 데이터 대기 중
-                    line = self.ser.readline().decode('utf-8').rstrip()  # 시리얼 데이터 읽기
+                    line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()  # 시리얼 데이터 읽기, 디코딩 에러 무시
                     self.new_data.emit(line)  # 새 데이터 신호 발생
             except serial.SerialException as e:  # 시리얼 예외 처리
                 self.new_data.emit(f"Serial error: {e}")  # 에러 메시지 발생
@@ -53,6 +53,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
             "Arduino Connection": QLabel()
         }
 
+        self.serial_buffer = []  # 시리얼 버퍼 리스트 초기화
         self.serial_lock = Lock()  # 시리얼 락 객체
 
         self.init_ui()  # UI 초기화
@@ -212,22 +213,22 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
 
     def start_serial_process_thread(self):  # 시리얼 처리 스레드 시작 함수
         self.process_thread = Thread(target=self.process_serial_buffer)  # 처리 스레드 생성
-        self.process_thread.start() 
+        self.process_thread.start()  # 스레드 시작
 
     def send_lift_command(self, command, label):  # 리프트 명령 전송 함수
         self.update_status_label("Lift Signal", label, "green")  # 상태 라벨 업데이트
         if self.ser:  # 시리얼 객체가 존재하면
             try:
-                self.ser.write(f"{command}\n".encode('utf-8'))
-                self.log_to_terminal(f"[Arduino Send] : {command}")
+                self.ser.write(f"{command}\n".encode('utf-8'))  # 명령 전송
+                self.log_to_terminal(f"[Arduino Send] : {command}")  # 로그 메시지
                 QTimer.singleShot(5000, lambda: self.update_status_label("Lift Signal", "-", "black"))  # 5초 후 상태 라벨 초기화
-            except serial.SerialException as e:
-                self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
+            except serial.SerialException as e:  # 시리얼 예외 처리
+                self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")  # 에러 로그 메시지
 
     def read_from_serial(self):  # 시리얼 읽기 함수
         while True:  # 계속 실행
             if self.ser and self.ser.in_waiting > 0:  # 시리얼 데이터 대기 중
-                line = self.ser.readline().decode('utf-8').rstrip()  # 시리얼 데이터 읽기
+                line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()  # 시리얼 데이터 읽기, 디코딩 에러 무시
                 with self.serial_lock:  # 락 사용
                     self.serial_buffer.append(line)  # 버퍼에 추가
 
@@ -238,7 +239,6 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
                     data = self.serial_buffer.pop(0)  # 데이터 꺼내기
                     self.process_serial_data(data)  # 데이터 처리
             time.sleep(0.1)  # 0.1초 대기
-
     def process_serial_data(self, data):  # 시리얼 데이터 처리 함수
         if data.startswith("E_"):  # 데이터가 E_로 시작하면
             try:
@@ -250,11 +250,11 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
                     self.emergency_stop_button.setChecked(False)  # 비상 정지 버튼 해제
                 elif status == 0:  # 상태가 0이면
                     self.emergency_pub.publish(Int32(data=0))  # 비상 신호 전송
-                    self.update_status_label("EMS Signal", "Emergency: 0", "red") 
+                    self.update_status_label("EMS Signal", "Emergency: 0", "red")  # 상태 라벨 업데이트
                     self.emergency_stop_button.setChecked(True)  # 비상 정지 버튼 설정
-                    self.log_to_terminal(f"Arduino received : EMS_{data}")  # 로그 메시지
+                self.log_to_terminal(f"Arduino received : EMS_{data}")  # 로그 메시지
             except (ValueError, IndexError) as e:  # 예외 처리
-                    self.log_to_terminal(f"Invalid data received: {data}")  # 에러 로그 메시지
+                self.log_to_terminal(f"Invalid data received: {data}")  # 에러 로그 메시지
 
     def move_to_preset_height(self, command, log_message):  # 미리 설정된 높이로 이동 함수
         self.send_lift_command(command, log_message)  # 리프트 명령 전송
@@ -349,22 +349,27 @@ class MainWindow(QMainWindow):
     def __init__(self, node):
         super(MainWindow, self).__init__()
         self.setWindowTitle("Robot Control Panel")
-        screen_geometry = QApplication.primaryScreen().geometry()  # 화면 해상도 가져오기
-        screen_width = screen_geometry.width()  # 화면 너비
-        screen_height = screen_geometry.height()  # 화면 높이
 
-        window_width = int(screen_width * 0.9)  # 윈도우 너비 설정
-        window_height = int(screen_height * 0.9)  # 윈도우 높이 설정
-        self.setGeometry(0, 0, window_width, window_height)  # 윈도우 크기 설정
+        # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
+        screen_geometry = QApplication.primaryScreen().geometry()
+        screen_width = screen_geometry.width()
+        screen_height = screen_geometry.height()
 
-        self.control_panel = ControlPanel(node, self)  # 컨트롤 패널 생성
+        # 메인 윈도우의 크기를 화면 해상도의 90%로 설정
+        window_width = int(screen_width * 0.9)
+        window_height = int(screen_height * 0.9)
+        self.setGeometry(0, 0, window_width, window_height)
 
-        main_layout = QVBoxLayout()  # 메인 레이아웃
-        main_layout.addWidget(self.control_panel)  # 컨트롤 패널 추가
+        # 컨트롤 패널 추가 및 크기 조정
+        self.control_panel = ControlPanel(node, self)
 
-        container = QWidget()  # 컨테이너 위젯
-        container.setLayout(main_layout)  # 레이아웃 설정
-        self.setCentralWidget(container)  # 중앙 위젯 설정
+        # 메인 레이아웃 설정
+        main_layout = QVBoxLayout()
+        main_layout.addWidget(self.control_panel)
+
+        container = QWidget()
+        container.setLayout(main_layout)
+        self.setCentralWidget(container)
 
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화
