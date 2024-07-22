@@ -303,9 +303,6 @@ class MainWindow(QMainWindow):
         container.setLayout(main_layout)
         self.setCentralWidget(container)
 
-        # 컨트롤 패널 내부의 레이아웃 크기 조정
-        self.control_panel.adjust_layouts(window_width, window_height)
-
         # # 초기 크기 설정
         # self.control_panel.map_label.setFixedSize(int(screen_width * 2 / 3), int(screen_height * 2 / 3))
         # self.control_panel.terminal_output.setFixedSize(int(screen_width * 13 / 30), int(screen_height * 3 / 10))
