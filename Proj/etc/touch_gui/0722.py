@@ -1,6 +1,6 @@
 import sys
 import serial
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QIcon
 import rclpy
@@ -50,68 +50,82 @@ class ControlPanel(QWidget):
             self.ser.reset_input_buffer()  # 입력 버퍼 리셋
             self.log_to_terminal(f"Serial Connected : {port} @ {baud_rate}")  # 연결 성공 로그 출력
         except serial.SerialException as e:
-            self.log_to_terminal(f"ERROR Serial Connected Failed : {str(e)}")  # 연결 실패 로그 출력
+            self.log_to_terminal(f"Serial Connected Failed : {str(e)}")  # 연결 실패 로그 출력
             self.ser = None
    
     def init_ui(self):
         # 메인 레이아웃 설정
-        main_layout = QHBoxLayout()  # 전체 레이아웃을 수평으로 설정
-        left_layout = QVBoxLayout()  # 왼쪽 레이아웃을 수직으로 설정
+        main_layout = QHBoxLayout()  # 전체 레이아웃 수평
+        self.setLayout(main_layout) # 메인 레이아웃 설정
 
-        # 지도 영역 라벨 설정
-        self.map_label = QLabel("Map Area")
+        # 왼쪽 레이아웃 설정
+        left_layout = QVBoxLayout() # 왼쪽 레이아웃 수직
+        self.map_label = QLabel("Map Area") # 지도 영역 라벨 설정
         self.map_label.setStyleSheet("background-color: lightgray;")
         left_layout.addWidget(self.map_label)
 
-        # 터미널 출력 영역 설정
-        left_bottom_layout = QHBoxLayout()
-        self.terminal_output = QTextEdit()
+        # 왼쪽 하단 레이아웃 설정
+        # left_bottom_layout = QHBoxLayout() 
+        self.terminal_output = QTextEdit() # 터미널 출력 영역 설정
         self.terminal_output.setReadOnly(True)
         self.terminal_output.setStyleSheet("background-color: black; color: white;")
-        left_bottom_layout.addWidget(self.terminal_output)
+        left_layout.addWidget(self.terminal_output)
+        # left_bottom_layout.addWidget(self.terminal_output)
 
         # 이동 제어 버튼 설정
         move_control_group = QGroupBox("Movement Control")
-        move_layout = QVBoxLayout()
-        self.up_button = QPushButton(QIcon("up_arrow.png"), "")
-        self.down_button = QPushButton(QIcon("down_arrow.png"), "")
-        self.left_button = QPushButton(QIcon("left_arrow.png"), "")
-        self.right_button = QPushButton(QIcon("right_arrow.png"), "")
-        self.up_button.clicked.connect(lambda: self.send_movement_command("up"))
+        move_layout = QGridLayout() # 이동 제어 버튼을 그리드 레이아웃으로 설정
+        move_control_group.setLayout(move_layout)
+
+        self.up_button = QPushButton("Up")
+        self.down_button = QPushButton("Down")
+        self.left_button = QPushButton("Left")
+        self.right_button = QPushButton("Right")
+        move_layout.addWidget(self.up_button, 0, 1)
+        move_layout.addWidget(self.left_button, 1, 0)
+        move_layout.addWidget(self.down_button, 2, 1)
+        move_layout.addWidget(self.right_button, 1, 2)
+        self.up_button.clicked.connect(lambda: self.send_movement_command("up")) # 이동 제어 버튼에 클릭 이벤트 연결
         self.down_button.clicked.connect(lambda: self.send_movement_command("down"))
         self.left_button.clicked.connect(lambda: self.send_movement_command("left"))
         self.right_button.clicked.connect(lambda: self.send_movement_command("right"))
-        move_layout.addWidget(self.up_button)
-        move_layout.addWidget(self.down_button)
-        move_layout.addWidget(self.left_button)
-        move_layout.addWidget(self.right_button)
-        move_control_group.setLayout(move_layout)
-        left_bottom_layout.addWidget(move_control_group)
 
-        left_layout.addLayout(left_bottom_layout)
+        # left_bottom_layout.addWidget(move_control_group) # 이동 제어 버튼을 왼쪽 하단 레이아웃에 추가
+        # move_control_group.setLayout(move_layout)
+        # left_layout.addLayout(left_bottom_layout)
+
+        left_layout.addWidget(move_control_group)
+        main_layout.addLayout(left_layout)
 
         # 오른쪽 레이아웃 설정
         right_layout = QVBoxLayout()
 
         # 리프트 제어 그룹 설정
         lift_group = QGroupBox("Lift Control")
-        lift_layout = QHBoxLayout()
-        preset_heights_group = QGroupBox("Preset Heights")
-        preset_heights_layout = QVBoxLayout()
+        lift_layout = QVBoxLayout()
+        lift_group.setLayout(lift_layout)
+
+        #preset_heights_group = QGroupBox("Preset Heights")
+        #preset_heights_layout = QVBoxLayout()
+
         self.height1_button = QPushButton("1 Height")
         self.height2_button = QPushButton("2 Height")
         self.height3_button = QPushButton("3 Height")
+        lift_layout.addWidget(self.height1_button)
+        lift_layout.addWidget(self.height2_button)
+        lift_layout.addWidget(self.height3_button)
         self.height1_button.setStyleSheet("font-size: 18px; height: 50px;")
         self.height2_button.setStyleSheet("font-size: 18px; height: 50px;")
-        self.height3_button.setStyleSheet("font-size: 18px; height: 50px;")
-        self.height1_button.clicked.connect(lambda: self.move_to_preset_height("L_20", "Move to 1 Height"))
-        self.height2_button.clicked.connect(lambda: self.move_to_preset_height("L_21", "Move to 2 Height"))
-        self.height3_button.clicked.connect(lambda: self.move_to_preset_height("L_22", "Move to 3 Height"))
-        preset_heights_layout.addWidget(self.height1_button)
-        preset_heights_layout.addWidget(self.height2_button)
-        preset_heights_layout.addWidget(self.height3_button)
-        preset_heights_group.setLayout(preset_heights_layout)
-        lift_layout.addWidget(preset_heights_group)
+        self.height3_button.setStyleSheet("font-size: 18px; height: 50px;") 
+        self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20"))
+        self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21"))
+        self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22"))
+
+        # preset_heights_layout.addWidget(self.height1_button)
+        # preset_heights_layout.addWidget(self.height2_button)
+        # preset_heights_layout.addWidget(self.height3_button)
+        # preset_heights_group.setLayout(preset_heights_layout)
+        right_layout.addWidget(lift_group)
 
         updown_group = QGroupBox("Lift Up/Down")
         updown_layout = QVBoxLayout()
@@ -126,9 +140,9 @@ class ControlPanel(QWidget):
         updown_layout.addWidget(self.lift_up_button)
         updown_layout.addWidget(self.lift_down_button)
         updown_group.setLayout(updown_layout)
-        lift_layout.addWidget(updown_group)
 
-        lift_group.setLayout(lift_layout)
+        lift_layout.addWidget(updown_group)
+        # lift_group.setLayout(lift_layout)
         right_layout.addWidget(lift_group)
 
         # 네비게이션 제어 그룹 설정
@@ -280,7 +294,6 @@ class MainWindow(QMainWindow):
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
-        self.control_panel.setFixedSize(window_width, window_height)
 
         # 메인 레이아웃 설정
         main_layout = QVBoxLayout()
