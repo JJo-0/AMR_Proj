@@ -118,21 +118,27 @@ class ControlPanel(QWidget):
         self.stop_button.clicked.connect(lambda: self.send_movement_command("stop"))
 
         # 비상정지 버튼 추가
-        self.emergency_stop_group = QGroupBox("Emergency Stop")
-        emergency_layout = QVBoxLayout()
-        self.emergency_stop_button1 = QToolButton()
-        self.emergency_stop_button1.setCheckable(True)
-        self.emergency_stop_button1.setText("EMS")
-        self.emergency_stop_button1.setStyleSheet("font-size: 24px;")
-        self.emergency_stop_button1.clicked.connect(self.handle_emergency_stop)
-        emergency_layout.addWidget(self.emergency_stop_button1)
-        self.emergency_stop_group.setLayout(emergency_layout)
+        self.emergency_stop_button = QToolButton()
+        self.emergency_stop_button.setCheckable(True)
+        self.emergency_stop_button.setText("EMS")
+        self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px;")
+        self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
 
-        # EMS 그룹을 Movement Control 그룹 옆으로 이동
+        # EMS 버튼을 Movement Control 옆에 추가
         left_control_layout = QHBoxLayout()
         left_control_layout.addWidget(move_control_group)
-        left_control_layout.addWidget(self.emergency_stop_group)
+        left_control_layout.addWidget(self.emergency_stop_button)
         left_layout.addLayout(left_control_layout)
+
+        # Connection 상태 표시 그룹 설정
+        connection_group = QGroupBox("Connection Status")
+        connection_layout = QVBoxLayout()
+        self.arduino_label = QLabel("Arduino Connection")
+        self.ros_label = QLabel("ROS Connection")
+        connection_layout.addWidget(self.arduino_label)
+        connection_layout.addWidget(self.ros_label)
+        connection_group.setLayout(connection_layout)
+        left_layout.addWidget(connection_group)
 
         main_layout.addLayout(left_layout)
 
@@ -147,27 +153,34 @@ class ControlPanel(QWidget):
         self.height1_button = QPushButton("1 Height")
         self.height2_button = QPushButton("2 Height")
         self.height3_button = QPushButton("3 Height")
-        self.lift_up_button = QPushButton("Lift Up")
-        self.lift_down_button = QPushButton("Lift Down")
-        self.height1_button.setStyleSheet("font-size: 18px; height: 30px;")
-        self.height2_button.setStyleSheet("font-size: 18px; height: 30px;")
-        self.height3_button.setStyleSheet("font-size: 18px; height: 30px;") 
-        self.lift_up_button.setStyleSheet("font-size: 18px; height: 30px;")
-        self.lift_down_button.setStyleSheet("font-size: 18px; height: 30px;")
+        self.height1_button.setStyleSheet("font-size: 18px;")
+        self.height2_button.setStyleSheet("font-size: 18px;")
+        self.height3_button.setStyleSheet("font-size: 18px;")
         self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))
         self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))
         self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))
+        lift_layout.addWidget(self.height1_button)
+        lift_layout.addWidget(self.height2_button)
+        lift_layout.addWidget(self.height3_button)
+
+        right_layout.addWidget(lift_group)
+
+        # Lift Up/Down 버튼을 별도 그룹으로 설정
+        lift_updown_group = QGroupBox("Lift Up/Down")
+        lift_updown_layout = QVBoxLayout()
+        self.lift_up_button = QPushButton("Lift Up")
+        self.lift_down_button = QPushButton("Lift Down")
+        self.lift_up_button.setStyleSheet("font-size: 18px;")
+        self.lift_down_button.setStyleSheet("font-size: 18px;")
         self.lift_up_button.pressed.connect(lambda: self.start_lift("L_10", "Lift Up"))
         self.lift_up_button.released.connect(self.stop_lift)
         self.lift_down_button.pressed.connect(lambda: self.start_lift("L_11", "Lift Down"))
         self.lift_down_button.released.connect(self.stop_lift)
-        lift_layout.addWidget(self.height1_button)
-        lift_layout.addWidget(self.height2_button)
-        lift_layout.addWidget(self.height3_button)
-        lift_layout.addWidget(self.lift_up_button)
-        lift_layout.addWidget(self.lift_down_button)
+        lift_updown_layout.addWidget(self.lift_up_button)
+        lift_updown_layout.addWidget(self.lift_down_button)
+        lift_updown_group.setLayout(lift_updown_layout)
 
-        right_layout.addWidget(lift_group)
+        right_layout.addWidget(lift_updown_group)
 
         # 네비게이션 제어 그룹 설정
         nav_group = QGroupBox("Navigation")
@@ -175,22 +188,18 @@ class ControlPanel(QWidget):
         self.toggle_nav_button = QToolButton()
         self.toggle_nav_button.setCheckable(True)
         self.toggle_nav_button.setText("Set Navigation Goal")
-        self.toggle_nav_button.setStyleSheet("font-size: 18px; height: 30px;")  # 높이 조정
+        self.toggle_nav_button.setStyleSheet("font-size: 18px;")
         self.toggle_nav_button.clicked.connect(self.toggle_navigation)
         nav_layout.addWidget(self.toggle_nav_button)
         nav_group.setLayout(nav_layout)
         right_layout.addWidget(nav_group)
-
         # 로봇 상태 표시 그룹 설정
         status_group = QGroupBox("Robot Status")
         status_layout = QVBoxLayout()
 
         self.status_labels = {
-            "Arduino Connection": QLabel(),
-            "ROS Connection": QLabel(),
             "EMS Signal": QLabel(),
             "Lift Signal": QLabel(),
-            "Navigation Status": QLabel(),
             "WiFi Connection": QLabel()
         }
 
@@ -199,11 +208,8 @@ class ControlPanel(QWidget):
             status_layout.addWidget(QLabel(key))
             status_layout.addWidget(label)
 
-        self.update_status_label("Arduino Connection", "-", "black")
-        self.update_status_label("ROS Connection", "-", "black")
         self.update_status_label("EMS Signal", "-", "black")
         self.update_status_label("Lift Signal", "-", "black")
-        self.update_status_label("Navigation Status", "Idle", "black")
         self.update_status_label("WiFi Connection", "Disconnected", "black")
 
         status_group.setLayout(status_layout)
@@ -325,7 +331,7 @@ class ControlPanel(QWidget):
         else:
             self.emergency_pub.publish(Int32(data=1))  # 비상 상태 해제
             if self.ser:
-                try :
+                try:
                     self.ser.write("E_1\n".encode('utf-8'))
                 except serial.SerialException as e:
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")  # 명령 전송 실패 로그 출력
