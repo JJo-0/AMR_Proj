@@ -46,6 +46,13 @@ class ControlPanel(QWidget):
         self.lift_timer = QTimer()
         self.current_lift_command = None  # 현재 리프트 명령 초기화
 
+        self.status_labels = {
+            "EMS Signal": QLabel(),
+            "Lift Signal": QLabel(),
+            "WiFi Connection": QLabel(),
+            "Arduino Connection": QLabel()
+        }
+
         self.init_ui()  # UI 초기화
 
         # UI 초기화 후에 로그 출력
@@ -179,7 +186,7 @@ class ControlPanel(QWidget):
         lift_updown_layout.addWidget(self.lift_up_button)
         lift_updown_layout.addWidget(self.lift_down_button)
         lift_updown_group.setLayout(lift_updown_layout)
-
+        
         right_layout.addWidget(lift_updown_group)
 
         # 네비게이션 제어 그룹 설정
@@ -193,15 +200,10 @@ class ControlPanel(QWidget):
         nav_layout.addWidget(self.toggle_nav_button)
         nav_group.setLayout(nav_layout)
         right_layout.addWidget(nav_group)
+
         # 로봇 상태 표시 그룹 설정
         status_group = QGroupBox("Robot Status")
         status_layout = QVBoxLayout()
-
-        self.status_labels = {
-            "EMS Signal": QLabel(),
-            "Lift Signal": QLabel(),
-            "WiFi Connection": QLabel()
-        }
 
         for key, label in self.status_labels.items():
             label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
@@ -211,6 +213,7 @@ class ControlPanel(QWidget):
         self.update_status_label("EMS Signal", "-", "black")
         self.update_status_label("Lift Signal", "-", "black")
         self.update_status_label("WiFi Connection", "Disconnected", "black")
+        self.update_status_label("Arduino Connection", "Disconnected", "black")
 
         status_group.setLayout(status_layout)
         right_layout.addWidget(status_group)
@@ -218,12 +221,12 @@ class ControlPanel(QWidget):
         # 메인 레이아웃에 서브 레이아웃 추가
         main_layout.addLayout(left_layout)
         main_layout.addLayout(right_layout)
-        self.setLayout(main_layout)
 
     def update_status_label(self, label_name, text, color):
-        label = self.status_labels[label_name]
-        label.setText(f"{text}")
-        label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
+        label = self.status_labels.get(label_name, None)
+        if label:
+            label.setText(f"{text}")
+            label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
 
     def start_serial_read_thread(self):  # 시리얼 읽기 스레드 시작
         if self.ser:
