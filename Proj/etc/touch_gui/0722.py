@@ -126,8 +126,13 @@ class ControlPanel(QWidget):
         self.emergency_stop_button1.clicked.connect(self.handle_emergency_stop)
         emergency_layout.addWidget(self.emergency_stop_button1)
         self.emergency_stop_group.setLayout(emergency_layout)
-        left_layout.addWidget(self.emergency_stop_group)
-        left_layout.addWidget(move_control_group)
+
+        # EMS 그룹을 Movement Control 그룹 옆으로 이동
+        left_control_layout = QHBoxLayout()
+        left_control_layout.addWidget(move_control_group)
+        left_control_layout.addWidget(self.emergency_stop_group)
+        left_layout.addLayout(left_control_layout)
+
         main_layout.addLayout(left_layout)
 
         # 오른쪽 레이아웃 설정
@@ -193,8 +198,9 @@ class ControlPanel(QWidget):
             "WiFi Connection": QLabel()
         }
 
-        for label in self.status_labels.values():
+        for key, label in self.status_labels.items():
             label.setStyleSheet("font-size: 18px; background-color: black; color: white; padding: 5px;")
+            status_layout.addWidget(QLabel(key))
             status_layout.addWidget(label)
 
         self.update_status_label("Arduino Connection", "-", "black")
@@ -260,7 +266,7 @@ class ControlPanel(QWidget):
         self.current_lift_command = command
         self.lift_timer.timeout.connect(lambda: self.send_lift_command(self.current_lift_command, log_message))
         self.lift_timer.start(100)
-        self.log_to_terminal("Lift Timer 시작됨")  # QTimer 시작 로그 출력
+        self.log_to_terminal("Lift Timer Started")  # QTimer 시작 로그 출력
 
     def stop_lift(self):  # 리프트 멈추기
         self.log_to_terminal("Stop Lift")
