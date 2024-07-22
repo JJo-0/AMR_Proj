@@ -1,8 +1,7 @@
 import sys
 import serial
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QCheckBox
 from PyQt5.QtCore import Qt, QTimer
-from PyQt5.QtGui import QIcon
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
@@ -17,7 +16,7 @@ class ControlPanel(QWidget):
     def __init__(self, node, parent=None):
         super(ControlPanel, self).__init__(parent)
         self.node = node  # ROS 노드를 저장
-       
+
         # 초기 상태 변수 설정
         self.ser = None
         self.velocity = None
@@ -28,7 +27,7 @@ class ControlPanel(QWidget):
         self.current_lift_command = None  # 현재 리프트 명령 초기화
 
         self.init_ui()  # UI 초기화
-       
+
         # UI 초기화 후에 로그 출력
         self.log_to_terminal("UI Set Success!")  # ROS 노드 초기화 로그 출력
 
@@ -48,11 +47,11 @@ class ControlPanel(QWidget):
         try:
             self.ser = serial.Serial(port, baud_rate, timeout=1)  # 시리얼 포트 연결
             self.ser.reset_input_buffer()  # 입력 버퍼 리셋
-            self.log_to_terminal(f"Serial Connected : {port} @ {baud_rate}")  # 연결 성공 로그 출력
+            self.log_to_terminal(f"[Serial Connected] : {port} @ {baud_rate}")  # 연결 성공 로그 출력
         except serial.SerialException as e:
-            self.log_to_terminal(f"Serial Connected Failed : {str(e)}")  # 연결 실패 로그 출력
+            self.log_to_terminal(f"[Serial Connected Failed] : {str(e)}")  # 연결 실패 로그 출력
             self.ser = None
-   
+
     def init_ui(self):
         # 메인 레이아웃 설정
         main_layout = QHBoxLayout()  # 전체 레이아웃 수평
@@ -65,34 +64,34 @@ class ControlPanel(QWidget):
         left_layout.addWidget(self.map_label)
 
         # 왼쪽 하단 레이아웃 설정
-        # left_bottom_layout = QHBoxLayout() 
         self.terminal_output = QTextEdit() # 터미널 출력 영역 설정
         self.terminal_output.setReadOnly(True)
         self.terminal_output.setStyleSheet("background-color: black; color: white;")
         left_layout.addWidget(self.terminal_output)
-        # left_bottom_layout.addWidget(self.terminal_output)
 
         # 이동 제어 버튼 설정
         move_control_group = QGroupBox("Movement Control")
         move_layout = QGridLayout() # 이동 제어 버튼을 그리드 레이아웃으로 설정
         move_control_group.setLayout(move_layout)
 
-        self.up_button = QPushButton("Up")
-        self.down_button = QPushButton("Down")
+        self.forward_button = QPushButton("Forward")
+        self.backward_button = QPushButton("Backward")
         self.left_button = QPushButton("Left")
         self.right_button = QPushButton("Right")
-        move_layout.addWidget(self.up_button, 0, 1)
+        move_layout.addWidget(self.forward_button, 0, 1)
         move_layout.addWidget(self.left_button, 1, 0)
-        move_layout.addWidget(self.down_button, 2, 1)
+        move_layout.addWidget(self.backward_button, 2, 1)
         move_layout.addWidget(self.right_button, 1, 2)
-        self.up_button.clicked.connect(lambda: self.send_movement_command("up")) # 이동 제어 버튼에 클릭 이벤트 연결
-        self.down_button.clicked.connect(lambda: self.send_movement_command("down"))
+        self.forward_button.clicked.connect(lambda: self.send_movement_command("forward"))  # 이동 제어 버튼에 클릭 이벤트 연결
+        self.backward_button.clicked.connect(lambda: self.send_movement_command("backward"))
         self.left_button.clicked.connect(lambda: self.send_movement_command("left"))
         self.right_button.clicked.connect(lambda: self.send_movement_command("right"))
 
-        # left_bottom_layout.addWidget(move_control_group) # 이동 제어 버튼을 왼쪽 하단 레이아웃에 추가
-        # move_control_group.setLayout(move_layout)
-        # left_layout.addLayout(left_bottom_layout)
+        # 비상정지 토글 스위치 추가
+        self.emergency_stop_switch = QCheckBox("Emergency Stop")
+        self.emergency_stop_switch.setStyleSheet("font-size: 18px; height: 50px;")
+        self.emergency_stop_switch.stateChanged.connect(self.handle_emergency_stop)
+        move_layout.addWidget(self.emergency_stop_switch, 3, 1, 1, 2)
 
         left_layout.addWidget(move_control_group)
         main_layout.addLayout(left_layout)
@@ -104,9 +103,6 @@ class ControlPanel(QWidget):
         lift_group = QGroupBox("Lift Control")
         lift_layout = QVBoxLayout()
         lift_group.setLayout(lift_layout)
-
-        #preset_heights_group = QGroupBox("Preset Heights")
-        #preset_heights_layout = QVBoxLayout()
 
         self.height1_button = QPushButton("1 Height")
         self.height2_button = QPushButton("2 Height")
@@ -120,12 +116,6 @@ class ControlPanel(QWidget):
         self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20"))
         self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21"))
         self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22"))
-
-        # preset_heights_layout.addWidget(self.height1_button)
-        # preset_heights_layout.addWidget(self.height2_button)
-        # preset_heights_layout.addWidget(self.height3_button)
-        # preset_heights_group.setLayout(preset_heights_layout)
-        right_layout.addWidget(lift_group)
 
         updown_group = QGroupBox("Lift Up/Down")
         updown_layout = QVBoxLayout()
@@ -142,7 +132,6 @@ class ControlPanel(QWidget):
         updown_group.setLayout(updown_layout)
 
         lift_layout.addWidget(updown_group)
-        # lift_group.setLayout(lift_layout)
         right_layout.addWidget(lift_group)
 
         # 네비게이션 제어 그룹 설정
@@ -187,9 +176,9 @@ class ControlPanel(QWidget):
         if self.ser:
             try:
                 self.ser.write(f"{command}\n".encode('utf-8'))  # 시리얼 포트로 명령 전송
-                self.log_to_terminal(f"Arduino Send: {command}")
+                self.log_to_terminal(f"[Arduino Send] : {command}")
             except serial.SerialException as e:
-                self.log_to_terminal(f"Error Arduino Sending : {str(e)}")  # 명령 전송 실패 로그 출력
+                self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")  # 명령 전송 실패 로그 출력
 
     def read_from_serial(self):  # 시리얼 포트로부터 읽기
         while True:
@@ -201,10 +190,12 @@ class ControlPanel(QWidget):
         if data.startswith("E_"):
             status = int(data.split("_")[1])
             if status == 1:
-                self.emergency_pub.publish(Int32(data=1))  # 비상 상태 발생
+                self.emergency_pub.publish(Int32(data=1))  # 비상 상태 해제
+                self.emergency_stop_switch.setChecked(False)  # 비상정지 해제 상태로 설정
             elif status == 0:
-                self.emergency_pub.publish(Int32(data=0))  # 비상 상태 해제
-            self.log_to_terminal(f"Arduino received : {data}")
+                self.emergency_pub.publish(Int32(data=0))  # 비상 상태 설정
+                self.emergency_stop_switch.setChecked(True)  # 비상정지 설정 상태로 설정
+            self.log_to_terminal(f"Arduino received : EMS_{data}")
 
     def move_to_preset_height(self, command, log_message):  # 미리 설정된 높이로 이동
         self.send_lift_command(command)
@@ -262,15 +253,22 @@ class ControlPanel(QWidget):
 
     def send_movement_command(self, direction):  # 이동 명령 전송
         msg = Twist()
-        if direction == "up":
-            msg.linear.x = 1.0
-        elif direction == "down":
-            msg.linear.x = -1.0
+        if direction == "forward":
+            msg.linear.x = 0.2
+        elif direction == "backward":
+            msg.linear.x = -0.2
         elif direction == "left":
-            msg.angular.z = 1.0
+            msg.angular.z = 0.4
         elif direction == "right":
-            msg.angular.z = -1.0
+            msg.angular.z = -0.4
         self.node.create_publisher(Twist, '/cmd_vel', 10).publish(msg)  # 이동 명령 전송
+
+    def handle_emergency_stop(self):  # 비상 정지 스위치 핸들러
+        if self.emergency_stop_switch.isChecked():
+            self.emergency_pub.publish(Int32(data=0))  # 비상 상태 설정
+        else:
+            self.emergency_pub.publish(Int32(data=1))  # 비상 상태 해제
+
 
     def log_to_terminal(self, message):  # 터미널에 로그 출력
         self.terminal_output.append(message)
@@ -291,7 +289,6 @@ class MainWindow(QMainWindow):
         window_height = int(screen_height * 0.9)
         self.setGeometry(0, 0, window_width, window_height)
 
-
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
 
@@ -302,12 +299,7 @@ class MainWindow(QMainWindow):
         container = QWidget()
         container.setLayout(main_layout)
         self.setCentralWidget(container)
-
-        # # 초기 크기 설정
-        # self.control_panel.map_label.setFixedSize(int(screen_width * 2 / 3), int(screen_height * 2 / 3))
-        # self.control_panel.terminal_output.setFixedSize(int(screen_width * 13 / 30), int(screen_height * 3 / 10))
-        # self.control_panel.setFixedSize(screen_width, screen_height)
-
+        
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화
     node = Node("robot_control_panel")  # ROS 2 노드 생성
