@@ -93,6 +93,7 @@ class ControlPanel(QWidget):
         self.terminal_output = QTextEdit() # 터미널 출력 영역 설정
         self.terminal_output.setReadOnly(True)
         self.terminal_output.setStyleSheet("background-color: black; color: white;")
+        self.terminal_output.setFixedHeight(200) # 터미널 높이 조정
         left_layout.addWidget(self.terminal_output)
 
         # 이동 제어 버튼 설정
@@ -118,7 +119,7 @@ class ControlPanel(QWidget):
 
         # 비상정지 버튼 추가
         self.emergency_stop_group = QGroupBox("Emergency Stop")
-        emergency_layout = QGridLayout()
+        emergency_layout = QVBoxLayout()
         self.emergency_stop_button1 = QToolButton()
         self.emergency_stop_button1.setCheckable(True)
         self.emergency_stop_button1.setText("EMS")
@@ -146,31 +147,26 @@ class ControlPanel(QWidget):
         self.height1_button = QPushButton("1 Height")
         self.height2_button = QPushButton("2 Height")
         self.height3_button = QPushButton("3 Height")
-        lift_layout.addWidget(self.height1_button)
-        lift_layout.addWidget(self.height2_button)
-        lift_layout.addWidget(self.height3_button)
-        self.height1_button.setStyleSheet("font-size: 18px; height: 50px;")
-        self.height2_button.setStyleSheet("font-size: 18px; height: 50px;")
-        self.height3_button.setStyleSheet("font-size: 18px; height: 50px;") 
+        self.lift_up_button = QPushButton("Lift Up")
+        self.lift_down_button = QPushButton("Lift Down")
+        self.height1_button.setStyleSheet("font-size: 18px; height: 30px;")
+        self.height2_button.setStyleSheet("font-size: 18px; height: 30px;")
+        self.height3_button.setStyleSheet("font-size: 18px; height: 30px;") 
+        self.lift_up_button.setStyleSheet("font-size: 18px; height: 30px;")
+        self.lift_down_button.setStyleSheet("font-size: 18px; height: 30px;")
         self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))
         self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))
         self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))
-
-        updown_group = QGroupBox("Lift Up/Down")
-        updown_layout = QVBoxLayout()
-        self.lift_up_button = QPushButton("Lift Up")
-        self.lift_down_button = QPushButton("Lift Down")
-        self.lift_up_button.setStyleSheet("font-size: 18px; height: 50px;")
-        self.lift_down_button.setStyleSheet("font-size: 18px; height: 50px;")
         self.lift_up_button.pressed.connect(lambda: self.start_lift("L_10", "Lift Up"))
         self.lift_up_button.released.connect(self.stop_lift)
         self.lift_down_button.pressed.connect(lambda: self.start_lift("L_11", "Lift Down"))
         self.lift_down_button.released.connect(self.stop_lift)
-        updown_layout.addWidget(self.lift_up_button)
-        updown_layout.addWidget(self.lift_down_button)
-        updown_group.setLayout(updown_layout)
+        lift_layout.addWidget(self.height1_button)
+        lift_layout.addWidget(self.height2_button)
+        lift_layout.addWidget(self.height3_button)
+        lift_layout.addWidget(self.lift_up_button)
+        lift_layout.addWidget(self.lift_down_button)
 
-        lift_layout.addWidget(updown_group)
         right_layout.addWidget(lift_group)
 
         # 네비게이션 제어 그룹 설정
@@ -179,7 +175,7 @@ class ControlPanel(QWidget):
         self.toggle_nav_button = QToolButton()
         self.toggle_nav_button.setCheckable(True)
         self.toggle_nav_button.setText("Set Navigation Goal")
-        self.toggle_nav_button.setStyleSheet("font-size: 24px; height: 100px;")
+        self.toggle_nav_button.setStyleSheet("font-size: 24px; height: 50px;")  # 높이 조정
         self.toggle_nav_button.clicked.connect(self.toggle_navigation)
         nav_layout.addWidget(self.toggle_nav_button)
         nav_group.setLayout(nav_layout)
@@ -199,7 +195,7 @@ class ControlPanel(QWidget):
         }
 
         for key, label in self.status_labels.items():
-            label.setStyleSheet("font-size: 9px; background-color: black; color: white; padding: 5px;")
+            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
             status_layout.addWidget(QLabel(key))
             status_layout.addWidget(label)
 
@@ -221,7 +217,7 @@ class ControlPanel(QWidget):
     def update_status_label(self, label_name, text, color):
         label = self.status_labels[label_name]
         label.setText(f"{text}")
-        label.setStyleSheet(f"font-size: 9px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
+        label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
 
     def start_serial_read_thread(self):  # 시리얼 읽기 스레드 시작
         if self.ser:
@@ -333,7 +329,6 @@ class ControlPanel(QWidget):
                     self.ser.write("E_1\n".encode('utf-8'))
                 except serial.SerialException as e:
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")  # 명령 전송 실패 로그 출력
-
 
     def log_to_terminal(self, message):  # 터미널에 로그 출력
         self.terminal_output.append(message)
