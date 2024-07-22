@@ -199,7 +199,7 @@ class ControlPanel(QWidget):
         }
 
         for key, label in self.status_labels.items():
-            label.setStyleSheet("font-size: 18px; background-color: black; color: white; padding: 5px;")
+            label.setStyleSheet("font-size: 9px; background-color: black; color: white; padding: 5px;")
             status_layout.addWidget(QLabel(key))
             status_layout.addWidget(label)
 
@@ -221,7 +221,7 @@ class ControlPanel(QWidget):
     def update_status_label(self, label_name, text, color):
         label = self.status_labels[label_name]
         label.setText(f"{text}")
-        label.setStyleSheet(f"font-size: 18px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
+        label.setStyleSheet(f"font-size: 9px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
 
     def start_serial_read_thread(self):  # 시리얼 읽기 스레드 시작
         if self.ser:
