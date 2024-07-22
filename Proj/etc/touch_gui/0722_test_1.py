@@ -244,6 +244,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         if data.startswith("E_"):  # 데이터가 E_로 시작하면
             try:
                 status = int(data.split("_")[1])  # 상태 값 파싱
+                self.log_to_terminal(f"Arduino received : EMS_NNNNNN{status}")  # 로그 메시지
                 self.ems_signal = status  # 상태 변수 업데이트
                 if status == 1:  # 상태가 1이면
                     self.emergency_pub.publish(Int32(data=1))  # 비상 해제 신호 전송
@@ -263,11 +264,9 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
 
     def start_lift(self, command, log_message):  # 리프트 시작 함수
         self.update_status_label("Lift Signal", log_message, "green")  # 상태 라벨 업데이트
-        self.log_to_terminal(log_message)  # 로그 메시지
         self.current_lift_command = command  # 현재 명령 설정
         self.lift_timer.timeout.connect(lambda: self.send_lift_command(self.current_lift_command, log_message))  # 타이머 연결
         self.lift_timer.start(100)  # 타이머 시작
-        self.log_to_terminal("Lift Timer Started")  # 로그 메시지
 
     def stop_lift(self):  # 리프트 멈추기 함수
         self.log_to_terminal("Stop Lift")  # 로그 메시지
