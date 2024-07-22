@@ -78,19 +78,24 @@ class ControlPanel(QWidget):
         self.backward_button = QPushButton("Backward")
         self.left_button = QPushButton("Left")
         self.right_button = QPushButton("Right")
+        self.stop_button = QPushButton("Stop")
         move_layout.addWidget(self.forward_button, 0, 1)
         move_layout.addWidget(self.left_button, 1, 0)
-        move_layout.addWidget(self.backward_button, 2, 1)
+        move_layout.addWidget(self.stop_button, 1, 1)
         move_layout.addWidget(self.right_button, 1, 2)
+        move_layout.addWidget(self.backward_button, 2, 1)
         self.forward_button.clicked.connect(lambda: self.send_movement_command("forward"))  # 이동 제어 버튼에 클릭 이벤트 연결
         self.backward_button.clicked.connect(lambda: self.send_movement_command("backward"))
         self.left_button.clicked.connect(lambda: self.send_movement_command("left"))
         self.right_button.clicked.connect(lambda: self.send_movement_command("right"))
+        self.stop_button.clicked.connect(lambda: self.send_movement_command("stop"))
 
         # 비상정지 토글 스위치 추가
-        self.emergency_stop_switch = QCheckBox("Emergency Stop")
+        self.emergency_stop_switch = QToolButton()
+        self.emergency_stop_switch.setCheckable(True)
+        self.emergency_stop_switch.setText("Emergency Stop")
         self.emergency_stop_switch.setStyleSheet("font-size: 18px; height: 50px;")
-        self.emergency_stop_switch.stateChanged.connect(self.handle_emergency_stop)
+        self.emergency_stop_switch.clicked.connect(self.handle_emergency_stop)
         move_layout.addWidget(self.emergency_stop_switch, 3, 1, 1, 2)
 
         left_layout.addWidget(move_control_group)
@@ -206,7 +211,7 @@ class ControlPanel(QWidget):
         self.current_lift_command = command
         self.lift_timer.timeout.connect(lambda: self.send_lift_command(self.current_lift_command))
         self.lift_timer.start(100)
-        self.log_to_terminal("Lift Timer 시작됨")  # QTimer 시작 로그 출력
+        self.log_to_terminal("Lift Timer Start")  # QTimer 시작 로그 출력
 
     def stop_lift(self):  # 리프트 멈추기
         self.log_to_terminal("Stop Lift")
@@ -261,6 +266,9 @@ class ControlPanel(QWidget):
             msg.angular.z = 0.4
         elif direction == "right":
             msg.angular.z = -0.4
+        elif direction == "stop":
+            msg.linear.x = 0.0
+            msg.angular.z = 0.0
         self.node.create_publisher(Twist, '/cmd_vel', 10).publish(msg)  # 이동 명령 전송
 
     def handle_emergency_stop(self):  # 비상 정지 스위치 핸들러
@@ -299,7 +307,7 @@ class MainWindow(QMainWindow):
         container = QWidget()
         container.setLayout(main_layout)
         self.setCentralWidget(container)
-        
+
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화
     node = Node("robot_control_panel")  # ROS 2 노드 생성
