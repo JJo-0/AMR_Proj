@@ -216,15 +216,18 @@ class ControlPanel(QWidget):
 
     def process_serial_data(self, data):  # 시리얼 데이터 처리
         if data.startswith("E_"):
-            status = int(data.split("_")[1])
-            self.ems_signal = status  # 로컬 변수 업데이트
-            if status == 1:
-                self.emergency_pub.publish(Int32(data=1))  # 비상 상태 해제
-                self.update_status_label("EMS Signal", "Good: 1", "green")
-            elif status == 0:
-                self.emergency_pub.publish(Int32(data=0))  # 비상 상태 설정
-                self.update_status_label("EMS Signal", "Emergency: 0", "red")
-            self.log_to_terminal(f"Arduino received : EMS_{data}")
+            try:
+                status = int(data.split("_")[1])
+                self.ems_signal = status  # 로컬 변수 업데이트
+                if status == 1:
+                    self.emergency_pub.publish(Int32(data=1))  # 비상 상태 해제
+                    self.update_status_label("EMS Signal", "Good: 1", "green")
+                elif status == 0:
+                    self.emergency_pub.publish(Int32(data=0))  # 비상 상태 설정
+                    self.update_status_label("EMS Signal", "Emergency: 0", "red")
+                self.log_to_terminal(f"Arduino received : EMS_{data}")
+            except (ValueError, IndexError):
+                self.log_to_terminal(f"Invalid data received: {data}")
 
     def move_to_preset_height(self, command, log_message):  # 미리 설정된 높이로 이동
         self.send_lift_command(command, log_message)
