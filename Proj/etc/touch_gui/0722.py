@@ -58,7 +58,6 @@ class ControlPanel(QWidget):
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)
         self.lift_pub = self.node.create_publisher(String, '/lift_command', 10)
         self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)
-        self.status_sub = self.node.create_subscription(String, '/robot_status', self.update_status, 10)
         self.velocity_sub = self.node.create_subscription(Odometry, '/odom', self.update_velocity, 10)
         self.imu_sub = self.node.create_subscription(Imu, '/imu', self.update_imu, 10)
         self.slam_sub = self.node.create_subscription(Float32, '/slam_remaining_distance', self.update_slam, 10)
@@ -121,32 +120,13 @@ class ControlPanel(QWidget):
         self.emergency_stop_group = QGroupBox("Emergency Stop")
         emergency_layout = QGridLayout()
         self.emergency_stop_button1 = QToolButton()
-        self.emergency_stop_button2 = QToolButton()
-        self.emergency_stop_button3 = QToolButton()
-
         self.emergency_stop_button1.setCheckable(True)
-        self.emergency_stop_button2.setCheckable(True)
-        self.emergency_stop_button3.setCheckable(True)
-
-        self.emergency_stop_button1.setText("EMS 1")
-        self.emergency_stop_button2.setText("EMS 2")
-        self.emergency_stop_button3.setText("EMS 3")
-
+        self.emergency_stop_button1.setText("EMS")
         self.emergency_stop_button1.setStyleSheet("font-size: 24px; height: 100px;")
-        self.emergency_stop_button2.setStyleSheet("font-size: 24px; height: 100px;")
-        self.emergency_stop_button3.setStyleSheet("font-size: 24px; height: 100px;")
-
         self.emergency_stop_button1.clicked.connect(self.handle_emergency_stop)
-        self.emergency_stop_button2.clicked.connect(self.handle_emergency_stop)
-        self.emergency_stop_button3.clicked.connect(self.handle_emergency_stop)
-
-        emergency_layout.addWidget(self.emergency_stop_button1, 0, 0)
-        emergency_layout.addWidget(self.emergency_stop_button2, 0, 1)
-        emergency_layout.addWidget(self.emergency_stop_button3, 0, 2)
-
+        emergency_layout.addWidget(self.emergency_stop_button1)
         self.emergency_stop_group.setLayout(emergency_layout)
         left_layout.addWidget(self.emergency_stop_group)
-
         left_layout.addWidget(move_control_group)
         main_layout.addLayout(left_layout)
 
@@ -241,7 +221,7 @@ class ControlPanel(QWidget):
         if self.ser:
             self.read_thread = Thread(target=self.read_from_serial)  # 시리얼 읽기 스레드 생성
             self.read_thread.start()  # 스레드 시작
-            self.log_to_terminal("시리얼 읽기 스레드 시작")  # 스레드 시작 로그 출력
+            self.log_to_terminal("Serial Reading Thread Start")  # 스레드 시작 로그 출력
 
     def send_lift_command(self, command, label):  # 리프트 명령 전송
         self.update_status_label("Lift Signal", label, "green")
@@ -293,25 +273,6 @@ class ControlPanel(QWidget):
         color = "green" if self.toggle_nav_button.isChecked() else "black"
         self.update_status_label("Navigation Status", nav_state, color)
         self.log_to_terminal(f"Navigation {nav_state}")
-
-    def update_status(self, msg):  # ROS로부터 로봇 상태 업데이트
-        status = msg.data
-        self.log_to_terminal(f"Update Status: {status}")
-        if status == "normal":
-            self.update_status_label("Arduino Connection", "Connected", "green")
-            self.update_status_label("ROS Connection", "Connected", "green")
-            self.update_status_label("WiFi Connection", "Connected", "green")
-            self.update_status_label("Navigation Status", "Navigating", "green")
-        elif status == "emergency":
-            self.update_status_label("Arduino Connection", "Error", "red")
-            self.update_status_label("ROS Connection", "Error", "red")
-            self.update_status_label("WiFi Connection", "Disconnected", "black")
-            self.update_status_label("Navigation Status", "Error", "red")
-        else:
-            self.update_status_label("Arduino Connection", "-", "black")
-            self.update_status_label("ROS Connection", "-", "black")
-            self.update_status_label("WiFi Connection", "Disconnected", "black")
-            self.update_status_label("Navigation Status", "Idle", "black")
 
     def update_wifi_status(self, status):
         color = "green" if status == "Connected" else "black"
