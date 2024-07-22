@@ -13,6 +13,8 @@ from std_msgs.msg import Int32, Float32
 from threading import Thread
 import time
 
+# 기능 : Navigation, Feedback, Emergency Stop, Lift Control, Localization, Mapping, ETA(remaining time)
+
 class ControlPanel(QWidget):
     def __init__(self, node, parent=None):
         super(ControlPanel, self).__init__(parent)

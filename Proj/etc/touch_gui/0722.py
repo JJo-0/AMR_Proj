@@ -270,7 +270,7 @@ class MainWindow(QMainWindow):
         # 화면 크기 설정
         screen_geometry = QApplication.primaryScreen().geometry()
         available_geometry = QApplication.primaryScreen().availableGeometry()
-        screen_width = int(available_geometry.width() * 23 / 24)
+        screen_width = int(available_geometry.width() * 21 / 24)
         screen_height = int(available_geometry.height() * 23 / 24)
         self.setGeometry(0, 0, screen_width, screen_height)
 
@@ -287,7 +287,7 @@ class MainWindow(QMainWindow):
 
         # 초기 크기 설정
         self.control_panel.map_label.setFixedSize(int(screen_width * 2 / 3), int(screen_height * 2 / 3))
-        self.control_panel.terminal_output.setFixedSize(int(screen_width * 2 / 3), int(screen_height * 1 / 3))
+        self.control_panel.terminal_output.setFixedSize(int(screen_width * 13 / 30), int(screen_height * 3 / 10))
         self.control_panel.setFixedSize(screen_width, screen_height)
 
 def main(args=None):
