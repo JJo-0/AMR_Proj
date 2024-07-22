@@ -13,25 +13,6 @@ from std_msgs.msg import Int32, Float32
 from threading import Thread
 import time
 
-class WiFiChecker(QThread):
-    wifi_status_signal = pyqtSignal(str)
-
-    def run(self):
-        while True:
-            status = self.check_wifi_connection()
-            self.wifi_status_signal.emit(status)
-            time.sleep(10)
-
-    def check_wifi_connection(self):
-        try:
-            result = subprocess.run(['ping', '-c', '1', '8.8.8.8'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            if result.returncode == 0:
-                return "Connected"
-            else:
-                return "Disconnected"
-        except Exception as e:
-            return "Error"
-
 class ControlPanel(QWidget):
     def __init__(self, node, parent=None):
         super(ControlPanel, self).__init__(parent)
@@ -45,11 +26,11 @@ class ControlPanel(QWidget):
         self.eta = None
         self.lift_timer = QTimer()
         self.current_lift_command = None  # 현재 리프트 명령 초기화
+        self.ems_signal = 1  # 비상 상태 해제 상태로 초기화
 
         self.status_labels = {
             "EMS Signal": QLabel(),
             "Lift Signal": QLabel(),
-            "WiFi Connection": QLabel(),
             "Arduino Connection": QLabel()
         }
 
@@ -69,11 +50,6 @@ class ControlPanel(QWidget):
         self.imu_sub = self.node.create_subscription(Imu, '/imu', self.update_imu, 10)
         self.slam_sub = self.node.create_subscription(Float32, '/slam_remaining_distance', self.update_slam, 10)
 
-        # WiFi Checker 스레드 시작
-        self.wifi_checker = WiFiChecker()
-        self.wifi_checker.wifi_status_signal.connect(self.update_wifi_status)
-        self.wifi_checker.start()
-
     def setup_serial_connection(self, port, baud_rate):  # 시리얼 연결 설정 함수
         try:
             self.ser = serial.Serial(port, baud_rate, timeout=1)  # 시리얼 포트 연결
@@ -88,24 +64,24 @@ class ControlPanel(QWidget):
     def init_ui(self):
         # 메인 레이아웃 설정
         main_layout = QHBoxLayout()  # 전체 레이아웃 수평
-        self.setLayout(main_layout) # 메인 레이아웃 설정
+        self.setLayout(main_layout)  # 메인 레이아웃 설정
 
         # 왼쪽 레이아웃 설정
-        left_layout = QVBoxLayout() # 왼쪽 레이아웃 수직
-        self.map_label = QLabel("Map Area") # 지도 영역 라벨 설정
+        left_layout = QVBoxLayout()  # 왼쪽 레이아웃 수직
+        self.map_label = QLabel("Map Area")  # 지도 영역 라벨 설정
         self.map_label.setStyleSheet("background-color: lightgray;")
         left_layout.addWidget(self.map_label)
 
         # 왼쪽 하단 레이아웃 설정
-        self.terminal_output = QTextEdit() # 터미널 출력 영역 설정
+        self.terminal_output = QTextEdit()  # 터미널 출력 영역 설정
         self.terminal_output.setReadOnly(True)
         self.terminal_output.setStyleSheet("background-color: black; color: white;")
-        self.terminal_output.setFixedHeight(200) # 터미널 높이 조정
+        self.terminal_output.setFixedHeight(200)  # 터미널 높이 조정
         left_layout.addWidget(self.terminal_output)
 
         # 이동 제어 버튼 설정
         move_control_group = QGroupBox("Movement Control")
-        move_layout = QGridLayout() # 이동 제어 버튼을 그리드 레이아웃으로 설정
+        move_layout = QGridLayout()  # 이동 제어 버튼을 그리드 레이아웃으로 설정
         move_control_group.setLayout(move_layout)
 
         self.forward_button = QPushButton("Forward")
@@ -136,16 +112,6 @@ class ControlPanel(QWidget):
         left_control_layout.addWidget(move_control_group)
         left_control_layout.addWidget(self.emergency_stop_button)
         left_layout.addLayout(left_control_layout)
-
-        # Connection 상태 표시 그룹 설정
-        connection_group = QGroupBox("Connection Status")
-        connection_layout = QVBoxLayout()
-        self.arduino_label = QLabel("Arduino Connection")
-        self.ros_label = QLabel("ROS Connection")
-        connection_layout.addWidget(self.arduino_label)
-        connection_layout.addWidget(self.ros_label)
-        connection_group.setLayout(connection_layout)
-        left_layout.addWidget(connection_group)
 
         main_layout.addLayout(left_layout)
 
@@ -186,7 +152,7 @@ class ControlPanel(QWidget):
         lift_updown_layout.addWidget(self.lift_up_button)
         lift_updown_layout.addWidget(self.lift_down_button)
         lift_updown_group.setLayout(lift_updown_layout)
-        
+
         right_layout.addWidget(lift_updown_group)
 
         # 네비게이션 제어 그룹 설정
@@ -207,12 +173,10 @@ class ControlPanel(QWidget):
 
         for key, label in self.status_labels.items():
             label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
-            status_layout.addWidget(QLabel(key))
-            status_layout.addWidget(label)
-
+        status_layout.addWidget(QLabel(key))
+        status_layout.addWidget(label)
         self.update_status_label("EMS Signal", "-", "black")
         self.update_status_label("Lift Signal", "-", "black")
-        self.update_status_label("WiFi Connection", "Disconnected", "black")
         self.update_status_label("Arduino Connection", "Disconnected", "black")
 
         status_group.setLayout(status_layout)
@@ -253,6 +217,7 @@ class ControlPanel(QWidget):
     def process_serial_data(self, data):  # 시리얼 데이터 처리
         if data.startswith("E_"):
             status = int(data.split("_")[1])
+            self.ems_signal = status  # 로컬 변수 업데이트
             if status == 1:
                 self.emergency_pub.publish(Int32(data=1))  # 비상 상태 해제
                 self.update_status_label("EMS Signal", "Good: 1", "green")
@@ -284,10 +249,6 @@ class ControlPanel(QWidget):
         color = "green" if self.toggle_nav_button.isChecked() else "black"
         self.update_status_label("Navigation Status", nav_state, color)
         self.log_to_terminal(f"Navigation {nav_state}")
-
-    def update_wifi_status(self, status):
-        color = "green" if status == "Connected" else "black"
-        self.update_status_label("WiFi Connection", status, color)
 
     def update_velocity(self, msg):  # ROS로부터 속도 업데이트
         self.velocity = msg.twist.twist.linear.x
@@ -326,6 +287,7 @@ class ControlPanel(QWidget):
         sender = self.sender()
         if sender.isChecked():
             self.emergency_pub.publish(Int32(data=0))  # 비상 상태 설정
+            self.ems_signal = 0  # 로컬 변수 업데이트
             if self.ser:
                 try:
                     self.ser.write("E_0\n".encode('utf-8'))
@@ -333,6 +295,7 @@ class ControlPanel(QWidget):
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")  # 명령 전송 실패 로그 출력
         else:
             self.emergency_pub.publish(Int32(data=1))  # 비상 상태 해제
+            self.ems_signal = 1  # 로컬 변수 업데이트
             if self.ser:
                 try:
                     self.ser.write("E_1\n".encode('utf-8'))
