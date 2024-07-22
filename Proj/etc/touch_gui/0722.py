@@ -232,6 +232,11 @@ class ControlPanel(QWidget):
         main_layout.addLayout(right_layout)
         self.setLayout(main_layout)
 
+    def update_status_label(self, label_name, text, color):
+        label = self.status_labels[label_name]
+        label.setText(f"{text}")
+        label.setStyleSheet(f"font-size: 18px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
+
     def start_serial_read_thread(self):  # 시리얼 읽기 스레드 시작
         if self.ser:
             self.read_thread = Thread(target=self.read_from_serial)  # 시리얼 읽기 스레드 생성
