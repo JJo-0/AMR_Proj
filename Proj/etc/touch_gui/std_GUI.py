@@ -130,6 +130,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.backward_button.setStyleSheet("font-size: 24px;")
         self.left_button.setStyleSheet("font-size: 24px;")
         self.right_button.setStyleSheet("font-size: 24px;")
+        self.stop_button.setStyleSheet("font-size: 24px;")
         self.forward_button.setFixedHeight(50)
         self.backward_button.setFixedHeight(50)
         self.left_button.setFixedHeight(50)
