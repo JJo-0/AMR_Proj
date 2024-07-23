@@ -21,15 +21,19 @@
 # Ignore build directories
 com_proj/dev_src_0708/build/
 Proj/dev/build/
+Proj/dev-0716/build/
 Proj/dev-last/build/
 
 # Ignore install directories
 com_proj/dev_src_0708/install/
 Proj/dev/install/
+Proj/dev-0716/install/
 Proj/dev-last/install/
 
 # Ignore log directories
 Proj/dev-last/log/
+Proj/dev/log/
+Proj/dev-0716/log/
 
 # Ignore specific directories within the project
 Proj/dev/ds4_driver/
