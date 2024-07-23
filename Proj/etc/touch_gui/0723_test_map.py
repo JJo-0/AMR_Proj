@@ -1,25 +1,22 @@
 """
-이 코드는 `QGraphicsView`와 `QGraphicsScene`을 사용하여 `Map Area`에 2D 맵을 표시하고,
-로봇의 위치를 `Odometry` 메시지를 구독하여 업데이트합니다.
-`robot_item`은 로봇의 현재 위치를 나타내는 파란색 원으로 설정되어 있습니다.
-`update_position` 함수는 `Odometry` 메시지를 수신할 때마다 호출되어 로봇의 위치를 업데이트합니다.
-또한, 전체 화면 모드를 지원하고 UI 요소를 조정하여 사용자 경험을 개선합니다.
+> /ems_sig 주석 되어 있음
 """
-
 import sys
 import serial
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
-from PyQt5.QtGui import QBrush, QPen, QColor
+from PyQt5.QtGui import QBrush, QPen, QColor, QPixmap
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Int32, Float32
 from sensor_msgs.msg import Imu
-from nav_msgs.msg import Odometry, OccupancyGrid  
+from nav_msgs.msg import Odometry, OccupancyGrid
 from geometry_msgs.msg import PoseStamped, Twist
 from threading import Thread, Lock
 import time
 import numpy as np
+import yaml
+import os
 
 class SerialReader(QThread):
     new_data = pyqtSignal(str)
@@ -82,6 +79,8 @@ class ControlPanel(QWidget):
         self.slam_sub = self.node.create_subscription(Float32, '/slam_remaining_distance', self.update_slam, 10)
         self.odom_sub = self.node.create_subscription(Odometry, '/odom', self.update_position, 10)
         self.map_sub = self.node.create_subscription(OccupancyGrid, '/map', self.update_map, 10)
+
+        self.load_map("/desktop/map_/map_.yaml")
 
     def setup_serial_connection(self, port, baud_rate):
         try:
@@ -378,6 +377,28 @@ class ControlPanel(QWidget):
                 rect = self.map_scene.addRect(x * resolution * 100, -y * resolution * 100, resolution * 100, resolution * 100, QPen(color), QBrush(color))
 
         self.map_scene.setSceneRect(origin_x * 100, -origin_y * 100, width * resolution * 100, height * resolution * 100)
+
+    def load_map(self, yaml_file):
+        with open(yaml_file, 'r') as file:
+            map_info = yaml.safe_load(file)
+            image_path = os.path.abspath(map_info['image'])  # 절대 경로로 변환
+            resolution = map_info['resolution']
+            origin = map_info['origin']
+
+            if not os.path.exists(image_path):
+                self.log_to_terminal(f"Image file does not exist: {image_path}")
+                return
+
+            image = QPixmap(image_path)
+            if image.isNull():
+                self.log_to_terminal(f"Failed to load image from {image_path}")
+                return
+
+            self.map_scene.clear()
+            self.map_scene.addPixmap(image)
+
+            self.map_scene.setSceneRect(origin[0], origin[1], image.width() * resolution, image.height() * resolution)
+            self.map_scene.addItem(self.robot_item)
 
 class MainWindow(QMainWindow):
     def __init__(self, node):
