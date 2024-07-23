@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/agent_ws/build/micro_ros_agent/agent/src/xrceagent-build/spdlog/src/spdlog" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/agent_ws/src/micro_ros_setup" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/agent_ws/src/uros/drive_base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/agent_ws/src/uros/micro-ROS-Agent" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/agent_ws/src/uros/micro_ros_msgs" vcs="Git" />
+  </component>
+</project>
