@@ -188,167 +188,167 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.update_status_label("Lift Signal", "-", "black")
         self.update_status_label("Arduino Connection", "Disconnected", "black")
 
-     def create_button(self, text, func, *args, height=24, label=None):
-        button = QPushButton(text)
-        button.setStyleSheet(f"font-size: 24px; height: {height}px;")
-        button.setFixedHeight(height)
-        button.pressed.connect(lambda: func(*args))
-        button.released.connect(self.stop_movement)
-        return button
+        def create_button(self, text, func, *args, height=24, label=None):
+            button = QPushButton(text)
+            button.setStyleSheet(f"font-size: 24px; height: {height}px;")
+            button.setFixedHeight(height)
+            button.pressed.connect(lambda: func(*args))
+            button.released.connect(self.stop_movement)
+            return button
 
-    def create_lift_button(self, text, command, label, height=50):
-        button = QPushButton(text)
-        button.setStyleSheet("font-size: 24px;")
-        button.setFixedHeight(height)
-        button.pressed.connect(lambda: self.send_lift_command(command, label))
-        return button
+        def create_lift_button(self, text, command, label, height=50):
+            button = QPushButton(text)
+            button.setStyleSheet("font-size: 24px;")
+            button.setFixedHeight(height)
+            button.pressed.connect(lambda: self.send_lift_command(command, label))
+            return button
 
-    def create_status_label(self):
-        label = QLabel()
-        label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
-        return label
+        def create_status_label(self):
+            label = QLabel()
+            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
+            return label
 
-    def update_status_label(self, label_name, text, color):
-        label = self.status_labels.get(label_name)
-        if label:
-            label.setText(text)
-            label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
+        def update_status_label(self, label_name, text, color):
+            label = self.status_labels.get(label_name)
+            if label:
+                label.setText(text)
+                label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
 
-    def start_serial_read_thread(self):
-        if self.ser:
-            self.read_thread = Thread(target=self.read_from_serial)
-            self.read_thread.start()
-            self.log_to_terminal("Serial Reading Thread Start")
+        def start_serial_read_thread(self):
+            if self.ser:
+                self.read_thread = Thread(target=self.read_from_serial)
+                self.read_thread.start()
+                self.log_to_terminal("Serial Reading Thread Start")
 
-    def start_serial_process_thread(self):
-        self.process_thread = Thread(target=self.process_serial_buffer)
-        self.process_thread.start()
+        def start_serial_process_thread(self):
+            self.process_thread = Thread(target=self.process_serial_buffer)
+            self.process_thread.start()
 
-    def send_lift_command(self, command, label):
-        self.update_status_label("Lift Signal", label, "green")
-        if self.ser:
-            try:
-                self.ser.write(f"{command}\n".encode('utf-8'))
-                self.log_to_terminal(f"[Arduino Send] : {command}")
-                QTimer.singleShot(5000, lambda: self.update_status_label("Lift Signal", "-", "black"))
-            except serial.SerialException as e:
-                self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
+        def send_lift_command(self, command, label):
+            self.update_status_label("Lift Signal", label, "green")
+            if self.ser:
+                try:
+                    self.ser.write(f"{command}\n".encode('utf-8'))
+                    self.log_to_terminal(f"[Arduino Send] : {command}")
+                    QTimer.singleShot(5000, lambda: self.update_status_label("Lift Signal", "-", "black"))
+                except serial.SerialException as e:
+                    self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
 
-    def start_lift_command(self, command, label):
-        self.lift_timer.timeout.connect(lambda: self.send_lift_command(command, label))
-        self.lift_timer.start(500)  # 0.5초마다 실행
+        def start_lift_command(self, command, label):
+            self.lift_timer.timeout.connect(lambda: self.send_lift_command(command, label))
+            self.lift_timer.start(500)  # 0.5초마다 실행
 
-    def stop_lift_command(self):
-        self.lift_timer.stop()
+        def stop_lift_command(self):
+            self.lift_timer.stop()
 
-    def read_from_serial(self):
-        while True:
-            if self.ser and self.ser.in_waiting > 0:
-                line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()
+        def read_from_serial(self):
+            while True:
+                if self.ser and self.ser.in_waiting > 0:
+                    line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()
+                    with self.serial_lock:
+                        self.serial_buffer.append(line)
+
+        def process_serial_buffer(self):
+            while True:
                 with self.serial_lock:
-                    self.serial_buffer.append(line)
+                    if self.serial_buffer:
+                        data = self.serial_buffer.pop(0)
+                        self.process_serial_data(data)
+                time.sleep(0.1)
 
-    def process_serial_buffer(self):
-        while True:
-            with self.serial_lock:
-                if self.serial_buffer:
-                    data = self.serial_buffer.pop(0)
-                    self.process_serial_data(data)
-            time.sleep(0.1)
-
-    def process_serial_data(self, data):
-        if data.startswith("E_"):
-            try:
-                status = int(data.split("_")[1])
-                self.ems_signal = status
-                self.trigger_ems_signal(status)
-                self.log_to_terminal(f"Arduino received : EMS_{data}")
-            except (ValueError, IndexError) as e:
-                self.log_to_terminal(f"Invalid data received: {data}")
-
-    def move_to_preset_height(self, command, log_message):
-        self.send_lift_command(command, log_message)
-        self.log_to_terminal(log_message)
-
-    def toggle_navigation(self):
-        nav_state = "Navigating" if self.toggle_nav_button.isChecked() else "Idle"
-        color = "green" if self.toggle_nav_button.isChecked() else "black"
-        self.update_status_label("Navigation Status", nav_state, color)
-        self.log_to_terminal(f"Navigation {nav_state}")
-
-    def update_velocity(self, msg):
-        self.velocity = msg.twist.twist.linear.x
-        self.log_to_terminal(f"Update Velocity: {self.velocity}")
-
-    def update_imu(self, msg):
-        self.imu_orientation = msg.orientation.z
-        self.log_to_terminal(f"Update IMU: {self.imu_orientation}")
-
-    def update_slam(self, msg):
-        self.slam_distance = msg.data
-        self.log_to_terminal(f"Update SLAM: {self.slam_distance}")
-        self.eta = self.calculate_eta()
-
-    def calculate_eta(self):
-        if self.velocity and self.slam_distance:
-            return self.slam_distance / self.velocity
-        return None
-
-    def start_movement(self, direction):
-        self.send_movement_command(direction)
-        QTimer.singleShot(100, lambda: self.trigger_ems_signal(1))
-
-    def stop_movement(self):
-        self.send_movement_command("stop")
-        QTimer.singleShot(100, lambda: self.trigger_ems_signal(0))
-
-    def send_movement_command(self, direction):
-        msg = Twist()
-        if direction == "forward":
-            msg.linear.x = 0.1
-        elif direction == "backward":
-            msg.linear.x = -0.1
-        elif direction == "left":
-            msg.angular.z = 0.2
-        elif direction == "right":
-            msg.angular.z = -0.2
-        elif direction == "stop":
-            msg.linear.x = 0.0
-            msg.angular.z = 0.0
-        self.node.create_publisher(Twist, '/cmd_vel', 10).publish(msg)
-
-    def trigger_ems_signal(self, status):
-        self.emergency_pub.publish(Int32(data=status))
-        ems_text = "Good: 1" if status == 1 else "Emergency: 0"
-        ems_color = "green" if status == 1 else "red"
-        self.update_status_label("EMS Signal", ems_text, ems_color)
-        self.emergency_stop_button.setChecked(status == 0)
-        if status == 0:
-            self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: darkred;")
-        else:
-            self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: green;")
-
-    def handle_emergency_stop(self):
-        sender = self.sender()
-        if sender.isChecked():
-            self.trigger_ems_signal(0)
-            if self.ser:
+        def process_serial_data(self, data):
+            if data.startswith("E_"):
                 try:
-                    self.ser.write("E_0\n".encode('utf-8'))
-                except serial.SerialException as e:
-                    self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
-        else:
-            self.trigger_ems_signal(1)
-            if self.ser:
-                try:
-                    self.ser.write("E_1\n".encode('utf-8'))
-                    self.log_to_terminal(f"[Arduino Send] : E_1")
-                except serial.SerialException as e:
-                    self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
+                    status = int(data.split("_")[1])
+                    self.ems_signal = status
+                    self.trigger_ems_signal(status)
+                    self.log_to_terminal(f"Arduino received : EMS_{data}")
+                except (ValueError, IndexError) as e:
+                    self.log_to_terminal(f"Invalid data received: {data}")
 
-    def log_to_terminal(self, message):
-        self.terminal_output.append(message)
-        self.terminal_output.ensureCursorVisible()
+        def move_to_preset_height(self, command, log_message):
+            self.send_lift_command(command, log_message)
+            self.log_to_terminal(log_message)
+
+        def toggle_navigation(self):
+            nav_state = "Navigating" if self.toggle_nav_button.isChecked() else "Idle"
+            color = "green" if self.toggle_nav_button.isChecked() else "black"
+            self.update_status_label("Navigation Status", nav_state, color)
+            self.log_to_terminal(f"Navigation {nav_state}")
+
+        def update_velocity(self, msg):
+            self.velocity = msg.twist.twist.linear.x
+            self.log_to_terminal(f"Update Velocity: {self.velocity}")
+
+        def update_imu(self, msg):
+            self.imu_orientation = msg.orientation.z
+            self.log_to_terminal(f"Update IMU: {self.imu_orientation}")
+
+        def update_slam(self, msg):
+            self.slam_distance = msg.data
+            self.log_to_terminal(f"Update SLAM: {self.slam_distance}")
+            self.eta = self.calculate_eta()
+
+        def calculate_eta(self):
+            if self.velocity and self.slam_distance:
+                return self.slam_distance / self.velocity
+            return None
+
+        def start_movement(self, direction):
+            self.send_movement_command(direction)
+            QTimer.singleShot(100, lambda: self.trigger_ems_signal(1))
+
+        def stop_movement(self):
+            self.send_movement_command("stop")
+            QTimer.singleShot(100, lambda: self.trigger_ems_signal(0))
+
+        def send_movement_command(self, direction):
+            msg = Twist()
+            if direction == "forward":
+                msg.linear.x = 0.1
+            elif direction == "backward":
+                msg.linear.x = -0.1
+            elif direction == "left":
+                msg.angular.z = 0.2
+            elif direction == "right":
+                msg.angular.z = -0.2
+            elif direction == "stop":
+                msg.linear.x = 0.0
+                msg.angular.z = 0.0
+            self.node.create_publisher(Twist, '/cmd_vel', 10).publish(msg)
+
+        def trigger_ems_signal(self, status):
+            self.emergency_pub.publish(Int32(data=status))
+            ems_text = "Good: 1" if status == 1 else "Emergency: 0"
+            ems_color = "green" if status == 1 else "red"
+            self.update_status_label("EMS Signal", ems_text, ems_color)
+            self.emergency_stop_button.setChecked(status == 0)
+            if status == 0:
+                self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: darkred;")
+            else:
+                self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: green;")
+
+        def handle_emergency_stop(self):
+            sender = self.sender()
+            if sender.isChecked():
+                self.trigger_ems_signal(0)
+                if self.ser:
+                    try:
+                        self.ser.write("E_0\n".encode('utf-8'))
+                    except serial.SerialException as e:
+                        self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
+            else:
+                self.trigger_ems_signal(1)
+                if self.ser:
+                    try:
+                        self.ser.write("E_1\n".encode('utf-8'))
+                        self.log_to_terminal(f"[Arduino Send] : E_1")
+                    except serial.SerialException as e:
+                        self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
+
+        def log_to_terminal(self, message):
+            self.terminal_output.append(message)
+            self.terminal_output.ensureCursorVisible()
 
 class MainWindow(QMainWindow):
     def __init__(self, node):
