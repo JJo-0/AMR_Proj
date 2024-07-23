@@ -1,18 +1,17 @@
 import sys
 import serial
+import numpy as np
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QScrollArea)
-from PyQt5.QtGui import QPixmap
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
+from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QMutex
+from PyQt5.QtGui import QPixmap, QImage, QPainter, QPen, QColor
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Int32, Float32
 from sensor_msgs.msg import Imu
-from nav_msgs.msg import Odometry
+from nav_msgs.msg import Odometry, OccupancyGrid
 from geometry_msgs.msg import PoseStamped, Twist
 from threading import Thread, Lock
 import time
-from rviz_visualization_frame import VisualizationFrame
-from rviz_render_panel import RenderPanel
 
 class SerialReader(QThread):
     new_data = pyqtSignal(str)
@@ -72,6 +71,12 @@ class ControlPanel(QWidget):
         self.velocity_sub = self.node.create_subscription(Odometry, '/odom', self.update_velocity, 10)
         self.imu_sub = self.node.create_subscription(Imu, '/imu', self.update_imu, 10)
         self.slam_sub = self.node.create_subscription(Float32, '/slam_remaining_distance', self.update_slam, 10)
+        self.map_sub = self.node.create_subscription(OccupancyGrid, '/map', self.update_map, 10)
+        self.odom_sub = self.node.create_subscription(Odometry, '/odom', self.update_robot_position, 10)
+
+        self.map_image = None
+        self.map_mutex = QMutex()
+        self.robot_pose = None
 
     def setup_serial_connection(self, port, baud_rate):
         try:
@@ -91,14 +96,9 @@ class ControlPanel(QWidget):
         left_layout = QVBoxLayout()
         scroll_area = QScrollArea()
 
-        self.rviz_frame = VisualizationFrame()
-        self.rviz_frame.initialize()
-        self.rviz_render_panel = RenderPanel()
-        self.rviz_render_panel.initialize(self.rviz_frame.getSceneManager(), self.rviz_frame.getSceneNode())
-        self.rviz_frame.addChild(self.rviz_render_panel)
-        self.rviz_render_panel.setFixedSize(800, 600)
-
-        scroll_area.setWidget(self.rviz_render_panel)
+        self.map_label = QLabel()
+        self.map_label.setAlignment(Qt.AlignCenter)
+        scroll_area.setWidget(self.map_label)
         left_layout.addWidget(scroll_area)
 
         self.terminal_output = QTextEdit()
@@ -193,8 +193,8 @@ class ControlPanel(QWidget):
             label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
             status_layout.addWidget(QLabel(key))
             status_layout.addWidget(label)
-            self.update_status_label("EMS Signal", "Good: 1", "green")
 
+        self.update_status_label("EMS Signal", "Good: 1", "green")
         self.update_status_label("Lift Signal", "-", "black")
         self.update_status_label("Arduino Connection", "Disconnected", "black")
 
@@ -202,6 +202,44 @@ class ControlPanel(QWidget):
         right_layout.addWidget(status_group)
         main_layout.addLayout(left_layout)
         main_layout.addLayout(right_layout)
+
+    def update_map(self, msg):
+        width, height = msg.info.width, msg.info.height
+        data = np.array(msg.data).reshape((height, width))
+        data = np.uint8((data == 0) * 255)  # Occupied cells are black (0), free cells are white (255)
+
+        qimage = QImage(data, width, height, QImage.Format_Grayscale8)
+        pixmap = QPixmap.fromImage(qimage)
+        self.map_mutex.lock()
+        self.map_image = pixmap
+        self.map_mutex.unlock()
+        self.update_map_display()
+
+    def update_robot_position(self, msg):
+        self.robot_pose = msg.pose.pose
+        self.update_map_display()
+
+    def update_map_display(self):
+        self.map_mutex.lock()
+        if self.map_image:
+            pixmap = self.map_image.copy()
+            painter = QPainter(pixmap)
+            painter.setPen(QPen(Qt.red, 5, Qt.SolidLine))
+
+            if self.robot_pose:
+                # Transform the robot position to map coordinates
+                resolution = 0.05  # example resolution, use actual map resolution
+                origin_x, origin_y = 0, 0  # example origin, use actual map origin
+
+                x = int((self.robot_pose.position.x - origin_x) / resolution)
+                y = int((self.robot_pose.position.y - origin_y) / resolution)
+                y = pixmap.height() - y  # Invert y axis
+
+                painter.drawEllipse(x - 5, y - 5, 10, 10)  # Draw the robot position as a circle
+
+            painter.end()
+            self.map_label.setPixmap(pixmap)
+        self.map_mutex.unlock()
 
     def send_nav_goal(self, x, y, z):
         goal = PoseStamped()
