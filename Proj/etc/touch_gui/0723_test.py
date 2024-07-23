@@ -49,6 +49,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.eta = None  # 도착 예상 시간 변수 초기화
         self.current_lift_command = None  # 현재 리프트 명령 초기화
         self.ems_signal = 1  # 비상 상태 초기화
+        self.lift_timer = QTimer()  # 리프트 타이머 초기화
 
         self.status_labels = {  # 상태 라벨 초기화
             "EMS Signal": QLabel(),
@@ -195,7 +196,8 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
             button.pressed.connect(lambda: func(*args, label))
             button.released.connect(self.stop_movement)
         else:
-            button.clicked.connect(lambda: func(*args))
+            button.pressed.connect(lambda: func(*args))
+            button.released.connect(self.stop_movement)
         return button
 
     def create_lift_button(self, text, command, label):
@@ -264,14 +266,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
             try:
                 status = int(data.split("_")[1])
                 self.ems_signal = status
-                if status == 1:
-                    self.emergency_pub.publish(Int32(data=1))
-                    self.update_status_label("EMS Signal", "Good: 1", "green")
-                    self.emergency_stop_button.setChecked(False)
-                elif status == 0:
-                    self.emergency_pub.publish(Int32(data=0))
-                    self.update_status_label("EMS Signal", "Emergency: 0", "red")
-                    self.emergency_stop_button.setChecked(True)
+                self.trigger_ems_signal(status)
                 self.log_to_terminal(f"Arduino received : EMS_{data}")
             except (ValueError, IndexError) as e:
                 self.log_to_terminal(f"Invalid data received: {data}")
