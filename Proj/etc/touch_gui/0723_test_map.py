@@ -356,7 +356,6 @@ class ControlPanel(QWidget):
         self.robot_item.setPos(x * 100, y * 100)  # Assuming 1 unit = 1 meter and scaling by 100 for visibility
         self.log_to_terminal(f"Update Position: x={x}, y={y}")
 
-<<<<<<< HEAD
     def update_map(self, msg):
         width = msg.info.width
         height = msg.info.height
@@ -380,25 +379,6 @@ class ControlPanel(QWidget):
 
         self.map_scene.setSceneRect(origin_x * 100, -origin_y * 100, width * resolution * 100, height * resolution * 100)
 
-=======
-    def update_map(self, msg):
-        self.map_scene.clear()
-        map_data = msg.data
-        width = msg.info.width
-        height = msg.info.height
-        resolution = msg.info.resolution
-        for i in range(height):
-            for j in range(width):
-                if map_data[i * width + j] == 100:
-                    color = Qt.black
-                elif map_data[i * width + j] == 0:
-                    color = Qt.white
-                else:
-                    color = Qt.gray
-                rect = self.map_scene.addRect(j * resolution * 100, i * resolution * 100, resolution * 100, resolution * 100, QPen(color), QBrush(color))
-        self.map_scene.addItem(self.robot_item)
-
->>>>>>> cd6ea8176af46193bfd3884491d2784bbd6f2ed3
 class MainWindow(QMainWindow):
     def __init__(self, node):
         super(MainWindow, self).__init__()
