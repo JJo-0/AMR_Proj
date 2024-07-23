@@ -1,0 +1,7 @@
+image: /desktop/AMR_Proj/Proj/dev-0716/src/omo_r1mini_navigation2/map/0716.pgm.pgm
+mode: trinary
+resolution: 0.05
+origin: [-3.18, -5.6, 0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.25
