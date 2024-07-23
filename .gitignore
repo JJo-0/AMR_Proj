@@ -31,6 +31,7 @@ Proj/dev-0716/install/
 Proj/dev-last/install/
 
 # Ignore log directories
+.log
 Proj/dev-last/log/
 Proj/dev/log/
 Proj/dev-0716/log/
