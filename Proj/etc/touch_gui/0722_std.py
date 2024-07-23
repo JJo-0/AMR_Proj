@@ -132,7 +132,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.emergency_stop_button = QToolButton()  # 비상 정지 버튼
         self.emergency_stop_button.setCheckable(True)  # 체크 가능
         self.emergency_stop_button.setText("EMS")  # 텍스트 설정
-        self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px;")  # 스타일 설정
+        self.emergency_stop_button.setStyleSheet("font-size: 48px; height: 100px;")  # 스타일 설정
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)  # 이벤트 연결
         self.emergency_stop_button.setFixedSize(150, 150)  # 버튼 높이 설정
         left_control_layout = QHBoxLayout()  # 왼쪽 제어 레이아웃
@@ -151,9 +151,9 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.height1_button = QPushButton("1 Height")  # 1 높이 버튼
         self.height2_button = QPushButton("2 Height")  # 2 높이 버튼
         self.height3_button = QPushButton("3 Height")  # 3 높이 버튼
-        self.height1_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
-        self.height2_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
-        self.height3_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
+        self.height1_button.setStyleSheet("font-size: 24px;")  # 스타일 설정
+        self.height2_button.setStyleSheet("font-size: 24px;")  # 스타일 설정
+        self.height3_button.setStyleSheet("font-size: 24px;")  # 스타일 설정
         self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))  # 버튼 이벤트 연결
         self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))  # 버튼 이벤트 연결
         self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))  # 버튼 이벤트 연결
@@ -167,8 +167,8 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         lift_updown_layout = QVBoxLayout()  # 수직 레이아웃
         self.lift_up_button = QPushButton("Lift Up")  # 리프트 업 버튼
         self.lift_down_button = QPushButton("Lift Down")  # 리프트 다운 버튼
-        self.lift_up_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
-        self.lift_down_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
+        self.lift_up_button.setStyleSheet("font-size: 24px;")  # 스타일 설정
+        self.lift_down_button.setStyleSheet("font-size: 24px;")  # 스타일 설정
         self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10", "Lift Up"))  # 버튼 이벤트 연결
         self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11", "Lift Down"))  # 버튼 이벤트 연결
         lift_updown_layout.addWidget(self.lift_up_button)  # 레이아웃에 추가
@@ -192,7 +192,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         status_layout = QVBoxLayout()  # 수직 레이아웃
 
         for key, label in self.status_labels.items():  # 상태 라벨 설정
-            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")  # 스타일 설정
+            label.setStyleSheet("font-size: 18px; background-color: black; color: white; padding: 5px;")  # 스타일 설정
             status_layout.addWidget(QLabel(key))  # 키 라벨 추가
             status_layout.addWidget(label)  # 상태 라벨 추가
 
