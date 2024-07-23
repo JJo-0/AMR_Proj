@@ -284,6 +284,7 @@ class ControlPanel(QWidget):
         return None
 
     def start_movement(self, direction):
+        self.emergency_pub.publish(Int32(data=1))  # EMS 신호를 1로 설정
         self.send_movement_command(direction)
 
     def stop_movement(self):
