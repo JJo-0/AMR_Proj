@@ -285,10 +285,12 @@ class ControlPanel(QWidget):
 
     def start_movement(self, direction):
         self.emergency_pub.publish(Int32(data=1))  # EMS 신호를 1로 설정
+        self.emergency_stop_button.setChecked(False)  # EMS 버튼 상태 해제
         self.send_movement_command(direction)
 
     def stop_movement(self):
         self.emergency_pub.publish(Int32(data=0))  # EMS 신호를 0로 설정
+        self.emergency_stop_button.setChecked(True)  # EMS 버튼 상태 설정
         self.send_movement_command("stop")
 
     def send_movement_command(self, direction):
