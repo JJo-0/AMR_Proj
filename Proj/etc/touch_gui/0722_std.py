@@ -89,28 +89,30 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         left_layout = QVBoxLayout()  # 왼쪽 레이아웃
         self.map_label = QLabel("Map Area")  # 지도 라벨
         self.map_label.setStyleSheet("background-color: lightgray;")  # 라벨 스타일
+        self.map_label.setFixedHeight(400)  # 고정 높이 설정
         left_layout.addWidget(self.map_label)  # 레이아웃에 위젯 추가
 
         self.terminal_output = QTextEdit()  # 터미널 출력
         self.terminal_output.setReadOnly(True)  # 읽기 전용
         self.terminal_output.setStyleSheet("background-color: black; color: white;")  # 스타일
-        self.terminal_output.setFixedHeight(200)  # 고정 높이
+        self.terminal_output.setFixedHeight(50)  # 고정 높이
         left_layout.addWidget(self.terminal_output)  # 레이아웃에 추가
 
         move_control_group = QGroupBox("Movement Control")  # 이동 제어 그룹
         move_layout = QGridLayout()  # 그리드 레이아웃
         move_control_group.setLayout(move_layout)  # 레이아웃 설정
+        move_control_group.setFixedHeight(200)  # 고정 높이 설정
 
         self.forward_button = QPushButton("Forward")  # 앞으로 버튼
         self.backward_button = QPushButton("Backward")  # 뒤로 버튼
         self.left_button = QPushButton("Left")  # 왼쪽 버튼
         self.right_button = QPushButton("Right")  # 오른쪽 버튼
         self.stop_button = QPushButton("Stop")  # 정지 버튼
-        move_layout.addWidget(self.forward_button, 0, 1)  # 레이아웃에 버튼 추가
-        move_layout.addWidget(self.left_button, 1, 0)  # 레이아웃에 버튼 추가
-        move_layout.addWidget(self.stop_button, 1, 1)  # 레이아웃에 버튼 추가
-        move_layout.addWidget(self.right_button, 1, 2)  # 레이아웃에 버튼 추가
-        move_layout.addWidget(self.backward_button, 2, 1)  # 레이아웃에 버튼 추가
+        move_layout.addWidget(self.backward_button, 0, 1)
+        move_layout.addWidget(self.left_button, 1, 0)
+        move_layout.addWidget(self.stop_button, 1, 1)
+        move_layout.addWidget(self.right_button, 1, 2)
+        move_layout.addWidget(self.forward_button, 2, 1)
 
         self.forward_button.pressed.connect(lambda: self.start_movement("forward"))  # 버튼 이벤트 연결
         self.forward_button.released.connect(self.stop_movement)  # 버튼 이벤트 연결
@@ -121,12 +123,18 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.right_button.pressed.connect(lambda: self.start_movement("right"))  # 버튼 이벤트 연결
         self.right_button.released.connect(self.stop_movement)  # 버튼 이벤트 연결
         self.stop_button.clicked.connect(lambda: self.send_movement_command("stop"))  # 버튼 이벤트 연결
+        self.forward_button.setFixedHeight(50)  # 버튼 높이 설정
+        self.backward_button.setFixedHeight(50)  # 버튼 높이 설정
+        self.left_button.setFixedHeight(50)  # 버튼 높이 설정
+        self.right_button.setFixedHeight(50)  # 버튼 높이 설정
+        self.stop_button.setFixedHeight(50)  # 버튼 높이 설정
 
         self.emergency_stop_button = QToolButton()  # 비상 정지 버튼
         self.emergency_stop_button.setCheckable(True)  # 체크 가능
         self.emergency_stop_button.setText("EMS")  # 텍스트 설정
         self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px;")  # 스타일 설정
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)  # 이벤트 연결
+        self.emergency_stop_button.setFixedSize(150, 150)  # 버튼 높이 설정
         left_control_layout = QHBoxLayout()  # 왼쪽 제어 레이아웃
         left_control_layout.addWidget(move_control_group)  # 이동 제어 그룹 추가
         left_control_layout.addWidget(self.emergency_stop_button)  # 비상 정지 버튼 추가
@@ -188,7 +196,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
             status_layout.addWidget(QLabel(key))  # 키 라벨 추가
             status_layout.addWidget(label)  # 상태 라벨 추가
 
-        self.update_status_label("EMS Signal", "-", "black")  # 초기 상태 업데이트
+        self.update_status_label("EMS Signal", "Good: 1", "green")  # 초기 상태 업데이트
         self.update_status_label("Lift Signal", "-", "black")  # 초기 상태 업데이트
         self.update_status_label("Arduino Connection", "Disconnected", "black")  # 초기 상태 업데이트
 
@@ -298,13 +306,13 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
     def send_movement_command(self, direction):  # 이동 명령 전송 함수
         msg = Twist()  # 메시지 생성
         if direction == "forward":  # 앞으로 이동
-            msg.linear.x = 0.2  # 속도 설정
+            msg.linear.x = 0.1  # 속도 설정
         elif direction == "backward":  # 뒤로 이동
-            msg.linear.x = -0.2  # 속도 설정
+            msg.linear.x = -0.1  # 속도 설정
         elif direction == "left":  # 왼쪽 회전
-            msg.angular.z = 0.4  # 회전 속도 설정
+            msg.angular.z = 0.2  # 회전 속도 설정
         elif direction == "right":  # 오른쪽 회전
-            msg.angular.z = -0.4  # 회전 속도 설정
+            msg.angular.z = -0.2  # 회전 속도 설정
         elif direction == "stop":  # 정지
             msg.linear.x = 0.0  # 속도 초기화
             msg.angular.z = 0.0  # 회전 속도 초기화
