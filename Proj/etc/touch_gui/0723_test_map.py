@@ -258,11 +258,11 @@ class ControlPanel(QWidget):
                 status = int(data.split("_")[1])
                 self.ems_signal = status
                 if status == 1:
-                    self.emergency_pub.publish(Int32(data=1))
+                    # self.emergency_pub.publish(Int32(data=1))
                     self.update_status_label("EMS Signal", "Good: 1", "green")
                     self.emergency_stop_button.setChecked(False)
                 elif status == 0:
-                    self.emergency_pub.publish(Int32(data=0))
+                    # self.emergency_pub.publish(Int32(data=0))
                     self.update_status_label("EMS Signal", "Emergency: 0", "red")
                     self.emergency_stop_button.setChecked(True)
                 self.log_to_terminal(f"Arduino received : EMS_{data}")
@@ -298,13 +298,13 @@ class ControlPanel(QWidget):
         return None
 
     def start_movement(self, direction):
-        self.emergency_pub.publish(Int32(data=1))
+        # self.emergency_pub.publish(Int32(data=1))
         self.update_status_label("EMS Signal", "1 : Good", "green")
         self.emergency_stop_button.setChecked(False)
         self.send_movement_command(direction)
 
     def stop_movement(self):
-        self.emergency_pub.publish(Int32(data=0))
+        # self.emergency_pub.publish(Int32(data=0))
         self.update_status_label("EMS Signal", "0 : Emergency", "red")
         self.emergency_stop_button.setChecked(True)
         self.send_movement_command("stop")
@@ -327,7 +327,7 @@ class ControlPanel(QWidget):
     def handle_emergency_stop(self):
         sender = self.sender()
         if sender.isChecked():
-            self.emergency_pub.publish(Int32(data=0))
+            # self.emergency_pub.publish(Int32(data=0))
             self.update_status_label("EMS Signal", "0 : Emergency", "red")
             self.ems_signal = 0
             if self.ser:
@@ -336,7 +336,7 @@ class ControlPanel(QWidget):
                 except serial.SerialException as e:
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
         else:
-            self.emergency_pub.publish(Int32(data=1))
+            # self.emergency_pub.publish(Int32(data=1))
             self.update_status_label("EMS Signal", "1 : Good", "green")
             self.ems_signal = 1
             if self.ser:
