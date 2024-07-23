@@ -98,12 +98,13 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.terminal_output = QTextEdit()  # 터미널 출력
         self.terminal_output.setReadOnly(True)  # 읽기 전용
         self.terminal_output.setStyleSheet("background-color: black; color: white;")  # 스타일
-        self.terminal_output.setFixedHeight(200)  # 고정 높이
+        self.terminal_output.setFixedHeight(50)  # 고정 높이
         left_layout.addWidget(self.terminal_output)  # 레이아웃에 추가
 
         move_control_group = QGroupBox("Movement Control")  # 이동 제어 그룹
         move_layout = QGridLayout()  # 그리드 레이아웃
         move_control_group.setLayout(move_layout)  # 레이아웃 설정
+        move_control_group.setFixedHeight(200)  # 고정 높이 설정
 
         self.forward_button = QPushButton("Forward")  # 앞으로 버튼
         self.backward_button = QPushButton("Backward")  # 뒤로 버튼

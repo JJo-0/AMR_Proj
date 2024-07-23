@@ -89,6 +89,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         left_layout = QVBoxLayout()  # 왼쪽 레이아웃
         self.map_label = QLabel("Map Area")  # 지도 라벨
         self.map_label.setStyleSheet("background-color: lightgray;")  # 라벨 스타일
+        self.map_label.setFixedHeight(400)  # 고정 높이 설정
         left_layout.addWidget(self.map_label)  # 레이아웃에 위젯 추가
 
         self.terminal_output = QTextEdit()  # 터미널 출력
@@ -100,6 +101,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         move_control_group = QGroupBox("Movement Control")  # 이동 제어 그룹
         move_layout = QGridLayout()  # 그리드 레이아웃
         move_control_group.setLayout(move_layout)  # 레이아웃 설정
+        move_control_group.setFixedHeight(200)  # 고정 높이 설정
 
         self.forward_button = QPushButton("Forward")  # 앞으로 버튼
         self.backward_button = QPushButton("Backward")  # 뒤로 버튼
