@@ -10,8 +10,6 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseStamped, Twist
 from threading import Thread, Lock
 import time
-from rviz2 import VisualizationFrame, RenderPanel
-from python_qt_binding.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget
 
 class SerialReader(QThread):
     new_data = pyqtSignal(str)
@@ -90,15 +88,10 @@ class ControlPanel(QWidget):
         left_layout = QVBoxLayout()
         scroll_area = QScrollArea()
 
-        # RViz 통합
-        self.rviz_frame = VisualizationFrame()
-        self.rviz_frame.initialize()
-        self.rviz_render_panel = RenderPanel()
-        self.rviz_render_panel.initialize(self.rviz_frame.getSceneManager(), self.rviz_frame.getSceneNode())
-        self.rviz_frame.addChild(self.rviz_render_panel)
-        self.rviz_render_panel.setFixedSize(800, 600)
-
-        scroll_area.setWidget(self.rviz_render_panel)
+        # RViz의 이미지를 표시할 QLabel 추가
+        self.map_label = QLabel("RViz를 실행하여 맵을 확인하세요.")
+        self.map_label.setAlignment(Qt.AlignCenter)
+        scroll_area.setWidget(self.map_label)
         left_layout.addWidget(scroll_area)
 
         self.terminal_output = QTextEdit()
