@@ -126,11 +126,15 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.right_button.pressed.connect(lambda: self.start_movement("right"))  # 버튼 이벤트 연결
         self.right_button.released.connect(self.stop_movement)  # 버튼 이벤트 연결
         self.stop_button.clicked.connect(lambda: self.send_movement_command("stop"))  # 버튼 이벤트 연결
-        self.forward_button.setFixedHeight(50)  # 버튼 높이 설정
-        self.backward_button.setFixedHeight(50)  # 버튼 높이 설정
-        self.left_button.setFixedHeight(50)  # 버튼 높이 설정
-        self.right_button.setFixedHeight(50)  # 버튼 높이 설정
-        self.stop_button.setFixedHeight(50)  # 버튼 높이 설정
+        self.forward_button.setStyleSheet("font-size: 24px;")
+        self.backward_button.setStyleSheet("font-size: 24px;")
+        self.left_button.setStyleSheet("font-size: 24px;")
+        self.right_button.setStyleSheet("font-size: 24px;")
+        self.forward_button.setFixedHeight(50)
+        self.backward_button.setFixedHeight(50)
+        self.left_button.setFixedHeight(50)
+        self.right_button.setFixedHeight(50)
+        self.stop_button.setFixedHeight(50)
 
         self.emergency_stop_button = QToolButton()  # 비상 정지 버튼
         self.emergency_stop_button.setCheckable(True)  # 체크 가능
