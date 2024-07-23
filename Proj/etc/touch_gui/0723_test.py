@@ -1,115 +1,116 @@
-import sys  # 시스템 관련 모듈
-import serial  # 시리얼 통신 모듈
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout)  # PyQt5 위젯
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QTimerEvent  # PyQt5 핵심 모듈
-import rclpy  # ROS2 Python 클라이언트 라이브러리
-from rclpy.node import Node  # ROS2 노드
-from std_msgs.msg import String, Int32, Float32  # ROS2 표준 메시지 타입
-from sensor_msgs.msg import Imu  # IMU 센서 메시지 타입
-from nav_msgs.msg import Odometry  # 오도메트리 메시지 타입
-from geometry_msgs.msg import PoseStamped, Twist  # 기하학적 메시지 타입
-from threading import Thread, Lock  # 스레딩 및 락 모듈
-import time  # 시간 모듈
+import sys
+import serial
+from PyQt5.QtWidgets import (
+    QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout,
+    QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout
+)
+from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String, Int32, Float32
+from sensor_msgs.msg import Imu
+from nav_msgs.msg import Odometry
+from geometry_msgs.msg import PoseStamped, Twist
+from threading import Thread, Lock
+import time
 
-class SerialReader(QThread):  # 시리얼 읽기 스레드 클래스
-    new_data = pyqtSignal(str)  # 새 데이터 신호
+class SerialReader(QThread):
+    new_data = pyqtSignal(str)
 
-    def __init__(self, ser, lock):  # 초기화
-        super().__init__()  # 부모 클래스 초기화
-        self.ser = ser  # 시리얼 객체
-        self.lock = lock  # 락 객체
-        self.running = True  # 스레드 실행 플래그
+    def __init__(self, ser, lock):
+        super().__init__()
+        self.ser = ser
+        self.lock = lock
+        self.running = True
 
-    def run(self):  # 스레드 실행 함수
-        while self.running:  # 실행 중일 때
+    def run(self):
+        while self.running:
             try:
-                if self.ser and self.ser.in_waiting > 0:  # 시리얼 데이터 대기 중
-                    line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()  # 시리얼 데이터 읽기, 디코딩 에러 무시
-                    self.new_data.emit(line)  # 새 데이터 신호 발생
-            except serial.SerialException as e:  # 시리얼 예외 처리
-                self.new_data.emit(f"Serial error: {e}")  # 에러 메시지 발생
-            time.sleep(0.1)  # 0.1초 대기
+                if self.ser and self.ser.in_waiting > 0:
+                    line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()
+                    self.new_data.emit(line)
+            except serial.SerialException as e:
+                self.new_data.emit(f"Serial error: {e}")
+            time.sleep(0.1)
 
-    def stop(self):  # 스레드 중지 함수
-        self.running = False  # 실행 플래그 중지
-        self.wait()  # 스레드 대기
+    def stop(self):
+        self.running = False
+        self.wait()
 
-class ControlPanel(QWidget):  # 컨트롤 패널 클래스
-    def __init__(self, node, parent=None):  # 초기화
-        super(ControlPanel, self).__init__(parent)  # 부모 클래스 초기화
-        self.node = node  # ROS 노드
+class ControlPanel(QWidget):
+    def __init__(self, node, parent=None):
+        super(ControlPanel, self).__init__(parent)
+        self.node = node
 
-        self.ser = None  # 시리얼 객체 초기화
-        self.velocity = None  # 속도 변수 초기화
-        self.imu_orientation = None  # IMU 방향 변수 초기화
-        self.slam_distance = None  # SLAM 거리 변수 초기화
-        self.eta = None  # 도착 예상 시간 변수 초기화
-        self.current_lift_command = None  # 현재 리프트 명령 초기화
-        self.ems_signal = 1  # 비상 상태 초기화
-        self.lift_timer = QTimer()  # 리프트 타이머
+        self.ser = None
+        self.velocity = None
+        self.imu_orientation = None
+        self.slam_distance = None
+        self.eta = None
+        self.current_lift_command = None
+        self.ems_signal = 1
+        self.lift_timer = QTimer()
 
-        self.status_labels = {  # 상태 라벨 초기화
+        self.status_labels = {
             "EMS Signal": QLabel(),
             "Lift Signal": QLabel(),
             "Arduino Connection": QLabel()
         }
 
-        self.serial_buffer = []  # 시리얼 버퍼 리스트 초기화
-        self.serial_lock = Lock()  # 시리얼 락 객체
+        self.serial_buffer = []
+        self.serial_lock = Lock()
 
-        self.init_ui()  # UI 초기화
+        self.init_ui()
+        self.log_to_terminal("UI Set Success!")
 
-        self.log_to_terminal("UI Set Success!")  # 로그 메시지
+        self.setup_serial_connection('/dev/ttyACM0', 115200)
+        self.start_serial_read_thread()
+        self.start_serial_process_thread()
 
-        self.setup_serial_connection('/dev/ttyACM0', 115200)  # 시리얼 연결 설정
-        self.start_serial_read_thread()  # 시리얼 읽기 스레드 시작
-        self.start_serial_process_thread()  # 시리얼 처리 스레드 시작
+        self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)
+        self.lift_pub = self.node.create_publisher(String, '/lift_command', 10)
+        self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)
+        self.velocity_sub = self.node.create_subscription(Odometry, '/odom', self.update_velocity, 10)
+        self.imu_sub = self.node.create_subscription(Imu, '/imu', self.update_imu, 10)
+        self.slam_sub = self.node.create_subscription(Float32, '/slam_remaining_distance', self.update_slam, 10)
 
-        self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)  # 비상 신호 퍼블리셔
-        self.lift_pub = self.node.create_publisher(String, '/lift_command', 10)  # 리프트 명령 퍼블리셔
-        self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 목표 퍼블리셔
-        self.velocity_sub = self.node.create_subscription(Odometry, '/odom', self.update_velocity, 10)  # 속도 서브스크립션
-        self.imu_sub = self.node.create_subscription(Imu, '/imu', self.update_imu, 10)  # IMU 서브스크립션
-        self.slam_sub = self.node.create_subscription(Float32, '/slam_remaining_distance', self.update_slam, 10)  # SLAM 서브스크립션
-
-    def setup_serial_connection(self, port, baud_rate):  # 시리얼 연결 설정 함수
+    def setup_serial_connection(self, port, baud_rate):
         try:
-            self.ser = serial.Serial(port, baud_rate, timeout=1)  # 시리얼 포트 연결
-            self.ser.reset_input_buffer()  # 입력 버퍼 초기화
-            self.update_status_label("Arduino Connection", "Connected", "green")  # 상태 라벨 업데이트
-            self.log_to_terminal(f"[Serial Connected] : {port} @ {baud_rate}")  # 로그 메시지
-        except serial.SerialException as e:  # 시리얼 예외 처리
-            self.update_status_label("Arduino Connection", "Error", "red")  # 상태 라벨 업데이트
-            self.log_to_terminal(f"[Serial Connected Failed] : {str(e)}")  # 로그 메시지
-            self.ser = None  # 시리얼 객체 초기화
+            self.ser = serial.Serial(port, baud_rate, timeout=1)
+            self.ser.reset_input_buffer()
+            self.update_status_label("Arduino Connection", "Connected", "green")
+            self.log_to_terminal(f"[Serial Connected] : {port} @ {baud_rate}")
+        except serial.SerialException as e:
+            self.update_status_label("Arduino Connection", "Error", "red")
+            self.log_to_terminal(f"[Serial Connected Failed] : {str(e)}")
+            self.ser = None
 
-    def init_ui(self):  # UI 초기화 함수
-        main_layout = QHBoxLayout()  # 메인 레이아웃
-        self.setLayout(main_layout)  # 레이아웃 설정
+    def init_ui(self):
+        main_layout = QHBoxLayout()
+        self.setLayout(main_layout)
 
-        left_layout = QVBoxLayout()  # 왼쪽 레이아웃
-        self.map_label = QLabel("Map Area")  # 지도 라벨
-        self.map_label.setStyleSheet("background-color: lightgray;")  # 라벨 스타일
-        self.map_label.setFixedHeight(400)  # 고정 높이 설정
-        left_layout.addWidget(self.map_label)  # 레이아웃에 위젯 추가
+        left_layout = QVBoxLayout()
+        self.map_label = QLabel("Map Area")
+        self.map_label.setStyleSheet("background-color: lightgray;")
+        self.map_label.setFixedHeight(400)
+        left_layout.addWidget(self.map_label)
 
-        self.terminal_output = QTextEdit()  # 터미널 출력
-        self.terminal_output.setReadOnly(True)  # 읽기 전용
-        self.terminal_output.setStyleSheet("background-color: black; color: white;")  # 스타일
-        self.terminal_output.setFixedHeight(50)  # 고정 높이
-        left_layout.addWidget(self.terminal_output)  # 레이아웃에 추가
+        self.terminal_output = QTextEdit()
+        self.terminal_output.setReadOnly(True)
+        self.terminal_output.setStyleSheet("background-color: black; color: white;")
+        self.terminal_output.setFixedHeight(50)
+        left_layout.addWidget(self.terminal_output)
 
-        move_control_group = QGroupBox("Movement Control")  # 이동 제어 그룹
-        move_layout = QGridLayout()  # 그리드 레이아웃
-        move_control_group.setLayout(move_layout)  # 레이아웃 설정
-        move_control_group.setFixedHeight(200)  # 고정 높이 설정
+        move_control_group = QGroupBox("Movement Control")
+        move_layout = QGridLayout()
+        move_control_group.setLayout(move_layout)
+        move_control_group.setFixedHeight(200)
 
-        # 방향 버튼 설정
-        self.forward_button = self.create_button("Forward", self.start_movement, "forward", 24)
-        self.backward_button = self.create_button("Backward", self.start_movement, "backward", 24)
-        self.left_button = self.create_button("Left", self.start_movement, "left", 24)
-        self.right_button = self.create_button("Right", self.start_movement, "right", 24)
-        self.stop_button = self.create_button("Stop", self.send_movement_command, "stop", 24)
+        self.forward_button = self.create_button("Forward", self.start_movement, "forward", 50)
+        self.backward_button = self.create_button("Backward", self.start_movement, "backward", 50)
+        self.left_button = self.create_button("Left", self.start_movement, "left", 50)
+        self.right_button = self.create_button("Right", self.start_movement, "right", 50)
+        self.stop_button = self.create_button("Stop", self.send_movement_command, "stop", 50)
 
         move_layout.addWidget(self.backward_button, 0, 1)
         move_layout.addWidget(self.left_button, 1, 0)
@@ -117,7 +118,6 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         move_layout.addWidget(self.right_button, 1, 2)
         move_layout.addWidget(self.forward_button, 2, 1)
 
-        # 비상 정지 버튼 설정
         self.emergency_stop_button = QToolButton()
         self.emergency_stop_button.setCheckable(True)
         self.emergency_stop_button.setText("EMS")
@@ -132,14 +132,13 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         main_layout.addLayout(left_layout)
         right_layout = QVBoxLayout()
 
-        # 리프트 제어 그룹 설정
         lift_group = QGroupBox("Lift Control")
         lift_layout = QVBoxLayout()
         lift_group.setLayout(lift_layout)
 
-        self.height1_button = self.create_button("1 Height", self.send_lift_command, "L_20", 24, "1 Point")
-        self.height2_button = self.create_button("2 Height", self.send_lift_command, "L_21", 24, "2 Point")
-        self.height3_button = self.create_button("3 Height", self.send_lift_command, "L_22", 24, "3 Point")
+        self.height1_button = self.create_button("1 Height", self.send_lift_command, "L_20", 50, "1 Point")
+        self.height2_button = self.create_button("2 Height", self.send_lift_command, "L_21", 50, "2 Point")
+        self.height3_button = self.create_button("3 Height", self.send_lift_command, "L_22", 50, "3 Point")
         lift_layout.addWidget(self.height1_button)
         lift_layout.addWidget(self.height2_button)
         lift_layout.addWidget(self.height3_button)
@@ -156,7 +155,6 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
 
         right_layout.addWidget(lift_updown_group)
 
-        # 네비게이션 그룹 설정
         nav_group = QGroupBox("Navigation")
         nav_layout = QVBoxLayout()
         self.toggle_nav_button = QToolButton()
@@ -168,7 +166,6 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         nav_group.setLayout(nav_layout)
         right_layout.addWidget(nav_group)
 
-        # 로봇 상태 그룹 설정
         status_group = QGroupBox("Robot Status")
         status_layout = QVBoxLayout()
 
@@ -192,7 +189,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
 
     def create_button(self, text, func, *args, height=24, label=None):
         button = QPushButton(text)
-        button.setStyleSheet(f"font-size: {height}px;")
+        button.setStyleSheet(f"font-size: 24px; height: {height}px;")
         button.setFixedHeight(height)
         if label:
             button.clicked.connect(lambda: func(*args, label))
@@ -308,7 +305,6 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
 
     def start_movement(self, direction):
         self.send_movement_command(direction)
-        self.ems_signal = 1
         QTimer.singleShot(100, lambda: self.trigger_ems_signal(1))
 
     def stop_movement(self):
@@ -355,8 +351,11 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
                     self.log_to_terminal(f"[Arduino Send] : E_1")
                 except serial.SerialException as e:
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
-                    self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: green;")
+            self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: green;")
 
+    def log_to_terminal(self, message):
+        self.terminal_output.append(message)
+        self.terminal_output.ensureCursorVisible()
 
     def log_to_terminal(self, message):  # 터미널 로그 출력 함수
         self.terminal_output.append(message)  # 메시지 추가
