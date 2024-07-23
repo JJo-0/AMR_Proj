@@ -245,11 +245,11 @@ class ControlPanel(QWidget):
                 self.ems_signal = status
                 if status == 1:
                     self.emergency_pub.publish(Int32(data=1))
-                    self.update_status_label("EMS Signal", "Good: 1", "green")
+                    self.update_status_label("EMS Signal", "1 : Good", "green")
                     self.emergency_stop_button.setChecked(False)
                 elif status == 0:
                     self.emergency_pub.publish(Int32(data=0))
-                    self.update_status_label("EMS Signal", "Emergency: 0", "red")
+                    self.update_status_label("EMS Signal", "0 : Emergency", "red")
                     self.emergency_stop_button.setChecked(True)
                 self.log_to_terminal(f"Arduino received : EMS_{data}")
             except (ValueError, IndexError) as e:
@@ -285,11 +285,13 @@ class ControlPanel(QWidget):
 
     def start_movement(self, direction):
         self.emergency_pub.publish(Int32(data=1))  # EMS 신호를 1로 설정
+        self.update_status_label("EMS Signal", "1 : Good", "green") 
         self.emergency_stop_button.setChecked(False)  # EMS 버튼 상태 해제
         self.send_movement_command(direction)
 
     def stop_movement(self):
         self.emergency_pub.publish(Int32(data=0))  # EMS 신호를 0로 설정
+        self.update_status_label("EMS Signal", "0 : Emergency", "red") 
         self.emergency_stop_button.setChecked(True)  # EMS 버튼 상태 설정
         self.send_movement_command("stop")
 
@@ -327,7 +329,7 @@ class ControlPanel(QWidget):
                     self.log_to_terminal(f"[Arduino Send] : E_1")
                 except serial.SerialException as e:
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
-            self.update_status_label("EMS Signal", "Good: 1", "green")
+            self.update_status_label("EMS Signal", "1 : Good", "green")
 
     def log_to_terminal(self, message):  # 터미널 로그 출력 함수
         self.terminal_output.append(message)  # 메시지 추가
