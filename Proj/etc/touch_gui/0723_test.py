@@ -1,7 +1,7 @@
 import sys  # 시스템 관련 모듈
 import serial  # 시리얼 통신 모듈
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout  # PyQt5 위젯
-from PyQt5.QtCore import Qt, QTimer, QThread, pyqtSignal, QMetaObject, Q_ARG  # PyQt5 핵심 모듈
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout)  # PyQt5 위젯
+from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer  # PyQt5 핵심 모듈
 import rclpy  # ROS2 Python 클라이언트 라이브러리
 from rclpy.node import Node  # ROS2 노드
 from std_msgs.msg import String, Int32, Float32  # ROS2 표준 메시지 타입
@@ -106,11 +106,11 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.left_button = QPushButton("Left")  # 왼쪽 버튼
         self.right_button = QPushButton("Right")  # 오른쪽 버튼
         self.stop_button = QPushButton("Stop")  # 정지 버튼
-        move_layout.addWidget(self.forward_button, 0, 1)  # 레이아웃에 버튼 추가
-        move_layout.addWidget(self.left_button, 1, 0)  # 레이아웃에 버튼 추가
-        move_layout.addWidget(self.stop_button, 1, 1)  # 레이아웃에 버튼 추가
-        move_layout.addWidget(self.right_button, 1, 2)  # 레이아웃에 버튼 추가
-        move_layout.addWidget(self.backward_button, 2, 1)  # 레이아웃에 버튼 추가
+        move_layout.addWidget(self.backward_button, 0, 1)
+        move_layout.addWidget(self.left_button, 1, 0)
+        move_layout.addWidget(self.stop_button, 1, 1)
+        move_layout.addWidget(self.right_button, 1, 2)
+        move_layout.addWidget(self.forward_button, 2, 1)
 
         self.forward_button.pressed.connect(lambda: self.start_movement("forward"))  # 버튼 이벤트 연결
         self.forward_button.released.connect(self.stop_movement)  # 버튼 이벤트 연결
@@ -161,10 +161,8 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.lift_down_button = QPushButton("Lift Down")  # 리프트 다운 버튼
         self.lift_up_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
         self.lift_down_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
-        self.lift_up_button.pressed.connect(lambda: self.start_lift("L_10", "Lift Up"))  # 버튼 이벤트 연결
-        self.lift_up_button.released.connect(self.stop_lift)  # 버튼 이벤트 연결
-        self.lift_down_button.pressed.connect(lambda: self.start_lift("L_11", "Lift Down"))  # 버튼 이벤트 연결
-        self.lift_down_button.released.connect(self.stop_lift)  # 버튼 이벤트 연결
+        self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10", "Lift Up"))  # 버튼 이벤트 연결
+        self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11", "Lift Down"))  # 버튼 이벤트 연결
         lift_updown_layout.addWidget(self.lift_up_button)  # 레이아웃에 추가
         lift_updown_layout.addWidget(self.lift_down_button)  # 레이아웃에 추가
         lift_updown_group.setLayout(lift_updown_layout)  # 레이아웃 설정
@@ -239,6 +237,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
                     data = self.serial_buffer.pop(0)  # 데이터 꺼내기
                     self.process_serial_data(data)  # 데이터 처리
             time.sleep(0.1)  # 0.1초 대기
+
     def process_serial_data(self, data):  # 시리얼 데이터 처리 함수
         if data.startswith("E_"):  # 데이터가 E_로 시작하면
             try:
@@ -252,27 +251,13 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
                     self.emergency_pub.publish(Int32(data=0))  # 비상 신호 전송
                     self.update_status_label("EMS Signal", "Emergency: 0", "red")  # 상태 라벨 업데이트
                     self.emergency_stop_button.setChecked(True)  # 비상 정지 버튼 설정
-                self.log_to_terminal(f"Arduino received : EMS_{data}")  # 로그 메시지
+                self.log_to_terminal(f"Arduino received : EMS_{data}")  # 로그 메시
             except (ValueError, IndexError) as e:  # 예외 처리
-                self.log_to_terminal(f"Invalid data received: {data}")  # 에러 로그 메시지
+                self.log_to_terminal(f"Invalid data received: {data}") # 에러 로그 메시지
 
     def move_to_preset_height(self, command, log_message):  # 미리 설정된 높이로 이동 함수
         self.send_lift_command(command, log_message)  # 리프트 명령 전송
         self.log_to_terminal(log_message)  # 로그 메시지
-
-    def start_lift(self, command, log_message):  # 리프트 시작 함수
-        self.update_status_label("Lift Signal", log_message, "green")  # 상태 라벨 업데이트
-        self.log_to_terminal(log_message)  # 로그 메시지
-        self.current_lift_command = command  # 현재 명령 설정
-        self.lift_timer.timeout.connect(lambda: self.send_lift_command(self.current_lift_command, log_message))  # 타이머 연결
-        self.lift_timer.start(100)  # 타이머 시작
-        self.log_to_terminal("Lift Timer Started")  # 로그 메시지
-
-    def stop_lift(self):  # 리프트 멈추기 함수
-        self.log_to_terminal("Stop Lift")  # 로그 메시지
-        self.current_lift_command = None  # 현재 명령 초기화
-        self.lift_timer.stop()  # 타이머 중지
-        QTimer.singleShot(5000, lambda: self.update_status_label("Lift Signal", "-", "black"))  # 5초 후 상태 라벨 초기화
 
     def toggle_navigation(self):  # 네비게이션 토글 함수
         nav_state = "Navigating" if self.toggle_nav_button.isChecked() else "Idle"  # 네비게이션 상태
@@ -299,24 +284,27 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         return None  # 없으면 None 반환
 
     def start_movement(self, direction):  # 이동 시작 함수
-        self.movement_timer = QTimer()  # 타이머 생성
-        self.movement_timer.timeout.connect(lambda: self.send_movement_command(direction))  # 타이머 이벤트 연결
-        self.movement_timer.start(100)  # 타이머 시작
+        self.emergency_pub.publish(Int32(data=1))  # EMS 신호를 1로 설정
+        self.update_status_label("EMS Signal", "1 : Good", "green") 
+        self.emergency_stop_button.setChecked(False)  # EMS 버튼 상태 해제
+        self.send_movement_command(direction)  # 이동 명령 전송
 
     def stop_movement(self):  # 이동 멈추기 함수
-        if hasattr(self, 'movement_timer'):  # 타이머가 있으면
-            self.movement_timer.stop()  # 타이머 중지
+        self.emergency_pub.publish(Int32(data=0))  # EMS 신호를 0로 설정
+        self.update_status_label("EMS Signal", "0 : Emergency", "red") 
+        self.emergency_stop_button.setChecked(True)  # EMS 버튼 상태 설정
+        self.send_movement_command("stop")  # 이동 정지 명령 전송
 
     def send_movement_command(self, direction):  # 이동 명령 전송 함수
         msg = Twist()  # 메시지 생성
         if direction == "forward":  # 앞으로 이동
-            msg.linear.x = 0.2  # 속도 설정
+            msg.linear.x = 0.1  # 속도 설정
         elif direction == "backward":  # 뒤로 이동
-            msg.linear.x = -0.2  # 속도 설정
+            msg.linear.x = -0.1  # 속도 설정
         elif direction == "left":  # 왼쪽 회전
-            msg.angular.z = 0.4  # 회전 속도 설정
+            msg.angular.z = 0.2  # 회전 속도 설정
         elif direction == "right":  # 오른쪽 회전
-            msg.angular.z = -0.4  # 회전 속도 설정
+            msg.angular.z = -0.2  # 회전 속도 설정
         elif direction == "stop":  # 정지
             msg.linear.x = 0.0  # 속도 초기화
             msg.angular.z = 0.0  # 회전 속도 초기화
@@ -326,6 +314,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         sender = self.sender()  # 신호 보낸 객체
         if sender.isChecked():  # 버튼이 눌리면
             self.emergency_pub.publish(Int32(data=0))  # 비상 신호 전송
+            self.update_status_label("EMS Signal", "0 : Emergency", "red") 
             self.ems_signal = 0  # 비상 상태 설정
             if self.ser:  # 시리얼 객체가 있으면
                 try:
@@ -334,10 +323,12 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")  # 에러 로그 메시지
         else:  # 버튼이 해제되면
             self.emergency_pub.publish(Int32(data=1))  # 비상 해제 신호 전송
+            self.update_status_label("EMS Signal", "1 : Good", "green")
             self.ems_signal = 1  # 비상 상태 해제
             if self.ser:  # 시리얼 객체가 있으면
                 try:
                     self.ser.write("E_1\n".encode('utf-8'))  # 시리얼 전송
+                    self.log_to_terminal(f"[Arduino Send] : E_1")  # 아두이노로 보낸 메시지 로그 출력
                 except serial.SerialException as e:  # 시리얼 예외 처리
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")  # 에러 로그 메시지
 
