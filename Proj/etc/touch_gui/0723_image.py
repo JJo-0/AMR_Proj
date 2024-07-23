@@ -95,6 +95,17 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.map_label.setScaledContents(True)  # 이미지 크기 맞춤
         left_layout.addWidget(self.map_label)  # 레이아웃에 위젯 추가
 
+        # 네비게이션 버튼 추가
+        self.nav_button_1 = QPushButton("Goal 1")
+        self.nav_button_2 = QPushButton("Goal 2")
+        self.nav_button_3 = QPushButton("Goal 3")
+        self.nav_button_1.clicked.connect(lambda: self.send_nav_goal(1.0, 2.0, 0.0))
+        self.nav_button_2.clicked.connect(lambda: self.send_nav_goal(3.0, 4.0, 0.0))
+        self.nav_button_3.clicked.connect(lambda: self.send_nav_goal(5.0, 6.0, 0.0))
+        left_layout.addWidget(self.nav_button_1)
+        left_layout.addWidget(self.nav_button_2)
+        left_layout.addWidget(self.nav_button_3)
+
         self.terminal_output = QTextEdit()  # 터미널 출력
         self.terminal_output.setReadOnly(True)  # 읽기 전용
         self.terminal_output.setStyleSheet("background-color: black; color: white;")  # 스타일
@@ -199,7 +210,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
             status_layout.addWidget(QLabel(key))  # 키 라벨 추가
             status_layout.addWidget(label)  # 상태 라벨 추가
 
-        self.update_status_label("EMS Signal", "-", "black")  # 초기 상태 업데이트
+        self.update_status_label("EMS Signal", "Good: 1", "green")  # 초기 상태 업데이트
         self.update_status_label("Lift Signal", "-", "black")  # 초기 상태 업데이트
         self.update_status_label("Arduino Connection", "Disconnected", "black")  # 초기 상태 업데이트
 

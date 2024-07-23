@@ -196,7 +196,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
             status_layout.addWidget(QLabel(key))  # 키 라벨 추가
             status_layout.addWidget(label)  # 상태 라벨 추가
 
-        self.update_status_label("EMS Signal", "-", "black")  # 초기 상태 업데이트
+        self.update_status_label("EMS Signal", "Good: 1", "green")  # 초기 상태 업데이트
         self.update_status_label("Lift Signal", "-", "black")  # 초기 상태 업데이트
         self.update_status_label("Arduino Connection", "Disconnected", "black")  # 초기 상태 업데이트
 
