@@ -1,7 +1,7 @@
 import sys  # 시스템 관련 모듈
 import serial  # 시리얼 통신 모듈
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout)  # PyQt5 위젯
-from PyQt5.QtGui import QPixmap  # QPixmap 추가
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout,  QScrollArea)  # PyQt5 위젯
+from PyQt5.QtGui import QPixmap, QPainter, QColor, QFont  # QPixmap 추가
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer  # PyQt5 핵심 모듈
 import rclpy  # ROS2 Python 클라이언트 라이브러리
 from rclpy.node import Node  # ROS2 노드
@@ -88,23 +88,33 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.setLayout(main_layout)  # 레이아웃 설정
 
         left_layout = QVBoxLayout()  # 왼쪽 레이아웃
-        self.map_label = QLabel("Map Area")  # 지도 라벨
-        self.map_label.setStyleSheet("background-color: lightgray;")  # 라벨 스타일
-        pixmap = QPixmap('/desktop/AMR_Proj/Proj/etc/touch_gui/map_.jpg')  # 이미지 로드
-        self.map_label.setPixmap(pixmap)  # 라벨에 이미지 설정
-        self.map_label.setScaledContents(True)  # 이미지 크기 맞춤
-        left_layout.addWidget(self.map_label)  # 레이아웃에 위젯 추가
+        scroll_area = QScrollArea()  # 스크롤 영역 추가
+        self.map_label = QLabel()  # 지도 라벨
 
-        # 네비게이션 버튼 추가
+        pixmap = QPixmap('/desktop/AMR_Proj/Proj/etc/touch_gui/map_1.jpg')  # 이미지 로드
+
+        # # 이미지에 빨간 동그라미와 숫자 추가
+        # self.draw_circles_on_pixmap(pixmap)
+
+        self.map_label.setPixmap(pixmap)  # 라벨에 이미지 설정
+        scroll_area.setWidget(self.map_label)  # 스크롤 영역에 라벨 설정
+        left_layout.addWidget(scroll_area)  # 레이아웃에 스크롤 영역 추가
+
+
+        # 네비게이션 버튼 그룹 추가
+        nav_group = QGroupBox("Navigation Goals")  # 네비게이션 그룹
+        nav_button_layout = QHBoxLayout()  # 네비게이션 버튼 레이아웃
         self.nav_button_1 = QPushButton("Goal 1")
         self.nav_button_2 = QPushButton("Goal 2")
         self.nav_button_3 = QPushButton("Goal 3")
         self.nav_button_1.clicked.connect(lambda: self.send_nav_goal(1.0, 2.0, 0.0))
         self.nav_button_2.clicked.connect(lambda: self.send_nav_goal(3.0, 4.0, 0.0))
         self.nav_button_3.clicked.connect(lambda: self.send_nav_goal(5.0, 6.0, 0.0))
-        left_layout.addWidget(self.nav_button_1)
-        left_layout.addWidget(self.nav_button_2)
-        left_layout.addWidget(self.nav_button_3)
+        nav_button_layout.addWidget(self.nav_button_1)
+        nav_button_layout.addWidget(self.nav_button_2)
+        nav_button_layout.addWidget(self.nav_button_3)
+        nav_group.setLayout(nav_button_layout)
+        left_layout.addWidget(nav_group)
 
         self.terminal_output = QTextEdit()  # 터미널 출력
         self.terminal_output.setReadOnly(True)  # 읽기 전용
@@ -137,11 +147,11 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.right_button.pressed.connect(lambda: self.start_movement("right"))  # 버튼 이벤트 연결
         self.right_button.released.connect(self.stop_movement)  # 버튼 이벤트 연결
         self.stop_button.clicked.connect(lambda: self.send_movement_command("stop"))  # 버튼 이벤트 연결
-        self.forward_button.setFixedHeight(50)  # 버튼 높이 설정
-        self.backward_button.setFixedHeight(50)  # 버튼 높이 설정
-        self.left_button.setFixedHeight(50)  # 버튼 높이 설정
-        self.right_button.setFixedHeight(50)  # 버튼 높이 설정
-        self.stop_button.setFixedHeight(50)  # 버튼 높이 설정
+        self.forward_button.setStyleSheet("font-size: 24px; height: 50px;")
+        self.backward_button.setStyleSheet("font-size: 24px; height: 50px;")
+        self.left_button.setStyleSheet("font-size: 24px; height: 50px;")
+        self.right_button.setStyleSheet("font-size: 24px; height: 50px;")
+        self.stop_button.setStyleSheet("font-size: 24px; height: 50px;")
 
         self.emergency_stop_button = QToolButton()  # 비상 정지 버튼
         self.emergency_stop_button.setCheckable(True)  # 체크 가능
@@ -165,9 +175,9 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.height1_button = QPushButton("1 Height")  # 1 높이 버튼
         self.height2_button = QPushButton("2 Height")  # 2 높이 버튼
         self.height3_button = QPushButton("3 Height")  # 3 높이 버튼
-        self.height1_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
-        self.height2_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
-        self.height3_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
+        self.height1_button.setStyleSheet("font-size: 24px; height: 50px;")
+        self.height2_button.setStyleSheet("font-size: 24px; height: 50px;")
+        self.height3_button.setStyleSheet("font-size: 24px; height: 50px;")
         self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))  # 버튼 이벤트 연결
         self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))  # 버튼 이벤트 연결
         self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))  # 버튼 이벤트 연결
@@ -181,8 +191,8 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         lift_updown_layout = QVBoxLayout()  # 수직 레이아웃
         self.lift_up_button = QPushButton("Lift Up")  # 리프트 업 버튼
         self.lift_down_button = QPushButton("Lift Down")  # 리프트 다운 버튼
-        self.lift_up_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
-        self.lift_down_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
+        self.lift_up_button.setStyleSheet("font-size: 24px; height: 50px;")
+        self.lift_down_button.setStyleSheet("font-size: 24px; height: 50px;")
         self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10", "Lift Up"))  # 버튼 이벤트 연결
         self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11", "Lift Down"))  # 버튼 이벤트 연결
         lift_updown_layout.addWidget(self.lift_up_button)  # 레이아웃에 추가
@@ -218,6 +228,25 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         right_layout.addWidget(status_group)  # 오른쪽 레이아웃에 추가
         main_layout.addLayout(left_layout)  # 메인 레이아웃에 추가
         main_layout.addLayout(right_layout)  # 메인 레이아웃에 추가
+
+    # def draw_circles_on_pixmap(self, pixmap):
+    #     painter = QPainter(pixmap)
+    #     painter.setPen(Qt.red)
+    #     painter.setBrush(QColor(255, 0, 0))
+    #     font = QFont()
+    #     font.setPointSize(20)
+    #     painter.setFont(font)
+    #     painter.setPen(Qt.black)  # 글자를 검은색으로 설정
+    #     # 1번 동그라미
+    #     painter.drawEllipse(50, 50, 50, 50)
+    #     painter.drawText(65, 85, "1")
+    #     # 2번 동그라미
+    #     painter.drawEllipse(200, 200, 50, 50)
+    #     painter.drawText(215, 235, "2")
+    #     # 3번 동그라미
+    #     painter.drawEllipse(350, 350, 50, 50)
+    #     painter.drawText(365, 385, "3")
+    #     painter.end()
 
     # Add the send_nav_goal method
     def send_nav_goal(self, x, y, z):
