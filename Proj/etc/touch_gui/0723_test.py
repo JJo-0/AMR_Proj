@@ -110,7 +110,7 @@ class ControlPanel(QWidget):
         self.backward_button = self.create_button("Backward", self.start_movement, "backward", 50)
         self.left_button = self.create_button("Left", self.start_movement, "left", 50)
         self.right_button = self.create_button("Right", self.start_movement, "right", 50)
-        self.stop_button = self.create_button("Stop", self.send_movement_command, "stop", 50)
+        self.stop_button = self.create_button("Stop", self.stop_movement, height=50)
 
         move_layout.addWidget(self.backward_button, 0, 1)
         move_layout.addWidget(self.left_button, 1, 0)
@@ -189,10 +189,10 @@ class ControlPanel(QWidget):
 
     def create_button(self, text, func, *args, height=24, label=None):
         button = QPushButton(text)
-        button.setStyleSheet(f"font-size: 24px; height: {height}px;")
+        button.setStyleSheet(f"font-size: 24px;")
         button.setFixedHeight(height)
         if label:
-            button.clicked.connect(lambda: func(*args, label))
+            button.clicked.connect(lambda: func(*(args + (label,))))
         else:
             button.clicked.connect(lambda: func(*args))
         return button
@@ -204,11 +204,6 @@ class ControlPanel(QWidget):
         button.pressed.connect(lambda: self.start_lift_command(command, label))
         button.released.connect(self.stop_lift_command)
         return button
-
-    def create_status_label(self):
-        label = QLabel()
-        label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
-        return label
 
     def update_status_label(self, label_name, text, color):
         label = self.status_labels.get(label_name)
@@ -352,10 +347,6 @@ class ControlPanel(QWidget):
                 except serial.SerialException as e:
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
             self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: green;")
-
-    def log_to_terminal(self, message):
-        self.terminal_output.append(message)
-        self.terminal_output.ensureCursorVisible()
 
     def log_to_terminal(self, message):  # 터미널 로그 출력 함수
         self.terminal_output.append(message)  # 메시지 추가
