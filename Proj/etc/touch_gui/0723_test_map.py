@@ -1,117 +1,378 @@
-# 전체 동작 및 설명:
-# 이 코드는 ROS2와 PyQt5를 사용하여 로봇 제어 GUI를 구현합니다.
-# /map 토픽에서 OccupancyGrid 메시지를 구독하여 맵을 표시하고, /odom 토픽에서 Odometry 메시지를 구독하여 로봇의 현재 위치를 지도 상에 표시합니다.
-# 사용자가 GUI의 지도를 클릭하여 로봇의 목표 위치를 설정하면 /move_base_simple/goal 토픽에 PoseStamped 메시지를 발행합니다.
+import sys
+import serial
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem)
+from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
+from PyQt5.QtGui import QBrush, QPen, QColor
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String, Int32, Float32
+from sensor_msgs.msg import Imu
+from nav_msgs.msg import Odometry
+from geometry_msgs.msg import PoseStamped, Twist
+from threading import Thread, Lock
+import time
 
-import sys  # 시스템 관련 모듈
-import serial  # 시리얼 통신 모듈
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QGraphicsView, QGraphicsScene, QGraphicsPixmapItem, QGraphicsEllipseItem  # PyQt5 위젯
-from PyQt5.QtCore import Qt, QTimer, QThread, pyqtSignal, QPointF  # PyQt5 핵심 모듈
-from PyQt5.QtGui import QPixmap, QImage  # PyQt5 그래픽 모듈
-import rclpy  # ROS2 Python 클라이언트 라이브러리
-from rclpy.node import Node  # ROS2 노드
-from std_msgs.msg import String, Int32, Float32  # ROS2 표준 메시지 타입
-from nav_msgs.msg import Odometry, OccupancyGrid  # 네비게이션 메시지 타입
-from geometry_msgs.msg import PoseStamped, Twist  # 기하학적 메시지 타입
-from threading import Thread  # 스레딩 모듈
-import numpy as np  # 수치 연산 모듈
+class SerialReader(QThread):
+    new_data = pyqtSignal(str)
 
-class ControlPanel(QWidget):  # 컨트롤 패널 클래스
+    def __init__(self, ser, lock):
+        super().__init__()
+        self.ser = ser
+        self.lock = lock
+        self.running = True
+
+    def run(self):
+        while self.running:
+            try:
+                if self.ser and self.ser.in_waiting > 0:
+                    line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()
+                    self.new_data.emit(line)
+            except serial.SerialException as e:
+                self.new_data.emit(f"Serial error: {e}")
+            time.sleep(0.1)
+
+    def stop(self):
+        self.running = False
+        self.wait()
+
+class ControlPanel(QWidget):
     def __init__(self, node, parent=None):
         super(ControlPanel, self).__init__(parent)
-        self.node = node  # ROS 노드
+        self.node = node
 
-        self.init_ui()  # UI 초기화
+        self.ser = None
+        self.velocity = None
+        self.imu_orientation = None
+        self.slam_distance = None
+        self.eta = None
+        self.current_lift_command = None
+        self.ems_signal = 1
 
-        # ROS2 Subscribers and Publishers
-        self.odom_sub = self.node.create_subscription(Odometry, '/odom', self.update_robot_position, 10)  # 오도메트리 구독
-        self.map_sub = self.node.create_subscription(OccupancyGrid, '/map', self.update_map, 10)  # 맵 구독
-        self.goal_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 목표 위치 발행
+        self.status_labels = {
+            "EMS Signal": QLabel(),
+            "Lift Signal": QLabel(),
+            "Arduino Connection": QLabel()
+        }
 
-    def init_ui(self):  # UI 초기화 함수
-        main_layout = QHBoxLayout()  # 메인 레이아웃
-        self.setLayout(main_layout)  # 레이아웃 설정
+        self.serial_buffer = []
+        self.serial_lock = Lock()
 
-        left_layout = QVBoxLayout()  # 왼쪽 레이아웃
-        self.map_view = QGraphicsView()  # 맵 뷰
-        self.map_scene = QGraphicsScene()  # 맵 씬
-        self.map_view.setScene(self.map_scene)  # 맵 뷰에 씬 설정
-        self.map_view.setRenderHint(QtGui.QPainter.Antialiasing)  # 앤티앨리어싱 설정
-        left_layout.addWidget(self.map_view)  # 왼쪽 레이아웃에 맵 뷰 추가
+        self.init_ui()
 
-        self.terminal_output = QTextEdit()  # 터미널 출력
-        self.terminal_output.setReadOnly(True)  # 읽기 전용
-        self.terminal_output.setStyleSheet("background-color: black; color: white;")  # 스타일 설정
-        self.terminal_output.setFixedHeight(200)  # 고정 높이 설정
-        left_layout.addWidget(self.terminal_output)  # 왼쪽 레이아웃에 터미널 출력 추가
+        self.log_to_terminal("UI Set Success!")
 
-        self.robot_marker = QGraphicsEllipseItem(-5, -5, 10, 10)  # 로봇 마커
-        self.robot_marker.setBrush(Qt.red)  # 마커 색상 설정
-        self.map_scene.addItem(self.robot_marker)  # 맵 씬에 마커 추가
+        self.setup_serial_connection('/dev/ttyACM0', 115200)
+        self.start_serial_read_thread()
+        self.start_serial_process_thread()
 
-        self.map_view.mousePressEvent = self.set_navigation_goal  # 마우스 클릭 이벤트 설정
+        self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)
+        self.lift_pub = self.node.create_publisher(String, '/lift_command', 10)
+        self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)
+        self.velocity_sub = self.node.create_subscription(Odometry, '/odom', self.update_velocity, 10)
+        self.imu_sub = self.node.create_subscription(Imu, '/imu', self.update_imu, 10)
+        self.slam_sub = self.node.create_subscription(Float32, '/slam_remaining_distance', self.update_slam, 10)
+        self.odom_sub = self.node.create_subscription(Odometry, '/odom', self.update_position, 10)
 
-        main_layout.addLayout(left_layout)  # 메인 레이아웃에 왼쪽 레이아웃 추가
+    def setup_serial_connection(self, port, baud_rate):
+        try:
+            self.ser = serial.Serial(port, baud_rate, timeout=1)
+            self.ser.reset_input_buffer()
+            self.update_status_label("Arduino Connection", "Connected", "green")
+            self.log_to_terminal(f"[Serial Connected] : {port} @ {baud_rate}")
+        except serial.SerialException as e:
+            self.update_status_label("Arduino Connection", "Error", "red")
+            self.log_to_terminal(f"[Serial Connected Failed] : {str(e)}")
+            self.ser = None
 
-        right_layout = QVBoxLayout()  # 오른쪽 레이아웃
+    def init_ui(self):
+        main_layout = QHBoxLayout()
+        self.setLayout(main_layout)
 
-        # Add other control buttons and status indicators here
+        left_layout = QVBoxLayout()
+        self.map_view = QGraphicsView()
+        self.map_view.setStyleSheet("background-color: lightgray;")
+        self.map_scene = QGraphicsScene()
+        self.map_view.setScene(self.map_scene)
+        self.robot_item = QGraphicsEllipseItem(-5, -5, 10, 10)
+        self.robot_item.setBrush(QBrush(Qt.blue))
+        self.map_scene.addItem(self.robot_item)
+        left_layout.addWidget(self.map_view)
 
-        main_layout.addLayout(right_layout)  # 메인 레이아웃에 오른쪽 레이아웃 추가
+        self.terminal_output = QTextEdit()
+        self.terminal_output.setReadOnly(True)
+        self.terminal_output.setStyleSheet("background-color: black; color: white;")
+        self.terminal_output.setFixedHeight(200)
+        left_layout.addWidget(self.terminal_output)
 
-    def update_robot_position(self, msg):  # 로봇 위치 업데이트 함수
-        pos = msg.pose.pose.position
-        self.robot_marker.setPos(pos.x * 100, pos.y * 100)  # 1미터를 100픽셀로 가정하여 위치 설정
+        move_control_group = QGroupBox("Movement Control")
+        move_layout = QGridLayout()
+        move_control_group.setLayout(move_layout)
 
-    def update_map(self, msg):  # 맵 업데이트 함수
-        width = msg.info.width
-        height = msg.info.height
-        data = np.array(msg.data).reshape((height, width))  # 맵 데이터 변환
-        data = np.flipud(data)  # 상하 반전
-        data = (data * 255).astype(np.uint8)  # 0-255로 스케일링
-        qimg = QImage(data, width, height, QImage.Format_Grayscale8)  # QImage 생성
-        pixmap = QPixmap.fromImage(qimg)  # QPixmap 생성
-        if not hasattr(self, 'map_pixmap_item'):
-            self.map_pixmap_item = QGraphicsPixmapItem(pixmap)  # 맵 픽스맵 아이템 생성
-            self.map_scene.addItem(self.map_pixmap_item)  # 맵 씬에 추가
+        self.forward_button = QPushButton("Forward")
+        self.backward_button = QPushButton("Backward")
+        self.left_button = QPushButton("Left")
+        self.right_button = QPushButton("Right")
+        self.stop_button = QPushButton("Stop")
+        move_layout.addWidget(self.backward_button, 0, 1)
+        move_layout.addWidget(self.left_button, 1, 0)
+        move_layout.addWidget(self.stop_button, 1, 1)
+        move_layout.addWidget(self.right_button, 1, 2)
+        move_layout.addWidget(self.forward_button, 2, 1)
+
+        self.forward_button.pressed.connect(lambda: self.start_movement("forward"))
+        self.forward_button.released.connect(self.stop_movement)
+        self.backward_button.pressed.connect(lambda: self.start_movement("backward"))
+        self.backward_button.released.connect(self.stop_movement)
+        self.left_button.pressed.connect(lambda: self.start_movement("left"))
+        self.left_button.released.connect(self.stop_movement)
+        self.right_button.pressed.connect(lambda: self.start_movement("right"))
+        self.right_button.released.connect(self.stop_movement)
+        self.stop_button.clicked.connect(lambda: self.send_movement_command("stop"))
+
+        self.emergency_stop_button = QToolButton()
+        self.emergency_stop_button.setCheckable(True)
+        self.emergency_stop_button.setText("EMS")
+        self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px;")
+        self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
+        left_control_layout = QHBoxLayout()
+        left_control_layout.addWidget(move_control_group)
+        left_control_layout.addWidget(self.emergency_stop_button)
+        left_layout.addLayout(left_control_layout)
+
+        main_layout.addLayout(left_layout)
+
+        right_layout = QVBoxLayout()
+
+        lift_group = QGroupBox("Lift Control")
+        lift_layout = QVBoxLayout()
+        lift_group.setLayout(lift_layout)
+
+        self.height1_button = QPushButton("1 Height")
+        self.height2_button = QPushButton("2 Height")
+        self.height3_button = QPushButton("3 Height")
+        self.height1_button.setStyleSheet("font-size: 18px;")
+        self.height2_button.setStyleSheet("font-size: 18px;")
+        self.height3_button.setStyleSheet("font-size: 18px;")
+        self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))
+        self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))
+        self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))
+        lift_layout.addWidget(self.height1_button)
+        lift_layout.addWidget(self.height2_button)
+        lift_layout.addWidget(self.height3_button)
+
+        right_layout.addWidget(lift_group)
+
+        lift_updown_group = QGroupBox("Lift Up/Down")
+        lift_updown_layout = QVBoxLayout()
+        self.lift_up_button = QPushButton("Lift Up")
+        self.lift_down_button = QPushButton("Lift Down")
+        self.lift_up_button.setStyleSheet("font-size: 18px;")
+        self.lift_down_button.setStyleSheet("font-size: 18px;")
+        self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10", "Lift Up"))
+        self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11", "Lift Down"))
+        lift_updown_layout.addWidget(self.lift_up_button)
+        lift_updown_layout.addWidget(self.lift_down_button)
+        lift_updown_group.setLayout(lift_updown_layout)
+
+        right_layout.addWidget(lift_updown_group)
+
+        nav_group = QGroupBox("Navigation")
+        nav_layout = QVBoxLayout()
+        self.toggle_nav_button = QToolButton()
+        self.toggle_nav_button.setCheckable(True)
+        self.toggle_nav_button.setText("Set Navigation Goal")
+        self.toggle_nav_button.setStyleSheet("font-size: 18px;")
+        self.toggle_nav_button.clicked.connect(self.toggle_navigation)
+        nav_layout.addWidget(self.toggle_nav_button)
+        nav_group.setLayout(nav_layout)
+        right_layout.addWidget(nav_group)
+
+        status_group = QGroupBox("Robot Status")
+        status_layout = QVBoxLayout()
+
+        for key, label in self.status_labels.items():
+            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
+            status_layout.addWidget(QLabel(key))
+            status_layout.addWidget(label)
+
+        self.update_status_label("EMS Signal", "-", "black")
+        self.update_status_label("Lift Signal", "-", "black")
+        self.update_status_label("Arduino Connection", "Disconnected", "black")
+        status_group.setLayout(status_layout)
+        right_layout.addWidget(status_group)
+        main_layout.addLayout(left_layout)
+        main_layout.addLayout(right_layout)
+
+    def update_status_label(self, label_name, text, color):
+        label = self.status_labels.get(label_name, None)
+        if label:
+            label.setText(f"{text}")
+            label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
+
+    def start_serial_read_thread(self):
+        if self.ser:
+            self.read_thread = Thread(target=self.read_from_serial)
+            self.read_thread.start()
+            self.log_to_terminal("Serial Reading Thread Start")
+
+    def start_serial_process_thread(self):
+        self.process_thread = Thread(target=self.process_serial_buffer)
+        self.process_thread.start()
+
+    def send_lift_command(self, command, label):
+        self.update_status_label("Lift Signal", label, "green")
+        if self.ser:
+            try:
+                self.ser.write(f"{command}\n".encode('utf-8'))
+                self.log_to_terminal(f"[Arduino Send] : {command}")
+                QTimer.singleShot(5000, lambda: self.update_status_label("Lift Signal", "-", "black"))
+            except serial.SerialException as e:
+                self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
+
+    def read_from_serial(self):
+        while True:
+            if self.ser and self.ser.in_waiting > 0:
+                line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()
+                with self.serial_lock:
+                    self.serial_buffer.append(line)
+
+    def process_serial_buffer(self):
+        while True:
+            with self.serial_lock:
+                if self.serial_buffer:
+                    data = self.serial_buffer.pop(0)
+                    self.process_serial_data(data)
+            time.sleep(0.1)
+
+    def process_serial_data(self, data):
+        if data.startswith("E_"):
+            try:
+                status = int(data.split("_")[1])
+                self.ems_signal = status
+                if status == 1:
+                    self.emergency_pub.publish(Int32(data=1))
+                    self.update_status_label("EMS Signal", "Good: 1", "green")
+                    self.emergency_stop_button.setChecked(False)
+                elif status == 0:
+                    self.emergency_pub.publish(Int32(data=0))
+                    self.update_status_label("EMS Signal", "Emergency: 0", "red")
+                    self.emergency_stop_button.setChecked(True)
+                self.log_to_terminal(f"Arduino received : EMS_{data}")
+            except (ValueError, IndexError) as e:
+                self.log_to_terminal(f"Invalid data received: {data}")
+
+    def move_to_preset_height(self, command, log_message):
+        self.send_lift_command(command, log_message)
+        self.log_to_terminal(log_message)
+
+    def toggle_navigation(self):
+        nav_state = "Navigating" if self.toggle_nav_button.isChecked() else "Idle"
+        color = "green" if self.toggle_nav_button.isChecked() else "black"
+        self.update_status_label("Navigation Status", nav_state, color)
+        self.log_to_terminal(f"Navigation {nav_state}")
+
+    def update_velocity(self, msg):
+        self.velocity = msg.twist.twist.linear.x
+        self.log_to_terminal(f"Update Velocity: {self.velocity}")
+
+    def update_imu(self, msg):
+        self.imu_orientation = msg.orientation.z
+        self.log_to_terminal(f"Update IMU: {self.imu_orientation}")
+
+    def update_slam(self, msg):
+        self.slam_distance = msg.data
+        self.log_to_terminal(f"Update SLAM: {self.slam_distance}")
+        self.eta = self.calculate_eta()
+
+    def calculate_eta(self):
+        if self.velocity and self.slam_distance:
+            return self.slam_distance / self.velocity
+        return None
+
+    def start_movement(self, direction):
+        self.emergency_pub.publish(Int32(data=1))
+        self.update_status_label("EMS Signal", "1 : Good", "green")
+        self.emergency_stop_button.setChecked(False)
+        self.send_movement_command(direction)
+
+    def stop_movement(self):
+        self.emergency_pub.publish(Int32(data=0))
+        self.update_status_label("EMS Signal", "0 : Emergency", "red")
+        self.emergency_stop_button.setChecked(True)
+        self.send_movement_command("stop")
+
+    def send_movement_command(self, direction):
+        msg = Twist()
+        if direction == "forward":
+            msg.linear.x = 0.1
+        elif direction == "backward":
+            msg.linear.x = -0.1
+        elif direction == "left":
+            msg.angular.z = 0.2
+        elif direction == "right":
+            msg.angular.z = -0.2
+        elif direction == "stop":
+            msg.linear.x = 0.0
+            msg.angular.z = 0.0
+        self.node.create_publisher(Twist, '/cmd_vel', 10).publish(msg)
+
+    def handle_emergency_stop(self):
+        sender = self.sender()
+        if sender.isChecked():
+            self.emergency_pub.publish(Int32(data=0))
+            self.update_status_label("EMS Signal", "0 : Emergency", "red")
+            self.ems_signal = 0
+            if self.ser:
+                try:
+                    self.ser.write("E_0\n".encode('utf-8'))
+                except serial.SerialException as e:
+                    self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
         else:
-            self.map_pixmap_item.setPixmap(pixmap)  # 기존 픽스맵 업데이트
+            self.emergency_pub.publish(Int32(data=1))
+            self.update_status_label("EMS Signal", "1 : Good", "green")
+            self.ems_signal = 1
+            if self.ser:
+                try:
+                    self.ser.write("E_1\n".encode('utf-8'))
+                    self.log_to_terminal(f"[Arduino Send] : E_1")
+                except serial.SerialException as e:
+                    self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
 
-    def set_navigation_goal(self, event):  # 네비게이션 목표 설정 함수
-        scene_pos = self.map_view.mapToScene(event.pos())  # 씬 좌표로 변환
-        goal = PoseStamped()  # 목표 위치 메시지 생성
-        goal.header.frame_id = 'map'
-        goal.pose.position.x = scene_pos.x() / 100  # 다시 미터로 변환
-        goal.pose.position.y = scene_pos.y() / 100
-        goal.pose.orientation.w = 1.0
-        self.goal_pub.publish(goal)  # 목표 위치 발행
-        self.log_to_terminal(f"Goal set to: x={goal.pose.position.x}, y={goal.pose.position.y}")  # 로그 출력
+    def log_to_terminal(self, message):
+        self.terminal_output.append(message)
+        self.terminal_output.ensureCursorVisible()
 
-    def log_to_terminal(self, message):  # 터미널 로그 출력 함수
-        self.terminal_output.append(message)  # 메시지 추가
-        self.terminal_output.ensureCursorVisible()  # 커서 가시성 유지
+    def update_position(self, msg):
+        x = msg.pose.pose.position.x
+        y = msg.pose.pose.position.y
+        self.robot_item.setPos(x * 100, y * 100)  # Assuming 1 unit = 1 meter and scaling by 100 for visibility
+        self.log_to_terminal(f"Update Position: x={x}, y={y}")
 
 class MainWindow(QMainWindow):
     def __init__(self, node):
         super(MainWindow, self).__init__()
-        self.setWindowTitle("Robot Control Panel")  # 윈도우 타이틀 설정
+        self.setWindowTitle("Robot Control Panel")
 
-        screen_geometry = QApplication.primaryScreen().geometry()  # 화면 해상도 가져오기
+        # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
+        screen_geometry = QApplication.primaryScreen().geometry()
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
 
-        window_width = int(screen_width * 0.9)  # 윈도우 너비 설정
-        window_height = int(screen_height * 0.9)  # 윈도우 높이 설정
-        self.setGeometry(0, 0, window_width, window_height)  # 윈도우 위치와 크기 설정
+        # 메인 윈도우의 크기를 화면 해상도의 90%로 설정
+        window_width = int(screen_width * 0.9)
+        window_height = int(screen_height * 0.9)
+        self.setGeometry(0, 0, window_width, window_height)
 
-        self.control_panel = ControlPanel(node, self)  # 컨트롤 패널 생성
+        # 컨트롤 패널 추가 및 크기 조정
+        self.control_panel = ControlPanel(node, self)
 
-        main_layout = QVBoxLayout()  # 메인 레이아웃
-        main_layout.addWidget(self.control_panel)  # 메인 레이아웃에 컨트롤 패널 추가
+        # 메인 레이아웃 설정
+        main_layout = QVBoxLayout()
+        main_layout.addWidget(self.control_panel)
 
-        container = QWidget()  # 컨테이너 위젯
-        container.setLayout(main_layout)  # 컨테이너 레이아웃 설정
-        self.setCentralWidget(container)  # 중앙 위젯 설정
+        container = QWidget()
+        container.setLayout(main_layout)
+        self.setCentralWidget(container)
 
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화
@@ -126,4 +387,4 @@ def main(args=None):
         rclpy.shutdown()  # ROS 2 종료
 
 if __name__ == "__main__":
-    main()  # 메인 함수 실행
+    main()
