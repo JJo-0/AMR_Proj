@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer  # PyQt5 핵심 모듈
 import rclpy  # ROS2 Python 클라이언트 라이브러리
 from rclpy.node import Node  # ROS2 노드
-from std_msgs.msg import Int32, Float32  # ROS2 표준 메시지 타입
+from std_msgs.msg import String, Int32, Float32  # ROS2 표준 메시지 타입
 from sensor_msgs.msg import Imu  # IMU 센서 메시지 타입
 from nav_msgs.msg import Odometry  # 오도메트리 메시지 타입
 from geometry_msgs.msg import PoseStamped, Twist  # 기하학적 메시지 타입
