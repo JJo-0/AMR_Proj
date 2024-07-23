@@ -1,7 +1,6 @@
 import sys
 import serial
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QScrollArea)
-from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
 import rclpy
 from rclpy.node import Node
@@ -11,8 +10,8 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseStamped, Twist
 from threading import Thread, Lock
 import time
-from rviz_visualization_frame import VisualizationFrame
-from rviz_render_panel import RenderPanel
+from rviz2 import VisualizationFrame, RenderPanel
+from python_qt_binding.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget
 
 class SerialReader(QThread):
     new_data = pyqtSignal(str)
@@ -91,6 +90,7 @@ class ControlPanel(QWidget):
         left_layout = QVBoxLayout()
         scroll_area = QScrollArea()
 
+        # RViz 통합
         self.rviz_frame = VisualizationFrame()
         self.rviz_frame.initialize()
         self.rviz_render_panel = RenderPanel()
@@ -193,8 +193,8 @@ class ControlPanel(QWidget):
             label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
             status_layout.addWidget(QLabel(key))
             status_layout.addWidget(label)
-            self.update_status_label("EMS Signal", "Good: 1", "green")
 
+        self.update_status_label("EMS Signal", "Good: 1", "green")
         self.update_status_label("Lift Signal", "-", "black")
         self.update_status_label("Arduino Connection", "Disconnected", "black")
 
