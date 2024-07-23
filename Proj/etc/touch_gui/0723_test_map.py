@@ -1,3 +1,6 @@
+"""
+이 코드는 `QGraphicsView`와 `QGraphicsScene`을 사용하여 `Map Area`에 2D 맵을 표시하고, 로봇의 위치를 `Odometry` 메시지를 구독하여 업데이트합니다. `robot_item`은 로봇의 현재 위치를 나타내는 파란색 원으로 설정되어 있습니다. `update_position` 함수는 `Odometry` 메시지를 수신할 때마다 호출되어 로봇의 위치를 업데이트
+"""
 import sys
 import serial
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem)
