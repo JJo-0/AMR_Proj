@@ -49,7 +49,7 @@ class ControlPanel(QWidget):
         self.start_serial_process_thread()
         self.init_ros()
 
-        def init_ros(self):
+    def init_ros(self):
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)
         self.lift_pub = self.node.create_publisher(String, '/lift_command', 10)
         self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)
