@@ -1,3 +1,6 @@
+##################################################################
+# 안전한 버전 (Test 버전 외, 실제 사용 가능)
+##################################################################
 import sys  # 시스템 관련 모듈
 import serial  # 시리얼 통신 모듈
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout)  # PyQt5 위젯
