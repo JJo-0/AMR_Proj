@@ -205,6 +205,11 @@ class ControlPanel(QWidget):
         button.released.connect(self.stop_lift_command)
         return button
 
+    def create_status_label(self):
+        label = QLabel()
+        label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
+        return label
+
     def update_status_label(self, label_name, text, color):
         label = self.status_labels.get(label_name)
         if label:
