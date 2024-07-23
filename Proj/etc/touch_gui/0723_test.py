@@ -1,75 +1,6 @@
 import sys  # 시스템 관련 모듈
 import serial  # 시리얼 통신 모듈
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout)  # PyQt5 위젯
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer  # PyQt5 핵심 모듈
-import rclpy  # ROS2 Python 클라이언트 라이브러리
-from rclpy.node import Node  # ROS2 노드
-from std_msgs.msg import String, Int32, Float32  # ROS2 표준 메시지 타입
-from sensor_msgs.msg import Imu  # IMU 센서 메시지 타입
-from nav_msgs.msg import Odometry  # 오도메트리 메시지 타입
-from geometry_msgs.msg import PoseStamped, Twist  # 기하학적 메시지 타입
-from threading import Thread, Lock  # 스레딩 및 락 모듈
-import time  # 시간 모듈
-
-class SerialReader(QThread):  # 시리얼 읽기 스레드 클래스
-    new_data = pyqtSignal(str)  # 새 데이터 신호
-
-    def __init__(self, ser, lock):  # 초기화
-        super().__init__()  # 부모 클래스 초기화
-        self.ser = ser  # 시리얼 객체
-        self.lock = lock  # 락 객체
-        self.running = True  # 스레드 실행 플래그
-
-    def run(self):  # 스레드 실행 함수
-        while self.running:  # 실행 중일 때
-            try:
-                if self.ser and self.ser.in_waiting > 0:  # 시리얼 데이터 대기 중
-                    line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()  # 시리얼 데이터 읽기, 디코딩 에러 무시
-                    self.new_data.emit(line)  # 새 데이터 신호 발생
-            except serial.SerialException as e:  # 시리얼 예외 처리
-                self.new_data.emit(f"Serial error: {e}")  # 에러 메시지 발생
-            time.sleep(0.1)  # 0.1초 대기
-
-    def stop(self):  # 스레드 중지 함수
-        self.running = False  # 실행 플래그 중지
-        self.wait()  # 스레드 대기
-
-class ControlPanel(QWidget):  # 컨트롤 패널 클래스
-    def __init__(self, node, parent=None):  # 초기화
-        super(ControlPanel, self).__init__(parent)  # 부모 클래스 초기화
-        self.node = node  # ROS 노드
-
-        self.ser = None  # 시리얼 객체 초기화
-        self.velocity = None  # 속도 변수 초기화
-        self.imu_orientation = None  # IMU 방향 변수 초기화
-        self.slam_distance = None  # SLAM 거리 변수 초기화
-        self.eta = None  # 도착 예상 시간 변수 초기화
-        self.current_lift_command = None  # 현재 리프트 명령 초기화
-        self.ems_signal = 1  # 비상 상태 초기화
-
-        self.status_labels = {  # 상태 라벨 초기화
-            "EMS Signal": QLabel(),
-            "Lift Signal": QLabel(),
-            "Arduino Connection": QLabel()
-        }
-
-        self.serial_buffer = []  # 시리얼 버퍼 리스트 초기화
-        self.serial_lock = Lock()  # 시리얼 락 객체
-
-        self.init_ui()  # UI 초기화
-
-        self.log_to_terminal("UI Set Success!")  # 로그 메시지
-
-        self.setup_serial_connection('/dev/ttyACM0', 115200)  # 시리얼 연결 설정
-        self.start_serial_read_thread()  # 시리얼 읽기 스레드 시작
-        self.start_serial_process_thread()  # 시리얼 처리 스레드 시작
-
-        self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)  # 비상 신호 퍼블리셔
-        self.lift_pub = self.node.create_publisher(String, '/lift_command', 10)  # 리프트 명령 퍼블리셔
-        self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 목표 퍼블리셔
-        self.velocity_sub = self.node.create_suimport sys  # 시스템 관련 모듈
-import serial  # 시리얼 통신 모듈
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout)  # PyQt5 위젯
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QTimerEvent  # PyQt5 핵심 모듈
 import rclpy  # ROS2 Python 클라이언트 라이브러리
 from rclpy.node import Node  # ROS2 노드
@@ -425,6 +356,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
                 except serial.SerialException as e:
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
                     self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: green;")
+
 
     def log_to_terminal(self, message):  # 터미널 로그 출력 함수
         self.terminal_output.append(message)  # 메시지 추가
