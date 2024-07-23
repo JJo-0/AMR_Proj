@@ -6,8 +6,8 @@
 또한, 전체 화면 모드를 지원하고 UI 요소를 조정하여 사용자 경험을 개선합니다.
 """
 
-import sys  # 시스템 관련 모듈
-import serial  # 시리얼 통신 모듈
+import sys
+import serial
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
 from PyQt5.QtGui import QBrush, QPen, QColor
@@ -15,10 +15,11 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Int32, Float32
 from sensor_msgs.msg import Imu
-from nav_msgs.msg import Odometry, OccupancyGrid  # 오도메트리 및 맵 데이터 메시지 타입
+from nav_msgs.msg import Odometry, OccupancyGrid  
 from geometry_msgs.msg import PoseStamped, Twist
 from threading import Thread, Lock
 import time
+import numpy as np
 
 class SerialReader(QThread):
     new_data = pyqtSignal(str)
@@ -194,7 +195,6 @@ class ControlPanel(QWidget):
         nav_layout.addWidget(self.toggle_nav_button)
         nav_group.setLayout(nav_layout)
         right_layout.addWidget(nav_group)
-
         status_group = QGroupBox("Robot Status")
         status_layout = QVBoxLayout()
 
@@ -356,6 +356,31 @@ class ControlPanel(QWidget):
         self.robot_item.setPos(x * 100, y * 100)  # Assuming 1 unit = 1 meter and scaling by 100 for visibility
         self.log_to_terminal(f"Update Position: x={x}, y={y}")
 
+<<<<<<< HEAD
+    def update_map(self, msg):
+        width = msg.info.width
+        height = msg.info.height
+        resolution = msg.info.resolution
+        origin_x = msg.info.origin.position.x
+        origin_y = msg.info.origin.position.y
+
+        self.map_scene.clear()
+        self.map_scene.addItem(self.robot_item)
+
+        map_data = np.array(msg.data).reshape((height, width))
+        for y in range(height):
+            for x in range(width):
+                if map_data[y, x] == 0:
+                    color = QColor(255, 255, 255)
+                elif map_data[y, x] == 100:
+                    color = QColor(0, 0, 0)
+                else:
+                    color = QColor(150, 150, 150)
+                rect = self.map_scene.addRect(x * resolution * 100, -y * resolution * 100, resolution * 100, resolution * 100, QPen(color), QBrush(color))
+
+        self.map_scene.setSceneRect(origin_x * 100, -origin_y * 100, width * resolution * 100, height * resolution * 100)
+
+=======
     def update_map(self, msg):
         self.map_scene.clear()
         map_data = msg.data
@@ -373,6 +398,7 @@ class ControlPanel(QWidget):
                 rect = self.map_scene.addRect(j * resolution * 100, i * resolution * 100, resolution * 100, resolution * 100, QPen(color), QBrush(color))
         self.map_scene.addItem(self.robot_item)
 
+>>>>>>> cd6ea8176af46193bfd3884491d2784bbd6f2ed3
 class MainWindow(QMainWindow):
     def __init__(self, node):
         super(MainWindow, self).__init__()
