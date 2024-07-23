@@ -1,0 +1,48 @@
+[35m[1mScanning dependencies of target stella_ahrs_node[0m
+[ 16%] [32mBuilding CXX object CMakeFiles/stella_ahrs_node.dir/src/listener.cpp.o[0m
+[01m[K/desktop/AMR_Proj/Proj/dev-0716/src/stella_ahrs/src/listener.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/desktop/AMR_Proj/Proj/dev-0716/src/stella_ahrs/src/listener.cpp:7:18:[m[K [01;35m[Kwarning: [m[KISO C++ forbids converting a string constant to ‘[01m[Kchar*[m[K’ [[01;35m[K-Wwrite-strings[m[K]
+    7 |     char *port = [01;35m[K"/dev/ttyUSB0"[m[K;
+      |                  [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/desktop/AMR_Proj/Proj/dev-0716/src/stella_ahrs/src/listener.cpp:1[m[K:
+[01m[K/desktop/AMR_Proj/Proj/dev-0716/src/stella_ahrs/include/mw/mw_ahrs.hpp:[m[K At global scope:
+[01m[K/desktop/AMR_Proj/Proj/dev-0716/src/stella_ahrs/include/mw/mw_ahrs.hpp:41:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Krun_bool[m[K’ defined but not used [[01;35m[K-Wunused-variable[m[K]
+   41 | static bool [01;35m[Krun_bool[m[K = false;
+      |             [01;35m[K^~~~~~~~[m[K
+[01m[K/desktop/AMR_Proj/Proj/dev-0716/src/stella_ahrs/include/mw/mw_ahrs.hpp:38:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kmag_value[m[K’ defined but not used [[01;35m[K-Wunused-variable[m[K]
+   38 |              [01;35m[Kmag_value[m[K[3] = {
+      |              [01;35m[K^~~~~~~~~[m[K
+[01m[K/desktop/AMR_Proj/Proj/dev-0716/src/stella_ahrs/include/mw/mw_ahrs.hpp:35:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kdeg_value[m[K’ defined but not used [[01;35m[K-Wunused-variable[m[K]
+   35 |              [01;35m[Kdeg_value[m[K[3] = {
+      |              [01;35m[K^~~~~~~~~[m[K
+[01m[K/desktop/AMR_Proj/Proj/dev-0716/src/stella_ahrs/include/mw/mw_ahrs.hpp:32:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kgyr_value[m[K’ defined but not used [[01;35m[K-Wunused-variable[m[K]
+   32 |              [01;35m[Kgyr_value[m[K[3] = {
+      |              [01;35m[K^~~~~~~~~[m[K
+[01m[K/desktop/AMR_Proj/Proj/dev-0716/src/stella_ahrs/include/mw/mw_ahrs.hpp:29:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kacc_value[m[K’ defined but not used [[01;35m[K-Wunused-variable[m[K]
+   29 | static float [01;35m[Kacc_value[m[K[3] = {
+      |              [01;35m[K^~~~~~~~~[m[K
+[ 33%] [32m[1mLinking CXX executable stella_ahrs_node[0m
+[100%] Built target stella_ahrs_node
+-- Install configuration: ""
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs//launch
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs//launch/stella_ahrs_launch.py
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/rviz
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/rviz/imu_test.rviz
+-- Installing: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/lib/stella_ahrs/stella_ahrs_node
+-- Set runtime path of "/desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/lib/stella_ahrs/stella_ahrs_node" to ""
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/ament_index/resource_index/package_run_dependencies/stella_ahrs
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/ament_index/resource_index/parent_prefix_path/stella_ahrs
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/environment/ament_prefix_path.sh
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/environment/ament_prefix_path.dsv
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/environment/path.sh
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/environment/path.dsv
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/local_setup.bash
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/local_setup.sh
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/local_setup.zsh
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/local_setup.dsv
+-- Installing: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/package.dsv
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/ament_index/resource_index/packages/stella_ahrs
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/cmake/stella_ahrsConfig.cmake
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/cmake/stella_ahrsConfig-version.cmake
+-- Up-to-date: /desktop/AMR_Proj/Proj/dev-0716/install/stella_ahrs/share/stella_ahrs/package.xml

@@ -1,0 +1,9 @@
+/desktop/AMR_Proj/Proj/dev-0716/build/articubot_one/CMakeFiles/install/strip.dir
+/desktop/AMR_Proj/Proj/dev-0716/build/articubot_one/CMakeFiles/install/local.dir
+/desktop/AMR_Proj/Proj/dev-0716/build/articubot_one/CMakeFiles/install.dir
+/desktop/AMR_Proj/Proj/dev-0716/build/articubot_one/CMakeFiles/list_install_components.dir
+/desktop/AMR_Proj/Proj/dev-0716/build/articubot_one/CMakeFiles/rebuild_cache.dir
+/desktop/AMR_Proj/Proj/dev-0716/build/articubot_one/CMakeFiles/edit_cache.dir
+/desktop/AMR_Proj/Proj/dev-0716/build/articubot_one/CMakeFiles/test.dir
+/desktop/AMR_Proj/Proj/dev-0716/build/articubot_one/CMakeFiles/articubot_one_uninstall.dir
+/desktop/AMR_Proj/Proj/dev-0716/build/articubot_one/CMakeFiles/uninstall.dir

@@ -35,6 +35,8 @@ def generate_launch_description():
         'rviz',
         'nav2_default_view.rviz')
 
+    
+
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',

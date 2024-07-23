@@ -1,0 +1,5 @@
+  File "/desktop/AMR_Proj/Proj/dev-0716/install/omo_r1mini_bringup/lib/python3.8/site-packages/omo_r1mini_bringup/scripts/omo_r1mini_mcu_node.py", line 183
+    if ((self.odo_r - self.odo_l) / self.wheel_separation) == 0 or (self.yaw - self.past_yaw) = 0:
+                                                                                              ^
+SyntaxError: invalid syntax
+
