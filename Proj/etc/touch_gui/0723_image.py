@@ -1,6 +1,7 @@
 import sys  # 시스템 관련 모듈
 import serial  # 시리얼 통신 모듈
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout)  # PyQt5 위젯
+from PyQt5.QtGui import QPixmap  # QPixmap 추가
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer  # PyQt5 핵심 모듈
 import rclpy  # ROS2 Python 클라이언트 라이브러리
 from rclpy.node import Node  # ROS2 노드
@@ -89,6 +90,9 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         left_layout = QVBoxLayout()  # 왼쪽 레이아웃
         self.map_label = QLabel("Map Area")  # 지도 라벨
         self.map_label.setStyleSheet("background-color: lightgray;")  # 라벨 스타일
+        pixmap = QPixmap('/desktop/AMR_Proj/Proj/etc/touch_gui/map_.jpg')  # 이미지 로드
+        self.map_label.setPixmap(pixmap)  # 라벨에 이미지 설정
+        self.map_label.setScaledContents(True)  # 이미지 크기 맞춤
         left_layout.addWidget(self.map_label)  # 레이아웃에 위젯 추가
 
         self.terminal_output = QTextEdit()  # 터미널 출력
