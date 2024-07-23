@@ -142,7 +142,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.emergency_stop_button.setText("EMS")  # 텍스트 설정
         self.emergency_stop_button.setStyleSheet("font-size: 48px; height: 100px;")  # 스타일 설정
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)  # 이벤트 연결
-        self.emergency_stop_button.setFixedSize(150, 150)  # 버튼 높이 설정
+        self.emergency_stop_button.setFixedSize(150, 150) 
         left_control_layout = QHBoxLayout()  # 왼쪽 제어 레이아웃
         left_control_layout.addWidget(move_control_group)  # 이동 제어 그룹 추가
         left_control_layout.addWidget(self.emergency_stop_button)  # 비상 정지 버튼 추가

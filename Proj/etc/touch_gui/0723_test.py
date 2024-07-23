@@ -124,7 +124,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.emergency_stop_button.setText("EMS")
         self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: green;")
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
-        self.emergency_stop_button.setFixedHeight(150)
+        self.emergency_stop_button.setFixedSize(150, 150)  
         left_control_layout = QHBoxLayout()
         left_control_layout.addWidget(move_control_group)
         left_control_layout.addWidget(self.emergency_stop_button)
@@ -137,9 +137,9 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         lift_layout = QVBoxLayout()
         lift_group.setLayout(lift_layout)
 
-        self.height1_button = self.create_button("1 Height", self.send_lift_command, "L_20", 50, "1 Point")
-        self.height2_button = self.create_button("2 Height", self.send_lift_command, "L_21", 50, "2 Point")
-        self.height3_button = self.create_button("3 Height", self.send_lift_command, "L_22", 50, "3 Point")
+        self.height1_button = self.create_lift_button("1 Height", "L_20", "1 Point", 50)
+        self.height2_button = self.create_lift_button("2 Height", "L_21", "2 Point", 50)
+        self.height3_button = self.create_lift_button("3 Height", "L_22", "3 Point", 50)
         lift_layout.addWidget(self.height1_button)
         lift_layout.addWidget(self.height2_button)
         lift_layout.addWidget(self.height3_button)
@@ -148,8 +148,8 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
 
         lift_updown_group = QGroupBox("Lift Up/Down")
         lift_updown_layout = QVBoxLayout()
-        self.lift_up_button = self.create_lift_button("Lift Up", "L_10", "Lift Up")
-        self.lift_down_button = self.create_lift_button("Lift Down", "L_11", "Lift Down")
+        self.lift_up_button = self.create_lift_button("Lift Up", "L_10", "Lift Up", 50)
+        self.lift_down_button = self.create_lift_button("Lift Down", "L_11", "Lift Down", 50)
         lift_updown_layout.addWidget(self.lift_up_button)
         lift_updown_layout.addWidget(self.lift_down_button)
         lift_updown_group.setLayout(lift_updown_layout)
@@ -188,24 +188,19 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.update_status_label("Lift Signal", "-", "black")
         self.update_status_label("Arduino Connection", "Disconnected", "black")
 
-    def create_button(self, text, func, *args, height=24, label=None):
+     def create_button(self, text, func, *args, height=24, label=None):
         button = QPushButton(text)
         button.setStyleSheet(f"font-size: 24px; height: {height}px;")
         button.setFixedHeight(height)
-        if label:
-            button.pressed.connect(lambda: func(*args, label))
-            button.released.connect(self.stop_movement)
-        else:
-            button.pressed.connect(lambda: func(*args))
-            button.released.connect(self.stop_movement)
+        button.pressed.connect(lambda: func(*args))
+        button.released.connect(self.stop_movement)
         return button
 
-    def create_lift_button(self, text, command, label):
+    def create_lift_button(self, text, command, label, height=50):
         button = QPushButton(text)
         button.setStyleSheet("font-size: 24px;")
-        button.setFixedHeight(50)
-        button.pressed.connect(lambda: self.start_lift_command(command, label))
-        button.released.connect(self.stop_lift_command)
+        button.setFixedHeight(height)
+        button.pressed.connect(lambda: self.send_lift_command(command, label))
         return button
 
     def create_status_label(self):
