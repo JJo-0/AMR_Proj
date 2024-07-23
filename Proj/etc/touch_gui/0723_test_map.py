@@ -1,8 +1,13 @@
 """
-이 코드는 `QGraphicsView`와 `QGraphicsScene`을 사용하여 `Map Area`에 2D 맵을 표시하고, 로봇의 위치를 `Odometry` 메시지를 구독하여 업데이트합니다. `robot_item`은 로봇의 현재 위치를 나타내는 파란색 원으로 설정되어 있습니다. `update_position` 함수는 `Odometry` 메시지를 수신할 때마다 호출되어 로봇의 위치를 업데이트
+이 코드는 `QGraphicsView`와 `QGraphicsScene`을 사용하여 `Map Area`에 2D 맵을 표시하고,
+로봇의 위치를 `Odometry` 메시지를 구독하여 업데이트합니다.
+`robot_item`은 로봇의 현재 위치를 나타내는 파란색 원으로 설정되어 있습니다.
+`update_position` 함수는 `Odometry` 메시지를 수신할 때마다 호출되어 로봇의 위치를 업데이트합니다.
+또한, 전체 화면 모드를 지원하고 UI 요소를 조정하여 사용자 경험을 개선합니다.
 """
-import sys
-import serial
+
+import sys  # 시스템 관련 모듈
+import serial  # 시리얼 통신 모듈
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
 from PyQt5.QtGui import QBrush, QPen, QColor
@@ -10,7 +15,7 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Int32, Float32
 from sensor_msgs.msg import Imu
-from nav_msgs.msg import Odometry
+from nav_msgs.msg import Odometry, OccupancyGrid  # 오도메트리 및 맵 데이터 메시지 타입
 from geometry_msgs.msg import PoseStamped, Twist
 from threading import Thread, Lock
 import time
@@ -75,6 +80,7 @@ class ControlPanel(QWidget):
         self.imu_sub = self.node.create_subscription(Imu, '/imu', self.update_imu, 10)
         self.slam_sub = self.node.create_subscription(Float32, '/slam_remaining_distance', self.update_slam, 10)
         self.odom_sub = self.node.create_subscription(Odometry, '/odom', self.update_position, 10)
+        self.map_sub = self.node.create_subscription(OccupancyGrid, '/map', self.update_map, 10)
 
     def setup_serial_connection(self, port, baud_rate):
         try:
@@ -104,7 +110,7 @@ class ControlPanel(QWidget):
         self.terminal_output = QTextEdit()
         self.terminal_output.setReadOnly(True)
         self.terminal_output.setStyleSheet("background-color: black; color: white;")
-        self.terminal_output.setFixedHeight(200)
+        self.terminal_output.setFixedHeight(100)
         left_layout.addWidget(self.terminal_output)
 
         move_control_group = QGroupBox("Movement Control")
@@ -176,7 +182,6 @@ class ControlPanel(QWidget):
         lift_updown_layout.addWidget(self.lift_up_button)
         lift_updown_layout.addWidget(self.lift_down_button)
         lift_updown_group.setLayout(lift_updown_layout)
-
         right_layout.addWidget(lift_updown_group)
 
         nav_group = QGroupBox("Navigation")
@@ -350,6 +355,23 @@ class ControlPanel(QWidget):
         y = msg.pose.pose.position.y
         self.robot_item.setPos(x * 100, y * 100)  # Assuming 1 unit = 1 meter and scaling by 100 for visibility
         self.log_to_terminal(f"Update Position: x={x}, y={y}")
+
+    def update_map(self, msg):
+        self.map_scene.clear()
+        map_data = msg.data
+        width = msg.info.width
+        height = msg.info.height
+        resolution = msg.info.resolution
+        for i in range(height):
+            for j in range(width):
+                if map_data[i * width + j] == 100:
+                    color = Qt.black
+                elif map_data[i * width + j] == 0:
+                    color = Qt.white
+                else:
+                    color = Qt.gray
+                rect = self.map_scene.addRect(j * resolution * 100, i * resolution * 100, resolution * 100, resolution * 100, QPen(color), QBrush(color))
+        self.map_scene.addItem(self.robot_item)
 
 class MainWindow(QMainWindow):
     def __init__(self, node):
