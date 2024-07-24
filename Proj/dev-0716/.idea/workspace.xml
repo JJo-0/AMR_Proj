@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e63bd05e-424e-4e60-86b0-1d1dde9e0acb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/3rd-party-licenses.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/3rd-party-licenses.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/CHANGELOG.rst" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/CHANGELOG.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/CONTRIBUTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/CONTRIBUTING.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/NOTICE" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/NOTICE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/extra_sources/microros_allocators.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/extra_sources/microros_allocators.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/extra_sources/microros_time.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/extra_sources/microros_time.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/extra_sources/microros_transports/dma_transport.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/extra_sources/microros_transports/dma_transport.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/extra_sources/microros_transports/it_transport.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/extra_sources/microros_transports/it_transport.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/extra_sources/microros_transports/usb_cdc_transport.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/extra_sources/microros_transports/usb_cdc_transport.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library/library_generation/colcon.meta" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library/library_generation/colcon.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library/library_generation/extra_packages/extra_packages.repos" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library/library_generation/extra_packages/extra_packages.repos" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library/library_generation/library_generation.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library/library_generation/library_generation.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library/library_generation/toolchain.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library/library_generation/toolchain.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/colcon.meta" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/colcon.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/extra_packages/extra_packages.repos" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/extra_packages/extra_packages.repos" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/extract_flags.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/extract_flags.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/toolchain.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/toolchain.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/package.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/sample_project.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/src/MicroRos_24/micro_ros_stm32cubemx_utils/sample_project.ioc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/articubot_one/config/mapper_params_online_async.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/articubot_one/config/mapper_params_online_async.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/articubot_one/config/nav2_params.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/articubot_one/config/nav2_params.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/articubot_one/launch/navigation_launch.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/articubot_one/launch/online_async_launch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/articubot_one/launch/online_async_launch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/articubot_one/launch/robot.launch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/articubot_one/launch/robot.launch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omo_r1mini_bringup/omo_r1mini_bringup/scripts/omo_r1mini_mcu_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/omo_r1mini_bringup/omo_r1mini_bringup/scripts/omo_r1mini_mcu_node.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omo_r1mini_description/rviz/model.rviz" beforeDir="false" afterPath="$PROJECT_DIR$/src/omo_r1mini_description/rviz/model.rviz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omo_r1mini_navigation2/launch/navigation2.launch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/omo_r1mini_navigation2/launch/navigation2.launch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omo_r1mini_navigation2/launch/navigation2_rviz.launch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/omo_r1mini_navigation2/launch/navigation2_rviz.launch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omo_r1mini_navigation2/param/omo_r1mini.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/omo_r1mini_navigation2/param/omo_r1mini.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stella_ahrs/src/listener.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/stella_ahrs/src/listener.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ydlidar_ros2_driver/params/ydlidar.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ydlidar_ros2_driver/params/ydlidar.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../com_proj/Micro_Ros_versions/  Versions/MicroRos_24/micro_ros_stm32cubemx_utils" beforeDir="false" afterPath="$PROJECT_DIR$/../../com_proj/Micro_Ros_versions/  Versions/MicroRos_24/micro_ros_stm32cubemx_utils" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../com_proj/Micro_Ros_versions/  Versions/MicroRos_25/micro_ros_stm32cubemx_utils" beforeDir="false" afterPath="$PROJECT_DIR$/../../com_proj/Micro_Ros_versions/  Versions/MicroRos_25/micro_ros_stm32cubemx_utils" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../com_proj/Micro_Ros_versions/  Versions/MicroRos_26/micro_ros_stm32cubemx_utils" beforeDir="false" afterPath="$PROJECT_DIR$/../../com_proj/Micro_Ros_versions/  Versions/MicroRos_26/micro_ros_stm32cubemx_utils" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../com_proj/Micro_Ros_versions/  Versions/MicroRos_27/micro_ros_stm32cubemx_utils" beforeDir="false" afterPath="$PROJECT_DIR$/../../com_proj/Micro_Ros_versions/  Versions/MicroRos_27/micro_ros_stm32cubemx_utils" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../com_proj/Micro_Ros_versions/  Versions/MicroRos_28_this/micro_ros_stm32cubemx_utils" beforeDir="false" afterPath="$PROJECT_DIR$/../../com_proj/Micro_Ros_versions/  Versions/MicroRos_28_this/micro_ros_stm32cubemx_utils" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../com_proj/Micro_Ros_versions/  Versions/MicroRos_29/micro_ros_stm32cubemx_utils" beforeDir="false" afterPath="$PROJECT_DIR$/../../com_proj/Micro_Ros_versions/  Versions/MicroRos_29/micro_ros_stm32cubemx_utils" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../com_proj/dev_src_0708/src/MicroRos_24/micro_ros_stm32cubemx_utils" beforeDir="false" afterPath="$PROJECT_DIR$/../../com_proj/dev_src_0708/src/MicroRos_24/micro_ros_stm32cubemx_utils" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="2jdTDGUxGBwyzVrF5Sieu4PFvqA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e63bd05e-424e-4e60-86b0-1d1dde9e0acb" name="Changes" comment="" />
+      <created>1721715836556</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1721715836556</updated>
+      <workItem from="1721715838473" duration="107000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
