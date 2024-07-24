@@ -132,16 +132,16 @@ class ControlPanel(QWidget):
         self.right_button.pressed.connect(lambda: self.start_movement("right"))
         self.right_button.released.connect(self.stop_movement)
         self.stop_button.clicked.connect(lambda: self.send_movement_command("stop"))
-        self.forward_button.setStyleSheet("font-size: 24px; height: 50px;")
-        self.backward_button.setStyleSheet("font-size: 24px; height: 50px;")
-        self.left_button.setStyleSheet("font-size: 24px; height: 50px;")
-        self.right_button.setStyleSheet("font-size: 24px; height: 50px;")
-        self.stop_button.setStyleSheet("font-size: 24px; height: 50px;")
+        self.forward_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
+        self.backward_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
+        self.left_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
+        self.right_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
+        self.stop_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
 
         self.emergency_stop_button = QToolButton()
         self.emergency_stop_button.setCheckable(True)
         self.emergency_stop_button.setText("EMS")
-        self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px;")
+        self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: lightcoral;")
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
         self.emergency_stop_button.setFixedSize(150, 150)
         left_control_layout = QHBoxLayout()
@@ -153,16 +153,22 @@ class ControlPanel(QWidget):
 
         right_layout = QVBoxLayout()
 
+        # 프로그램 종료 버튼 추가
+        self.exit_button = QPushButton("Exit")
+        self.exit_button.setStyleSheet("font-size: 8px; height: 12px; background-color: grey; color: white;")
+        self.exit_button.clicked.connect(self.exit_program)
+        right_layout.addWidget(self.exit_button)
+        
+        # Lift Control Group
         lift_group = QGroupBox("Lift Control")
         lift_layout = QVBoxLayout()
         lift_group.setLayout(lift_layout)
-
         self.height1_button = QPushButton("1 Height")
         self.height2_button = QPushButton("2 Height")
         self.height3_button = QPushButton("3 Height")
-        self.height1_button.setStyleSheet("font-size: 24px; height: 50px;")
-        self.height2_button.setStyleSheet("font-size: 24px; height: 50px;")
-        self.height3_button.setStyleSheet("font-size: 24px; height: 50px;")
+        self.height1_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.height2_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.height3_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
         self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))
         self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))
         self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))
@@ -176,8 +182,8 @@ class ControlPanel(QWidget):
         lift_updown_layout = QVBoxLayout()
         self.lift_up_button = QPushButton("Lift Up")
         self.lift_down_button = QPushButton("Lift Down")
-        self.lift_up_button.setStyleSheet("font-size: 24px; height: 50px;")
-        self.lift_down_button.setStyleSheet("font-size: 24px; height: 50px;")
+        self.lift_up_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.lift_down_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
         self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10", "Lift Up"))
         self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11", "Lift Down"))
         lift_updown_layout.addWidget(self.lift_up_button)
@@ -227,15 +233,15 @@ class ControlPanel(QWidget):
             painter.setPen(QPen(Qt.red, 5, Qt.SolidLine))
 
             if self.robot_pose:
-                # Transform the robot position to map coordinates
-                resolution = 0.05  # example resolution, use actual map resolution
-                origin_x, origin_y = 0, 0  # example origin, use actual map origin
+                # 로봇 위치를 맵 좌표로 변환
+                resolution = 0.05  # 예제 해상도, 실제 맵 해상도 사용
+                origin_x, origin_y = 0, 0  # 예제 원점, 실제 맵 원점 사용
 
                 x = int((self.robot_pose.position.x - origin_x) / resolution)
                 y = int((self.robot_pose.position.y - origin_y) / resolution)
-                y = pixmap.height() - y  # Invert y axis
+                y = pixmap.height() - y  # y 축 반전
 
-                painter.drawEllipse(x - 5, y - 5, 10, 10)  # Draw the robot position as a circle
+                painter.drawEllipse(x - 5, y - 5, 10, 10)  # 로봇 위치를 원으로 그림
 
             painter.end()
             self.map_label.setPixmap(pixmap)
@@ -392,6 +398,11 @@ class ControlPanel(QWidget):
         self.terminal_output.append(message)
         self.terminal_output.ensureCursorVisible()
 
+    def exit_program(self):
+        self.log_to_terminal("Exiting program...")
+        QApplication.quit()
+
+
 class MainWindow(QMainWindow):
     def __init__(self, node):
         super(MainWindow, self).__init__()
@@ -405,10 +416,7 @@ class MainWindow(QMainWindow):
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
 
-        # 메인 윈도우의 크기를 화면 해상도의 90%로 설정
-        window_width = int(screen_width * 0.9)
-        window_height = int(screen_height * 0.9)
-        self.setGeometry(0, 0, window_width, window_height)
+        self.setGeometry(0, 0, screen_width, screen_height)
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)

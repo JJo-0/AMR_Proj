@@ -168,10 +168,16 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
 
         right_layout = QVBoxLayout()
 
+        # 프로그램 종료 버튼 추가
+        self.exit_button = QPushButton("Exit")
+        self.exit_button.setStyleSheet("font-size: 8px; height: 12px; background-color: grey; color: white;")
+        self.exit_button.clicked.connect(self.exit_program)
+        right_layout.addWidget(self.exit_button)
+
+        # Lift Control Group
         lift_group = QGroupBox("Lift Control")
         lift_layout = QVBoxLayout()
         lift_group.setLayout(lift_layout)
-
         self.height1_button = QPushButton("1 Height")
         self.height2_button = QPushButton("2 Height")
         self.height3_button = QPushButton("3 Height")
@@ -312,12 +318,6 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.send_lift_command(command, log_message)  # 리프트 명령 전송
         self.log_to_terminal(log_message)  # 로그 메시지
 
-    def toggle_navigation(self):  # 네비게이션 토글 함수
-        nav_state = "Navigating" if self.toggle_nav_button.isChecked() else "Idle"  # 네비게이션 상태
-        color = "green" if self.toggle_nav_button.isChecked() else "black"  # 색상 설정
-        self.update_status_label("Navigation Status", nav_state, color)  # 상태 라벨 업데이트
-        self.log_to_terminal(f"Navigation {nav_state}")  # 로그 메시지
-
     def update_velocity(self, msg):  # 속도 업데이트 함수
         self.velocity = msg.twist.twist.linear.x  # 속도 설정
         self.log_to_terminal(f"Update Velocity: {self.velocity}")  # 로그 메시지
@@ -389,20 +389,29 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.terminal_output.append(message)  # 메시지 추가
         self.terminal_output.ensureCursorVisible()  # 커서 가시성 유지
 
+    def exit_program(self):
+        self.log_to_terminal("Exiting program...")
+        QApplication.quit()
+
 class MainWindow(QMainWindow):
     def __init__(self, node):
         super(MainWindow, self).__init__()
         self.setWindowTitle("Robot Control Panel")
+
+        # 전체 화면 설정
+        self.showFullScreen()
 
         # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
         screen_geometry = QApplication.primaryScreen().geometry()
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
 
-        # 메인 윈도우의 크기를 화면 해상도의 90%로 설정
-        window_width = int(screen_width * 0.9)
-        window_height = int(screen_height * 0.9)
-        self.setGeometry(0, 0, window_width, window_height)
+        # # 메인 윈도우의 크기를 화면 해상도의 90%로 설정
+        # window_width = int(screen_width * 0.9)
+        # window_height = int(screen_height * 0.9)
+        # self.setGeometry(0, 0, window_width, window_height)
+
+        self.setGeometry(0, 0, screen_width, screen_height)
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
