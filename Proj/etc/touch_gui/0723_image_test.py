@@ -168,10 +168,16 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
 
         right_layout = QVBoxLayout()
 
+        # 프로그램 종료 버튼 추가
+        self.exit_button = QPushButton("Exit")
+        self.exit_button.setStyleSheet("font-size: 12px; height: 30px; background-color: red; color: black;")
+        self.exit_button.clicked.connect(self.exit_program)
+        right_layout.addWidget(self.exit_button)
+
+        # Lift Control Group
         lift_group = QGroupBox("Lift Control")
         lift_layout = QVBoxLayout()
         lift_group.setLayout(lift_layout)
-
         self.height1_button = QPushButton("1 Height")
         self.height2_button = QPushButton("2 Height")
         self.height3_button = QPushButton("3 Height")
@@ -382,6 +388,10 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
     def log_to_terminal(self, message):  # 터미널 로그 출력 함수
         self.terminal_output.append(message)  # 메시지 추가
         self.terminal_output.ensureCursorVisible()  # 커서 가시성 유지
+
+    def exit_program(self):
+        self.log_to_terminal("Exiting program...")
+        QApplication.quit()
 
 class MainWindow(QMainWindow):
     def __init__(self, node):
