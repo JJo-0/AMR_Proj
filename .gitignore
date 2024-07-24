@@ -49,3 +49,11 @@ __pycache__/
 
 # Ignore metadata directories
 com_proj/Micro_Ros_versions/Versions/.metadata/
+Proj/driver/YDLidar-SDK
+com_proj/dev_src_0708/src/MicroRos_24/micro_ros_stm32cubemx_utils
+com_proj/Micro_Ros_versions/  Versions/MicroRos_24/micro_ros_stm32cubemx_utils
+com_proj/Micro_Ros_versions/  Versions/MicroRos_25/micro_ros_stm32cubemx_utils
+com_proj/Micro_Ros_versions/  Versions/MicroRos_26/micro_ros_stm32cubemx_utils
+com_proj/Micro_Ros_versions/  Versions/MicroRos_27/micro_ros_stm32cubemx_utils
+com_proj/Micro_Ros_versions/  Versions/MicroRos_28_this/micro_ros_stm32cubemx_utils
+com_proj/Micro_Ros_versions/  Versions/MicroRos_29/micro_ros_stm32cubemx_utils
