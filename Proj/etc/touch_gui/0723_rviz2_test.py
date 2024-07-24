@@ -1,7 +1,7 @@
 import sys
 import serial
 import numpy as np
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QScrollArea)
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QScrollArea, QCheckBox)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QMutex
 from PyQt5.QtGui import QPixmap, QImage, QPainter, QPen, QColor
 import rclpy
@@ -153,12 +153,28 @@ class ControlPanel(QWidget):
 
         right_layout = QVBoxLayout()
 
-        # 프로그램 종료 버튼 추가
         self.exit_button = QPushButton("Exit")
         self.exit_button.setStyleSheet("font-size: 8px; height: 12px; background-color: grey; color: white;")
         self.exit_button.clicked.connect(self.exit_program)
         right_layout.addWidget(self.exit_button)
-        
+
+        nav_group = QGroupBox("Navigation")
+        nav_layout = QHBoxLayout()
+        nav_group.setLayout(nav_layout)
+        self.current_location_button = QCheckBox("Current Location")
+        self.publish_pose_button = QCheckBox("Publish Pose")
+        self.publish_point_button = QCheckBox("Publish Point")
+
+        nav_layout.addWidget(self.current_location_button)
+        nav_layout.addWidget(self.publish_pose_button)
+        nav_layout.addWidget(self.publish_point_button)
+
+        self.current_location_button.toggled.connect(self.update_navigation)
+        self.publish_pose_button.toggled.connect(self.update_navigation)
+        self.publish_point_button.toggled.connect(self.update_navigation)
+
+        right_layout.addWidget(nav_group)
+
         # Lift Control Group
         lift_group = QGroupBox("Lift Control")
         lift_layout = QVBoxLayout()
@@ -415,11 +431,6 @@ class MainWindow(QMainWindow):
         screen_geometry = QApplication.primaryScreen().geometry()
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
-
-        # # 메인 윈도우의 크기를 화면 해상도의 90%로 설정
-        # window_width = int(screen_width * 0.9)
-        # window_height = int(screen_height * 0.9)
-        # self.setGeometry(0, 0, window_width, window_height)
 
         self.setGeometry(0, 0, screen_width, screen_height)
 
