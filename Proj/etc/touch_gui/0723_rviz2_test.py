@@ -398,6 +398,10 @@ class ControlPanel(QWidget):
         self.terminal_output.append(message)
         self.terminal_output.ensureCursorVisible()
 
+    def exit_program(self):
+        self.log_to_terminal("Exiting program...")
+        QApplication.quit()
+
 
 class MainWindow(QMainWindow):
     def __init__(self, node):
@@ -417,11 +421,6 @@ class MainWindow(QMainWindow):
         window_height = int(screen_height * 0.9)
         self.setGeometry(0, 0, window_width, window_height)
 
-        # 종료 버튼 추가
-        self.exit_button = QPushButton("Exit")
-        self.exit_button.clicked.connect(self.close_application)
-        self.exit_button.setStyleSheet("font-size: 24px;")
-
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
 
@@ -432,10 +431,6 @@ class MainWindow(QMainWindow):
         container = QWidget()
         container.setLayout(main_layout)
         self.setCentralWidget(container)
-
-    def close_application(self):
-        print("Exiting application...")
-        QApplication.quit()
 
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화
