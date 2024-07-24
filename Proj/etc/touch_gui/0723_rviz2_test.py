@@ -101,6 +101,20 @@ class ControlPanel(QWidget):
         scroll_area.setWidget(self.map_label)
         left_layout.addWidget(scroll_area)
 
+        nav_group = QGroupBox("Navigation Goals")  # 네비게이션 그룹
+        nav_button_layout = QHBoxLayout()  # 네비게이션 버튼 레이아웃
+        self.nav_button_1 = QPushButton("Goal 1")
+        self.nav_button_2 = QPushButton("Goal 2")
+        self.nav_button_3 = QPushButton("Goal 3")
+        self.nav_button_1.clicked.connect(lambda: self.send_nav_goal(1.0, 2.0, 0.0))
+        self.nav_button_2.clicked.connect(lambda: self.send_nav_goal(3.0, 4.0, 0.0))
+        self.nav_button_3.clicked.connect(lambda: self.send_nav_goal(5.0, 6.0, 0.0))
+        nav_button_layout.addWidget(self.nav_button_1)
+        nav_button_layout.addWidget(self.nav_button_2)
+        nav_button_layout.addWidget(self.nav_button_3)
+        nav_group.setLayout(nav_button_layout)
+        left_layout.addWidget(nav_group)
+
         self.terminal_output = QTextEdit()
         self.terminal_output.setReadOnly(True)
         self.terminal_output.setStyleSheet("background-color: black; color: white;")
