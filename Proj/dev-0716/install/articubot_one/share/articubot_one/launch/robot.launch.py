@@ -6,15 +6,10 @@ from launch.actions import IncludeLaunchDescription, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 def generate_launch_description():
-    description = TimerAction(
-        period=3.0, 
-        actions=[
-            IncludeLaunchDescription(
+    description = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory("omo_r1mini_description"), 'launch', 'omo_r1mini_description.launch.py'
                 )])
-            )
-        ]
     )
 
     controller = IncludeLaunchDescription(
@@ -36,7 +31,7 @@ def generate_launch_description():
                     get_package_share_directory("ydlidar_ros2_driver"), 'launch', 'ydlidar_launch.py'
                 )])
     )
-    
+    delayed_description_manager = TimerAction(period=3.0, actions=[description])
     navigation = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory("articubot_one"), 'launch', 'localization_launch.py'
@@ -53,15 +48,15 @@ def generate_launch_description():
                     get_package_share_directory("omo_r1mini_cartographer"), 'launch', 'cartographer.launch.py'
                 )])
     )
-
+    delayed_cartographer_manager = TimerAction(period=9.0, actions=[cartographer])
 
     
     return LaunchDescription([
-        description,
+        imu,
         lidar,
         delayed_controller_manager,
-        imu,
+        delayed_description_manager,
         #navigation,
         # mapping,
-        cartographer,
+        # delayed_cartographer_manager,
     ])

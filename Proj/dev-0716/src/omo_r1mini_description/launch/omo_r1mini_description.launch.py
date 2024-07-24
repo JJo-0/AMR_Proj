@@ -20,7 +20,7 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/omo_r1mini_state_publisher.launch.py'])
         ),
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/omo_r1mini_description_rviz.launch.py'])
-        )
+        #IncludeLaunchDescription(
+        #    PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/omo_r1mini_description_rviz.launch.py'])
+        #)
     ])
