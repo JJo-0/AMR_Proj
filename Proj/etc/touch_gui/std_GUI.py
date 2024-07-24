@@ -95,109 +95,93 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.map_label.setFixedHeight(400)  # 고정 높이 설정
         left_layout.addWidget(self.map_label)  # 레이아웃에 위젯 추가
 
-        self.terminal_output = QTextEdit()  # 터미널 출력
-        self.terminal_output.setReadOnly(True)  # 읽기 전용
-        self.terminal_output.setStyleSheet("background-color: black; color: white;")  # 스타일
-        self.terminal_output.setFixedHeight(50)  # 고정 높이
-        left_layout.addWidget(self.terminal_output)  # 레이아웃에 추가
+        self.terminal_output = QTextEdit()
+        self.terminal_output.setReadOnly(True)
+        self.terminal_output.setStyleSheet("background-color: black; color: white;")
+        self.terminal_output.setFixedHeight(50)
+        left_layout.addWidget(self.terminal_output)
 
-        move_control_group = QGroupBox("Movement Control")  # 이동 제어 그룹
-        move_layout = QGridLayout()  # 그리드 레이아웃
-        move_control_group.setLayout(move_layout)  # 레이아웃 설정
-        move_control_group.setFixedHeight(200)  # 고정 높이 설정
+        move_control_group = QGroupBox("Movement Control")
+        move_layout = QGridLayout()
+        move_control_group.setLayout(move_layout)
+        move_control_group.setFixedHeight(200)
 
-        self.forward_button = QPushButton("Forward")  # 앞으로 버튼
-        self.backward_button = QPushButton("Backward")  # 뒤로 버튼
-        self.left_button = QPushButton("Left")  # 왼쪽 버튼
-        self.right_button = QPushButton("Right")  # 오른쪽 버튼
-        self.stop_button = QPushButton("Stop")  # 정지 버튼
+        self.forward_button = QPushButton("Forward")
+        self.backward_button = QPushButton("Backward")
+        self.left_button = QPushButton("Left")
+        self.right_button = QPushButton("Right")
+        self.stop_button = QPushButton("Stop")
         move_layout.addWidget(self.backward_button, 0, 1)
         move_layout.addWidget(self.left_button, 1, 0)
         move_layout.addWidget(self.stop_button, 1, 1)
         move_layout.addWidget(self.right_button, 1, 2)
         move_layout.addWidget(self.forward_button, 2, 1)
 
-        self.forward_button.pressed.connect(lambda: self.start_movement("forward"))  # 버튼 이벤트 연결
-        self.forward_button.released.connect(self.stop_movement)  # 버튼 이벤트 연결
-        self.backward_button.pressed.connect(lambda: self.start_movement("backward"))  # 버튼 이벤트 연결
-        self.backward_button.released.connect(self.stop_movement)  # 버튼 이벤트 연결
-        self.left_button.pressed.connect(lambda: self.start_movement("left"))  # 버튼 이벤트 연결
-        self.left_button.released.connect(self.stop_movement)  # 버튼 이벤트 연결
-        self.right_button.pressed.connect(lambda: self.start_movement("right"))  # 버튼 이벤트 연결
-        self.right_button.released.connect(self.stop_movement)  # 버튼 이벤트 연결
-        self.stop_button.clicked.connect(lambda: self.send_movement_command("stop"))  # 버튼 이벤트 연결
-        self.forward_button.setStyleSheet("font-size: 24px;")
-        self.backward_button.setStyleSheet("font-size: 24px;")
-        self.left_button.setStyleSheet("font-size: 24px;")
-        self.right_button.setStyleSheet("font-size: 24px;")
-        self.stop_button.setStyleSheet("font-size: 24px;")
-        self.forward_button.setFixedHeight(50)
-        self.backward_button.setFixedHeight(50)
-        self.left_button.setFixedHeight(50)
-        self.right_button.setFixedHeight(50)
-        self.stop_button.setFixedHeight(50)
+        self.forward_button.pressed.connect(lambda: self.start_movement("forward"))
+        self.forward_button.released.connect(self.stop_movement)
+        self.backward_button.pressed.connect(lambda: self.start_movement("backward"))
+        self.backward_button.released.connect(self.stop_movement)
+        self.left_button.pressed.connect(lambda: self.start_movement("left"))
+        self.left_button.released.connect(self.stop_movement)
+        self.right_button.pressed.connect(lambda: self.start_movement("right"))
+        self.right_button.released.connect(self.stop_movement)
+        self.stop_button.clicked.connect(lambda: self.send_movement_command("stop"))
+        self.forward_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
+        self.backward_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
+        self.left_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
+        self.right_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
+        self.stop_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
 
-        self.emergency_stop_button = QToolButton()  # 비상 정지 버튼
-        self.emergency_stop_button.setCheckable(True)  # 체크 가능
-        self.emergency_stop_button.setText("EMS")  # 텍스트 설정
-        self.emergency_stop_button.setStyleSheet("font-size: 48px; height: 100px;")  # 스타일 설정
-        self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)  # 이벤트 연결
-        self.emergency_stop_button.setFixedSize(150, 150) 
-        left_control_layout = QHBoxLayout()  # 왼쪽 제어 레이아웃
-        left_control_layout.addWidget(move_control_group)  # 이동 제어 그룹 추가
-        left_control_layout.addWidget(self.emergency_stop_button)  # 비상 정지 버튼 추가
-        left_layout.addLayout(left_control_layout)  # 왼쪽 레이아웃에 추가
+        self.emergency_stop_button = QToolButton()
+        self.emergency_stop_button.setCheckable(True)
+        self.emergency_stop_button.setText("EMS")
+        self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: lightcoral;")
+        self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
+        self.emergency_stop_button.setFixedSize(150, 150)
+        left_control_layout = QHBoxLayout()
+        left_control_layout.addWidget(move_control_group)
+        left_control_layout.addWidget(self.emergency_stop_button)
+        left_layout.addLayout(left_control_layout)
 
-        main_layout.addLayout(left_layout)  # 메인 레이아웃에 추가
+        main_layout.addLayout(left_layout)
 
-        right_layout = QVBoxLayout()  # 오른쪽 레이아웃
+        right_layout = QVBoxLayout()
 
-        lift_group = QGroupBox("Lift Control")  # 리프트 제어 그룹
-        lift_layout = QVBoxLayout()  # 수직 레이아웃
-        lift_group.setLayout(lift_layout)  # 레이아웃 설정
+        lift_group = QGroupBox("Lift Control")
+        lift_layout = QVBoxLayout()
+        lift_group.setLayout(lift_layout)
 
-        self.height1_button = QPushButton("1 Height")  # 1 높이 버튼
-        self.height2_button = QPushButton("2 Height")  # 2 높이 버튼
-        self.height3_button = QPushButton("3 Height")  # 3 높이 버튼
-        self.height1_button.setStyleSheet("font-size: 24px;")  # 스타일 설정
-        self.height2_button.setStyleSheet("font-size: 24px;")  # 스타일 설정
-        self.height3_button.setStyleSheet("font-size: 24px;")  # 스타일 설정
-        self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))  # 버튼 이벤트 연결
-        self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))  # 버튼 이벤트 연결
-        self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))  # 버튼 이벤트 연결
-        lift_layout.addWidget(self.height1_button)  # 레이아웃에 추가
-        lift_layout.addWidget(self.height2_button)  # 레이아웃에 추가
-        lift_layout.addWidget(self.height3_button)  # 레이아웃에 추가
+        self.height1_button = QPushButton("1 Height")
+        self.height2_button = QPushButton("2 Height")
+        self.height3_button = QPushButton("3 Height")
+        self.height1_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.height2_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.height3_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))
+        self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))
+        self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))
+        lift_layout.addWidget(self.height1_button)
+        lift_layout.addWidget(self.height2_button)
+        lift_layout.addWidget(self.height3_button)
 
-        right_layout.addWidget(lift_group)  # 오른쪽 레이아웃에 추가
+        right_layout.addWidget(lift_group)
 
-        lift_updown_group = QGroupBox("Lift Up/Down")  # 리프트 상하 그룹
-        lift_updown_layout = QVBoxLayout()  # 수직 레이아웃
-        self.lift_up_button = QPushButton("Lift Up")  # 리프트 업 버튼
-        self.lift_down_button = QPushButton("Lift Down")  # 리프트 다운 버튼
-        self.lift_up_button.setStyleSheet("font-size: 24px;")  # 스타일 설정
-        self.lift_down_button.setStyleSheet("font-size: 24px;")  # 스타일 설정
-        self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10", "Lift Up"))  # 버튼 이벤트 연결
-        self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11", "Lift Down"))  # 버튼 이벤트 연결
-        lift_updown_layout.addWidget(self.lift_up_button)  # 레이아웃에 추가
-        lift_updown_layout.addWidget(self.lift_down_button)  # 레이아웃에 추가
-        lift_updown_group.setLayout(lift_updown_layout)  # 레이아웃 설정
+        lift_updown_group = QGroupBox("Lift Up/Down")
+        lift_updown_layout = QVBoxLayout()
+        self.lift_up_button = QPushButton("Lift Up")
+        self.lift_down_button = QPushButton("Lift Down")
+        self.lift_up_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.lift_down_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10", "Lift Up"))
+        self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11", "Lift Down"))
+        lift_updown_layout.addWidget(self.lift_up_button)
+        lift_updown_layout.addWidget(self.lift_down_button)
+        lift_updown_group.setLayout(lift_updown_layout)
 
-        right_layout.addWidget(lift_updown_group)  # 오른쪽 레이아웃에 추가
+        right_layout.addWidget(lift_updown_group)
 
-        nav_group = QGroupBox("Navigation")  # 네비게이션 그룹
-        nav_layout = QVBoxLayout()  # 수직 레이아웃
-        self.toggle_nav_button = QToolButton()  # 네비게이션 버튼
-        self.toggle_nav_button.setCheckable(True)  # 체크 가능
-        self.toggle_nav_button.setText("Set Navigation Goal")  # 텍스트 설정
-        self.toggle_nav_button.setStyleSheet("font-size: 18px;")  # 스타일 설정
-        self.toggle_nav_button.clicked.connect(self.toggle_navigation)  # 이벤트 연결
-        nav_layout.addWidget(self.toggle_nav_button)  # 레이아웃에 추가
-        nav_group.setLayout(nav_layout)  # 레이아웃 설정
-        right_layout.addWidget(nav_group)  # 오른쪽 레이아웃에 추가
-
-        status_group = QGroupBox("Robot Status")  # 로봇 상태 그룹
-        status_layout = QVBoxLayout()  # 수직 레이아웃
+        status_group = QGroupBox("Robot Status")
+        status_layout = QVBoxLayout()
 
         for key, label in self.status_labels.items():  # 상태 라벨 설정
             label.setStyleSheet("font-size: 18px; background-color: black; color: white; padding: 5px;")  # 스타일 설정
