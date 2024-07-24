@@ -398,6 +398,9 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.setWindowTitle("Robot Control Panel")
 
+        # 전체 화면 설정
+        self.showFullScreen()
+
         # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
         screen_geometry = QApplication.primaryScreen().geometry()
         screen_width = screen_geometry.width()
