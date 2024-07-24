@@ -153,10 +153,16 @@ class ControlPanel(QWidget):
 
         right_layout = QVBoxLayout()
 
+        # 프로그램 종료 버튼 추가
+        self.exit_button = QPushButton("Exit")
+        self.exit_button.setStyleSheet("font-size: 12px; height: 30px; background-color: red; color: black;")
+        self.exit_button.clicked.connect(self.exit_program)
+        right_layout.addWidget(self.exit_button)
+
+        # Lift Control Group
         lift_group = QGroupBox("Lift Control")
         lift_layout = QVBoxLayout()
         lift_group.setLayout(lift_layout)
-
         self.height1_button = QPushButton("1 Height")
         self.height2_button = QPushButton("2 Height")
         self.height3_button = QPushButton("3 Height")
