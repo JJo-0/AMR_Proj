@@ -177,6 +177,7 @@ class ControlPanel(QWidget):
         self.lift_up_button = QPushButton("Lift Up")
         self.lift_down_button = QPushButton("Lift Down")
         self.lift_up_button.setStyleSheet("font-size: 24px; height: 50px;")
+        self.lift_down_button.setStyleSheet("font-size: 24px; height: 50px;")
         self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10", "Lift Up"))
         self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11", "Lift Down"))
         lift_updown_layout.addWidget(self.lift_up_button)
