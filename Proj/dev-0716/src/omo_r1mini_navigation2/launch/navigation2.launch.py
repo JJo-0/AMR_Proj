@@ -35,7 +35,7 @@ def generate_launch_description():
         default=os.path.join(
             get_package_share_directory('omo_r1mini_navigation2'),
             'map',
-            'map_.yaml'))
+            'map_mask.yaml'))
 
     param_file_name = 'omo_r1mini.yaml'
     param_dir = LaunchConfiguration(

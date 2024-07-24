@@ -56,7 +56,7 @@ def generate_launch_description():
         lidar,
         delayed_controller_manager,
         delayed_description_manager,
-        #navigation,
+        # navigation,
         # mapping,
         # delayed_cartographer_manager,
     ])
