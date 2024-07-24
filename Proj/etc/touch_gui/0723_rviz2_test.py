@@ -227,15 +227,15 @@ class ControlPanel(QWidget):
             painter.setPen(QPen(Qt.red, 5, Qt.SolidLine))
 
             if self.robot_pose:
-                # Transform the robot position to map coordinates
-                resolution = 0.05  # example resolution, use actual map resolution
-                origin_x, origin_y = 0, 0  # example origin, use actual map origin
+                # 로봇 위치를 맵 좌표로 변환
+                resolution = 0.05  # 예제 해상도, 실제 맵 해상도 사용
+                origin_x, origin_y = 0, 0  # 예제 원점, 실제 맵 원점 사용
 
                 x = int((self.robot_pose.position.x - origin_x) / resolution)
                 y = int((self.robot_pose.position.y - origin_y) / resolution)
-                y = pixmap.height() - y  # Invert y axis
+                y = pixmap.height() - y  # y 축 반전
 
-                painter.drawEllipse(x - 5, y - 5, 10, 10)  # Draw the robot position as a circle
+                painter.drawEllipse(x - 5, y - 5, 10, 10)  # 로봇 위치를 원으로 그림
 
             painter.end()
             self.map_label.setPixmap(pixmap)
