@@ -170,7 +170,7 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
 
         # 프로그램 종료 버튼 추가
         self.exit_button = QPushButton("Exit")
-        self.exit_button.setStyleSheet("font-size: 8px; height: 12px; background-color: red; color: black;")
+        self.exit_button.setStyleSheet("font-size: 8px; height: 12px; background-color: grey; color: white;")
         self.exit_button.clicked.connect(self.exit_program)
         right_layout.addWidget(self.exit_button)
 
