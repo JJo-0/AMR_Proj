@@ -416,10 +416,12 @@ class MainWindow(QMainWindow):
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
 
-        # 메인 윈도우의 크기를 화면 해상도의 90%로 설정
-        window_width = int(screen_width * 0.9)
-        window_height = int(screen_height * 0.9)
-        self.setGeometry(0, 0, window_width, window_height)
+        # # 메인 윈도우의 크기를 화면 해상도의 90%로 설정
+        # window_width = int(screen_width * 0.9)
+        # window_height = int(screen_height * 0.9)
+        # self.setGeometry(0, 0, window_width, window_height)
+
+        self.setGeometry(0, 0, screen_width, screen_height)
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
