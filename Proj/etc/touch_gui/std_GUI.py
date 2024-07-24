@@ -259,12 +259,6 @@ class ControlPanel(QWidget):  # 컨트롤 패널 클래스
         self.send_lift_command(command, log_message)  # 리프트 명령 전송
         self.log_to_terminal(log_message)  # 로그 메시지
 
-    def toggle_navigation(self):  # 네비게이션 토글 함수
-        nav_state = "Navigating" if self.toggle_nav_button.isChecked() else "Idle"  # 네비게이션 상태
-        color = "green" if self.toggle_nav_button.isChecked() else "black"  # 색상 설정
-        self.update_status_label("Navigation Status", nav_state, color)  # 상태 라벨 업데이트
-        self.log_to_terminal(f"Navigation {nav_state}")  # 로그 메시지
-
     def update_velocity(self, msg):  # 속도 업데이트 함수
         self.velocity = msg.twist.twist.linear.x  # 속도 설정
         self.log_to_terminal(f"Update Velocity: {self.velocity}")  # 로그 메시지

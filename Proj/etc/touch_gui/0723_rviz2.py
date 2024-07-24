@@ -321,12 +321,6 @@ class ControlPanel(QWidget):
         self.send_lift_command(command, log_message)
         self.log_to_terminal(log_message)
 
-    def toggle_navigation(self):
-        nav_state = "Navigating" if self.toggle_nav_button.isChecked() else "Idle"
-        color = "green" if self.toggle_nav_button.isChecked() else "black"
-        self.update_status_label("Navigation Status", nav_state, color)
-        self.log_to_terminal(f"Navigation {nav_state}")
-
     def update_velocity(self, msg):
         self.velocity = msg.twist.twist.linear.x
         self.log_to_terminal(f"Update Velocity: {self.velocity}")
