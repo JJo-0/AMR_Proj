@@ -65,7 +65,7 @@ class ControlPanel(QWidget):
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)
         self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)
 
-        self.create_goal_service()  # 서비스 생성 함수 호출
+        self.create_goal_service()
 
         self.map_image = None
         self.map_mutex = QMutex()
@@ -168,6 +168,9 @@ class ControlPanel(QWidget):
         self.save_goal_button_1.clicked.connect(lambda: self.save_nav_goal(1))
         self.save_goal_button_2.clicked.connect(lambda: self.save_nav_goal(2))
         self.save_goal_button_3.clicked.connect(lambda: self.save_nav_goal(3))
+        self.save_goal_button_1.setStyleSheet("font-size: 9px; height: 50px; background-color: lightgrey;")
+        self.save_goal_button_2.setStyleSheet("font-size: 9px; height: 50px; background-color: lightgrey;")
+        self.save_goal_button_3.setStyleSheet("font-size: 9px; height: 50px; background-color: lightgrey;")
         nav_layout.addWidget(self.save_goal_button_1)
         nav_layout.addWidget(self.save_goal_button_2)
         nav_layout.addWidget(self.save_goal_button_3)
@@ -179,6 +182,9 @@ class ControlPanel(QWidget):
         self.go_goal_button_1.clicked.connect(lambda: self.go_nav_goal(1))
         self.go_goal_button_2.clicked.connect(lambda: self.go_nav_goal(2))
         self.go_goal_button_3.clicked.connect(lambda: self.go_nav_goal(3))
+        self.go_goal_button_1.setStyleSheet("font-size: 9px; height: 50px; background-color: lightgrey;")
+        self.go_goal_button_2.setStyleSheet("font-size: 9px; height: 50px; background-color: lightgrey;")
+        self.go_goal_button_3.setStyleSheet("font-size: 9px; height: 50px; background-color: lightgrey;")
         nav_layout.addWidget(self.go_goal_button_1)
         nav_layout.addWidget(self.go_goal_button_2)
         nav_layout.addWidget(self.go_goal_button_3)
