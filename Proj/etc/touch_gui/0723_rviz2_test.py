@@ -1,18 +1,17 @@
 import subprocess
 import sys
+import time
 import serial
 import numpy as np
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout, QScrollArea, QCheckBox)
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QMutex
 from PyQt5.QtGui import QPixmap, QImage, QPainter, QPen, QColor
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Int32, Float32
-from sensor_msgs.msg import Imu
-from nav_msgs.msg import Odometry, OccupancyGrid
+from std_srvs.srv import Trigger
 from geometry_msgs.msg import PoseStamped, Twist
 from threading import Thread, Lock
-import time
 
 class SerialReader(QThread):
     new_data = pyqtSignal(str)
@@ -44,9 +43,6 @@ class ControlPanel(QWidget):
 
         self.ser = None
         self.velocity = None
-        self.imu_orientation = None
-        self.slam_distance = None
-        self.eta = None
         self.current_lift_command = None
         self.ems_signal = 1
 
@@ -67,13 +63,7 @@ class ControlPanel(QWidget):
         self.start_serial_process_thread()
 
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)
-        self.lift_pub = self.node.create_publisher(String, '/lift_command', 10)
         self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)
-        self.velocity_sub = self.node.create_subscription(Odometry, '/odom', self.update_velocity, 10)
-        self.imu_sub = self.node.create_subscription(Imu, '/imu', self.update_imu, 10)
-        self.slam_sub = self.node.create_subscription(Float32, '/slam_remaining_distance', self.update_slam, 10)
-        self.map_sub = self.node.create_subscription(OccupancyGrid, '/map', self.update_map, 10)
-        self.odom_sub = self.node.create_subscription(Odometry, '/odom', self.update_robot_position, 10)
 
         self.map_image = None
         self.map_mutex = QMutex()
@@ -95,15 +85,9 @@ class ControlPanel(QWidget):
         self.setLayout(main_layout)
 
         left_layout = QVBoxLayout()
-        scroll_area = QScrollArea()
-
-        self.map_label = QLabel()
-        self.map_label.setAlignment(Qt.AlignCenter)
-        scroll_area.setWidget(self.map_label)
-        left_layout.addWidget(scroll_area)
 
         nav_group = QGroupBox("Navigation Goals")  # 네비게이션 그룹
-        nav_button_layout = QHBoxLayout()  # 네비게이션 버튼 레이아웃
+        nav_button_layout = QHBoxLayout()
         self.nav_button_1 = QPushButton("Goal 1")
         self.nav_button_2 = QPushButton("Goal 2")
         self.nav_button_3 = QPushButton("Goal 3")
@@ -172,21 +156,6 @@ class ControlPanel(QWidget):
         self.exit_button.setStyleSheet("font-size: 8px; height: 12px; background-color: grey; color: white;")
         self.exit_button.clicked.connect(self.exit_program)
         right_layout.addWidget(self.exit_button)
-
-        nav_group = QGroupBox("Navigation")
-        nav_layout = QHBoxLayout()
-        nav_group.setLayout(nav_layout)
-        self.current_location_button = QCheckBox("Current Location")
-        self.publish_pose_button = QCheckBox("Publish Pose")
-        self.publish_point_button = QCheckBox("Publish Point")
-
-        nav_layout.addWidget(self.current_location_button)
-        nav_layout.addWidget(self.publish_pose_button)
-        nav_layout.addWidget(self.publish_point_button)
-
-        self.current_location_button.toggled.connect(self.update_navigation)
-        self.publish_pose_button.toggled.connect(self.update_navigation)
-        self.publish_point_button.toggled.connect(self.update_navigation)
 
         right_layout.addWidget(nav_group)
 
@@ -352,17 +321,6 @@ class ControlPanel(QWidget):
         self.send_lift_command(command, log_message)
         self.log_to_terminal(log_message)
 
-    def update_navigation(self):
-        self.current_location_button.setChecked(False)
-        self.publish_pose_button.setChecked(False)
-        self.publish_point_button.setChecked(False)
-        sender = self.sender()
-        if sender.isChecked():
-            sender.setChecked(True)
-            self.log_to_terminal(f"{sender.text()} selected")
-        else:
-            self.log_to_terminal(f"{sender.text()} deselected")
-
     def update_velocity(self, msg):
         self.velocity = msg.twist.twist.linear.x
         self.log_to_terminal(f"Update Velocity: {self.velocity}")
@@ -465,9 +423,21 @@ class MainWindow(QMainWindow):
         container.setLayout(main_layout)
         self.setCentralWidget(container)
 
+        # RViz 실행
+        self.launch_rviz()
+
     def launch_rviz():
         config_path = "/desktop/AMR_Proj/Proj/etc/touch_gui/my_rviz_config.rviz"  # RViz 설정 파일 경로
         subprocess.Popen(["rviz2", "-d", config_path])
+        time.sleep(5)
+
+        output = subprocess.check_output("xrandr | grep '*' | awk '{print $1}'", shell=True)
+        resolution = output.decode().strip().split('x')
+        screen_width = int(resolution[0])
+        screen_height = int(resolution[1])
+
+        left_half_width = screen_width // 2
+        subprocess.call(f"wmctrl -r RViz -e 0,0,0,{left_half_width},{screen_height}", shell=True)
 
 
 def main(args=None):
