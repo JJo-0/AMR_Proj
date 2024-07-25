@@ -352,8 +352,8 @@ class MainWindow(QMainWindow):
         # RViz 실행
         self.launch_rviz()
 
-    def launch_rviz():
-        config_path = "/path/to/your/my_rviz_config.rviz"  # RViz 설정 파일 경로
+    def launch_rviz(self):
+        config_path = "desktop/AMR_Proj/Proj/etc/touch_gui/my_rviz_config.rviz"  # RViz 설정 파일 경로
         subprocess.Popen(["rviz2", "-d", config_path]) 
 
 
