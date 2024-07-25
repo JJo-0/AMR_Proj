@@ -73,10 +73,10 @@ class ControlPanel(QWidget):
         try:
             self.ser = serial.Serial(port, baud_rate, timeout=1)
             self.ser.reset_input_buffer()
-            self.update_status_label("Arduino Connection", "Connected", "green")
+            self.update_status_label("Arduino", "C", "green")
             self.log_to_terminal(f"[Serial Connected] : {port} @ {baud_rate}")
         except serial.SerialException as e:
-            self.update_status_label("Arduino Connection", "Error", "red")
+            self.update_status_label("Arduino", "E", "red")
             self.log_to_terminal(f"[Serial Connected Failed] : {str(e)}")
             self.ser = None
 
@@ -97,11 +97,18 @@ class ControlPanel(QWidget):
         self.terminal_output = QTextEdit()
         self.terminal_output.setReadOnly(True)
         self.terminal_output.setStyleSheet("background-color: black; color: white;")
+        self.terminal_output.setFixedHeight(50)
         left_layout.addWidget(self.terminal_output)
 
         main_layout.addLayout(left_layout)
 
         right_layout = QVBoxLayout()
+
+        # 끄는 버튼 추가
+        self.exit_button = QPushButton("Exit")
+        self.exit_button.setStyleSheet("font-size: 8px; height: 12px; background-color: gray; color: white;")
+        self.exit_button.clicked.connect(self.exit_program)
+        right_layout.addWidget(self.exit_button)
 
         status_group = QGroupBox("Robot Status")
         status_layout = QHBoxLayout()
@@ -336,7 +343,8 @@ class MainWindow(QMainWindow):
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
 
-        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height)  # 오른쪽 절반 차지
+        # 오른쪽 절반 차지
+        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height)  
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
@@ -355,7 +363,17 @@ class MainWindow(QMainWindow):
     def launch_rviz(self):
         config_path = "desktop/AMR_Proj/Proj/etc/touch_gui/my_rviz_config.rviz"  # RViz 설정 파일 경로
         subprocess.Popen(["rviz2", "-d", config_path]) 
+        time.sleep(5)  # RViz 창이 뜰 시간을 줌
 
+        # 화면 해상도 확인
+        output = subprocess.check_output("xrandr | grep '*' | awk '{print $1}'", shell=True)
+        resolution = output.decode().strip().split('x')
+        screen_width = int(resolution[0])
+        screen_height = int(resolution[1])
+
+        # RViz 창을 화면의 왼쪽 절반으로 조정
+        left_half_width = screen_width // 2
+        subprocess.call(f"wmctrl -r RViz -e 0,0,0,{left_half_width},{screen_height}", shell=True)
 
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화
