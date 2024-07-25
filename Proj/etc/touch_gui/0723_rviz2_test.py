@@ -47,9 +47,9 @@ class ControlPanel(QWidget):
         self.ems_signal = 1
 
         self.status_labels = {
-            "EMS Signal": QLabel(),
-            "Lift Signal": QLabel(),
-            "Arduino Connection": QLabel()
+            "EMS": QLabel(),
+            "Lift": QLabel(),
+            "Arduino": QLabel()
         }
 
         self.serial_buffer = []
@@ -101,7 +101,7 @@ class ControlPanel(QWidget):
         status_layout = QVBoxLayout()
 
         for key, label in self.status_labels.items():
-            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
+            label.setStyleSheet("font-size: 8px; background-color: white; color: white; padding: 5px;")
             status_layout.addWidget(QLabel(key))
             status_layout.addWidget(label)
 
@@ -157,35 +157,39 @@ class ControlPanel(QWidget):
         right_layout.addWidget(lift_group)
 
         nav_group = QGroupBox("Navigation Goals")
-        nav_layout = QHBoxLayout()
+        nav_layout = QVBoxLayout()
 
-        # Save Goal Buttons
+        save_goal_layout = QHBoxLayout()  # 가로 레이아웃
         self.save_goal_button_1 = QPushButton("Save Goal 1")
         self.save_goal_button_2 = QPushButton("Save Goal 2")
         self.save_goal_button_3 = QPushButton("Save Goal 3")
         self.save_goal_button_1.clicked.connect(lambda: self.save_nav_goal(1))
         self.save_goal_button_2.clicked.connect(lambda: self.save_nav_goal(2))
         self.save_goal_button_3.clicked.connect(lambda: self.save_nav_goal(3))
-        self.save_goal_button_1.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgrey;")
-        self.save_goal_button_2.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgrey;")
-        self.save_goal_button_3.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgrey;")
-        nav_layout.addWidget(self.save_goal_button_1)
-        nav_layout.addWidget(self.save_goal_button_2)
-        nav_layout.addWidget(self.save_goal_button_3)
+        self.save_goal_button_1.setStyleSheet("font-size: 18px; height: 50px; background-color: lightyellow;")
+        self.save_goal_button_2.setStyleSheet("font-size: 18px; height: 50px; background-color: lightyellow;")
+        self.save_goal_button_3.setStyleSheet("font-size: 18px; height: 50px; background-color: lightyellow;")
+        save_goal_layout.addWidget(self.save_goal_button_1)
+        save_goal_layout.addWidget(self.save_goal_button_2)
+        save_goal_layout.addWidget(self.save_goal_button_3)
 
         # Go Goal Buttons
+        go_goal_layout = QHBoxLayout()  # 가로 레이아웃
         self.go_goal_button_1 = QPushButton("Go Goal 1")
         self.go_goal_button_2 = QPushButton("Go Goal 2")
         self.go_goal_button_3 = QPushButton("Go Goal 3")
         self.go_goal_button_1.clicked.connect(lambda: self.go_nav_goal(1))
         self.go_goal_button_2.clicked.connect(lambda: self.go_nav_goal(2))
         self.go_goal_button_3.clicked.connect(lambda: self.go_nav_goal(3))
-        self.go_goal_button_1.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgrey;")
-        self.go_goal_button_2.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgrey;")
-        self.go_goal_button_3.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgrey;")
-        nav_layout.addWidget(self.go_goal_button_1)
-        nav_layout.addWidget(self.go_goal_button_2)
-        nav_layout.addWidget(self.go_goal_button_3)
+        self.go_goal_button_1.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgreen;")
+        self.go_goal_button_2.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgreen;")
+        self.go_goal_button_3.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgreen;")
+        go_goal_layout.addWidget(self.go_goal_button_1)
+        go_goal_layout.addWidget(self.go_goal_button_2)
+        go_goal_layout.addWidget(self.go_goal_button_3)
+
+        nav_layout.addLayout(save_goal_layout)
+        nav_layout.addLayout(go_goal_layout)
 
         nav_group.setLayout(nav_layout)
         right_layout.addWidget(nav_group)
