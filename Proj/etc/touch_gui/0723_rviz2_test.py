@@ -113,7 +113,7 @@ class ControlPanel(QWidget):
         right_layout = QVBoxLayout()
 
         self.exit_button = QPushButton("Exit")
-        self.exit_button.setStyleSheet("font-size: 8px; height: 12px; background-color: gray; color: white;")
+        self.exit_button.setStyleSheet("font-size: 14px; height: 12px; background-color: gray; color: white;")
         self.exit_button.clicked.connect(self.exit_program)
         right_layout.addWidget(self.exit_button)
 
@@ -131,9 +131,9 @@ class ControlPanel(QWidget):
         self.height1_button = QPushButton("1 Height")
         self.height2_button = QPushButton("2 Height")
         self.height3_button = QPushButton("3 Height")
-        self.height1_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
-        self.height2_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
-        self.height3_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.height1_button.setStyleSheet("font-size: 18px; height: 40px; background-color: lightgrey;")
+        self.height2_button.setStyleSheet("font-size: 18px; height: 40px; background-color: lightgrey;")
+        self.height3_button.setStyleSheet("font-size: 18px; height: 40px; background-color: lightgrey;")
         self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))
         self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))
         self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))
@@ -144,8 +144,8 @@ class ControlPanel(QWidget):
         lift_updown_group = QVBoxLayout()
         self.lift_up_button = QPushButton("Lift Up")
         self.lift_down_button = QPushButton("Lift Down")
-        self.lift_up_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
-        self.lift_down_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.lift_up_button.setStyleSheet("font-size: 24px; height: 60px; background-color: lightgrey;")
+        self.lift_down_button.setStyleSheet("font-size: 24px; height: 60px; background-color: lightgrey;")
         self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10", "Lift Up"))
         self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11", "Lift Down"))
         lift_updown_group.addWidget(self.lift_up_button)
@@ -166,9 +166,9 @@ class ControlPanel(QWidget):
         self.save_goal_button_1.clicked.connect(lambda: self.save_nav_goal(1))
         self.save_goal_button_2.clicked.connect(lambda: self.save_nav_goal(2))
         self.save_goal_button_3.clicked.connect(lambda: self.save_nav_goal(3))
-        self.save_goal_button_1.setStyleSheet("font-size: 18px; height: 50px; background-color: lightyellow;")
-        self.save_goal_button_2.setStyleSheet("font-size: 18px; height: 50px; background-color: lightyellow;")
-        self.save_goal_button_3.setStyleSheet("font-size: 18px; height: 50px; background-color: lightyellow;")
+        self.save_goal_button_1.setStyleSheet("font-size: 14px; height: 30px; background-color: lightyellow;")
+        self.save_goal_button_2.setStyleSheet("font-size: 14px; height: 30px; background-color: lightyellow;")
+        self.save_goal_button_3.setStyleSheet("font-size: 14px; height: 30px; background-color: lightyellow;")
         save_goal_layout.addWidget(self.save_goal_button_1)
         save_goal_layout.addWidget(self.save_goal_button_2)
         save_goal_layout.addWidget(self.save_goal_button_3)
@@ -181,9 +181,9 @@ class ControlPanel(QWidget):
         self.go_goal_button_1.clicked.connect(lambda: self.go_nav_goal(1))
         self.go_goal_button_2.clicked.connect(lambda: self.go_nav_goal(2))
         self.go_goal_button_3.clicked.connect(lambda: self.go_nav_goal(3))
-        self.go_goal_button_1.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgreen;")
-        self.go_goal_button_2.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgreen;")
-        self.go_goal_button_3.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgreen;")
+        self.go_goal_button_1.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgreen;")
+        self.go_goal_button_2.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgreen;")
+        self.go_goal_button_3.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgreen;")
         go_goal_layout.addWidget(self.go_goal_button_1)
         go_goal_layout.addWidget(self.go_goal_button_2)
         go_goal_layout.addWidget(self.go_goal_button_3)
@@ -390,7 +390,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Robot Control Panel")
 
         # 전체 화면 설정
-        # self.showFullScreen()
+        self.showFullScreen()
 
         # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
         screen_geometry = QApplication.primaryScreen().geometry()
@@ -398,7 +398,7 @@ class MainWindow(QMainWindow):
         screen_height = screen_geometry.height()
 
         # 오른쪽 절반 차지
-        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height)
+        self.setGeometry(0, 0, screen_width // 2, screen_height)
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
