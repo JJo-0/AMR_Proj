@@ -1,3 +1,4 @@
+import os  # 파일 경로 처리를 위한 모듈
 import subprocess  # 서브프로세스를 실행하기 위한 모듈
 import sys  # 시스템 관련 기능을 위한 모듈
 import time  # 시간 관련 기능을 위한 모듈
@@ -73,6 +74,7 @@ class ControlPanel(QWidget):
         self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 퍼블리셔
         self.pose_sub = self.node.create_subscription(PoseStamped, '/robot_pose', self.update_robot_pose, 10)  # 로봇 위치 구독
 
+        self.save_file_path = os.path.join(os.getcwd(), 'Save_point.json')  # 현재 작업 디렉터리에서 Save_point.json 파일의 절대 경로 생성
         self.load_saved_goals()  # 저장된 목표 불러오기
 
         self.map_image = None  # 맵 이미지
@@ -82,17 +84,20 @@ class ControlPanel(QWidget):
     def load_saved_goals(self):
         """저장된 목표를 파일에서 불러오기"""
         try:
-            with open('Save_point.json', 'r') as f:
+            with open(self.save_file_path, 'r') as f:
                 self.goal_positions = json.load(f)
                 self.log_to_terminal("Loaded saved goals.")
         except FileNotFoundError:
             self.log_to_terminal("No saved goals found.")
+        except json.JSONDecodeError:
+            self.log_to_terminal("Failed to decode saved goals.")
 
     def save_goals_to_file(self):
         """현재 목표를 파일에 저장"""
-        with open('Save_point.json', 'w') as f:
+        with open(self.save_file_path, 'w') as f:
             json.dump(self.goal_positions, f)
             self.log_to_terminal("Saved goals to file.")
+
 
     def setup_serial_connection(self, port, baud_rate):
         """시리얼 연결 설정"""
