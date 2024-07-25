@@ -11,7 +11,7 @@ from rclpy.node import Node
 from std_msgs.msg import String, Int32, Float32
 from omo_r1mini_interfaces.srv import Trigger
 from geometry_msgs.msg import PoseStamped, Twist
-from your_package_name.srv import SaveGoal
+from gui.srv import SaveGoal
 from threading import Thread, Lock
 
 class SerialReader(QThread):
