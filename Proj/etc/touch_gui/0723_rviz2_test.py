@@ -413,8 +413,9 @@ class MainWindow(QMainWindow):
         time.sleep(5)  # RViz 창이 뜰 시간을 줌
 
         # RViz 창을 화면의 왼쪽 절반으로 조정
-        left_half_width = screen_width // 2
-        subprocess.call(f"wmctrl -r RViz -e 0,0,0,{left_half_width // 2},{screen_height // 2}", shell=True)
+        right_half_width = screen_width // 2
+        half_width = screen_height // 2
+        subprocess.call(f"wmctrl -r RViz -e 0,{right_half_width},0,{right_half_width},{half_width}", shell=True)
 
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화
