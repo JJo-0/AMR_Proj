@@ -273,11 +273,13 @@ class ControlPanel(QWidget):
             self.log_to_terminal(f"Goal {goal_index} not saved.")
 
     def update_status_label(self, label_name, text, color):
+        print(f"Updating {label_name} to {text} with color {color}")
+        self.log_to_terminal(f"Updating {label_name} to {text} with color {color}")  # 로그 추가
         label = self.status_labels.get(label_name, None)
         if label:
             label.setText(f"{text}")
             label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
-            print(f"Updated {label_name}: {text}, {color}")
+            self.log_to_terminal(f"Updated {label_name} successfully")
 
     def start_serial_read_thread(self):
         if self.ser:
@@ -372,7 +374,6 @@ class ControlPanel(QWidget):
 
     def log_to_terminal(self, message):
         self.terminal_output.append(message)
-        self.terminal_output.ensureCursorVisible()
 
     def exit_program(self):
         self.log_to_terminal("Exiting program...")
