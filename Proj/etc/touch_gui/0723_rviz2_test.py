@@ -463,6 +463,11 @@ class MainWindow(QMainWindow):
         container = QWidget()
         container.setLayout(main_layout)
         self.setCentralWidget(container)
+        
+    def launch_rviz():
+        config_path = “/path/to/your/rviz/config/file.rviz”  # RViz 설정 파일 경로
+        subprocess.Popen([“rviz2”, “-d”, config_path])
+
 
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화
