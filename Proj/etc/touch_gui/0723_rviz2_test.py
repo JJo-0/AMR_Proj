@@ -246,6 +246,9 @@ class ControlPanel(QWidget):
         self.update_status_label("Lift", "-", "black")
         self.update_status_label("Arduino", "E", "red")
 
+    def update_robot_pose(self, msg):
+        self.robot_pose = msg.pose  
+
     def send_lift_command(self, command, label):
         self.update_status_label("Lift", label, "green")
         if self.ser:
