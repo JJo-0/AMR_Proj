@@ -9,7 +9,6 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Int32
 from geometry_msgs.msg import PoseStamped, Twist
-from gui.srv import SaveGoal
 from threading import Thread, Lock
 
 class SerialReader(QThread):
@@ -270,9 +269,6 @@ class ControlPanel(QWidget):
         self.current_lift_command = None
         self.lift_command_timer.stop()
         self.update_status_label("Lift", "-", "black")
-
-    def create_goal_service(self):
-        self.save_goal_srv = self.node.create_service(SaveGoal, '/go_save_goal', self.save_goal_callback)
 
     def save_goal_callback(self, request, response):
         if self.robot_pose:
