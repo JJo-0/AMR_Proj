@@ -1,3 +1,4 @@
+import subprocess
 import sys
 import serial
 import numpy as np
@@ -451,7 +452,7 @@ class MainWindow(QMainWindow):
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
 
-        self.setGeometry(0, 0, screen_width, screen_height)
+        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height)  # 오른쪽 절반 차지
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
@@ -463,10 +464,10 @@ class MainWindow(QMainWindow):
         container = QWidget()
         container.setLayout(main_layout)
         self.setCentralWidget(container)
-        
+
     def launch_rviz():
-        config_path = “/path/to/your/rviz/config/file.rviz”  # RViz 설정 파일 경로
-        subprocess.Popen([“rviz2”, “-d”, config_path])
+        config_path = "/desktop/AMR_Proj/Proj/etc/touch_gui/my_rviz_config.rviz"  # RViz 설정 파일 경로
+        subprocess.Popen(["rviz2", "-d", config_path])
 
 
 def main(args=None):
