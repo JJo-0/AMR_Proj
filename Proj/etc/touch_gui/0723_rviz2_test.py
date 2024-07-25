@@ -65,6 +65,8 @@ class ControlPanel(QWidget):
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)
         self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)
 
+        self.create_goal_service()  # 서비스 생성 함수 호출
+
         self.map_image = None
         self.map_mutex = QMutex()
         self.robot_pose = None
@@ -160,15 +162,29 @@ class ControlPanel(QWidget):
 
         nav_group = QGroupBox("Navigation Goals")
         nav_layout = QHBoxLayout()
-        self.nav_button_1 = QPushButton("Goal 1")
-        self.nav_button_2 = QPushButton("Goal 2")
-        self.nav_button_3 = QPushButton("Goal 3")
-        self.nav_button_1.clicked.connect(lambda: self.send_nav_goal(1.0, 2.0, 0.0))
-        self.nav_button_2.clicked.connect(lambda: self.send_nav_goal(3.0, 4.0, 0.0))
-        self.nav_button_3.clicked.connect(lambda: self.send_nav_goal(5.0, 6.0, 0.0))
-        nav_layout.addWidget(self.nav_button_1)
-        nav_layout.addWidget(self.nav_button_2)
-        nav_layout.addWidget(self.nav_button_3)
+
+        # Save Goal Buttons
+        self.save_goal_button_1 = QPushButton("Save Goal 1")
+        self.save_goal_button_2 = QPushButton("Save Goal 2")
+        self.save_goal_button_3 = QPushButton("Save Goal 3")
+        self.save_goal_button_1.clicked.connect(lambda: self.save_nav_goal(1))
+        self.save_goal_button_2.clicked.connect(lambda: self.save_nav_goal(2))
+        self.save_goal_button_3.clicked.connect(lambda: self.save_nav_goal(3))
+        nav_layout.addWidget(self.save_goal_button_1)
+        nav_layout.addWidget(self.save_goal_button_2)
+        nav_layout.addWidget(self.save_goal_button_3)
+
+        # Go Goal Buttons
+        self.go_goal_button_1 = QPushButton("Go Goal 1")
+        self.go_goal_button_2 = QPushButton("Go Goal 2")
+        self.go_goal_button_3 = QPushButton("Go Goal 3")
+        self.go_goal_button_1.clicked.connect(lambda: self.go_nav_goal(1))
+        self.go_goal_button_2.clicked.connect(lambda: self.go_nav_goal(2))
+        self.go_goal_button_3.clicked.connect(lambda: self.go_nav_goal(3))
+        nav_layout.addWidget(self.go_goal_button_1)
+        nav_layout.addWidget(self.go_goal_button_2)
+        nav_layout.addWidget(self.go_goal_button_3)
+
         nav_group.setLayout(nav_layout)
         right_layout.addWidget(nav_group)
 
@@ -213,6 +229,22 @@ class ControlPanel(QWidget):
             except serial.SerialException as e:
                 self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
 
+    def create_goal_service(self):
+        self.save_goal_srv = self.node.create_service(Trigger, '/go_save_goal', self.save_goal_callback)
+
+    def save_goal_callback(self, request, response):
+        if self.robot_pose:
+            x = self.robot_pose.position.x
+            y = self.robot_pose.position.y
+            z = self.robot_pose.orientation.z
+            self.goal_positions[self.current_goal_index] = (x, y, z)
+            response.success = True
+            response.message = f"Goal {self.current_goal_index} saved: ({x}, {y}, {z})"
+        else:
+            response.success = False
+            response.message = "No robot pose available"
+        return response
+
     def send_nav_goal(self, x, y, z):
         goal = PoseStamped()
         goal.header.frame_id = "map"
@@ -223,6 +255,17 @@ class ControlPanel(QWidget):
         goal.pose.orientation.z = z
         goal.pose.orientation.w = 1.0
         self.nav_pub.publish(goal)
+
+    def save_nav_goal(self, goal_index):
+        self.current_goal_index = goal_index
+        self.node.get_service_client('/go_save_goal', Trigger).call(Trigger.Request())
+
+    def go_nav_goal(self, goal_index):
+        if goal_index in self.goal_positions:
+            x, y, z = self.goal_positions[goal_index]
+            self.send_nav_goal(x, y, z)
+        else:
+            self.log_to_terminal(f"Goal {goal_index} not saved.")
 
     def update_status_label(self, label_name, text, color):
         label = self.status_labels.get(label_name, None)
