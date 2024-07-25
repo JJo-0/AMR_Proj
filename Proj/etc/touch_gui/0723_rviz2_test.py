@@ -2,14 +2,12 @@ import subprocess
 import sys
 import time
 import serial
-import numpy as np
+import json
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QMutex
-from PyQt5.QtGui import QPixmap, QImage, QPainter, QPen, QColor
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String, Int32, Float32
-from omo_r1mini_interfaces.srv import Trigger
+from std_msgs.msg import Int32
 from geometry_msgs.msg import PoseStamped, Twist
 from gui.srv import SaveGoal
 from threading import Thread, Lock
@@ -45,7 +43,7 @@ class ControlPanel(QWidget):
         self.ser = None
         self.current_lift_command = None
         self.ems_signal = 1
-        self.goal_positions = {}
+        self.goal_positions = {"goal_1": None, "goal_2": None, "goal_3": None}
         self.current_goal_index = None
 
         self.status_labels = {
@@ -68,12 +66,26 @@ class ControlPanel(QWidget):
 
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)
         self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)
+        self.pose_sub = self.node.create_subscription(PoseStamped, '/robot_pose', self.update_robot_pose, 10)
 
-        self.create_goal_service()
+        self.load_saved_goals()
 
         self.map_image = None
         self.map_mutex = QMutex()
         self.robot_pose = None
+    
+    def load_saved_goals(self):
+        try:
+            with open('Save_point.json', 'r') as f:
+                self.goal_positions = json.load(f)
+                self.log_to_terminal("Loaded saved goals.")
+        except FileNotFoundError:
+            self.log_to_terminal("No saved goals found.")
+
+    def save_goals_to_file(self):
+        with open('Save_point.json', 'w') as f:
+            json.dump(self.goal_positions, f)
+            self.log_to_terminal("Saved goals to file.")
 
     def setup_serial_connection(self, port, baud_rate):
         try:
@@ -276,39 +288,59 @@ class ControlPanel(QWidget):
         return response
 
     def save_nav_goal(self, goal_index):
+        if self.robot_pose is None:
+            self.log_to_terminal(f"Error: Cannot save goal {goal_index} - no robot pose available.")
+            return
+
         self.current_goal_index = goal_index
-        client = self.node.create_client(SaveGoal, '/go_save_goal')
-        while not client.wait_for_service(timeout_sec=1.0):
-            self.node.get_logger().info('Service not available, waiting again...')
+        self.send_lift_command("A_00", "Get Lift Height")  # 아두이노에게 현재 높이 요청
+        QTimer.singleShot(500, self.save_goal_with_height)  # 0.5초 후에 높이 값을 저장
 
-        request = SaveGoal.Request()
-        request.goal_number = goal_index
-        future = client.call_async(request)
-        future.add_done_callback(self.save_goal_response_callback)
+    def save_goal_with_height(self):
+        height = self.get_current_height_from_arduino()  # 아두이노로부터 높이 값을 가져오는 함수
+        if height is None:
+            self.log_to_terminal(f"Error: Cannot save goal {self.current_goal_index} - no lift height available.")
+            return
 
-    def save_goal_response_callback(self, future):
-        try:
-            response = future.result()
-            self.log_to_terminal(response.message)
-        except Exception as e:
-            self.log_to_terminal(f'Service call failed: {str(e)}')
+        x = self.robot_pose.position.x
+        y = self.robot_pose.position.y
+        z = self.robot_pose.orientation.z
+        self.goal_positions[f"goal_{self.current_goal_index}"] = {"position": [x, y, z], "height": height}
+        self.log_to_terminal(f"Goal {self.current_goal_index} saved: ({x}, {y}, {z}, height={height})")
+        self.save_goals_to_file()
+
+    def get_current_height_from_arduino(self):
+        # 여기에 아두이노로부터 현재 높이 값을 가져오는 로직 추가
+        # 현재 높이 값을 반환
+        return 100  # 예시 높이 값
 
     def go_nav_goal(self, goal_index):
-        client = self.node.create_client(SaveGoal, '/go_go_goal')
-        while not client.wait_for_service(timeout_sec=1.0):
-            self.node.get_logger().info('Service not available, waiting again...')
+        goal_key = f"goal_{goal_index}"
+        if self.goal_positions[goal_key] is None:
+            self.log_to_terminal(f"Error: Goal {goal_index} is not set.")
+            return
 
-        request = SaveGoal.Request()
-        request.goal_number = goal_index
-        future = client.call_async(request)
-        future.add_done_callback(self.go_goal_response_callback)
+        goal = self.goal_positions[goal_key]
+        x, y, z = goal["position"]
+        height = goal["height"]
 
-    def go_goal_response_callback(self, future):
-        try:
-            response = future.result()
-            self.log_to_terminal(response.message)
-        except Exception as e:
-            self.log_to_terminal(f'Service call failed: {str(e)}')
+        self.log_to_terminal(f"Navigating to Goal {goal_index}: ({x}, {y}, {z}, height={height})")
+        
+        goal_msg = PoseStamped()
+        goal_msg.header.frame_id = "map"
+        goal_msg.header.stamp = self.node.get_clock().now().to_msg()
+        goal_msg.pose.position.x = x
+        goal_msg.pose.position.y = y
+        goal_msg.pose.orientation.z = z
+        self.nav_pub.publish(goal_msg)
+
+        self.node.create_subscription(String, '/navigation_status', self.handle_navigation_status, 10)
+
+    def handle_navigation_status(self, msg):
+        if msg.data == "success":
+            self.log_to_terminal("Navigation succeeded.")
+        elif msg.data == "fail":
+            self.log_to_terminal("Navigation failed.")
 
     def update_status_label(self, label_name, text, color):
         label = self.status_labels.get(label_name, None)
