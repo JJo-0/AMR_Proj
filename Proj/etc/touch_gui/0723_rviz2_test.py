@@ -96,11 +96,17 @@ class ControlPanel(QWidget):
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
         left_layout.addWidget(self.emergency_stop_button)
 
-        self.terminal_output = QTextEdit()
-        self.terminal_output.setReadOnly(True)
-        self.terminal_output.setStyleSheet("background-color: black; color: white;")
-        self.terminal_output.setFixedHeight(50)
-        left_layout.addWidget(self.terminal_output)
+        status_group = QGroupBox("Robot Status")
+        status_layout = QVBoxLayout() 
+        for key, label in self.status_labels.items():
+            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
+            status_layout.addWidget(QLabel(key))
+            status_layout.addWidget(label)
+        self.update_status_label("EMS", "1", "green")
+        self.update_status_label("Lift", "-", "black")
+        self.update_status_label("Arduino", "E", "red")
+        status_group.setLayout(status_layout)
+        left_layout.addWidget(status_group)
 
         main_layout.addLayout(left_layout)
 
@@ -112,20 +118,11 @@ class ControlPanel(QWidget):
         self.exit_button.clicked.connect(self.exit_program)
         right_layout.addWidget(self.exit_button)
 
-        status_group = QGroupBox("Robot Status")
-        status_layout = QHBoxLayout()
-
-        for key, label in self.status_labels.items():
-            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
-            status_layout.addWidget(QLabel(key))
-            status_layout.addWidget(label)
-
-        self.update_status_label("EMS", "1", "green")
-        self.update_status_label("Lift", "-", "black")
-        self.update_status_label("Arduino", "E", "red")
-
-        status_group.setLayout(status_layout)
-        right_layout.addWidget(status_group)
+        self.terminal_output = QTextEdit()
+        self.terminal_output.setReadOnly(True)
+        self.terminal_output.setStyleSheet("background-color: black; color: white;")
+        self.terminal_output.setFixedHeight(50)
+        right_layout.addWidget(self.terminal_output)
 
         lift_group = QGroupBox("Lift Control")
         lift_layout = QHBoxLayout()
