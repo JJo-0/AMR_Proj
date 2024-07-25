@@ -4,11 +4,11 @@
         "height": 14
     },
     "goal_2": {
-        "position": [x, y, z],
-        "height": height
+        "position": [2, 3, 54],
+        "height": 1
     },
     "goal_3": {
-        "position": [x, y, z],
-        "height": height
+        "position": [1, 2, 3],
+        "height": 0
     }
 }
