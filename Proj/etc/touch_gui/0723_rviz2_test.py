@@ -112,20 +112,6 @@ class ControlPanel(QWidget):
         self.terminal_output.setFixedHeight(50)
         right_layout.addWidget(self.terminal_output)
 
-        status_group = QGroupBox("Robot Status")
-        status_layout = QVBoxLayout()
-
-        for key, label in self.status_labels.items():
-            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
-            status_layout.addWidget(QLabel(key))
-            status_layout.addWidget(label)
-
-        self.update_status_label("EMS", "1", "green")
-        self.update_status_label("Lift", "-", "black")
-        self.update_status_label("Arduino", "E", "red")
-        status_group.setLayout(status_layout)
-        left_layout.addWidget(status_group)
-
         lift_group = QGroupBox("Lift Control")
         lift_layout = QHBoxLayout()
         lift_group.setLayout(lift_layout)
@@ -161,6 +147,20 @@ class ControlPanel(QWidget):
 
         nav_group = QGroupBox("Navigation Goals")
         nav_layout = QHBoxLayout()
+
+        status_group = QGroupBox("Robot Status")
+        status_layout = QVBoxLayout()
+
+        for key, label in self.status_labels.items():
+            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
+            status_layout.addWidget(QLabel(key))
+            status_layout.addWidget(label)
+
+        self.update_status_label("EMS", "1", "green")
+        self.update_status_label("Lift", "-", "black")
+        self.update_status_label("Arduino", "E", "red")
+        status_group.setLayout(status_layout)
+        left_layout.addWidget(status_group)
 
         # Save Goal Buttons
         self.save_goal_button_1 = QPushButton("Save Goal 1")
@@ -395,7 +395,7 @@ class MainWindow(QMainWindow):
         screen_height = screen_geometry.height()
 
         # 오른쪽 절반 차지
-        self.setGeometry(int(screen_width // 2), 0, screen_width // 2, screen_height)
+        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height)
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
