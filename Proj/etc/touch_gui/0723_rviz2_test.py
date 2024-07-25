@@ -91,13 +91,13 @@ class ControlPanel(QWidget):
         self.emergency_stop_button = QToolButton()
         self.emergency_stop_button.setCheckable(True)
         self.emergency_stop_button.setText("EMS")
-        self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: lightcoral;")
+        self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 300px; background-color: lightcoral;")
 
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
         left_layout.addWidget(self.emergency_stop_button)
 
         status_group = QGroupBox("Robot Status")
-        status_layout = QVBoxLayout() 
+        status_layout = QVBoxLayout()
         for key, label in self.status_labels.items():
             label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
             status_layout.addWidget(QLabel(key))
@@ -398,18 +398,12 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(container)
 
         # RViz 실행
-        self.launch_rviz()
+        self.launch_rviz(screen_width, screen_height)
 
-    def launch_rviz(self):
+    def launch_rviz(self, screen_width, screen_height):
         config_path = "desktop/AMR_Proj/Proj/etc/touch_gui/my_rviz_config.rviz"  # RViz 설정 파일 경로
-        subprocess.Popen(["rviz2", "-d", config_path]) 
+        subprocess.Popen(["rviz2", "-d", config_path])
         time.sleep(5)  # RViz 창이 뜰 시간을 줌
-
-        # 화면 해상도 확인
-        output = subprocess.check_output("xrandr | grep '*' | awk '{print $1}'", shell=True)
-        resolution = output.decode().strip().split('x')
-        screen_width = int(resolution[0])
-        screen_height = int(resolution[1])
 
         # RViz 창을 화면의 왼쪽 절반으로 조정
         left_half_width = screen_width // 2
