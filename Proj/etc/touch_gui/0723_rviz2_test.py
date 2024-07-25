@@ -94,6 +94,11 @@ class ControlPanel(QWidget):
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
         left_layout.addWidget(self.emergency_stop_button)
 
+        self.terminal_output = QTextEdit()
+        self.terminal_output.setReadOnly(True)
+        self.terminal_output.setStyleSheet("background-color: black; color: white;")
+        left_layout.addWidget(self.terminal_output)
+
         main_layout.addLayout(left_layout)
 
         right_layout = QVBoxLayout()
