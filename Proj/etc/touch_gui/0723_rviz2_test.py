@@ -378,7 +378,7 @@ class ControlPanel(QWidget):
 
     def log_to_terminal(self, message):
         self.terminal_output.append(message)
-        # self.terminal_output.ensureCursorVisible()
+        self.terminal_output.ensureCursorVisible()
 
     def exit_program(self):
         self.log_to_terminal("Exiting program...")
