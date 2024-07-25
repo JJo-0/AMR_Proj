@@ -1,79 +1,84 @@
-import subprocess
-import sys
-import time
-import serial
-import json
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout)
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QMutex
-import rclpy
-from rclpy.node import Node
-from std_msgs.msg import Int32, String
-from geometry_msgs.msg import PoseStamped, Twist
-from threading import Thread, Lock
+import subprocess  # 서브프로세스를 실행하기 위한 모듈
+import sys  # 시스템 관련 기능을 위한 모듈
+import time  # 시간 관련 기능을 위한 모듈
+import serial  # 시리얼 통신을 위한 모듈
+import json  # JSON 파일 처리를 위한 모듈
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout)  # PyQt5 GUI 위젯들
+from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QMutex  # PyQt5 코어 기능들
+import rclpy  # ROS 2 파이썬 라이브러리
+from rclpy.node import Node  # ROS 2 노드 클래스
+from std_msgs.msg import Int32, String  # ROS 2 표준 메시지
+from geometry_msgs.msg import PoseStamped, Twist  # ROS 2 지오메트리 메시지
+from threading import Thread, Lock  # 스레딩 및 락
 
 class SerialReader(QThread):
-    new_data = pyqtSignal(str)
+    """시리얼 데이터 읽기용 스레드 클래스"""
+    new_data = pyqtSignal(str)  # 새로운 데이터를 받았음을 알리는 시그널
 
     def __init__(self, ser, lock):
         super().__init__()
-        self.ser = ser
-        self.lock = lock
-        self.running = True
+        self.ser = ser  # 시리얼 포트 객체
+        self.lock = lock  # 락 객체
+        self.running = True  # 스레드 실행 상태
 
     def run(self):
+        """스레드 실행 함수"""
         while self.running:
             try:
                 if self.ser and self.ser.in_waiting > 0:
-                    line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()
-                    self.new_data.emit(line)
+                    line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()  # 시리얼 데이터 읽기
+                    self.new_data.emit(line)  # 새로운 데이터 시그널 발생
             except serial.SerialException as e:
-                self.new_data.emit(f"Serial error: {e}")
-            time.sleep(0.1)
+                self.new_data.emit(f"Serial error: {e}")  # 시리얼 예외 처리
+            time.sleep(0.1)  # 0.1초 대기
 
     def stop(self):
+        """스레드 중지 함수"""
         self.running = False
         self.wait()
 
 class ControlPanel(QWidget):
+    """로봇 제어 패널 위젯 클래스"""
     def __init__(self, node, parent=None):
         super(ControlPanel, self).__init__(parent)
-        self.node = node
+        self.node = node  # ROS 2 노드
 
-        self.ser = None
-        self.current_lift_command = None
-        self.ems_signal = 1
-        self.goal_positions = {"goal_1": None, "goal_2": None, "goal_3": None}
-        self.current_goal_index = None
+        self.ser = None  # 시리얼 포트 객체
+        self.current_lift_command = None  # 현재 리프트 명령
+        self.ems_signal = 1  # 응급 정지 신호
+        self.goal_positions = {"goal_1": None, "goal_2": None, "goal_3": None}  # 목표 위치들
+        self.current_goal_index = None  # 현재 목표 인덱스
 
         self.status_labels = {
             "EMS": QLabel(),
             "Lift": QLabel(),
             "Arduino": QLabel()
-        }
+        }  # 상태 레이블들
 
-        self.serial_buffer = []
-        self.serial_lock = Lock()
-        self.lift_command_timer = QTimer()
+        self.serial_buffer = []  # 시리얼 버퍼
+        self.serial_lock = Lock()  # 시리얼 락
+        self.lift_command_timer = QTimer()  # 리프트 명령 타이머
         self.lift_command_timer.timeout.connect(self.send_lift_command_periodic)
 
-        self.init_ui()
+        self.init_ui()  # UI 초기화
         self.log_to_terminal("UI Set Success!")
 
-        self.setup_serial_connection('/dev/ttyACM0', 115200)
-        self.start_serial_read_thread()
-        self.start_serial_process_thread()
+        self.setup_serial_connection('/dev/ttyACM0', 115200)  # 시리얼 연결 설정
+        self.start_serial_read_thread()  # 시리얼 읽기 스레드 시작
+        self.start_serial_process_thread()  # 시리얼 처리 스레드 시작
 
-        self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)
-        self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)
-        self.pose_sub = self.node.create_subscription(PoseStamped, '/robot_pose', self.update_robot_pose, 10)
+        self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)  # 응급 정지 퍼블리셔
+        self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 퍼블리셔
+        self.pose_sub = self.node.create_subscription(PoseStamped, '/robot_pose', self.update_robot_pose, 10)  # 로봇 위치 구독
 
-        self.load_saved_goals()
+        self.load_saved_goals()  # 저장된 목표 불러오기
 
-        self.map_image = None
-        self.map_mutex = QMutex()
-        self.robot_pose = None
-    
+        self.map_image = None  # 맵 이미지
+        self.map_mutex = QMutex()  # 맵 뮤텍스
+        self.robot_pose = None  # 로봇 위치
+
     def load_saved_goals(self):
+        """저장된 목표를 파일에서 불러오기"""
         try:
             with open('Save_point.json', 'r') as f:
                 self.goal_positions = json.load(f)
@@ -82,11 +87,13 @@ class ControlPanel(QWidget):
             self.log_to_terminal("No saved goals found.")
 
     def save_goals_to_file(self):
+        """현재 목표를 파일에 저장"""
         with open('Save_point.json', 'w') as f:
             json.dump(self.goal_positions, f)
             self.log_to_terminal("Saved goals to file.")
 
     def setup_serial_connection(self, port, baud_rate):
+        """시리얼 연결 설정"""
         try:
             self.ser = serial.Serial(port, baud_rate, timeout=1)
             self.ser.reset_input_buffer()
@@ -98,6 +105,7 @@ class ControlPanel(QWidget):
             self.ser = None
 
     def init_ui(self):
+        """UI 초기화"""
         main_layout = QHBoxLayout()
         self.setLayout(main_layout)
 
@@ -108,7 +116,6 @@ class ControlPanel(QWidget):
         self.emergency_stop_button.setText("EMS")
         self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 300px; background-color: lightcoral;")
         self.emergency_stop_button.setFixedWidth(100)
-
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
         left_layout.addWidget(self.emergency_stop_button)
 
@@ -246,9 +253,11 @@ class ControlPanel(QWidget):
         self.update_status_label("Arduino", "E", "red")
 
     def update_robot_pose(self, msg):
-        self.robot_pose = msg.pose  
+        """로봇 위치 업데이트"""
+        self.robot_pose = msg.pose
 
     def send_lift_command(self, command, label):
+        """리프트 명령 전송"""
         self.update_status_label("Lift", label, "green")
         if self.ser:
             try:
@@ -259,20 +268,24 @@ class ControlPanel(QWidget):
                 self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
 
     def send_lift_command_periodic(self):
+        """주기적으로 리프트 명령 전송"""
         if self.current_lift_command:
             self.send_lift_command(*self.current_lift_command)
 
     def start_lift_command(self, command, label):
+        """리프트 명령 시작"""
         self.current_lift_command = (command, label)
         self.send_lift_command(command, label)
         self.lift_command_timer.start(1000)  # 1초마다 주기적으로 실행
 
     def stop_lift_command(self):
+        """리프트 명령 중지"""
         self.current_lift_command = None
         self.lift_command_timer.stop()
         self.update_status_label("Lift", "-", "black")
 
     def save_nav_goal(self, goal_index):
+        """네비게이션 목표 저장"""
         if self.robot_pose is None:
             self.log_to_terminal(f"Error: Cannot save goal {goal_index} - no robot pose available.")
             return
@@ -282,7 +295,8 @@ class ControlPanel(QWidget):
         QTimer.singleShot(500, self.save_goal_with_height)  # 0.5초 후에 높이 값을 저장
 
     def save_goal_with_height(self):
-        height = self.get_current_height_from_arduino()  # 아두이노로부터 높이 값을 가져오는 함수
+        """높이 정보와 함께 목표 저장"""
+        height = self.get_current_height_from_arduino()
         if height is None:
             self.log_to_terminal(f"Error: Cannot save goal {self.current_goal_index} - no lift height available.")
             return
@@ -295,11 +309,22 @@ class ControlPanel(QWidget):
         self.save_goals_to_file()
 
     def get_current_height_from_arduino(self):
-        # 여기에 아두이노로부터 현재 높이 값을 가져오는 로직 추가
-        # 현재 높이 값을 반환
-        return 100  # 예시 높이 값
+        """아두이노로부터 현재 높이 값 가져오기"""
+        if self.ser:
+            try:
+                self.ser.write("A_00\n".encode('utf-8'))  # 높이 요청 명령 전송
+                time.sleep(0.5)  # 응답 대기 시간
+                if self.ser.in_waiting > 0:
+                    line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()
+                    if line.startswith("A_"):
+                        height = int(line.split("_")[1])  # 높이 값 파싱
+                        return height
+            except serial.SerialException as e:
+                self.log_to_terminal(f"[Arduino Reading Error] : {str(e)}")
+        return None
 
     def go_nav_goal(self, goal_index):
+        """네비게이션 목표로 이동"""
         goal_key = f"goal_{goal_index}"
         if self.goal_positions[goal_key] is None:
             self.log_to_terminal(f"Error: Goal {goal_index} is not set.")
@@ -322,28 +347,33 @@ class ControlPanel(QWidget):
         self.node.create_subscription(String, '/navigation_status', self.handle_navigation_status, 10)
 
     def handle_navigation_status(self, msg):
+        """네비게이션 상태 처리"""
         if msg.data == "success":
             self.log_to_terminal("Navigation succeeded.")
         elif msg.data == "fail":
             self.log_to_terminal("Navigation failed.")
 
     def update_status_label(self, label_name, text, color):
-        label = self.status_labels.get(label_name, None)
-        if label:
-            label.setText(f"{text}")
-            label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
+        """상태 레이블 업데이트"""
+    label = self.status_labels.get(label_name, None)
+    if label:
+        label.setText(f"{text}")
+        label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
 
     def start_serial_read_thread(self):
+        """시리얼 읽기 스레드 시작"""
         if self.ser:
             self.read_thread = Thread(target=self.read_from_serial)
             self.read_thread.start()
             self.log_to_terminal("Serial Reading Thread Start")
 
     def start_serial_process_thread(self):
+        """시리얼 처리 스레드 시작"""
         self.process_thread = Thread(target=self.process_serial_buffer)
         self.process_thread.start()
 
     def read_from_serial(self):
+        """시리얼 데이터 읽기"""
         while True:
             if self.ser and self.ser.in_waiting > 0:
                 line = self.ser.readline().decode('utf-8', errors='ignore').rstrip()
@@ -351,6 +381,7 @@ class ControlPanel(QWidget):
                     self.serial_buffer.append(line)
 
     def process_serial_buffer(self):
+        """시리얼 버퍼 처리"""
         while True:
             with self.serial_lock:
                 if self.serial_buffer:
@@ -359,6 +390,7 @@ class ControlPanel(QWidget):
             time.sleep(0.1)
 
     def process_serial_data(self, data):
+        """시리얼 데이터 처리"""
         if data.startswith("E_"):
             try:
                 status = int(data.split("_")[1])
@@ -375,19 +407,30 @@ class ControlPanel(QWidget):
             except (ValueError, IndexError) as e:
                 self.log_to_terminal(f"Invalid data received: {data}")
 
+        if data.startswith("A_"):
+            try:
+                height = int(data.split("_")[1])
+                self.goal_positions[f"goal_{self.current_goal_index}"]["height"] = height
+                self.log_to_terminal(f"Arduino received lift height: {height}")
+            except (ValueError, IndexError) as e:
+                self.log_to_terminal(f"Invalid height data received: {data}")
+
     def start_movement(self, direction):
+        """로봇 이동 시작"""
         self.emergency_pub.publish(Int32(data=1))
         self.update_status_label("EMS", "1", "green")
         self.emergency_stop_button.setChecked(False)
         self.send_movement_command(direction)
 
     def stop_movement(self):
+        """로봇 이동 중지"""
         self.emergency_pub.publish(Int32(data=0))
         self.update_status_label("EMS", "0", "red")
         self.emergency_stop_button.setChecked(True)
         self.send_movement_command("stop")
-    
+
     def send_movement_command(self, direction):
+        """이동 명령 전송"""
         msg = Twist()
         if direction == "forward":
             msg.linear.x = 0.1
@@ -403,6 +446,7 @@ class ControlPanel(QWidget):
         self.node.create_publisher(Twist, '/cmd_vel', 10).publish(msg)
 
     def handle_emergency_stop(self):
+        """응급 정지 처리"""
         sender = self.sender()
         if sender.isChecked():
             self.emergency_pub.publish(Int32(data=0))
@@ -425,10 +469,12 @@ class ControlPanel(QWidget):
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
 
     def log_to_terminal(self, message):
+        """터미널 로그"""
         self.terminal_output.append(message)
         self.terminal_output.ensureCursorVisible()
 
     def exit_program(self):
+        """프로그램 종료"""
         self.log_to_terminal("Exiting program...")
         QApplication.quit()
 
