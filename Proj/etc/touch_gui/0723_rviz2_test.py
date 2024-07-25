@@ -43,6 +43,8 @@ class ControlPanel(QWidget):
         super(ControlPanel, self).__init__(parent)
         self.node = node  # ROS 2 노드
 
+        self.rviz_process = None  # RViz 프로세스 객체를 저장할 변수
+
         self.ser = None  # 시리얼 포트 객체
         self.current_lift_command = None  # 현재 리프트 명령
         self.ems_signal = 1  # 응급 정지 신호
@@ -508,8 +510,9 @@ class MainWindow(QMainWindow):
         self.launch_rviz()
 
     def launch_rviz(self):
+        """RViz 실행"""
         config_path = "desktop/AMR_Proj/Proj/etc/touch_gui/touch_gui.rviz"  # RViz 설정 파일 경로
-        subprocess.Popen(["rviz2", "-d", config_path])
+        self.control_panel.rviz_process = subprocess.Popen(["rviz2", "-d", config_path])  # RViz 프로세스를 시작하고 객체를 저장
         time.sleep(5)  # RViz 창이 뜰 시간을 줌
 
 def main(args=None):
