@@ -394,7 +394,7 @@ class MainWindow(QMainWindow):
         screen_height = screen_geometry.height()
 
         # 오른쪽 절반 차지
-        self.setGeometry(int(screen_width // 2), 0, screen_width // 2, screen_height)
+        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height)
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
