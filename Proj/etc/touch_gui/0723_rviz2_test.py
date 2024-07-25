@@ -86,31 +86,82 @@ class ControlPanel(QWidget):
 
         left_layout = QVBoxLayout()
 
-        nav_group = QGroupBox("Navigation Goals")  # 네비게이션 그룹
-        nav_button_layout = QHBoxLayout()
+        self.emergency_stop_button = QToolButton()
+        self.emergency_stop_button.setCheckable(True)
+        self.emergency_stop_button.setText("EMS")
+        self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: lightcoral;")
+
+        self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
+        left_layout.addWidget(self.emergency_stop_button)
+
+        main_layout.addLayout(left_layout)
+
+        right_layout = QVBoxLayout()
+
+        status_group = QGroupBox("Robot Status")
+        status_layout = QHBoxLayout()
+
+        for key, label in self.status_labels.items():
+            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
+            status_layout.addWidget(QLabel(key))
+            status_layout.addWidget(label)
+
+        self.update_status_label("EMS", "1", "green")
+        self.update_status_label("Lift", "-", "black")
+        self.update_status_label("Arduino", "E", "red")
+
+        status_group.setLayout(status_layout)
+        right_layout.addWidget(status_group)
+
+        lift_group = QGroupBox("Lift Control")
+        lift_layout = QHBoxLayout()
+        lift_group.setLayout(lift_layout)
+
+        lift_height_group = QVBoxLayout()
+        self.height1_button = QPushButton("1 Height")
+        self.height2_button = QPushButton("2 Height")
+        self.height3_button = QPushButton("3 Height")
+        self.height1_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.height2_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.height3_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))
+        self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))
+        self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))
+        lift_height_group.addWidget(self.height1_button)
+        lift_height_group.addWidget(self.height2_button)
+        lift_height_group.addWidget(self.height3_button)
+
+        lift_updown_group = QVBoxLayout()
+        self.lift_up_button = QPushButton("Lift Up")
+        self.lift_down_button = QPushButton("Lift Down")
+        self.lift_up_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.lift_down_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
+        self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10", "Lift Up"))
+        self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11", "Lift Down"))
+        lift_updown_group.addWidget(self.lift_up_button)
+        lift_updown_group.addWidget(self.lift_down_button)
+
+        lift_layout.addLayout(lift_height_group)
+        lift_layout.addLayout(lift_updown_group)
+
+        right_layout.addWidget(lift_group)
+
+        nav_group = QGroupBox("Navigation Goals")
+        nav_layout = QHBoxLayout()
         self.nav_button_1 = QPushButton("Goal 1")
         self.nav_button_2 = QPushButton("Goal 2")
         self.nav_button_3 = QPushButton("Goal 3")
         self.nav_button_1.clicked.connect(lambda: self.send_nav_goal(1.0, 2.0, 0.0))
         self.nav_button_2.clicked.connect(lambda: self.send_nav_goal(3.0, 4.0, 0.0))
         self.nav_button_3.clicked.connect(lambda: self.send_nav_goal(5.0, 6.0, 0.0))
-        nav_button_layout.addWidget(self.nav_button_1)
-        nav_button_layout.addWidget(self.nav_button_2)
-        nav_button_layout.addWidget(self.nav_button_3)
-        nav_group.setLayout(nav_button_layout)
-        left_layout.addWidget(nav_group)
-
-        self.terminal_output = QTextEdit()
-        self.terminal_output.setReadOnly(True)
-        self.terminal_output.setStyleSheet("background-color: black; color: white;")
-        self.terminal_output.setFixedHeight(50)
-        left_layout.addWidget(self.terminal_output)
+        nav_layout.addWidget(self.nav_button_1)
+        nav_layout.addWidget(self.nav_button_2)
+        nav_layout.addWidget(self.nav_button_3)
+        nav_group.setLayout(nav_layout)
+        right_layout.addWidget(nav_group)
 
         move_control_group = QGroupBox("Movement Control")
         move_layout = QGridLayout()
-        move_control_group.setLayout(move_layout)
-        move_control_group.setFixedHeight(200)
-
         self.forward_button = QPushButton("Forward")
         self.backward_button = QPushButton("Backward")
         self.left_button = QPushButton("Left")
@@ -121,7 +172,6 @@ class ControlPanel(QWidget):
         move_layout.addWidget(self.stop_button, 1, 1)
         move_layout.addWidget(self.right_button, 1, 2)
         move_layout.addWidget(self.forward_button, 2, 1)
-
         self.forward_button.pressed.connect(lambda: self.start_movement("forward"))
         self.forward_button.released.connect(self.stop_movement)
         self.backward_button.pressed.connect(lambda: self.start_movement("backward"))
@@ -136,116 +186,20 @@ class ControlPanel(QWidget):
         self.left_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
         self.right_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
         self.stop_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
+        move_control_group.setLayout(move_layout)
+        right_layout.addWidget(move_control_group)
 
-        self.emergency_stop_button = QToolButton()
-        self.emergency_stop_button.setCheckable(True)
-        self.emergency_stop_button.setText("EMS")
-        self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 100px; background-color: lightcoral;")
-        self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
-        self.emergency_stop_button.setFixedSize(150, 150)
-        left_control_layout = QHBoxLayout()
-        left_control_layout.addWidget(move_control_group)
-        left_control_layout.addWidget(self.emergency_stop_button)
-        left_layout.addLayout(left_control_layout)
-
-        main_layout.addLayout(left_layout)
-
-        right_layout = QVBoxLayout()
-
-        self.exit_button = QPushButton("Exit")
-        self.exit_button.setStyleSheet("font-size: 8px; height: 12px; background-color: grey; color: white;")
-        self.exit_button.clicked.connect(self.exit_program)
-        right_layout.addWidget(self.exit_button)
-
-        right_layout.addWidget(nav_group)
-
-        # Lift Control Group
-        lift_group = QGroupBox("Lift Control")
-        lift_layout = QVBoxLayout()
-        lift_group.setLayout(lift_layout)
-        self.height1_button = QPushButton("1 Height")
-        self.height2_button = QPushButton("2 Height")
-        self.height3_button = QPushButton("3 Height")
-        self.height1_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
-        self.height2_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
-        self.height3_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
-        self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))
-        self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))
-        self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))
-        lift_layout.addWidget(self.height1_button)
-        lift_layout.addWidget(self.height2_button)
-        lift_layout.addWidget(self.height3_button)
-
-        right_layout.addWidget(lift_group)
-
-        lift_updown_group = QGroupBox("Lift Up/Down")
-        lift_updown_layout = QVBoxLayout()
-        self.lift_up_button = QPushButton("Lift Up")
-        self.lift_down_button = QPushButton("Lift Down")
-        self.lift_up_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
-        self.lift_down_button.setStyleSheet("font-size: 24px; height: 50px; background-color: lightgrey;")
-        self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10", "Lift Up"))
-        self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11", "Lift Down"))
-        lift_updown_layout.addWidget(self.lift_up_button)
-        lift_updown_layout.addWidget(self.lift_down_button)
-        lift_updown_group.setLayout(lift_updown_layout)
-
-        right_layout.addWidget(lift_updown_group)
-
-        status_group = QGroupBox("Robot Status")
-        status_layout = QVBoxLayout()
-
-        for key, label in self.status_labels.items():
-            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
-            status_layout.addWidget(QLabel(key))
-            status_layout.addWidget(label)
-
-        self.update_status_label("EMS Signal", "Good: 1", "green")
-        self.update_status_label("Lift Signal", "-", "black")
-        self.update_status_label("Arduino Connection", "Disconnected", "black")
-
-        status_group.setLayout(status_layout)
-        right_layout.addWidget(status_group)
-        main_layout.addLayout(left_layout)
         main_layout.addLayout(right_layout)
 
-    def update_map(self, msg):
-        width, height = msg.info.width, msg.info.height
-        data = np.array(msg.data).reshape((height, width))
-        data = np.uint8((data == 0) * 255)  # Occupied cells are black (0), free cells are white (255)
-
-        qimage = QImage(data, width, height, QImage.Format_Grayscale8)
-        pixmap = QPixmap.fromImage(qimage)
-        self.map_mutex.lock()
-        self.map_image = pixmap
-        self.map_mutex.unlock()
-        self.update_map_display()
-
-    def update_robot_position(self, msg):
-        self.robot_pose = msg.pose.pose
-        self.update_map_display()
-
-    def update_map_display(self):
-        self.map_mutex.lock()
-        if self.map_image:
-            pixmap = self.map_image.copy()
-            painter = QPainter(pixmap)
-            painter.setPen(QPen(Qt.red, 5, Qt.SolidLine))
-
-            if self.robot_pose:
-                # 로봇 위치를 맵 좌표로 변환
-                resolution = 0.05  # 예제 해상도, 실제 맵 해상도 사용
-                origin_x, origin_y = 0, 0  # 예제 원점, 실제 맵 원점 사용
-
-                x = int((self.robot_pose.position.x - origin_x) / resolution)
-                y = int((self.robot_pose.position.y - origin_y) / resolution)
-                y = pixmap.height() - y  # y 축 반전
-
-                painter.drawEllipse(x - 5, y - 5, 10, 10)  # 로봇 위치를 원으로 그림
-
-            painter.end()
-            self.map_label.setPixmap(pixmap)
-        self.map_mutex.unlock()
+    def send_lift_command(self, command, label):
+        self.update_status_label("Lift", label, "green")
+        if self.ser:
+            try:
+                self.ser.write(f"{command}\n".encode('utf-8'))
+                self.log_to_terminal(f"[Arduino Send] : {command}")
+                QTimer.singleShot(5000, lambda: self.update_status_label("Lift", "-", "black"))
+            except serial.SerialException as e:
+                self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
 
     def send_nav_goal(self, x, y, z):
         goal = PoseStamped()
@@ -257,7 +211,6 @@ class ControlPanel(QWidget):
         goal.pose.orientation.z = z
         goal.pose.orientation.w = 1.0
         self.nav_pub.publish(goal)
-        self.log_to_terminal(f"Navigation goal sent: ({x}, {y}, {z})")
 
     def update_status_label(self, label_name, text, color):
         label = self.status_labels.get(label_name, None)
@@ -274,16 +227,6 @@ class ControlPanel(QWidget):
     def start_serial_process_thread(self):
         self.process_thread = Thread(target=self.process_serial_buffer)
         self.process_thread.start()
-
-    def send_lift_command(self, command, label):
-        self.update_status_label("Lift Signal", label, "green")
-        if self.ser:
-            try:
-                self.ser.write(f"{command}\n".encode('utf-8'))
-                self.log_to_terminal(f"[Arduino Send] : {command}")
-                QTimer.singleShot(5000, lambda: self.update_status_label("Lift Signal", "-", "black"))
-            except serial.SerialException as e:
-                self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
 
     def read_from_serial(self):
         while True:
@@ -307,47 +250,25 @@ class ControlPanel(QWidget):
                 self.ems_signal = status
                 if status == 1:
                     self.emergency_pub.publish(Int32(data=1))
-                    self.update_status_label("EMS Signal", "Good: 1", "green")
+                    self.update_status_label("EMS", "1", "green")
                     self.emergency_stop_button.setChecked(False)
                 elif status == 0:
                     self.emergency_pub.publish(Int32(data=0))
-                    self.update_status_label("EMS Signal", "Emergency: 0", "red")
+                    self.update_status_label("EMS", "0", "red")
                     self.emergency_stop_button.setChecked(True)
                 self.log_to_terminal(f"Arduino received : EMS_{data}")
             except (ValueError, IndexError) as e:
                 self.log_to_terminal(f"Invalid data received: {data}")
 
-    def move_to_preset_height(self, command, log_message):
-        self.send_lift_command(command, log_message)
-        self.log_to_terminal(log_message)
-
-    def update_velocity(self, msg):
-        self.velocity = msg.twist.twist.linear.x
-        self.log_to_terminal(f"Update Velocity: {self.velocity}")
-
-    def update_imu(self, msg):
-        self.imu_orientation = msg.orientation.z
-        self.log_to_terminal(f"Update IMU: {self.imu_orientation}")
-
-    def update_slam(self, msg):
-        self.slam_distance = msg.data
-        self.log_to_terminal(f"Update SLAM: {self.slam_distance}")
-        self.eta = self.calculate_eta()
-
-    def calculate_eta(self):
-        if self.velocity and self.slam_distance:
-            return self.slam_distance / self.velocity
-        return None
-
     def start_movement(self, direction):
         self.emergency_pub.publish(Int32(data=1))
-        self.update_status_label("EMS Signal", "1 : Good", "green")
+        self.update_status_label("EMS", "1", "green")
         self.emergency_stop_button.setChecked(False)
         self.send_movement_command(direction)
 
     def stop_movement(self):
         self.emergency_pub.publish(Int32(data=0))
-        self.update_status_label("EMS Signal", "0 : Emergency", "red")
+        self.update_status_label("EMS", "0", "red")
         self.emergency_stop_button.setChecked(True)
         self.send_movement_command("stop")
 
@@ -370,7 +291,7 @@ class ControlPanel(QWidget):
         sender = self.sender()
         if sender.isChecked():
             self.emergency_pub.publish(Int32(data=0))
-            self.update_status_label("EMS Signal", "0 : Emergency", "red")
+            self.update_status_label("EMS", "0", "red")
             self.ems_signal = 0
             if self.ser:
                 try:
@@ -379,7 +300,7 @@ class ControlPanel(QWidget):
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
         else:
             self.emergency_pub.publish(Int32(data=1))
-            self.update_status_label("EMS Signal", "1 : Good", "green")
+            self.update_status_label("EMS", "1", "green")
             self.ems_signal = 1
             if self.ser:
                 try:
@@ -427,17 +348,8 @@ class MainWindow(QMainWindow):
         self.launch_rviz()
 
     def launch_rviz():
-        config_path = "/desktop/AMR_Proj/Proj/etc/touch_gui/my_rviz_config.rviz"  # RViz 설정 파일 경로
-        subprocess.Popen(["rviz2", "-d", config_path])
-        time.sleep(5)
-
-        output = subprocess.check_output("xrandr | grep '*' | awk '{print $1}'", shell=True)
-        resolution = output.decode().strip().split('x')
-        screen_width = int(resolution[0])
-        screen_height = int(resolution[1])
-
-        left_half_width = screen_width // 2
-        subprocess.call(f"wmctrl -r RViz -e 0,0,0,{left_half_width},{screen_height}", shell=True)
+        config_path = "/path/to/your/my_rviz_config.rviz"  # RViz 설정 파일 경로
+        subprocess.Popen(["rviz2", "-d", config_path]) 
 
 
 def main(args=None):
