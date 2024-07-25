@@ -459,7 +459,7 @@ class MainWindow(QMainWindow):
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
 
-        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height * (9 / 10))
+        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height * 9 // 10)
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
