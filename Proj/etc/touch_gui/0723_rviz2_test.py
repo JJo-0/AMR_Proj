@@ -92,6 +92,7 @@ class ControlPanel(QWidget):
         self.emergency_stop_button.setCheckable(True)
         self.emergency_stop_button.setText("EMS")
         self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 300px; background-color: lightcoral;")
+        self.emergency_stop_button.setStyleWidth(150)
 
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
         left_layout.addWidget(self.emergency_stop_button)
