@@ -97,6 +97,17 @@ class ControlPanel(QWidget):
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
         left_layout.addWidget(self.emergency_stop_button)
 
+        status_group = QGroupBox("Robot Status")
+        status_layout = QVBoxLayout()
+
+        for key, label in self.status_labels.items():
+            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
+            status_layout.addWidget(QLabel(key))
+            status_layout.addWidget(label)
+
+        status_group.setLayout(status_layout)
+        left_layout.addWidget(status_group)
+
         main_layout.addLayout(left_layout)
 
         right_layout = QVBoxLayout()
@@ -147,20 +158,6 @@ class ControlPanel(QWidget):
 
         nav_group = QGroupBox("Navigation Goals")
         nav_layout = QHBoxLayout()
-
-        status_group = QGroupBox("Robot Status")
-        status_layout = QVBoxLayout()
-
-        for key, label in self.status_labels.items():
-            label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
-            status_layout.addWidget(QLabel(key))
-            status_layout.addWidget(label)
-
-        self.update_status_label("EMS", "1", "green")
-        self.update_status_label("Lift", "-", "black")
-        self.update_status_label("Arduino", "E", "red")
-        status_group.setLayout(status_layout)
-        left_layout.addWidget(status_group)
 
         # Save Goal Buttons
         self.save_goal_button_1 = QPushButton("Save Goal 1")
@@ -224,6 +221,10 @@ class ControlPanel(QWidget):
 
         main_layout.addLayout(right_layout)
 
+        self.update_status_label("EMS", "1", "green")
+        self.update_status_label("Lift", "-", "black")
+        self.update_status_label("Arduino", "E", "red")
+
     def send_lift_command(self, command, label):
         self.update_status_label("Lift", label, "green")
         if self.ser:
@@ -273,12 +274,11 @@ class ControlPanel(QWidget):
             self.log_to_terminal(f"Goal {goal_index} not saved.")
 
     def update_status_label(self, label_name, text, color):
-        print(f"Updating {label_name} to {text} with color {color}")
-        self.log_to_terminal(f"Updating {label_name} to {text} with color {color}")  # 로그 추가
         label = self.status_labels.get(label_name, None)
         if label:
             label.setText(f"{text}")
             label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
+            label.update()  # 강제로 업데이트
             self.log_to_terminal(f"Updated {label_name} successfully")
 
     def start_serial_read_thread(self):
@@ -374,12 +374,11 @@ class ControlPanel(QWidget):
 
     def log_to_terminal(self, message):
         self.terminal_output.append(message)
-        self.terminal_output.ensureCursorVisible()
+        # self.terminal_output.ensureCursorVisible()
 
     def exit_program(self):
         self.log_to_terminal("Exiting program...")
         QApplication.quit()
-
 
 class MainWindow(QMainWindow):
     def __init__(self, node):
@@ -395,7 +394,7 @@ class MainWindow(QMainWindow):
         screen_height = screen_geometry.height()
 
         # 오른쪽 절반 차지
-        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height)
+        self.setGeometry(int(screen_width // 2), 0, screen_width // 2, screen_height)
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
