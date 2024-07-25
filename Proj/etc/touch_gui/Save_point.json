@@ -1,7 +1,7 @@
 {
     "goal_1": {
-        "position": [x, y, z],
-        "height": height
+        "position": [1, 2, 3],
+        "height": 14
     },
     "goal_2": {
         "position": [x, y, z],
