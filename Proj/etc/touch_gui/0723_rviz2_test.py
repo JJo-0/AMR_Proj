@@ -184,9 +184,9 @@ class ControlPanel(QWidget):
         self.go_goal_button_1.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgreen;")
         self.go_goal_button_2.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgreen;")
         self.go_goal_button_3.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgreen;")
-        go_goal_layout.addWidget(self.go_goal_button_1)
-        go_goal_layout.addWidget(self.go_goal_button_2)
         go_goal_layout.addWidget(self.go_goal_button_3)
+        go_goal_layout.addWidget(self.go_goal_button_2)
+        go_goal_layout.addWidget(self.go_goal_button_1)
 
         nav_layout.addLayout(save_goal_layout)
         nav_layout.addLayout(go_goal_layout)
@@ -390,15 +390,14 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Robot Control Panel")
 
         # 전체 화면 설정
-        # self.showFullScreen()
+        self.showFullScreen()
 
         # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
         screen_geometry = QApplication.primaryScreen().geometry()
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
 
-        # 오른쪽 절반 차지
-        self.setGeometry(0, 0, screen_width // 2, screen_height)
+        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height)  
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
