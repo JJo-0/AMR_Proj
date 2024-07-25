@@ -99,10 +99,12 @@ class ControlPanel(QWidget):
 
         status_group = QGroupBox("Robot Status")
         status_layout = QVBoxLayout()
+
         for key, label in self.status_labels.items():
             label.setStyleSheet("font-size: 14px; background-color: black; color: white; padding: 5px;")
             status_layout.addWidget(QLabel(key))
             status_layout.addWidget(label)
+
         self.update_status_label("EMS", "1", "green")
         self.update_status_label("Lift", "-", "black")
         self.update_status_label("Arduino", "E", "red")
@@ -113,7 +115,6 @@ class ControlPanel(QWidget):
 
         right_layout = QVBoxLayout()
 
-        # 끄는 버튼 추가
         self.exit_button = QPushButton("Exit")
         self.exit_button.setStyleSheet("font-size: 8px; height: 12px; background-color: gray; color: white;")
         self.exit_button.clicked.connect(self.exit_program)
@@ -168,9 +169,9 @@ class ControlPanel(QWidget):
         self.save_goal_button_1.clicked.connect(lambda: self.save_nav_goal(1))
         self.save_goal_button_2.clicked.connect(lambda: self.save_nav_goal(2))
         self.save_goal_button_3.clicked.connect(lambda: self.save_nav_goal(3))
-        self.save_goal_button_1.setStyleSheet("font-size: 9px; height: 50px; background-color: lightgrey;")
-        self.save_goal_button_2.setStyleSheet("font-size: 9px; height: 50px; background-color: lightgrey;")
-        self.save_goal_button_3.setStyleSheet("font-size: 9px; height: 50px; background-color: lightgrey;")
+        self.save_goal_button_1.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgrey;")
+        self.save_goal_button_2.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgrey;")
+        self.save_goal_button_3.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgrey;")
         nav_layout.addWidget(self.save_goal_button_1)
         nav_layout.addWidget(self.save_goal_button_2)
         nav_layout.addWidget(self.save_goal_button_3)
@@ -182,9 +183,9 @@ class ControlPanel(QWidget):
         self.go_goal_button_1.clicked.connect(lambda: self.go_nav_goal(1))
         self.go_goal_button_2.clicked.connect(lambda: self.go_nav_goal(2))
         self.go_goal_button_3.clicked.connect(lambda: self.go_nav_goal(3))
-        self.go_goal_button_1.setStyleSheet("font-size: 9px; height: 50px; background-color: lightgrey;")
-        self.go_goal_button_2.setStyleSheet("font-size: 9px; height: 50px; background-color: lightgrey;")
-        self.go_goal_button_3.setStyleSheet("font-size: 9px; height: 50px; background-color: lightgrey;")
+        self.go_goal_button_1.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgrey;")
+        self.go_goal_button_2.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgrey;")
+        self.go_goal_button_3.setStyleSheet("font-size: 18px; height: 50px; background-color: lightgrey;")
         nav_layout.addWidget(self.go_goal_button_1)
         nav_layout.addWidget(self.go_goal_button_2)
         nav_layout.addWidget(self.go_goal_button_3)
@@ -276,6 +277,7 @@ class ControlPanel(QWidget):
         if label:
             label.setText(f"{text}")
             label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
+            print(f"Updated {label_name}: {text}, {color}")
 
     def start_serial_read_thread(self):
         if self.ser:
@@ -408,14 +410,9 @@ class MainWindow(QMainWindow):
         self.launch_rviz(screen_width, screen_height)
 
     def launch_rviz(self, screen_width, screen_height):
-        config_path = "desktop/AMR_Proj/Proj/etc/touch_gui/my_rviz_config.rviz"  # RViz 설정 파일 경로
+        config_path = "desktop/AMR_Proj/Proj/etc/touch_gui/touch_gui.rviz"  # RViz 설정 파일 경로
         subprocess.Popen(["rviz2", "-d", config_path])
         time.sleep(5)  # RViz 창이 뜰 시간을 줌
-
-        # RViz 창을 화면의 왼쪽 절반으로 조정
-        right_half_width = screen_width // 2
-        half_width = screen_height // 2
-        subprocess.call(f"wmctrl -r RViz -e 0,{right_half_width},0,{right_half_width},{half_width}", shell=True)
 
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화
