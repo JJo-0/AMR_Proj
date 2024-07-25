@@ -9,8 +9,9 @@ from PyQt5.QtGui import QPixmap, QImage, QPainter, QPen, QColor
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Int32, Float32
-from std_srvs.srv import Trigger
+from omo_r1mini_interfaces.srv import Trigger
 from geometry_msgs.msg import PoseStamped, Twist
+from your_package_name.srv import SaveGoal
 from threading import Thread, Lock
 
 class SerialReader(QThread):
@@ -42,9 +43,10 @@ class ControlPanel(QWidget):
         self.node = node
 
         self.ser = None
-        self.velocity = None
         self.current_lift_command = None
         self.ems_signal = 1
+        self.goal_positions = {}
+        self.current_goal_index = None
 
         self.status_labels = {
             "EMS": QLabel(),
@@ -54,6 +56,8 @@ class ControlPanel(QWidget):
 
         self.serial_buffer = []
         self.serial_lock = Lock()
+        self.lift_command_timer = QTimer()
+        self.lift_command_timer.timeout.connect(self.send_lift_command_periodic)
 
         self.init_ui()
         self.log_to_terminal("UI Set Success!")
@@ -146,8 +150,10 @@ class ControlPanel(QWidget):
         self.lift_down_button = QPushButton("Lift Down")
         self.lift_up_button.setStyleSheet("font-size: 20px; height: 60px; background-color: lightgrey;")
         self.lift_down_button.setStyleSheet("font-size: 20px; height: 60px; background-color: lightgrey;")
-        self.lift_up_button.clicked.connect(lambda: self.send_lift_command("L_10", "Lift Up"))
-        self.lift_down_button.clicked.connect(lambda: self.send_lift_command("L_11", "Lift Down"))
+        self.lift_up_button.pressed.connect(lambda: self.start_lift_command("L_10", "Lift Up"))
+        self.lift_up_button.released.connect(self.stop_lift_command)
+        self.lift_down_button.pressed.connect(lambda: self.start_lift_command("L_11", "Lift Down"))
+        self.lift_down_button.released.connect(self.stop_lift_command)
         lift_updown_group.addWidget(self.lift_up_button)
         lift_updown_group.addWidget(self.lift_down_button)
 
@@ -239,8 +245,22 @@ class ControlPanel(QWidget):
             except serial.SerialException as e:
                 self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
 
+    def send_lift_command_periodic(self):
+        if self.current_lift_command:
+            self.send_lift_command(*self.current_lift_command)
+
+    def start_lift_command(self, command, label):
+        self.current_lift_command = (command, label)
+        self.send_lift_command(command, label)
+        self.lift_command_timer.start(1000)  # 1초마다 주기적으로 실행
+
+    def stop_lift_command(self):
+        self.current_lift_command = None
+        self.lift_command_timer.stop()
+        self.update_status_label("Lift", "-", "black")
+
     def create_goal_service(self):
-        self.save_goal_srv = self.node.create_service(Trigger, '/go_save_goal', self.save_goal_callback)
+        self.save_goal_srv = self.node.create_service(SaveGoal, '/go_save_goal', self.save_goal_callback)
 
     def save_goal_callback(self, request, response):
         if self.robot_pose:
@@ -255,35 +275,46 @@ class ControlPanel(QWidget):
             response.message = "No robot pose available"
         return response
 
-    def send_nav_goal(self, x, y, z):
-        goal = PoseStamped()
-        goal.header.frame_id = "map"
-        goal.header.stamp = self.node.get_clock().now().to_msg()
-        goal.pose.position.x = x
-        goal.pose.position.y = y
-        goal.pose.position.z = 0.0
-        goal.pose.orientation.z = z
-        goal.pose.orientation.w = 1.0
-        self.nav_pub.publish(goal)
-
     def save_nav_goal(self, goal_index):
         self.current_goal_index = goal_index
-        self.node.get_service_client('/go_save_goal', Trigger).call(Trigger.Request())
+        client = self.node.create_client(SaveGoal, '/go_save_goal')
+        while not client.wait_for_service(timeout_sec=1.0):
+            self.node.get_logger().info('Service not available, waiting again...')
+
+        request = SaveGoal.Request()
+        request.goal_number = goal_index
+        future = client.call_async(request)
+        future.add_done_callback(self.save_goal_response_callback)
+
+    def save_goal_response_callback(self, future):
+        try:
+            response = future.result()
+            self.log_to_terminal(response.message)
+        except Exception as e:
+            self.log_to_terminal(f'Service call failed: {str(e)}')
 
     def go_nav_goal(self, goal_index):
-        if goal_index in self.goal_positions:
-            x, y, z = self.goal_positions[goal_index]
-            self.send_nav_goal(x, y, z)
-        else:
-            self.log_to_terminal(f"Goal {goal_index} not saved.")
+        client = self.node.create_client(SaveGoal, '/go_go_goal')
+        while not client.wait_for_service(timeout_sec=1.0):
+            self.node.get_logger().info('Service not available, waiting again...')
+
+        request = SaveGoal.Request()
+        request.goal_number = goal_index
+        future = client.call_async(request)
+        future.add_done_callback(self.go_goal_response_callback)
+
+    def go_goal_response_callback(self, future):
+        try:
+            response = future.result()
+            self.log_to_terminal(response.message)
+        except Exception as e:
+            self.log_to_terminal(f'Service call failed: {str(e)}')
 
     def update_status_label(self, label_name, text, color):
         label = self.status_labels.get(label_name, None)
         if label:
             label.setText(f"{text}")
             label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
-            label.update()  # 강제로 업데이트
-            self.log_to_terminal(f"Updated {label_name} successfully")
 
     def start_serial_read_thread(self):
         if self.ser:
