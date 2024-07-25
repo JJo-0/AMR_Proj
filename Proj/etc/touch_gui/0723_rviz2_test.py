@@ -92,7 +92,7 @@ class ControlPanel(QWidget):
         self.emergency_stop_button.setCheckable(True)
         self.emergency_stop_button.setText("EMS")
         self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 300px; background-color: lightcoral;")
-        self.emergency_stop_button.setFixedWidth(150)
+        self.emergency_stop_button.setFixedWidth(100)
 
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
         left_layout.addWidget(self.emergency_stop_button)
@@ -390,7 +390,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Robot Control Panel")
 
         # 전체 화면 설정
-        self.showFullScreen()
+        # self.showFullScreen()
 
         # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
         screen_geometry = QApplication.primaryScreen().geometry()
@@ -412,9 +412,9 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(container)
 
         # RViz 실행
-        self.launch_rviz(screen_width, screen_height)
+        self.launch_rviz()
 
-    def launch_rviz(self, screen_width, screen_height):
+    def launch_rviz(self):
         config_path = "desktop/AMR_Proj/Proj/etc/touch_gui/touch_gui.rviz"  # RViz 설정 파일 경로
         subprocess.Popen(["rviz2", "-d", config_path])
         time.sleep(5)  # RViz 창이 뜰 시간을 줌
