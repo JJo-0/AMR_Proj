@@ -355,10 +355,10 @@ class ControlPanel(QWidget):
 
     def update_status_label(self, label_name, text, color):
         """상태 레이블 업데이트"""
-    label = self.status_labels.get(label_name, None)
-    if label:
-        label.setText(f"{text}")
-        label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
+        label = self.status_labels.get(label_name, None)
+        if label:
+            label.setText(f"{text}")
+            label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
 
     def start_serial_read_thread(self):
         """시리얼 읽기 스레드 시작"""
