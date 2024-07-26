@@ -90,21 +90,28 @@ class ControlPanel(QWidget):
                     position = value["position"]
                     orientation = value.get("orientation", [0, 0, 0, 1])  # 기본값 설정
                     height = value["height"]
+                    
+                    # position 값을 float로 변환
+                    position = [float(coord) for coord in position]
+                    
                     pose_stamped = PoseStamped()
                     pose_stamped.header.frame_id = "map"
                     pose_stamped.pose.position.x = position[0]
                     pose_stamped.pose.position.y = position[1]
                     pose_stamped.pose.position.z = position[2]
-                    pose_stamped.pose.orientation.x = orientation[0]
-                    pose_stamped.pose.orientation.y = orientation[1]
-                    pose_stamped.pose.orientation.z = orientation[2]
-                    pose_stamped.pose.orientation.w = orientation[3]
+                    pose_stamped.pose.orientation.x = float(orientation[0])
+                    pose_stamped.pose.orientation.y = float(orientation[1])
+                    pose_stamped.pose.orientation.z = float(orientation[2])
+                    pose_stamped.pose.orientation.w = float(orientation[3])
+                    
                     self.goal_positions[key] = {"pose": pose_stamped, "height": height}
                 self.log_to_terminal("Loaded saved goals.")
         except FileNotFoundError:
             self.log_to_terminal("No saved goals found.")
         except json.JSONDecodeError:
             self.log_to_terminal("Failed to decode saved goals.")
+        except ValueError as e:
+            self.log_to_terminal(f"Invalid data in saved goals: {e}")
 
     def save_goals_to_file(self):
         """현재 목표를 파일에 저장"""
