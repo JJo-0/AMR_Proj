@@ -94,7 +94,7 @@ controller_server:
       debug_trajectory_details: True  # 궤적 디버그 세부 정보 활성화
       min_vel_x: -0.80  # 최소 x축 속도
       min_vel_y: 0.0  # 최소 y축 속도
-      max_vel_x: 1.00  # 최대 x축 속도
+      max_vel_x: 0.80  # 최대 x축 속도
       max_vel_y: 0.0  # 최대 y축 속도
       max_vel_theta: 1.50  # 최대 theta 속도
       min_speed_xy: 0.0  # 최소 xy 속도
@@ -115,7 +115,7 @@ controller_server:
       transform_tolerance: 0.2  # 변환 허용 오차
       xy_goal_tolerance: 0.3  # xy 목표 허용 오차
       # yaw_goal_tolerance: 0.5  # yaw 목표 허용 오차
-      trans_stopped_velocity: 0.5  # 이동 중지 속도
+      trans_stopped_velocity: 0.001  # 이동 중지 속도
       short_circuit_trajectory_evaluation: True  # 단락 회로 궤적 평가 활성화
       stateful: True  # 상태 유지 활성화
       critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]  # 평가자 목록
