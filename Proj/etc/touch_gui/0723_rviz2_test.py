@@ -85,7 +85,21 @@ class ControlPanel(QWidget):
         """저장된 목표를 파일에서 불러오기"""
         try:
             with open(self.save_file_path, 'r') as f:
-                self.goal_positions = json.load(f)
+                saved_data = json.load(f)
+                for key, value in saved_data.items():
+                    position = value["position"]
+                    orientation = value["orientation"]
+                    height = value["height"]
+                    pose_stamped = PoseStamped()
+                    pose_stamped.header.frame_id = "map"
+                    pose_stamped.pose.position.x = position[0]
+                    pose_stamped.pose.position.y = position[1]
+                    pose_stamped.pose.position.z = position[2]
+                    pose_stamped.pose.orientation.x = orientation[0]
+                    pose_stamped.pose.orientation.y = orientation[1]
+                    pose_stamped.pose.orientation.z = orientation[2]
+                    pose_stamped.pose.orientation.w = orientation[3]
+                    self.goal_positions[key] = {"pose": pose_stamped, "height": height}
                 self.log_to_terminal("Loaded saved goals.")
         except FileNotFoundError:
             self.log_to_terminal("No saved goals found.")
@@ -94,8 +108,17 @@ class ControlPanel(QWidget):
 
     def save_goals_to_file(self):
         """현재 목표를 파일에 저장"""
+        to_save = {}
+        for key, value in self.goal_positions.items():
+            if value:
+                pose = value["pose"].pose
+                to_save[key] = {
+                    "position": [pose.position.x, pose.position.y, pose.position.z],
+                    "orientation": [pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w],
+                    "height": value["height"]
+                }
         with open(self.save_file_path, 'w') as f:
-            json.dump(self.goal_positions, f)
+            json.dump(to_save, f)
             self.log_to_terminal("Saved goals to file.")
 
 
@@ -308,11 +331,13 @@ class ControlPanel(QWidget):
             self.log_to_terminal(f"Error: Cannot save goal {self.current_goal_index} - no lift height available.")
             return
 
-        x = self.robot_pose.position.x
-        y = self.robot_pose.position.y
-        z = self.robot_pose.orientation.z
-        self.goal_positions[f"goal_{self.current_goal_index}"] = {"position": [x, y, z], "height": height}
-        self.log_to_terminal(f"Goal {self.current_goal_index} saved: ({x}, {y}, {z}, height={height})")
+        pose_stamped = PoseStamped()
+        pose_stamped.header.frame_id = "map"
+        pose_stamped.header.stamp = self.node.get_clock().now().to_msg()
+        pose_stamped.pose = self.robot_pose
+
+        self.goal_positions[f"goal_{self.current_goal_index}"] = {"pose": pose_stamped, "height": height}
+        self.log_to_terminal(f"Goal {self.current_goal_index} saved: ({pose_stamped.pose.position.x}, {pose_stamped.pose.position.y}, {pose_stamped.pose.orientation.z}, height={height})")
         self.save_goals_to_file()
 
     def get_current_height_from_arduino(self):
@@ -338,19 +363,12 @@ class ControlPanel(QWidget):
             return
 
         goal = self.goal_positions[goal_key]
-        x, y, z = goal["position"]
+        pose_stamped = goal["pose"]
         height = goal["height"]
 
-        self.log_to_terminal(f"Navigating to Goal {goal_index}: ({x}, {y}, {z}, height={height})")
-        
-        goal_msg = PoseStamped()
-        goal_msg.header.frame_id = "map"
-        goal_msg.header.stamp = self.node.get_clock().now().to_msg()
-        goal_msg.pose.position.x = x
-        goal_msg.pose.position.y = y
-        goal_msg.pose.orientation.z = z
-        self.nav_pub.publish(goal_msg)
+        self.log_to_terminal(f"Navigating to Goal {goal_index}: ({pose_stamped.pose.position.x}, {pose_stamped.pose.position.y}, {pose_stamped.pose.orientation.z}, height={height})")
 
+        self.goal_pub.publish(pose_stamped)
         self.node.create_subscription(String, '/navigation_status', self.handle_navigation_status, 10)
 
     def handle_navigation_status(self, msg):
