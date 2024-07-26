@@ -71,7 +71,7 @@ class ControlPanel(QWidget):
         self.start_serial_process_thread()  # 시리얼 처리 스레드 시작
 
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)  # 응급 정지 퍼블리셔
-        self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 퍼블리셔
+        self.goal_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 퍼블리셔
         self.pose_sub = self.node.create_subscription(PoseWithCovarianceStamped, '/amcl_pose', self.update_robot_pose, 10)
 
         self.save_file_path = os.path.join(os.getcwd(), 'Save_point.json')  # 현재 작업 디렉터리에서 Save_point.json 파일의 절대 경로 생성
@@ -88,7 +88,7 @@ class ControlPanel(QWidget):
                 saved_data = json.load(f)
                 for key, value in saved_data.items():
                     position = value["position"]
-                    orientation = value["orientation"]
+                    orientation = value.get("orientation", [0, 0, 0, 1])  # 기본값 설정
                     height = value["height"]
                     pose_stamped = PoseStamped()
                     pose_stamped.header.frame_id = "map"
@@ -357,19 +357,18 @@ class ControlPanel(QWidget):
 
     def go_nav_goal(self, goal_index):
         """네비게이션 목표로 이동"""
-        goal_key = f"goal_{goal_index}"
-        if self.goal_positions[goal_key] is None:
-            self.log_to_terminal(f"Error: Goal {goal_index} is not set.")
+        goal_key = f"goal_{goal_index}"  # 목표 키 생성
+        if self.goal_positions[goal_key] is None:  # 목표가 설정되어 있는지 확인
+            self.log_to_terminal(f"Error: Goal {goal_index} is not set.")  # 목표가 설정되지 않은 경우 오류 메시지 로그
             return
 
-        goal = self.goal_positions[goal_key]
-        pose_stamped = goal["pose"]
-        height = goal["height"]
+        goal = self.goal_positions[goal_key]  # 목표 데이터 가져오기
+        pose_stamped = goal["pose"]  # 목표 위치 데이터 가져오기
+        height = goal["height"]  # 목표 높이 데이터 가져오기
 
-        self.log_to_terminal(f"Navigating to Goal {goal_index}: ({pose_stamped.pose.position.x}, {pose_stamped.pose.position.y}, {pose_stamped.pose.orientation.z}, height={height})")
+        self.log_to_terminal(f"Navigating to Goal {goal_index}: ({pose_stamped.pose.position.x}, {pose_stamped.pose.position.y}, {pose_stamped.pose.orientation.z}, height={height})")  # 목표로 이동 시작 로그
 
-        self.goal_pub.publish(pose_stamped)
-        self.node.create_subscription(String, '/navigation_status', self.handle_navigation_status, 10)
+        self.goal_pub.publish(pose_stamped)  # 목표 위치를 퍼블리시
 
     def handle_navigation_status(self, msg):
         """네비게이션 상태 처리"""
