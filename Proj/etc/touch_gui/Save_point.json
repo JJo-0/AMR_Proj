@@ -1,14 +1,17 @@
 {
     "goal_1": {
-        "position": [1, 2, 3],
+        "position": [1.0, 2.0, 3.0],
+        "orientation": [0.0, 0.0, 0.0, 1.0],
         "height": 14
     },
     "goal_2": {
-        "position": [2, 3, 54],
+        "position": [2.0, 3.0, 54.0],
+        "orientation": [0.0, 0.0, 0.0, 1.0],
         "height": 1
     },
     "goal_3": {
-        "position": [1, 2, 3],
+        "position": [1.0, 2.0, 3.0],
+        "orientation": [0.0, 0.0, 0.0, 1.0],
         "height": 0
     }
 }

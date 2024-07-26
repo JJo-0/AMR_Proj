@@ -9,7 +9,7 @@ from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QMutex  # PyQt5 코어
 import rclpy  # ROS 2 파이썬 라이브러리
 from rclpy.node import Node  # ROS 2 노드 클래스
 from std_msgs.msg import Int32, String  # ROS 2 표준 메시지
-from geometry_msgs.msg import PoseStamped, Twist  # ROS 2 지오메트리 메시지
+from geometry_msgs.msg import PoseWithCovarianceStamped, PoseStamped, Twist  # ROS 2 지오메트리 메시지
 from threading import Thread, Lock  # 스레딩 및 락
 
 class SerialReader(QThread):
@@ -71,8 +71,8 @@ class ControlPanel(QWidget):
         self.start_serial_process_thread()  # 시리얼 처리 스레드 시작
 
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)  # 응급 정지 퍼블리셔
-        self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 퍼블리셔
-        self.pose_sub = self.node.create_subscription(PoseStamped, '/robot_pose', self.update_robot_pose, 10)  # 로봇 위치 구독
+        self.goal_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 퍼블리셔
+        self.pose_sub = self.node.create_subscription(PoseWithCovarianceStamped, '/amcl_pose', self.update_robot_pose, 10)
 
         self.save_file_path = os.path.join(os.getcwd(), 'Save_point.json')  # 현재 작업 디렉터리에서 Save_point.json 파일의 절대 경로 생성
         self.load_saved_goals()  # 저장된 목표 불러오기
@@ -85,17 +85,47 @@ class ControlPanel(QWidget):
         """저장된 목표를 파일에서 불러오기"""
         try:
             with open(self.save_file_path, 'r') as f:
-                self.goal_positions = json.load(f)
+                saved_data = json.load(f)
+                for key, value in saved_data.items():
+                    position = value["position"]
+                    orientation = value.get("orientation", [0, 0, 0, 1])  # 기본값 설정
+                    height = value["height"]
+                    
+                    # position 값을 float로 변환
+                    position = [float(coord) for coord in position]
+                    
+                    pose_stamped = PoseStamped()
+                    pose_stamped.header.frame_id = "map"
+                    pose_stamped.pose.position.x = position[0]
+                    pose_stamped.pose.position.y = position[1]
+                    pose_stamped.pose.position.z = position[2]
+                    pose_stamped.pose.orientation.x = float(orientation[0])
+                    pose_stamped.pose.orientation.y = float(orientation[1])
+                    pose_stamped.pose.orientation.z = float(orientation[2])
+                    pose_stamped.pose.orientation.w = float(orientation[3])
+                    
+                    self.goal_positions[key] = {"pose": pose_stamped, "height": height}
                 self.log_to_terminal("Loaded saved goals.")
         except FileNotFoundError:
             self.log_to_terminal("No saved goals found.")
         except json.JSONDecodeError:
             self.log_to_terminal("Failed to decode saved goals.")
+        except ValueError as e:
+            self.log_to_terminal(f"Invalid data in saved goals: {e}")
 
     def save_goals_to_file(self):
         """현재 목표를 파일에 저장"""
+        to_save = {}
+        for key, value in self.goal_positions.items():
+            if value:
+                pose = value["pose"].pose
+                to_save[key] = {
+                    "position": [pose.position.x, pose.position.y, pose.position.z],
+                    "orientation": [pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w],
+                    "height": value["height"]
+                }
         with open(self.save_file_path, 'w') as f:
-            json.dump(self.goal_positions, f)
+            json.dump(to_save, f)
             self.log_to_terminal("Saved goals to file.")
 
 
@@ -308,11 +338,13 @@ class ControlPanel(QWidget):
             self.log_to_terminal(f"Error: Cannot save goal {self.current_goal_index} - no lift height available.")
             return
 
-        x = self.robot_pose.position.x
-        y = self.robot_pose.position.y
-        z = self.robot_pose.orientation.z
-        self.goal_positions[f"goal_{self.current_goal_index}"] = {"position": [x, y, z], "height": height}
-        self.log_to_terminal(f"Goal {self.current_goal_index} saved: ({x}, {y}, {z}, height={height})")
+        pose_stamped = PoseStamped()
+        pose_stamped.header.frame_id = "map"
+        pose_stamped.header.stamp = self.node.get_clock().now().to_msg()
+        pose_stamped.pose = self.robot_pose
+
+        self.goal_positions[f"goal_{self.current_goal_index}"] = {"pose": pose_stamped, "height": height}
+        self.log_to_terminal(f"Goal {self.current_goal_index} saved: ({pose_stamped.pose.position.x}, {pose_stamped.pose.position.y}, {pose_stamped.pose.orientation.z}, height={height})")
         self.save_goals_to_file()
 
     def get_current_height_from_arduino(self):
@@ -332,26 +364,18 @@ class ControlPanel(QWidget):
 
     def go_nav_goal(self, goal_index):
         """네비게이션 목표로 이동"""
-        goal_key = f"goal_{goal_index}"
-        if self.goal_positions[goal_key] is None:
-            self.log_to_terminal(f"Error: Goal {goal_index} is not set.")
+        goal_key = f"goal_{goal_index}"  # 목표 키 생성
+        if self.goal_positions[goal_key] is None:  # 목표가 설정되어 있는지 확인
+            self.log_to_terminal(f"Error: Goal {goal_index} is not set.")  # 목표가 설정되지 않은 경우 오류 메시지 로그
             return
 
-        goal = self.goal_positions[goal_key]
-        x, y, z = goal["position"]
-        height = goal["height"]
+        goal = self.goal_positions[goal_key]  # 목표 데이터 가져오기
+        pose_stamped = goal["pose"]  # 목표 위치 데이터 가져오기
+        height = goal["height"]  # 목표 높이 데이터 가져오기
 
-        self.log_to_terminal(f"Navigating to Goal {goal_index}: ({x}, {y}, {z}, height={height})")
-        
-        goal_msg = PoseStamped()
-        goal_msg.header.frame_id = "map"
-        goal_msg.header.stamp = self.node.get_clock().now().to_msg()
-        goal_msg.pose.position.x = x
-        goal_msg.pose.position.y = y
-        goal_msg.pose.orientation.z = z
-        self.nav_pub.publish(goal_msg)
+        self.log_to_terminal(f"Navigating to Goal {goal_index}: ({pose_stamped.pose.position.x}, {pose_stamped.pose.position.y}, {pose_stamped.pose.orientation.z}, height={height})")  # 목표로 이동 시작 로그
 
-        self.node.create_subscription(String, '/navigation_status', self.handle_navigation_status, 10)
+        self.goal_pub.publish(pose_stamped)  # 목표 위치를 퍼블리시
 
     def handle_navigation_status(self, msg):
         """네비게이션 상태 처리"""
