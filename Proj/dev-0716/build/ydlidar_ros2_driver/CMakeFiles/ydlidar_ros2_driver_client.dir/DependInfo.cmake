@@ -21,7 +21,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/desktop/AMR_Proj/Proj/dev-0716/src/ydlidar_ros2_driver/src"
   "/usr/local/include/src"
   "/opt/ros/foxy/include"
-  "/desktop/AMR_Proj/Proj/dev-0716/src/agent_ws/install/micro_ros_agent/include"
   )
 
 # Targets to which this target links.

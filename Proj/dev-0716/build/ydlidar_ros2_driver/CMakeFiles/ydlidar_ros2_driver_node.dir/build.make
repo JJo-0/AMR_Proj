@@ -107,7 +107,7 @@ ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesuppor
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librmw_implementation.so
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librmw.so
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librcl_logging_spdlog.so
-ydlidar_ros2_driver_node: /desktop/AMR_Proj/Proj/dev-0716/src/agent_ws/install/micro_ros_agent/lib/libspdlog.a
+ydlidar_ros2_driver_node: /usr/lib/x86_64-linux-gnu/libspdlog.so.1.5.0
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librcl_yaml_param_parser.so
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/libyaml.so
 ydlidar_ros2_driver_node: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so

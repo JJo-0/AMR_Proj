@@ -34,10 +34,11 @@ def generate_launch_description():
     delayed_description_manager = TimerAction(period=3.0, actions=[description])
     navigation = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory("articubot_one"), 'launch', 'localization_launch.py'
+                    get_package_share_directory("omo_r1mini_navigation2"), 'launch', 'navigation2.launch.py'
                 )])
     )
-    
+    delayed_navigation_manager = TimerAction(period=9.0, actions=[navigation])
+
     mapping = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory("articubot_one"), 'launch', 'online_async_launch.py'
@@ -50,13 +51,14 @@ def generate_launch_description():
     )
     delayed_cartographer_manager = TimerAction(period=9.0, actions=[cartographer])
 
-    
+
     return LaunchDescription([
         imu,
         lidar,
         delayed_controller_manager,
         delayed_description_manager,
-        # navigation,
+        # delayed_navigation_manager,
+        # delayed_rviz_manager,
         # mapping,
         # delayed_cartographer_manager,
     ])

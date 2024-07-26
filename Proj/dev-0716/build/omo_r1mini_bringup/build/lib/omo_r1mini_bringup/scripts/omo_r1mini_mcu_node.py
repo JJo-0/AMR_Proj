@@ -34,26 +34,8 @@ class Joint(object):
     joint_vel = [0.0, 0.0]
 
 
-def quaternion_from_euler(roll, pitch, yaw):
-    """
-  Converts euler roll, pitch, yaw to quaternion (w in last place)
-  quat = [x, y, z, w]
-  Bellow should be replaced when porting for ROS 2 Python tf_conversions is done.
-  """
-    cy = math.cos(yaw * 0.5)
-    sy = math.sin(yaw * 0.5)
-    cp = math.cos(pitch * 0.5)
-    sp = math.sin(pitch * 0.5)
-    cr = math.cos(roll * 0.5)
-    sr = math.sin(roll * 0.5)
 
-    q = [0] * 4
-    q[0] = cy * cp * sr - sy * sp * cr
-    q[1] = sy * cp * sr + cy * sp * cr
-    q[2] = sy * cp * cr - cy * sp * sr
-    q[3] = cy * cp * cr + sy * sp * sr
 
-    return q
 class ComplementaryFilter():
   def __init__(self):
     self.theta = 0.
@@ -128,7 +110,7 @@ class OMOR1MiniNode(Node):
         self.yaw = 0.0
         self.pitch = 0.0
         self.roll = 0.0
-
+        self.check = 0.0
         # self.odom_sum = 0.0
         
         self.orientation_x, self.orientation_y, self.orientation_z, self.orientation_w = 0.0, 0.0, 0.0, 0.0
@@ -143,7 +125,10 @@ class OMOR1MiniNode(Node):
         self.past_yaw = 0.0
         self.trans_dist = 0.0
         self.orient_dist = 0.0
-        self.calibration = 0
+        self.calibration =  (math.pi+0.05) / math.pi
+        self.d_theta = 0.0
+        self.q = [0] * 4
+        self.check = 0.0
         # self.subYaw = self.create_subscription(Float64, 'imu/yaw', self.RsvYaw, 10)
 
         # Set publisher
@@ -153,12 +138,27 @@ class OMOR1MiniNode(Node):
         self.pub_Odom = self.create_publisher(Odometry, 'odom', 10)
         self.pub_OdomTF = TransformBroadcaster(self)
         self.pub_pose = self.create_publisher(Pose, 'pose', 10)
-
-        sleep(0.01)
         # Set timer proc
         
 
+    def quaternion_from_euler(self, roll, pitch, yaw):
+        """
+        Converts euler roll, pitch, yaw to quaternion (w in last place)
+        quat = [x, y, z, w]
+        Bellow should be replaced when porting for ROS 2 Python tf_conversions is done.
+        """
 
+        cy = math.cos(yaw * 0.5)
+        sy = math.sin(yaw * 0.5)
+        cp = math.cos(pitch * 0.5)
+        sp = math.sin(pitch * 0.5)
+        cr = math.cos(roll * 0.5)
+        sr = math.sin(roll * 0.5)
+
+        self.q[0] = cy * cp * sr - sy * sp * cr
+        self.q[1] = sy * cp * sr + cy * sp * cr
+        self.q[2] = sy * cp * cr - cy * sp * sr
+        self.q[3] = cy * cp * cr + sy * sp * sr
 
     def RsvEnc(self, msg):
         if msg.data % 100 == 0:
@@ -190,8 +190,16 @@ class OMOR1MiniNode(Node):
         
         self.trans_dist = ((self.odo_r + self.odo_l) / 2.0)  # 현재 velocity를 받아야 함.
         self.orient_dist = ((self.odo_r - self.odo_l) / self.wheel_separation)
-        self.past_yaw = self.yaw
+
+        self.querternion_to_euler(self.orientation_x, self.orientation_y, self.orientation_z, self.orientation_w)
         
+        if abs(self.yaw - self.past_yaw) > 5.5:
+            self.d_theta = math.pi * 2 - abs(self.yaw) - abs(self.past_yaw) 
+        else:
+            self.d_theta = self.yaw - self.past_yaw
+
+        self.d_theta = self.d_theta * self.calibration
+        self.past_yaw = self.yaw
         self.update_robot()
 
     def split_int(self, str):
@@ -201,20 +209,10 @@ class OMOR1MiniNode(Node):
         int2 = int(parts[1])
         return [int1, int2]
 
-    # def RsvEncStr(self, msg):
-    #     if (self.encoder_setting == False):
-    #         self.past_dist = self.split_int(msg.data)
-    #         self.encoder_setting = True
-    #     else:
-    #         self.curr_dist = self.split_int(msg.data)
-    #         self.l_enc1 = self.curr_dist[0] - self.past_dist[0]
-    #         self.r_enc1 = self.curr_dist[1] - self.past_dist[1]
-    #
-
 
     def RsvImu(self, msg):
         self.orientation_x, self.orientation_y, self.orientation_z, self.orientation_w = msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w
-        self.querternion_to_euler(self.orientation_x, self.orientation_y, self.orientation_z, self.orientation_w)
+
         # print("orientation : ", msg.orientation.x)
 
     def update_odometry(self):
@@ -224,19 +222,24 @@ class OMOR1MiniNode(Node):
         self.odom_pose.pre_timestamp = self.odom_pose.timestamp
         trans_vel = self.trans_dist / dt 
         orient_vel = self.orient_dist / dt 
-        # print(orient_vel)
-        # print(trans_vel)
-        
-        self.odom_pose.theta = self.yaw
-        # print(self.odom_pose.theta, self.yaw)
-        d_x = trans_vel * math.cos(self.yaw)
-        d_y = trans_vel * math.sin(self.yaw)
+
+        # self.odom_pose.theta += self.d_theta
+        self.odom_pose.theta += self.d_theta
+        #self.check += self.orient_dist
+        # print(self.odom_pose.theta - self.check)
+        d_x = trans_vel * math.cos(self.odom_pose.theta)
+        d_y = trans_vel * math.sin(self.odom_pose.theta)
         self.odom_pose.x += d_x * dt
         self.odom_pose.y += d_y * dt
+        # if self.check > math.pi * 2:
+         #   self.odom_pose.theta -= 2 * math.pi
+        #    self.check -= 2 * math.pi
+        #    print(self.check - self.odom_pose.theta)
+        # 2print(self.odom_pose.theta - self.check)
         # print('ODO L:%.2f, R:%.2f, V:%.2f, W=%.2f --> X:%.2f, Y:%.2f, Theta:%.2f'
         #  %(odo_l, odo_r, trans_vel, orient_vel,
         #  self.odom_pose.x,self.odom_pose.y,self.odom_pose.theta))
-        q = quaternion_from_euler(0, 0, self.yaw)
+        self.quaternion_from_euler(0, 0, self.odom_pose.theta)
 
         self.odom_vel.x = trans_vel
         self.odom_vel.y = 0.
@@ -251,10 +254,10 @@ class OMOR1MiniNode(Node):
         odom.pose.pose.position.x = self.odom_pose.x
         odom.pose.pose.position.y = self.odom_pose.y
         odom.pose.pose.position.z = 0.0
-        odom.pose.pose.orientation.x = q[0]
-        odom.pose.pose.orientation.y = q[1]
-        odom.pose.pose.orientation.z = q[2]
-        odom.pose.pose.orientation.w = q[3]
+        odom.pose.pose.orientation.x = self.q[0]
+        odom.pose.pose.orientation.y = self.q[1]
+        odom.pose.pose.orientation.z = self.q[2]
+        odom.pose.pose.orientation.w = self.q[3]
 
         odom.twist.twist.linear.x = trans_vel
         odom.twist.twist.linear.y = 0.0
@@ -279,9 +282,9 @@ class OMOR1MiniNode(Node):
     def updatePoseStates(self):
         # Added to publish pose orientation of IMU
         pose = Pose()
-        pose.orientation.x = self.roll
-        pose.orientation.y = self.pitch
-        pose.orientation.z = self.yaw
+        pose.orientation.x = self.q[0]
+        pose.orientation.y = self.q[1]
+        pose.orientation.z = self.q[2]
         self.pub_pose.publish(pose)
 
     def querternion_to_euler(self, x, y, z, w):

@@ -188,7 +188,7 @@ stella_ahrs_node: /opt/ros/foxy/lib/librcl.so
 stella_ahrs_node: /opt/ros/foxy/lib/librmw_implementation.so
 stella_ahrs_node: /opt/ros/foxy/lib/librmw.so
 stella_ahrs_node: /opt/ros/foxy/lib/librcl_logging_spdlog.so
-stella_ahrs_node: /desktop/AMR_Proj/Proj/dev-0716/src/agent_ws/install/micro_ros_agent/lib/libspdlog.a
+stella_ahrs_node: /usr/lib/x86_64-linux-gnu/libspdlog.so.1.5.0
 stella_ahrs_node: /opt/ros/foxy/lib/librcl_yaml_param_parser.so
 stella_ahrs_node: /opt/ros/foxy/lib/libyaml.so
 stella_ahrs_node: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so

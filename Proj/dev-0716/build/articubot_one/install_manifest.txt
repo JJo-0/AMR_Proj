@@ -3,6 +3,7 @@
 /desktop/AMR_Proj/Proj/dev-0716/install/articubot_one/share/articubot_one/launch/robot.launch.py
 /desktop/AMR_Proj/Proj/dev-0716/install/articubot_one/share/articubot_one/launch/online_async_launch.py
 /desktop/AMR_Proj/Proj/dev-0716/install/articubot_one/share/articubot_one/launch/localization_launch.py
+/desktop/AMR_Proj/Proj/dev-0716/install/articubot_one/share/articubot_one/launch/navigation_launch.py
 /desktop/AMR_Proj/Proj/dev-0716/install/articubot_one/share/ament_index/resource_index/package_run_dependencies/articubot_one
 /desktop/AMR_Proj/Proj/dev-0716/install/articubot_one/share/ament_index/resource_index/parent_prefix_path/articubot_one
 /desktop/AMR_Proj/Proj/dev-0716/install/articubot_one/share/articubot_one/environment/ament_prefix_path.sh

@@ -37,5 +37,5 @@ def generate_launch_description():
       emulate_tty=True,
       parameters=[omo_r1mini_mcu_parameter],
       namespace='',
-    )
+    ),
   ])
