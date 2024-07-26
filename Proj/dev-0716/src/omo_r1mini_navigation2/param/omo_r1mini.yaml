@@ -1,11 +1,11 @@
 amcl:
   ros__parameters:
     use_sim_time: False  # 시뮬레이션 시간을 사용하지 않음
-    alpha1: 0.05 # 0.1 # 0.2  # 전진 방향의 노이즈
-    alpha2: 0.03 # 0.1 #  0.2  # 측면 방향의 노이즈
-    alpha3: 0.05 # 0.1 #  0.2  # 회전 속도의 노이즈
-    alpha4: 0.05 # 0.1 #  0.2  # 전진 속도의 노이즈
-    alpha5: 0.03 # 0.1 #  0.2  # 회전 방향의 노이즈
+    alpha1: 0.2 # 0.05 # 0.1 # 0.2  # 전진 방향의 노이즈
+    alpha2: 0.2 # 0.03 # 0.1 #  0.2  # 측면 방향의 노이즈
+    alpha3: 0.2 # 0.05 # 0.1 #  0.2  # 회전 속도의 노이즈
+    alpha4: 0.2 # 0.05 # 0.1 #  0.2  # 전진 속도의 노이즈
+    alpha5: 0.2 # 0.03 # 0.1 #  0.2  # 회전 방향의 노이즈
     base_frame_id: "base_footprint"  # 로봇의 기본 프레임
     beam_skip_distance: 0.5  # 빔 스킵 거리
     beam_skip_error_threshold: 0.9  # 빔 스킵 오류 임계값
@@ -21,7 +21,7 @@ amcl:
     max_particles: 3000 # 2000  # 최대 파티클 수
     min_particles: 1000 # 1000 # 500  # 최소 파티클 수
     odom_frame_id: "odom"  # 오도메트리 프레임 ID
-    pf_err: 0.03 # 0.04 # 0.05  # 파티클 필터 오류 임계값
+    pf_err: 0.05 # 0.04 # 0.05  # 파티클 필터 오류 임계값
     pf_z: 0.99  # 파티클 필터 신뢰도
     recovery_alpha_fast: 0.0  # 빠른 회복 알파 값
     recovery_alpha_slow: 0.0  # 느린 회복 알파 값
@@ -49,7 +49,7 @@ amcl_rclcpp_node:
 bt_navigator:
   ros__parameters:
     use_sim_time: False  # 시뮬레이션 시간 사용 여부
-    global_frame": "map"  # 전역 프레임
+    global_frame: "map"  # 전역 프레임
     robot_base_frame: "base_link"  # 로봇 기본 프레임
     odom_topic: /odom  # 오도메트리 토픽
     default_bt_xml_filename: "navigate_w_replanning_and_recovery.xml"  # 기본 BT XML 파일
@@ -88,6 +88,24 @@ controller_server:
     min_theta_velocity_threshold: 0.001  # 최소 theta 속도 임계값
     controller_plugins: ["FollowPath"]  # 컨트롤러 플러그인 목록
 
+
+    # FollowPath parameters
+    FollowPath:
+      plugin: "nav2_rotation_shim_controller::RotationShimController"
+      primary_controller: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
+      angular_dist_threshold: 0.785
+      forward_sampling_distance: 0.5
+      rotate_to_heading_angular_vel: 1.8
+      max_angular_accel: 3.2
+      simulate_ahead_time: 1.0
+      rotate_to_goal_heading: false
+
+    general_goal_checker:
+      stateful: True
+      plugin: "nav2_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.25
+      yaw_goal_tolerance: 0.25
+
     # DWB parameters
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
@@ -105,7 +123,7 @@ controller_server:
       acc_lim_theta: 1.0  # theta 가속도 한계
       decel_lim_x: -0.07  # x축 감속도 한계
       decel_lim_y: 0.0  # y축 감속도 한계
-      decel_lim_theta: -1.0  # theta 감속도 한계
+      decel_lim_theta: 0.0 # -1.0  # theta 감속도 한계
       vx_samples: 20 # 20  # x축 속도 샘플 수
       vy_samples: 5  # y축 속도 샘플 수
       vtheta_samples: 30 # 20  # theta 속도 샘플 수
@@ -146,12 +164,17 @@ local_costmap:
       width: 7 # 3  # 로컬 코스트맵 너비
       height: 7  # 로컬 코스트맵 높이
       resolution: 0.1 # 0.2 # 0.1  # 해상도
-      robot_radius: 0.51  # 로봇 반경
-      plugins: ["obstacle_layer", "inflation_layer"]  # 플러그인 목록
+      robot_radius: 0.55  # 로봇 반경
+      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]  # 플러그인 목록
+      static_layer:
+        plugin: "nav2_costmap_2d::StaticLayer"
+        map_subscribe_transient_local: True  # 맵 구독 일시적 로컬 여부
+        # map_topic: "map"  # 맵 토픽 이름
+        mask: "map_mask.pgm"  # 마스크 이미지 경로
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 1.25 # 0.5 # 1.0 # 3.0  # 비용 확장 계수
-        inflation_radius: 0.3 # 0.3  # 확장 반경
+        cost_scaling_factor: 3.0 # 1.25 # 0.5 # 1.0 # 3.0  # 비용 확장 계수
+        inflation_radius: 0.4 # 0.3  # 확장 반경
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True  # 활성화 여부
@@ -162,9 +185,6 @@ local_costmap:
           clearing: True  # 클리어링 사용 여부
           marking: True  # 마킹 사용 여부
           data_type: "LaserScan"  # 데이터 타입
-      static_layer:
-        map_subscribe_transient_local: True  # 맵 구독 일시적 로컬 여부
-        mask: "map_mask.pgm"  # 마스크 이미지 경로
       always_send_full_costmap: True  # 항상 전체 코스트맵 전송 여부
   local_costmap_client:
     ros__parameters:
@@ -178,7 +198,7 @@ global_costmap:
     ros__parameters:
       update_frequency: 0.8 # 1.0  # 업데이트 빈도
       publish_frequency: 0.8 # 1.0  # 발행 빈도
-      global_frame": "map"  # 전역 프레임
+      global_frame: "map"  # 전역 프레임
       robot_base_frame: "base_link"  # 로봇 기본 프레임
       use_sim_time: False  # 시뮬레이션 시간 사용 여부
       robot_radius: 0.510  # 로봇 반경
@@ -210,7 +230,7 @@ global_costmap:
 map_server:
   ros__parameters:
     use_sim_time: False  # 시뮬레이션 시간 사용 여부
-    yaml_filename: "map_.yaml"  # 맵 YAML 파일 이름
+    yaml_filename: "map_.yaml"  #` 맵 YAML 파일 이름
 
 map_saver:
   ros__parameters:
@@ -219,16 +239,36 @@ map_saver:
     free_thresh_default: 0.25  # 기본 자유 임계값
     occupied_thresh_default: 0.65  # 기본 점유 임계값
 
+# planner_server:
+#   ros__parameters:
+#     expected_planner_frequency: 10.0 # 20.0  # 예상 플래너 빈도
+#     use_sim_time: False  # 시뮬레이션 시간 사용 여부
+#     planner_plugins: ["GridBased"]  # 플래너 플러그인 목록
+#     GridBased:
+#       plugin: "nav2_navfn_planner/NavfnPlanner"
+#       tolerance: 0.8 # 0.5  # 허용 오차
+#       use_astar: false  # A* 알고리즘 사용 여부
+#       allow_unknown: true  # 미지의 영역 허용 여부
+
+# planner_server:
+#   ros__parameters:
+#     expected_planner_frequency: 20.0
+#     planner_plugin_types: ["nav2_theta_star_planner/ThetaStarPlanner"]
+#     planner_plugin_ids: ["theta_star"]
+#     theta_star:
+#       max_iterations: 10000
+#       max_planning_time: 1.0
+#       search_radius: 0.2
+#       use_grid_path: true
+
 planner_server:
   ros__parameters:
-    expected_planner_frequency: 10.0 # 20.0  # 예상 플래너 빈도
-    use_sim_time: False  # 시뮬레이션 시간 사용 여부
-    planner_plugins: ["GridBased"]  # 플래너 플러그인 목록
+    planner_plugin_types: ["nav2_theta_star_planner::ThetaStarPlanner"]
+    planner_plugin_ids: ["GridBased"]
     GridBased:
-      plugin: "nav2_navfn_planner/NavfnPlanner"
-      tolerance: 0.8 # 0.5  # 허용 오차
-      use_astar: false  # A* 알고리즘 사용 여부
-      allow_unknown: true  # 미지의 영역 허용 여부
+      how_many_corners: 8
+      w_euc_cost: 1.0
+      w_traversal_cost: 2.0
 
 planner_server_rclcpp_node:
   ros__parameters:
