@@ -9,7 +9,7 @@ from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QMutex  # PyQt5 코어
 import rclpy  # ROS 2 파이썬 라이브러리
 from rclpy.node import Node  # ROS 2 노드 클래스
 from std_msgs.msg import Int32, String  # ROS 2 표준 메시지
-from geometry_msgs.msg import PoseStamped, Twist  # ROS 2 지오메트리 메시지
+from geometry_msgs.msg import PoseWithCovarianceStamped, PoseStamped, Twist  # ROS 2 지오메트리 메시지
 from threading import Thread, Lock  # 스레딩 및 락
 
 class SerialReader(QThread):
@@ -72,7 +72,7 @@ class ControlPanel(QWidget):
 
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)  # 응급 정지 퍼블리셔
         self.nav_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 퍼블리셔
-        self.pose_sub = self.node.create_subscription(PoseStamped, '/robot_pose', self.update_robot_pose, 10)  # 로봇 위치 구독
+        self.pose_sub = self.node.create_subscription(PoseWithCovarianceStamped, '/amcl_pose', self.update_robot_pose, 10)
 
         self.save_file_path = os.path.join(os.getcwd(), 'Save_point.json')  # 현재 작업 디렉터리에서 Save_point.json 파일의 절대 경로 생성
         self.load_saved_goals()  # 저장된 목표 불러오기
