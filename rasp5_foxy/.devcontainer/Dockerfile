@@ -17,7 +17,7 @@ FROM arm64v8/ros:foxy
 # APT 설정을 non-interactive 모드로 변경하여 사용자 입력 대기 상태를 방지합니다.
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Example of installing programs
+# 기본 패키지 및 ROS 2 패키지 설치
 RUN apt-get update \
     && apt-get install -y \
     nano \
@@ -35,29 +35,23 @@ RUN apt-get update \
     ros-foxy-cartographer \
     ros-foxy-cartographer-ros \
     joystick jstest-gtk evtest \
+    python3-pip \
+    git \
+    locales \
+    tzdata \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
-# Install language
-RUN apt-get update \
-    && apt-get install -y \
-    locales \
-    && locale-gen en_US.UTF-8 \
-    && update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 \
-    && rm -rf /var/lib/apt/lists/*
+# 로케일 설정
+RUN locale-gen en_US.UTF-8 \
+    && update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 ENV LANG en_US.UTF-8
 
-# Install timezone
+# 타임존 설정
 RUN ln -fs /usr/share/zoneinfo/Asia/Seoul /etc/localtime \
-    && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get update \
-    && apt-get install -y tzdata \
-    python3-pip \
-    && dpkg-reconfigure --frontend noninteractive tzdata \
-    && rm -rf /var/lib/apt/lists/*
+    && dpkg-reconfigure --frontend noninteractive tzdata
 
-# Add vscode user with same UID and GID as your host system
-# (copied from https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user#_creating-a-nonroot-user)
+# 사용자 추가
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -73,22 +67,16 @@ USER $USERNAME
 # Add user to video group to allow access to webcam
 RUN sudo usermod --append --groups video $USERNAME
 
-# Update all packages
+# 모든 패키지 업데이트 및 업그레이드
 RUN sudo apt update && sudo apt upgrade -y
 
-# Install Git
-RUN sudo apt install -y git
-
-# Rosdep update
-RUN rosdep update
+# Rosdep 업데이트
+RUN sudo rosdep init && rosdep update
 
 # Source the ROS setup file
+# ROS 환경 설정 추가
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
 RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/src/agent_ws/install/setup.bash" >> ~/.bashrc
 RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/install/setup.bash" >> ~/.bashrc
 RUN echo "sudo chmod 666 /dev/ttyUSB0 && sudo chmod 666 /dev/ttyUSB1 && sudo chmod 666 /dev/ttyACM0" >> ~/.bashrc
-
-
-# Raspberry pi 5 does not have a GPU, so we need to force software rendering
-ENV LIBGL_ALWAYS_SOFTWARE=1
 
