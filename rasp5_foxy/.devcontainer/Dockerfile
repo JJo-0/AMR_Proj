@@ -20,9 +20,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 # 패키지 목록을 업데이트하고, 필요한 패키지들을 설치합니다.
 RUN apt-get update \
     && apt-get install -y \
-    nano \                      # 텍스트 편집기 nano
-    x11-utils \                  # X11 애플리케이션 모음
-    ros-foxy-desktop \          # ROS 2 Foxy 데스크탑 설치
+    nano \                      
+    x11-xserver-utils \         
+    ros-foxy-desktop \          
     ros-foxy-rviz2 \            # ROS 2 RViz2 설치
     ros-foxy-twist-mux \        # ROS 2 Twist Mux 설치
     ros-foxy-xacro \            # ROS 2 Xacro 설치
