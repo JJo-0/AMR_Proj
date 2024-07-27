@@ -7,17 +7,13 @@
 # by Jo_09
 # 
 #########################################################################
-
-#cpu architecture : x86_64 (ex. laptop, desktop)
-#FROM ros:foxy
-
-# 라즈베리파이와 같은 ARM64 아키텍처용 ROS 2 Foxy 이미지를 기반으로 합니다.
+# ARM64 foxy 
 FROM arm64v8/ros:foxy
 
-# APT 설정을 비대화형 모드로 설정하여 사용자 입력 대기 상태를 방지합니다.
+# APT none talk
 ENV DEBIAN_FRONTEND=noninteractive
 
-# 패키지 목록을 업데이트하고, 필요한 패키지들을 설치합니다.
+# package install
 RUN apt-get update \
     && apt-get install -y \
     nano \                      
