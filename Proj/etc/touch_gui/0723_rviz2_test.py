@@ -72,61 +72,7 @@ class ControlPanel(QWidget):
 
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)  # 응급 정지 퍼블리셔
         self.goal_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 퍼블리셔
-        self.pose_sub = self.node.create_subscription(PoseWithCovarianceStamped, '/amcl_pose', self.update_robot_pose, 10)
-
-        self.save_file_path = os.path.join(os.getcwd(), 'Save_point.json')  # 현재 작업 디렉터리에서 Save_point.json 파일의 절대 경로 생성
-        self.load_saved_goals()  # 저장된 목표 불러오기
-
-        self.map_image = None  # 맵 이미지
-        self.map_mutex = QMutex()  # 맵 뮤텍스
-        self.robot_pose = None  # 로봇 위치
-
-    def load_saved_goals(self):
-        """저장된 목표를 파일에서 불러오기"""
-        try:
-            with open(self.save_file_path, 'r') as f:
-                saved_data = json.load(f)
-                for key, value in saved_data.items():
-                    position = value["position"]
-                    orientation = value.get("orientation", [0, 0, 0, 1])  # 기본값 설정
-                    height = value["height"]
-                    
-                    # position 값을 float로 변환
-                    position = [float(coord) for coord in position]
-                    
-                    pose_stamped = PoseStamped()
-                    pose_stamped.header.frame_id = "map"
-                    pose_stamped.pose.position.x = position[0]
-                    pose_stamped.pose.position.y = position[1]
-                    pose_stamped.pose.position.z = position[2]
-                    pose_stamped.pose.orientation.x = float(orientation[0])
-                    pose_stamped.pose.orientation.y = float(orientation[1])
-                    pose_stamped.pose.orientation.z = float(orientation[2])
-                    pose_stamped.pose.orientation.w = float(orientation[3])
-                    
-                    self.goal_positions[key] = {"pose": pose_stamped, "height": height}
-                self.log_to_terminal("Loaded saved goals.")
-        except FileNotFoundError:
-            self.log_to_terminal("No saved goals found.")
-        except json.JSONDecodeError:
-            self.log_to_terminal("Failed to decode saved goals.")
-        except ValueError as e:
-            self.log_to_terminal(f"Invalid data in saved goals: {e}")
-
-    def save_goals_to_file(self):
-        """현재 목표를 파일에 저장"""
-        to_save = {}
-        for key, value in self.goal_positions.items():
-            if value:
-                pose = value["pose"].pose
-                to_save[key] = {
-                    "position": [pose.position.x, pose.position.y, pose.position.z],
-                    "orientation": [pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w],
-                    "height": value["height"]
-                }
-        with open(self.save_file_path, 'w') as f:
-            json.dump(to_save, f)
-            self.log_to_terminal("Saved goals to file.")
+        self.pose_pub = self.node.create_publisher(Int32, '/pose_cmd', 10)  # /pose_cmd 퍼블리셔
 
 
     def setup_serial_connection(self, port, baud_rate):
@@ -224,9 +170,9 @@ class ControlPanel(QWidget):
         self.save_goal_button_1 = QPushButton("Save Goal 1")
         self.save_goal_button_2 = QPushButton("Save Goal 2")
         self.save_goal_button_3 = QPushButton("Save Goal 3")
-        self.save_goal_button_1.clicked.connect(lambda: self.save_nav_goal(1))
-        self.save_goal_button_2.clicked.connect(lambda: self.save_nav_goal(2))
-        self.save_goal_button_3.clicked.connect(lambda: self.save_nav_goal(3))
+        self.save_goal_button_1.clicked.connect(lambda: self.publish_pose_cmd(1))
+        self.save_goal_button_2.clicked.connect(lambda: self.publish_pose_cmd(2))
+        self.save_goal_button_3.clicked.connect(lambda: self.publish_pose_cmd(3))
         self.save_goal_button_1.setStyleSheet("font-size: 14px; height: 30px; background-color: lightyellow;")
         self.save_goal_button_2.setStyleSheet("font-size: 14px; height: 30px; background-color: lightyellow;")
         self.save_goal_button_3.setStyleSheet("font-size: 14px; height: 30px; background-color: lightyellow;")
@@ -239,15 +185,22 @@ class ControlPanel(QWidget):
         self.go_goal_button_1 = QPushButton("Go Goal 1")
         self.go_goal_button_2 = QPushButton("Go Goal 2")
         self.go_goal_button_3 = QPushButton("Go Goal 3")
-        self.go_goal_button_1.clicked.connect(lambda: self.go_nav_goal(1))
-        self.go_goal_button_2.clicked.connect(lambda: self.go_nav_goal(2))
-        self.go_goal_button_3.clicked.connect(lambda: self.go_nav_goal(3))
+        self.go_goal_button_1.clicked.connect(lambda: self.publish_pose_cmd(1))
+        self.go_goal_button_2.clicked.connect(lambda: self.publish_pose_cmd(1))
+        self.go_goal_button_3.clicked.connect(lambda: self.publish_pose_cmd(1))
         self.go_goal_button_1.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgreen;")
         self.go_goal_button_2.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgreen;")
         self.go_goal_button_3.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgreen;")
         go_goal_layout.addWidget(self.go_goal_button_1)
         go_goal_layout.addWidget(self.go_goal_button_2)
         go_goal_layout.addWidget(self.go_goal_button_3)
+
+        # Spin Button
+        self.spin_button = QPushButton("Spin")
+        self.spin_button.clicked.connect(lambda: self.publish_pose_cmd(0))
+        self.spin_button.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgray;")
+        go_goal_layout.addWidget(self.spin_button)
+
         nav_layout.addLayout(save_goal_layout)
         nav_layout.addLayout(go_goal_layout)
 
@@ -289,9 +242,12 @@ class ControlPanel(QWidget):
         self.update_status_label("Lift", "-", "black")
         self.update_status_label("Arduino", "E", "red")
 
-    def update_robot_pose(self, msg):
-        """로봇 위치 업데이트"""
-        self.robot_pose = msg.pose
+    def publish_pose_cmd(self, cmd_value):
+        """/pose_cmd 토픽으로 명령을 퍼블리시"""
+        msg = Int32()
+        msg.data = cmd_value
+        self.pose_pub.publish(msg)
+        self.log_to_terminal(f"Published to /pose_cmd: {cmd_value}")
 
     def send_lift_command(self, command, label):
         """리프트 명령 전송"""
@@ -321,32 +277,6 @@ class ControlPanel(QWidget):
         self.lift_command_timer.stop()
         self.update_status_label("Lift", "-", "black")
 
-    def save_nav_goal(self, goal_index):
-        """네비게이션 목표 저장"""
-        if self.robot_pose is None:
-            self.log_to_terminal(f"Error: Cannot save goal {goal_index} - no robot pose available.")
-            return
-
-        self.current_goal_index = goal_index
-        self.send_lift_command("A_00", "Get Lift Height")  # 아두이노에게 현재 높이 요청
-        QTimer.singleShot(500, self.save_goal_with_height)  # 0.5초 후에 높이 값을 저장
-
-    def save_goal_with_height(self):
-        """높이 정보와 함께 목표 저장"""
-        height = self.get_current_height_from_arduino()
-        if height is None:
-            self.log_to_terminal(f"Error: Cannot save goal {self.current_goal_index} - no lift height available.")
-            return
-
-        pose_stamped = PoseStamped()
-        pose_stamped.header.frame_id = "map"
-        pose_stamped.header.stamp = self.node.get_clock().now().to_msg()
-        pose_stamped.pose = self.robot_pose
-
-        self.goal_positions[f"goal_{self.current_goal_index}"] = {"pose": pose_stamped, "height": height}
-        self.log_to_terminal(f"Goal {self.current_goal_index} saved: ({pose_stamped.pose.position.x}, {pose_stamped.pose.position.y}, {pose_stamped.pose.orientation.z}, height={height})")
-        self.save_goals_to_file()
-
     def get_current_height_from_arduino(self):
         """아두이노로부터 현재 높이 값 가져오기"""
         if self.ser:
@@ -361,28 +291,6 @@ class ControlPanel(QWidget):
             except serial.SerialException as e:
                 self.log_to_terminal(f"[Arduino Reading Error] : {str(e)}")
         return None
-
-    def go_nav_goal(self, goal_index):
-        """네비게이션 목표로 이동"""
-        goal_key = f"goal_{goal_index}"  # 목표 키 생성
-        if self.goal_positions[goal_key] is None:  # 목표가 설정되어 있는지 확인
-            self.log_to_terminal(f"Error: Goal {goal_index} is not set.")  # 목표가 설정되지 않은 경우 오류 메시지 로그
-            return
-
-        goal = self.goal_positions[goal_key]  # 목표 데이터 가져오기
-        pose_stamped = goal["pose"]  # 목표 위치 데이터 가져오기
-        height = goal["height"]  # 목표 높이 데이터 가져오기
-
-        self.log_to_terminal(f"Navigating to Goal {goal_index}: ({pose_stamped.pose.position.x}, {pose_stamped.pose.position.y}, {pose_stamped.pose.orientation.z}, height={height})")  # 목표로 이동 시작 로그
-
-        self.goal_pub.publish(pose_stamped)  # 목표 위치를 퍼블리시
-
-    def handle_navigation_status(self, msg):
-        """네비게이션 상태 처리"""
-        if msg.data == "success":
-            self.log_to_terminal("Navigation succeeded.")
-        elif msg.data == "fail":
-            self.log_to_terminal("Navigation failed.")
 
     def update_status_label(self, label_name, text, color):
         """상태 레이블 업데이트"""
