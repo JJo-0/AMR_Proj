@@ -46,16 +46,16 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \ 
     && apt-get clean             
 
-# 로케일 설정
+# Install language
 RUN locale-gen en_US.UTF-8 \
     && update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 ENV LANG en_US.UTF-8
 
-# 타임존 설정
+# Install timezone
 RUN ln -fs /usr/share/zoneinfo/Asia/Seoul /etc/localtime \
     && dpkg-reconfigure --frontend noninteractive tzdata
 
-# 사용자 추가
+# Add vscode user with same UID and GID as your host system
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -70,22 +70,17 @@ USER $USERNAME
 
 # Add user to video group to allow access to webcam
 RUN sudo usermod --append --groups video $USERNAME
-
-# 모든 패키지 업데이트 및 업그레이드
 RUN sudo apt update && sudo apt upgrade -y
 
-# Rosdep 업데이트 (이미 초기화된 경우 건너뛰기)
+# Rosdep update
 RUN if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then rosdep init; fi \
     && rosdep update
 
 RUN pip install pyserial
 
 # Source the ROS setup file
-# ROS 환경 설정을 .bashrc 파일에 추가합니다.
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
-# DISPLAY 환경 변수를 설정하여 X11 디스플레이를 사용 가능하게 합니다.
 RUN echo "export DISPLAY=:0" >> ~/.bashrc
-# OpenGL을 소프트웨어 모드로 설정합니다.
 RUN echo "export LIBGL_ALWAYS_SOFTWARE=1" >> ~/.bashrc
 RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/src/agent_ws/install/setup.bash" >> ~/.bashrc
 RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/install/setup.bash" >> ~/.bashrc
@@ -93,5 +88,4 @@ RUN echo "sudo chmod 666 /dev/ttyUSB0 && sudo chmod 666 /dev/ttyUSB1 && sudo chm
 RUN echo "alias q='sudo chmod 666 /dev/ttyACM0'" >> ~/.bashrc
 RUN echo "alias w='python3 /desktop/AMR_Proj/Proj/etc/touch_gui/std_GUI.py'" >> ~/.bashrc
 
-# 컨테이너가 시작될 때 실행할 명령을 설정합니다.
 ENTRYPOINT ["/bin/bash", "-c", "source ~/.bashrc && bash", "code"]
