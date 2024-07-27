@@ -51,6 +51,7 @@ class ControlPanel(QWidget):
         self.ser = None  # 시리얼 포트 객체
         self.current_lift_command = None  # 현재 리프트 명령
         self.ems_signal = 1  # 응급 정지 신호
+        self.current_goal_index = None  # 현재 목표 인덱스
 
         self.status_labels = {
             "EMS": QLabel(),
@@ -74,7 +75,6 @@ class ControlPanel(QWidget):
         self.goal_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 퍼블리셔
         self.pose_pub = self.node.create_publisher(Int32, '/pose_cmd', 10)  # /pose_cmd 퍼블리셔
         self.nav_to_pose_client = ActionClient(self.node, NavigateToPose, 'navigate_to_pose')
-        self.nav_status_sub = self.node.create_subscription(String, '/pose_cmd/status', self.handle_navigation_status, 10)
         
     def setup_serial_connection(self, port, baud_rate):
         """시리얼 연결 설정"""
@@ -110,6 +110,12 @@ class ControlPanel(QWidget):
             label.setStyleSheet("font-size: 8px; background-color: white; color: white; padding: 5px;")
             status_layout.addWidget(QLabel(key))
             status_layout.addWidget(label)
+        
+        # Spin Button 추가
+        self.spin_button = QPushButton("Spin")
+        self.spin_button.clicked.connect(lambda: self.publish_pose_cmd(0))
+        self.spin_button.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgray;")
+        status_layout.addWidget(self.spin_button)
 
         status_group.setLayout(status_layout)
         left_layout.addWidget(status_group)
@@ -195,12 +201,6 @@ class ControlPanel(QWidget):
         go_goal_layout.addWidget(self.go_goal_button_1)
         go_goal_layout.addWidget(self.go_goal_button_2)
         go_goal_layout.addWidget(self.go_goal_button_3)
-
-        # Spin Button
-        self.spin_button = QPushButton("Spin")
-        self.spin_button.clicked.connect(lambda: self.publish_pose_cmd(0))
-        self.spin_button.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgray;")
-        go_goal_layout.addWidget(self.spin_button)
 
         nav_layout.addLayout(save_goal_layout)
         nav_layout.addLayout(go_goal_layout)
