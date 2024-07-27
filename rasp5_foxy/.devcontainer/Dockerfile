@@ -21,29 +21,29 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get install -y \
     nano \                      
-    x11-xserver-utils \         
+    x11-apps \         
     ros-foxy-desktop \          
-    ros-foxy-rviz2 \            # ROS 2 RViz2 설치
-    ros-foxy-twist-mux \        # ROS 2 Twist Mux 설치
-    ros-foxy-xacro \            # ROS 2 Xacro 설치
-    ros-foxy-ros2-control \     # ROS 2 컨트롤 라이브러리
-    ros-foxy-ros2-controllers \ # ROS 2 컨트롤러 라이브러리
-    ros-foxy-gazebo-ros2-control \ # Gazebo ROS 2 컨트롤 플러그인
-    ros-foxy-slam-toolbox \     # SLAM 툴박스
-    ros-foxy-navigation2 \      # 네비게이션2
-    ros-foxy-nav2-bringup \     # 네비게이션2 브링업 패키지
-    ros-foxy-cartographer \     # 카토그래퍼 패키지
-    ros-foxy-cartographer-ros \ # 카토그래퍼 ROS 패키지
-    joystick \                  # 조이스틱 유틸리티
-    jstest-gtk \                # 조이스틱 테스트 유틸리티
-    evtest \                    # 이벤트 테스트 유틸리티
-    python3-pip \               # Python 3 pip 설치
-    git \                       # Git 버전 관리 시스템 설치
-    locales \                   # 로케일 설정 패키지
-    tzdata \                    # 타임존 데이터 패키지
-    qt5-default \               # QT5 기본 패키지
-    && rm -rf /var/lib/apt/lists/* \ # APT 캐시 제거
-    && apt-get clean             # APT 캐시 클리어
+    ros-foxy-rviz2 \           
+    ros-foxy-twist-mux \       
+    ros-foxy-xacro \           
+    ros-foxy-ros2-control \    
+    ros-foxy-ros2-controllers \ 
+    ros-foxy-gazebo-ros2-control \ 
+    ros-foxy-slam-toolbox \     
+    ros-foxy-navigation2 \      
+    ros-foxy-nav2-bringup \     
+    ros-foxy-cartographer \     
+    ros-foxy-cartographer-ros \ 
+    joystick \                  
+    jstest-gtk \                
+    evtest \                    
+    python3-pip \               
+    git \                       
+    locales \                   
+    tzdata \                    
+    qt5-default \               
+    && rm -rf /var/lib/apt/lists/* \ 
+    && apt-get clean             
 
 # 로케일 설정
 RUN locale-gen en_US.UTF-8 \
