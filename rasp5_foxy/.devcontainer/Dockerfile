@@ -34,11 +34,11 @@ RUN apt-get update \
     ros-foxy-nav2-bringup \     
     ros-foxy-cartographer \     
     ros-foxy-cartographer-ros \ 
-    joystick \                  
-    jstest-gtk \                
-    evtest \                    
-    python3-pip \               
-    git \                       
+    joystick \ 
+    jstest-gtk \ 
+    evtest \ 
+    python3-pip \ 
+    git \ 
     locales \                   
     tzdata \                    
     qt5-default \ 
@@ -69,10 +69,10 @@ RUN groupadd --gid $USER_GID $USERNAME \
 USER $USERNAME
 
 # Add user to video group to allow access to webcam
-RUN usermod --append --groups video $USERNAME
+RUN sudo usermod --append --groups video $USERNAME
 
 # 모든 패키지 업데이트 및 업그레이드
-RUN apt update && apt upgrade -y
+RUN sudo apt update && sudo apt upgrade -y
 
 # Rosdep 업데이트 (이미 초기화된 경우 건너뛰기)
 RUN if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then rosdep init; fi \
