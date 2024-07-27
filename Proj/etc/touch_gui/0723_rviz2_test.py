@@ -540,8 +540,10 @@ class MainWindow(QMainWindow):
 
     def launch_rviz(self):
         """RViz 실행"""
-        config_path = "desktop/AMR_Proj/Proj/etc/touch_gui/touch_gui.rviz"  # RViz 설정 파일 경로
-        self.control_panel.rviz_process = subprocess.Popen(["rviz2", "-d", config_path])  # RViz 프로세스를 시작하고 객체를 저장
+        config_path = "/opt/ros/foxy/share/nav2_bringup/rviz/nav2_default_view.rviz"  # RViz 설정 파일 경로
+        env = os.environ.copy()
+        env['LIBGL_ALWAYS_SOFTWARE'] = '1'
+        self.control_panel.rviz_process = subprocess.Popen(["rviz2", "-d", config_path], env=env)  # RViz 프로세스를 시작하고 객체를 저장
         time.sleep(5)  # RViz 창이 뜰 시간을 줌
 
 def main(args=None):
