@@ -41,7 +41,8 @@ RUN apt-get update \
     git \                       
     locales \                   
     tzdata \                    
-    qt5-default \               
+    qt5-default \ 
+    code \              
     && rm -rf /var/lib/apt/lists/* \ 
     && apt-get clean             
 
@@ -77,6 +78,8 @@ RUN sudo apt update && sudo apt upgrade -y
 RUN if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then sudo rosdep init; fi \
     && rosdep update
 
+RUN pip install pyserial
+
 # Source the ROS setup file
 # ROS 환경 설정을 .bashrc 파일에 추가합니다.
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
@@ -87,6 +90,8 @@ RUN echo "export LIBGL_ALWAYS_SOFTWARE=1" >> ~/.bashrc
 RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/src/agent_ws/install/setup.bash" >> ~/.bashrc
 RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/install/setup.bash" >> ~/.bashrc
 RUN echo "sudo chmod 666 /dev/ttyUSB0 && sudo chmod 666 /dev/ttyUSB1 && sudo chmod 666 /dev/ttyACM0" >> ~/.bashrc
+RUN echo "alias q='sudo chmod 666 /dev/ttyACM0'" >> ~/.bashrc
+RUN echo "alias w='python3 /desktop/AMR_Proj/Proj/etc/touch_gui/std_GUI.py'" >> ~/.bashrc
 
 # 컨테이너가 시작될 때 실행할 명령을 설정합니다.
-ENTRYPOINT ["/bin/bash", "-c", "source ~/.bashrc && bash"]
+ENTRYPOINT ["/bin/bash", "-c", "source ~/.bashrc && bash", "code"]
