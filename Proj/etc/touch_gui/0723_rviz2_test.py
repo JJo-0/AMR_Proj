@@ -51,8 +51,6 @@ class ControlPanel(QWidget):
         self.ser = None  # 시리얼 포트 객체
         self.current_lift_command = None  # 현재 리프트 명령
         self.ems_signal = 1  # 응급 정지 신호
-        self.goal_positions = {"goal_1": None, "goal_2": None, "goal_3": None}  # 목표 위치들
-        self.current_goal_index = None  # 현재 목표 인덱스
 
         self.status_labels = {
             "EMS": QLabel(),
@@ -349,14 +347,6 @@ class ControlPanel(QWidget):
                 self.log_to_terminal(f"Arduino received : EMS_{data}")
             except (ValueError, IndexError) as e:
                 self.log_to_terminal(f"Invalid data received: {data}")
-
-        if data.startswith("A_"):
-            try:
-                height = int(data.split("_")[1])
-                self.goal_positions[f"goal_{self.current_goal_index}"]["height"] = height
-                self.log_to_terminal(f"Arduino received lift height: {height}")
-            except (ValueError, IndexError) as e:
-                self.log_to_terminal(f"Invalid height data received: {data}")
 
     def start_movement(self, direction):
         """로봇 이동 시작"""

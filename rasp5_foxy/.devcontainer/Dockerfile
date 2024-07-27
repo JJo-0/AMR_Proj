@@ -88,17 +88,5 @@ RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/src/agent_ws/install/setup.bash
 RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/install/setup.bash" >> ~/.bashrc
 RUN echo "sudo chmod 666 /dev/ttyUSB0 && sudo chmod 666 /dev/ttyUSB1 && sudo chmod 666 /dev/ttyACM0" >> ~/.bashrc
 
-# NVIDIA Docker 설정을 추가하여 GPU를 사용할 수 있게 합니다.
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
-
-# NVIDIA Docker 런타임을 설치합니다.
-RUN curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
-    && distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
-    && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list \
-    && sudo apt-get update \
-    && sudo apt-get install -y nvidia-docker2 \
-    && sudo pkill -SIGHUP dockerd
-
 # 컨테이너가 시작될 때 실행할 명령을 설정합니다.
 ENTRYPOINT ["/bin/bash", "-c", "source ~/.bashrc && bash"]
