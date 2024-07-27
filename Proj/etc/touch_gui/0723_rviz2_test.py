@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QMutex  # PyQt5 코어 기능들
 import rclpy  # ROS 2 파이썬 라이브러리
 from rclpy.node import Node  # ROS 2 노드 클래스
+from rclpy.action import ActionClient 
+from nav2_msgs.action import NavigateToPose
 from std_msgs.msg import Int32, String  # ROS 2 표준 메시지
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseStamped, Twist  # ROS 2 지오메트리 메시지
 from threading import Thread, Lock  # 스레딩 및 락
@@ -73,8 +75,9 @@ class ControlPanel(QWidget):
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)  # 응급 정지 퍼블리셔
         self.goal_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 퍼블리셔
         self.pose_pub = self.node.create_publisher(Int32, '/pose_cmd', 10)  # /pose_cmd 퍼블리셔
-
-
+        self.nav_to_pose_client = ActionClient(self.node, NavigateToPose, 'navigate_to_pose')
+        self.nav_status_sub = self.node.create_subscription(String, '/pose_cmd/status', self.handle_navigation_status, 10)
+        
     def setup_serial_connection(self, port, baud_rate):
         """시리얼 연결 설정"""
         try:
