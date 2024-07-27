@@ -247,11 +247,12 @@ class ControlPanel(QWidget):
         msg = Int32()
         msg.data = cmd_value
         self.pose_pub.publish(msg)
-        if cmd_value <= 3 :
-
+        if cmd_value == 0 :
+            self.log_to_terminal(f"Spinning: {cmd_value}")
+        elif cmd_value <= 3 :
             self.log_to_terminal(f"Saved Goal: {cmd_value}")
         else : 
-            self.log_to_terminal(f"Go Goal Set: {cmd_value}")
+            self.log_to_terminal(f"Go Goal Set: {cmd_value - 2}")
 
     def send_lift_command(self, command, label):
         """리프트 명령 전송"""
