@@ -34,8 +34,6 @@ RUN apt-get update \
     locales \
     tzdata \
     qt5-default \
-    code \
-    sudo \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
