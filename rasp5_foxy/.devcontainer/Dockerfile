@@ -62,20 +62,20 @@ ARG USER_GID=$USER_UID
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
     && apt-get update \
-    && apt-get install -y sudo \
+    && apt-get install -y  \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 # Switch from root to user
 USER $USERNAME
 
 # Add user to video group to allow access to webcam
-RUN sudo usermod --append --groups video $USERNAME
+RUN usermod --append --groups video $USERNAME
 
 # 모든 패키지 업데이트 및 업그레이드
-RUN sudo apt update && sudo apt upgrade -y
+RUN apt update && apt upgrade -y
 
 # Rosdep 업데이트 (이미 초기화된 경우 건너뛰기)
-RUN if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then sudo rosdep init; fi \
+RUN if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then rosdep init; fi \
     && rosdep update
 
 RUN pip install pyserial
