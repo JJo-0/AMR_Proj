@@ -1,11 +1,7 @@
 ###############################################################################
 # 
-# Copyright (C) 2024
-# 
-# Dockerfile for ROS2-foxy
+# Dockerfile for ROS2-foxy on ARM64
 #
-# by Jo_09
-# 
 #########################################################################
 # ARM64 foxy 
 FROM arm64v8/ros:foxy
@@ -13,7 +9,7 @@ FROM arm64v8/ros:foxy
 # APT none talk
 ENV DEBIAN_FRONTEND=noninteractive
 
-# package install
+# Install packages
 RUN apt-get update \
     && apt-get install -y \
     nano \
@@ -39,6 +35,7 @@ RUN apt-get update \
     tzdata \
     qt5-default \
     code \
+    sudo \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
@@ -57,16 +54,15 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && apt-get update \
-    && apt-get install -y  \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
+
 # Switch from root to user
 USER $USERNAME
 
 # Add user to video group to allow access to webcam
-RUN sudo usermod --append --groups video $USERNAME
-RUN sudo apt update && sudo apt upgrade -y
+RUN sudo usermod --append --groups video $USERNAME \
+    && sudo apt update && sudo apt upgrade -y
 
 # Rosdep update
 RUN if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then rosdep init; fi \
@@ -75,13 +71,13 @@ RUN if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then rosdep init
 RUN pip install pyserial
 
 # Source the ROS setup file
-RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
-RUN echo "export DISPLAY=:0" >> ~/.bashrc
-RUN echo "export LIBGL_ALWAYS_SOFTWARE=1" >> ~/.bashrc
-RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/src/agent_ws/install/setup.bash" >> ~/.bashrc
-RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/install/setup.bash" >> ~/.bashrc
-RUN echo "sudo chmod 666 /dev/ttyUSB0 && sudo chmod 666 /dev/ttyUSB1 && sudo chmod 666 /dev/ttyACM0" >> ~/.bashrc
-RUN echo "alias q='sudo chmod 666 /dev/ttyACM0'" >> ~/.bashrc
-RUN echo "alias w='python3 /desktop/AMR_Proj/Proj/etc/touch_gui/std_GUI.py'" >> ~/.bashrc
+ENV DISPLAY=:0
+ENV LIBGL_ALWAYS_SOFTWARE=1
+RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/$USERNAME/.bashrc
+RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/src/agent_ws/install/setup.bash" >> /home/$USERNAME/.bashrc
+RUN echo "source /desktop/AMR_Proj/Proj/dev-0716/install/setup.bash" >> /home/$USERNAME/.bashrc
+RUN echo "sudo chmod 666 /dev/ttyUSB0 && sudo chmod 666 /dev/ttyUSB1 && sudo chmod 666 /dev/ttyACM0" >> /home/$USERNAME/.bashrc
+RUN echo "alias q='sudo chmod 666 /dev/ttyACM0'" >> /home/$USERNAME/.bashrc
+RUN echo "alias w='python3 /desktop/AMR_Proj/Proj/etc/touch_gui/std_GUI.py'" >> /home/$USERNAME/.bashrc
 
-ENTRYPOINT ["/bin/bash", "-c", "source ~/.bashrc && bash", "code"]
+ENTRYPOINT ["/bin/bash", "-c", "source /home/vscode/.bashrc && bash", "code"]
