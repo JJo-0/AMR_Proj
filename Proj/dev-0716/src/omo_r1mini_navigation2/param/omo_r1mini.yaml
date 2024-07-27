@@ -1,11 +1,11 @@
 amcl:
   ros__parameters:
     use_sim_time: False  # 시뮬레이션 시간을 사용하지 않음
-    alpha1: 0.05 # 0.1 # 0.2  # 전진 방향의 노이즈
-    alpha2: 0.03 # 0.1 #  0.2  # 측면 방향의 노이즈
-    alpha3: 0.05 # 0.1 #  0.2  # 회전 속도의 노이즈
-    alpha4: 0.05 # 0.1 #  0.2  # 전진 속도의 노이즈
-    alpha5: 0.03 # 0.1 #  0.2  # 회전 방향의 노이즈
+    alpha1: 0.2 # 0.1 # 0.2  # 전진 방향의 노이즈
+    alpha2: 0.2 # 0.1 #  0.2  # 측면 방향의 노이즈
+    alpha3: 0.2 # 0.1 #  0.2  # 회전 속도의 노이즈
+    alpha4: 0.2 # 0.1 #  0.2  # 전진 속도의 노이즈
+    alpha5: 0.2 # 0.1 #  0.2  # 회전 방향의 노이즈
     base_frame_id: "base_footprint"  # 로봇의 기본 프레임
     beam_skip_distance: 0.5  # 빔 스킵 거리
     beam_skip_error_threshold: 0.9  # 빔 스킵 오류 임계값
@@ -19,7 +19,7 @@ amcl:
     laser_model_type: "likelihood_field"  #   # 레이저 모델 타입
     max_beams: 50  # 최대 빔 수
     max_particles: 3000 # 2000  # 최대 파티클 수
-    min_particles: 1000 # 1000 # 500  # 최소 파티클 수
+    min_particles: 1500 # 1000 # 500  # 최소 파티클 수
     odom_frame_id: "odom"  # 오도메트리 프레임 ID
     pf_err: 0.03 # 0.04 # 0.05  # 파티클 필터 오류 임계값
     pf_z: 0.99  # 파티클 필터 신뢰도
@@ -74,6 +74,8 @@ bt_navigator:
     - nav2_transform_available_condition_bt_node
     - nav2_time_expired_condition_bt_node
     - nav2_distance_traveled_condition_bt_node
+  #  - nav2_remove_passed_goals_bt_node
+    
 
 bt_navigator_rclcpp_node:
   ros__parameters:
@@ -86,9 +88,18 @@ controller_server:
     min_x_velocity_threshold: 0.001  # 최소 x축 속도 임계값
     min_y_velocity_threshold: 0.5  # 최소 y축 속도 임계값
     min_theta_velocity_threshold: 0.001  # 최소 theta 속도 임계값
-    controller_plugins: ["FollowPath"]  # 컨트롤러 플러그인 목록
-# ----------------------------------------------------------------------
-
+    progress_checker_plugins: ["progress_checker"] # progress_checker_plugin: "progress_checker" For Humble and older
+    goal_checker_plugins: ["goal_checker"] # goal_checker_plugin: "goal_checker" For Galactic and older
+    controller_plugins: ["FollowPath"]
+    progress_checker:
+      plugin: "nav2_controller::SimpleProgressChecker"
+      required_movement_radius: 0.5
+      movement_time_allowance: 10.0
+    goal_checker:
+      plugin: "nav2_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.25
+      yaw_goal_tolerance: 0.25
+      stateful: True
 
 # ------------------------------------------------------------------------
    # DWB parameters
@@ -100,7 +111,7 @@ controller_server:
       rotate_to_heading_angular_vel: 1.8
       max_angular_accel: 3.2
       simulate_ahead_time: 1.0
-      
+
       plugin: "dwb_core::DWBLocalPlanner"
       debug_trajectory_details: True  # 궤적 디버그 세부 정보 활성화
       min_vel_x: -0.80  # 최소 x축 속도
@@ -156,13 +167,13 @@ local_costmap:
       rolling_window: true  # 롤링 윈도우 사용
       width: 7 # 3  # 로컬 코스트맵 너비
       height: 7  # 로컬 코스트맵 높이
-      resolution: 0.1 # 0.2 # 0.1  # 해상도
-      robot_radius: 0.9  # 로봇 반경
+      resolution: 0.2 # 0.2 # 0.1  # 해상도
+      robot_radius: 0.8  # 로봇 반경
       plugins: ["obstacle_layer", "inflation_layer"]  # 플러그인 목록
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 1.25 # 0.5 # 1.0 # 3.0  # 비용 확장 계수
-        inflation_radius: 0.3 # 0.3  # 확장 반경
+        cost_scaling_factor: 1.5 # 0.5 # 1.0 # 3.0  # 비용 확장 계수
+        inflation_radius: 0.55 # 0.3  # 확장 반경
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True  # 활성화 여부
@@ -173,9 +184,6 @@ local_costmap:
           clearing: True  # 클리어링 사용 여부
           marking: True  # 마킹 사용 여부
           data_type: "LaserScan"  # 데이터 타입
-      static_layer:
-        map_subscribe_transient_local: True  # 맵 구독 일시적 로컬 여부
-        mask: "map_mask.pgm"  # 마스크 이미지 경로
       always_send_full_costmap: True  # 항상 전체 코스트맵 전송 여부
   local_costmap_client:
     ros__parameters:
@@ -192,7 +200,7 @@ global_costmap:
       global_frame": "map"  # 전역 프레임
       robot_base_frame: "base_link"  # 로봇 기본 프레임
       use_sim_time: False  # 시뮬레이션 시간 사용 여부
-      robot_radius: 1.0  # 로봇 반경
+      robot_radius: 0.8  # 로봇 반경
       resolution: 0.25 # 0.05  # 해상도
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]  # 플러그인 목록
       obstacle_layer:
@@ -266,6 +274,7 @@ planner_server_rclcpp_node:
 #     min_rotational_vel: 0.4  # 최소 회전 속도
 #     rotational_acc_lim: 1.0  # 회전 가속도 한계
 
+      
 robot_state_publisher:
   ros__parameters:
     use_sim_time: False  # 시뮬레이션 시간 사용 여부
