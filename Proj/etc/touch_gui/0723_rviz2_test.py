@@ -51,6 +51,7 @@ class ControlPanel(QWidget):
         self.ser = None  # 시리얼 포트 객체
         self.current_lift_command = None  # 현재 리프트 명령
         self.ems_signal = 1  # 응급 정지 신호
+        self.goal_positions = {"goal_1": None, "goal_2": None, "goal_3": None}  # 목표 위치들
         self.current_goal_index = None  # 현재 목표 인덱스
 
         self.status_labels = {
@@ -74,7 +75,6 @@ class ControlPanel(QWidget):
         self.emergency_pub = self.node.create_publisher(Int32, '/ems_sig', 10)  # 응급 정지 퍼블리셔
         self.goal_pub = self.node.create_publisher(PoseStamped, '/move_base_simple/goal', 10)  # 네비게이션 퍼블리셔
         self.pose_pub = self.node.create_publisher(Int32, '/pose_cmd', 10)  # /pose_cmd 퍼블리셔
-        self.nav_to_pose_client = ActionClient(self.node, NavigateToPose, 'navigate_to_pose')
         
     def setup_serial_connection(self, port, baud_rate):
         """시리얼 연결 설정"""
@@ -110,15 +110,14 @@ class ControlPanel(QWidget):
             label.setStyleSheet("font-size: 8px; background-color: white; color: white; padding: 5px;")
             status_layout.addWidget(QLabel(key))
             status_layout.addWidget(label)
-        
-        # Spin Button 추가
-        self.spin_button = QPushButton("Spin")
-        self.spin_button.clicked.connect(lambda: self.publish_pose_cmd(0))
-        self.spin_button.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgray;")
-        status_layout.addWidget(self.spin_button)
 
         status_group.setLayout(status_layout)
         left_layout.addWidget(status_group)
+
+        self.spin_button = QPushButton("Spin")
+        self.spin_button.clicked.connect(lambda: self.publish_pose_cmd(0))
+        self.spin_button.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgray;")
+        left_layout.addWidget(self.spin_button)
 
         main_layout.addLayout(left_layout)
 
@@ -248,7 +247,11 @@ class ControlPanel(QWidget):
         msg = Int32()
         msg.data = cmd_value
         self.pose_pub.publish(msg)
-        self.log_to_terminal(f"Published to /pose_cmd: {cmd_value}")
+        if cmd_value <= 3 :
+
+            self.log_to_terminal(f"Saved Goal: {cmd_value}")
+        else : 
+            self.log_to_terminal(f"Go Goal Set: {cmd_value}")
 
     def send_lift_command(self, command, label):
         """리프트 명령 전송"""
@@ -416,12 +419,14 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.setWindowTitle("Robot Control Panel")
 
-        # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
-        screen_geometry = QApplication.primaryScreen().geometry()
-        screen_width = screen_geometry.width()
-        screen_height = screen_geometry.height()
-
-        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height * 9 // 10)
+        # # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
+        # screen_geometry = QApplication.primaryScreen().geometry()
+        # screen_width = screen_geometry.width()
+        # screen_height = screen_geometry.height()
+        # self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height * 9 // 10)
+        
+        # 전체 화면
+        self.showFullScreen()
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
@@ -435,15 +440,15 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(container)
 
         # RViz 실행
-        self.launch_rviz()
+        # self.launch_rviz()
 
-    def launch_rviz(self):
-        """RViz 실행"""
-        config_path = "/desktop/AMR_Proj/Proj/etc/touch_gui/my_rviz.rviz"  # RViz 설정 파일 경로
-        #env = os.environ.copy()
-        #env['LIBGL_ALWAYS_SOFTWARE'] = '1'
-        self.control_panel.rviz_process = subprocess.Popen(["rviz2", "-d", config_path])#, env=env)  # RViz 프로세스를 시작하고 객체를 저장
-        time.sleep(5)  # RViz 창이 뜰 시간을 줌
+    # def launch_rviz(self):
+    #     """RViz 실행"""
+    #     config_path = "/desktop/AMR_Proj/Proj/etc/touch_gui/my_rviz.rviz"  # RViz 설정 파일 경로
+    #     #env = os.environ.copy()
+    #     #env['LIBGL_ALWAYS_SOFTWARE'] = '1'
+    #     self.control_panel.rviz_process = subprocess.Popen(["rviz2", "-d", config_path])#, env=env)  # RViz 프로세스를 시작하고 객체를 저장
+    #     time.sleep(5)  # RViz 창이 뜰 시간을 줌
 
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화
