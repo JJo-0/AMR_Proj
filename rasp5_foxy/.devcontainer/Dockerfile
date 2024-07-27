@@ -16,31 +16,31 @@ ENV DEBIAN_FRONTEND=noninteractive
 # package install
 RUN apt-get update \
     && apt-get install -y \
-    nano \                      
-    x11-apps \         
-    ros-foxy-desktop \          
-    ros-foxy-rviz2 \           
-    ros-foxy-twist-mux \       
-    ros-foxy-xacro \           
-    ros-foxy-ros2-control \    
-    ros-foxy-ros2-controllers \ 
-    ros-foxy-gazebo-ros2-control \ 
-    ros-foxy-slam-toolbox \     
-    ros-foxy-navigation2 \      
-    ros-foxy-nav2-bringup \     
-    ros-foxy-cartographer \     
-    ros-foxy-cartographer-ros \ 
-    joystick \ 
-    jstest-gtk \ 
-    evtest \ 
-    python3-pip \ 
-    git \ 
-    locales \                   
-    tzdata \                    
-    qt5-default \ 
-    code \              
-    && rm -rf /var/lib/apt/lists/* \ 
-    && apt-get clean             
+    nano \
+    x11-apps \
+    ros-foxy-desktop \
+    ros-foxy-rviz2 \
+    ros-foxy-twist-mux \
+    ros-foxy-xacro \
+    ros-foxy-ros2-control \
+    ros-foxy-ros2-controllers \
+    ros-foxy-gazebo-ros2-control \
+    ros-foxy-slam-toolbox \
+    ros-foxy-navigation2 \
+    ros-foxy-nav2-bringup \
+    ros-foxy-cartographer \
+    ros-foxy-cartographer-ros \
+    joystick \
+    jstest-gtk \
+    evtest \
+    python3-pip \
+    git \
+    locales \
+    tzdata \
+    qt5-default \
+    code \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
 
 # Install language
 RUN locale-gen en_US.UTF-8 \
