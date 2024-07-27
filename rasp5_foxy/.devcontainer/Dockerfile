@@ -70,8 +70,9 @@ RUN sudo usermod --append --groups video $USERNAME
 # 모든 패키지 업데이트 및 업그레이드
 RUN sudo apt update && sudo apt upgrade -y
 
-# Rosdep 업데이트
-RUN sudo rosdep init && rosdep update
+# Rosdep 업데이트 (이미 초기화된 경우 건너뛰기)
+RUN if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then sudo rosdep init; fi \
+    && rosdep update
 
 # Source the ROS setup file
 # ROS 환경 설정 추가
