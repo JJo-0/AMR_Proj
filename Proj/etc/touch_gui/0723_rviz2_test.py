@@ -228,11 +228,11 @@ class ControlPanel(QWidget):
         self.right_button.pressed.connect(lambda: self.start_movement("right"))
         self.right_button.released.connect(self.stop_movement)
         self.stop_button.clicked.connect(lambda: self.send_movement_command("stop"))
-        self.forward_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
-        self.backward_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
-        self.left_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
-        self.right_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
-        self.stop_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white;")
+        self.forward_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white; border-radius: 10px;")
+        self.backward_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white; border-radius: 10px;")
+        self.left_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white; border-radius: 10px;")
+        self.right_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white; border-radius: 10px;")
+        self.stop_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white; border-radius: 10px;")
         move_control_group.setLayout(move_layout)
         right_layout.addWidget(move_control_group)
 
@@ -298,6 +298,7 @@ class ControlPanel(QWidget):
         if label:
             label.setText(f"{text}")
             label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
+            label.setAlignment(Qt.AlignCenter)
 
     def start_serial_read_thread(self):
         """시리얼 읽기 스레드 시작"""
