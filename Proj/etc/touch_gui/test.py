@@ -1,3 +1,5 @@
+#testing py
+
 import os  # 파일 경로 처리를 위한 모듈
 import subprocess  # 서브프로세스를 실행하기 위한 모듈
 import sys  # 시스템 관련 기능을 위한 모듈
@@ -133,14 +135,8 @@ class ControlPanel(QWidget):
         self.terminal_output = QTextEdit()
         self.terminal_output.setReadOnly(True)
         self.terminal_output.setStyleSheet("background-color: lightgrey; color: black;")
-        self.terminal_output.setFixedHeight(50)
+        self.terminal_output.setFixedHeight(200)
         right_layout.addWidget(self.terminal_output)
-
-        self.nav_terminal_output = QTextEdit()
-        self.nav_terminal_output.setReadOnly(True)
-        self.nav_terminal_output.setStyleSheet("background-color: lightgrey; color: black;")
-        self.nav_terminal_output.setFixedHeight(100)
-        right_layout.addWidget(self.nav_terminal_output)
 
         lift_group = QGroupBox("Lift Control")
         lift_layout = QHBoxLayout()
@@ -150,9 +146,9 @@ class ControlPanel(QWidget):
         self.height1_button = QPushButton("1 Height")
         self.height2_button = QPushButton("2 Height")
         self.height3_button = QPushButton("3 Height")
-        self.height1_button.setStyleSheet("font-size: 24px; height: 60px; background-color: lightgrey;")
-        self.height2_button.setStyleSheet("font-size: 24px; height: 60px; background-color: lightgrey;")
-        self.height3_button.setStyleSheet("font-size: 24px; height: 60px; background-color: lightgrey;")
+        self.height1_button.setStyleSheet("font-size: 18px; height: 40px; background-color: lightgrey;")
+        self.height2_button.setStyleSheet("font-size: 18px; height: 40px; background-color: lightgrey;")
+        self.height3_button.setStyleSheet("font-size: 18px; height: 40px; background-color: lightgrey;")
         self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))
         self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))
         self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))
@@ -163,15 +159,14 @@ class ControlPanel(QWidget):
         lift_updown_group = QVBoxLayout()
         self.lift_up_button = QPushButton("Lift Up")
         self.lift_down_button = QPushButton("Lift Down")
-        self.lift_up_button.setStyleSheet("font-size: 20px; height: 90px; background-color: lightgrey;")
-        self.lift_down_button.setStyleSheet("font-size: 20px; height: 90px; background-color: lightgrey;")
+        self.lift_up_button.setStyleSheet("font-size: 20px; height: 60px; background-color: lightgrey;")
+        self.lift_down_button.setStyleSheet("font-size: 20px; height: 60px; background-color: lightgrey;")
         self.lift_up_button.pressed.connect(lambda: self.start_lift_command("L_10", "Lift Up"))
         self.lift_up_button.released.connect(self.stop_lift_command)
         self.lift_down_button.pressed.connect(lambda: self.start_lift_command("L_11", "Lift Down"))
         self.lift_down_button.released.connect(self.stop_lift_command)
         lift_updown_group.addWidget(self.lift_up_button)
         lift_updown_group.addWidget(self.lift_down_button)
-
         lift_layout.addLayout(lift_height_group)
         lift_layout.addLayout(lift_updown_group)
 
@@ -349,168 +344,4 @@ class ControlPanel(QWidget):
                 status = int(data.split("_")[1])
                 prev_ems_signal = self.ems_signal
                 self.ems_signal = status
-                if status == 0 or status == 2:
-                    # E_0와 E_2의 동일한 동작
-                    self.emergency_pub.publish(Int32(data=0))
-                    self.update_status_label("EMS", str(status), "red")
-                    self.emergency_stop_button.setChecked(True)
-                    self.log_to_terminal(f"Arduino received : EMS_{data}")
-
-                elif status == 1:
-                    self.emergency_pub.publish(Int32(data=1))
-                    self.update_status_label("EMS", "1", "green")
-                    self.emergency_stop_button.setChecked(False)
-                    self.log_to_terminal(f"Arduino received : EMS_{data}")
-
-                elif status == 3:
-                    if prev_ems_signal == 2: 
-                        self.emergency_pub.publish(Int32(data=1))
-                        self.update_status_label("EMS", "1", "green")
-                        self.emergency_stop_button.setChecked(False)
-                        if self.ser:
-                            try:
-                                self.ser.write("E_1\n".encode('utf-8'))
-                                self.log_to_terminal(f"[Arduino Send] : E_1")
-                            except serial.SerialException as e:
-                                self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
-                    self.log_to_terminal(f"Arduino received : EMS_{data}")
-            except (ValueError, IndexError) as e:
-                self.log_to_terminal(f"Invalid data received: {data}")
-
-    def start_movement(self, direction):
-        """로봇 이동 시작"""
-        self.emergency_pub.publish(Int32(data=1))
-        self.update_status_label("EMS", "1", "green")
-        self.emergency_stop_button.setChecked(False)
-        self.send_movement_command(direction)
-
-    def stop_movement(self):
-        """로봇 이동 중지"""
-        self.emergency_pub.publish(Int32(data=0))
-        self.update_status_label("EMS", "0", "red")
-        self.emergency_stop_button.setChecked(True)
-        self.send_movement_command("stop")
-
-    def send_movement_command(self, direction):
-        """이동 명령 전송"""
-        msg = Twist()
-        if direction == "forward":
-            msg.linear.x = 0.25
-        elif direction == "backward":
-            msg.linear.x = -0.25
-        elif direction == "left":
-            msg.angular.z = 0.4
-        elif direction == "right":
-            msg.angular.z = -0.4
-        elif direction == "stop":
-            msg.linear.x = 0.0
-            msg.angular.z = 0.0
-        self.node.create_publisher(Twist, '/cmd_vel', 10).publish(msg)
-
-    def handle_emergency_stop(self):
-        """응급 정지 처리"""
-        sender = self.sender()
-        if sender.isChecked():
-            self.emergency_pub.publish(Int32(data=0))
-            self.update_status_label("EMS", "0", "red")
-            self.ems_signal = 0
-            if self.ser:
-                try:
-                    self.ser.write("E_0\n".encode('utf-8'))
-                except serial.SerialException as e:
-                    self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
-        else:
-            self.emergency_pub.publish(Int32(data=1))
-            self.update_status_label("EMS", "1", "green")
-            self.ems_signal = 1
-            if self.ser:
-                try:
-                    self.ser.write("E_1\n".encode('utf-8'))
-                    self.log_to_terminal(f"[Arduino Send] : E_1")
-                except serial.SerialException as e:
-                    self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
-
-    def log_to_terminal(self, message):
-        """터미널 로그"""
-        self.terminal_output.append(message)
-        self.terminal_output.ensureCursorVisible()
-
-    def start_ros2_launch(self):
-        """ros2 launch omo_r1mini_navigation2 navigation2.launch.py 실행 및 로그 출력"""
-        self.process = QProcess()
-        self.process.setProcessChannelMode(QProcess.MergedChannels)
-        self.process.readyReadStandardOutput.connect(self.handle_ros2_output)
-        self.process.start("ros2", ["launch", "omo_r1mini_navigation2", "navigation2.launch.py"])
-
-    def handle_ros2_output(self):
-        data = self.process.readAllStandardOutput().data().decode()
-        self.nav_terminal_output.append(data)
-        self.nav_terminal_output.ensureCursorVisible()
-
-
-    def exit_program(self):
-        """프로그램 종료"""
-        self.log_to_terminal("Exiting program...")
-        
-        if self.rviz_process:
-            self.rviz_process.terminate()
-            self.rviz_process.wait()
-        
-        QApplication.quit()
-        sys.exit(0)
-
-class MainWindow(QMainWindow):
-    def __init__(self, node):
-        super(MainWindow, self).__init__()
-        self.setWindowTitle("Robot Control Panel")
-
-        # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
-        screen_geometry = QApplication.primaryScreen().geometry()
-        screen_width = screen_geometry.width()
-        screen_height = screen_geometry.height()
-        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height * 9 // 10)
-        
-        # # 전체 화면
-        # self.showFullScreen()
-
-        # 컨트롤 패널 추가 및 크기 조정
-        self.control_panel = ControlPanel(node, self)
-
-        # 메인 레이아웃 설정
-        main_layout = QVBoxLayout()
-        main_layout.addWidget(self.control_panel)
-
-        container = QWidget()
-        container.setLayout(main_layout)
-        self.setCentralWidget(container)
-
-        # RViz 실행
-        self.launch_rviz()
-
-    def launch_rviz(self):
-        """RViz 실행"""
-        config_path = "/desktop/AMR_Proj/Proj/etc/touch_gui/my_rviz.rviz"  # RViz 설정 파일 경로
-        env = os.environ.copy()
-        env['LIBGL_ALWAYS_SOFTWARE'] = '1'
-        self.control_panel.rviz_process = subprocess.Popen(["rviz2", "-d", config_path], env=env)  # RViz 프로세스를 시작하고 객체를 저장
-        time.sleep(5)  # RViz 창이 뜰 시간을 줌
-
-    def closeEvent(self, event):
-        """윈도우가 닫힐 때 처리"""
-        self.control_panel.exit_program()
-        event.accept()
-
-def main(args=None):
-    rclpy.init(args=args)  # ROS 2 초기화
-    node = Node("robot_control_panel")  # ROS 2 노드 생성
-    app = QApplication(sys.argv)  # QApplication 생성
-    main_window = MainWindow(node)  # 메인 윈도우 생성
-    main_window.show()  # 메인 윈도우 표시
-
-    try:
-        sys.exit(app.exec_())  # QApplication 이벤트 루프 실행
-    finally:
-        rclpy.shutdown()  # ROS 2 종료
-
-if __name__ == "__main__":
-    main()
+                if status == 0 or status == 

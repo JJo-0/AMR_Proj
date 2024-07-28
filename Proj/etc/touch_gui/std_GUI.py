@@ -8,13 +8,13 @@ import time  # 시간 관련 기능을 위한 모듈
 import serial  # 시리얼 통신을 위한 모듈
 import json  # JSON 파일 처리를 위한 모듈
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QToolButton, QLabel, QGroupBox, QTextEdit, QGridLayout)  # PyQt5 GUI 위젯들
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QMutex  # PyQt5 코어 기능들
+from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QMutex, QCoreApplication  # PyQt5 코어 기능들
 import rclpy  # ROS 2 파이썬 라이브러리
 from rclpy.node import Node  # ROS 2 노드 클래스
 from rclpy.action import ActionClient 
 from nav2_msgs.action import NavigateToPose
 from std_msgs.msg import Int32, String  # ROS 2 표준 메시지
-from geometry_msgs.msg import PoseWithCovarianceStamped, PoseStamped, Twist  # ROS 2 지오메트리 메시지
+from geometry_msgs.msg import PoseStamped, Twist  # ROS 2 지오메트리 메시지
 from threading import Thread, Lock  # 스레딩 및 락
 
 class SerialReader(QThread):
@@ -71,7 +71,7 @@ class ControlPanel(QWidget):
         self.init_ui()  # UI 초기화
         self.log_to_terminal("UI Set Success!")
 
-        self.setup_serial_connection('/dev/ttyACM0', 115200)  # 시리얼 연결 설정
+        self.setup_serial_connection('/dev/ttyACM1', 115200)  # 시리얼 연결 설정
         self.start_serial_read_thread()  # 시리얼 읽기 스레드 시작
         self.start_serial_process_thread()  # 시리얼 처리 스레드 시작
 
@@ -218,9 +218,9 @@ class ControlPanel(QWidget):
         self.right_button = QPushButton("Right")
         self.stop_button = QPushButton("Stop")
         move_layout.addWidget(self.backward_button, 0, 1)
-        move_layout.addWidget(self.left_button, 1, 0)
+        move_layout.addWidget(self.left_button, 1, 2)
         move_layout.addWidget(self.stop_button, 1, 1)
-        move_layout.addWidget(self.right_button, 1, 2)
+        move_layout.addWidget(self.right_button, 1, 0)
         move_layout.addWidget(self.forward_button, 2, 1)
         self.forward_button.pressed.connect(lambda: self.start_movement("forward"))
         self.forward_button.released.connect(self.stop_movement)
@@ -313,7 +313,7 @@ class ControlPanel(QWidget):
         if self.ser:
             self.read_thread = Thread(target=self.read_from_serial)
             self.read_thread.start()
-            self.log_to_terminal("Serial Reading Thread Start")
+            self.log_to_terminal("Aduino Serial Reading Thread Start")
 
     def start_serial_process_thread(self):
         """시리얼 처리 스레드 시작"""
@@ -373,13 +373,13 @@ class ControlPanel(QWidget):
         """이동 명령 전송"""
         msg = Twist()
         if direction == "forward":
-            msg.linear.x = 0.1
+            msg.linear.x = 0.25
         elif direction == "backward":
-            msg.linear.x = -0.1
+            msg.linear.x = -0.25
         elif direction == "left":
-            msg.angular.z = 0.2
+            msg.angular.z = 0.4
         elif direction == "right":
-            msg.angular.z = -0.2
+            msg.angular.z = -0.4
         elif direction == "stop":
             msg.linear.x = 0.0
             msg.angular.z = 0.0
@@ -416,21 +416,26 @@ class ControlPanel(QWidget):
     def exit_program(self):
         """프로그램 종료"""
         self.log_to_terminal("Exiting program...")
+        if self.rviz_process:
+            self.rviz_process.terminate()
+            self.rviz_process.wait()
         QApplication.quit()
+        QCoreApplication.exit()
+        sys.exit(0)
 
 class MainWindow(QMainWindow):
     def __init__(self, node):
         super(MainWindow, self).__init__()
         self.setWindowTitle("Robot Control Panel")
 
-        # # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
-        # screen_geometry = QApplication.primaryScreen().geometry()
-        # screen_width = screen_geometry.width()
-        # screen_height = screen_geometry.height()
-        # self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height * 9 // 10)
+        # 화면 해상도에 따라 메인 윈도우 크기 동적 조정
+        screen_geometry = QApplication.primaryScreen().geometry()
+        screen_width = screen_geometry.width()
+        screen_height = screen_geometry.height()
+        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height * 9 // 10)
         
-        # 전체 화면
-        self.showFullScreen()
+        # # 전체 화면
+        # self.showFullScreen()
 
         # 컨트롤 패널 추가 및 크기 조정
         self.control_panel = ControlPanel(node, self)
@@ -444,15 +449,20 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(container)
 
         # RViz 실행
-        # self.launch_rviz()
+        self.launch_rviz()
 
-    # def launch_rviz(self):
-    #     """RViz 실행"""
-    #     config_path = "/desktop/AMR_Proj/Proj/etc/touch_gui/my_rviz.rviz"  # RViz 설정 파일 경로
-    #     #env = os.environ.copy()
-    #     #env['LIBGL_ALWAYS_SOFTWARE'] = '1'
-    #     self.control_panel.rviz_process = subprocess.Popen(["rviz2", "-d", config_path])#, env=env)  # RViz 프로세스를 시작하고 객체를 저장
-    #     time.sleep(5)  # RViz 창이 뜰 시간을 줌
+    def launch_rviz(self):
+        """RViz 실행"""
+        config_path = "/desktop/AMR_Proj/Proj/etc/touch_gui/my_rviz.rviz"  # RViz 설정 파일 경로
+        #env = os.environ.copy()
+        #env['LIBGL_ALWAYS_SOFTWARE'] = '1'
+        self.control_panel.rviz_process = subprocess.Popen(["rviz2", "-d", config_path])#, env=env)  # RViz 프로세스를 시작하고 객체를 저장
+        time.sleep(5)  # RViz 창이 뜰 시간을 줌
+
+    def closeEvent(self, event):
+        """윈도우가 닫힐 때 처리"""
+        self.control_panel.exit_program()
+        event.accept()
 
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화

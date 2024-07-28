@@ -1,0 +1,281 @@
+amcl:
+  ros__parameters:
+    use_sim_time: False  # 시뮬레이션 시간을 사용하지 않음
+    alpha1: 0.2 # 0.1 # 0.2  # 전진 방향의 노이즈
+    alpha2: 0.2 # 0.1 #  0.2  # 측면 방향의 노이즈
+    alpha3: 0.2 # 0.1 #  0.2  # 회전 속도의 노이즈
+    alpha4: 0.2 # 0.1 #  0.2  # 전진 속도의 노이즈
+    alpha5: 0.2 # 0.1 #  0.2  # 회전 방향의 노이즈
+    base_frame_id: "base_footprint"  # 로봇의 기본 프레임
+    beam_skip_distance: 0.5  # 빔 스킵 거리
+    beam_skip_error_threshold: 0.9  # 빔 스킵 오류 임계값
+    beam_skip_threshold: 0.3  # 빔 스킵 임계값
+    do_beamskip: false  # 빔 스킵 사용 여부
+    global_frame_id: "map"  # 전역 프레임 ID
+    lambda_short: 0.05  # 짧은 거리 노이즈 매개변수
+    laser_likelihood_max_dist: 3.0 # 2.0 # 레이저 최대 거리
+    laser_max_range: 10.0  # 레이저 최대 범위
+    laser_min_range: 0.55  # 레이저 최소 범위
+    laser_model_type: "likelihood_field"  #   # 레이저 모델 타입
+    max_beams: 60  # 최대 빔 수
+    max_particles: 3000 # 2000  # 최대 파티클 수
+    min_particles: 800 # 1000 # 500  # 최소 파티클 수
+    odom_frame_id: "odom"  # 오도메트리 프레임 ID
+    pf_err: 0.03 # 0.04 # 0.05  # 파티클 필터 오류 임계값
+    pf_z: 0.99  # 파티클 필터 신뢰도
+    recovery_alpha_fast: 0.0  # 빠른 회복 알파 값
+    recovery_alpha_slow: 0.0  # 느린 회복 알파 값
+    resample_interval: 1  # 리샘플링 간격
+    robot_model_type: "differential"  # 로봇 모델 타입
+    save_pose_rate: 0.5  # 포즈 저장 속도
+    sigma_hit: 0.2  # 적중 시그마 값
+    tf_broadcast: true  # TF 브로드캐스트 사용 여부
+    transform_tolerance: 1.0  # 변환 허용 오차
+    update_min_a: 0.2  # 최소 업데이트 각도
+    update_min_d: 0.25  # 최소 업데이트 거리
+    z_hit: 0.5  # 히트 확률
+    z_max: 0.05  # 최대 거리 확률
+    z_rand: 0.5  # 무작위 확률
+    z_short: 0.05  # 짧은 거리 확률
+
+amcl_map_client:
+  ros__parameters:
+    use_sim_time: False  # 시뮬레이션 시간 사용 여부
+
+amcl_rclcpp_node:
+  ros__parameters:
+    use_sim_time: False  # 시뮬레이션 시간 사용 여부
+
+bt_navigator:
+  ros__parameters:
+    use_sim_time: False  # 시뮬레이션 시간 사용 여부
+    global_frame": "map"  # 전역 프레임
+    robot_base_frame: "base_link"  # 로봇 기본 프레임
+    odom_topic: /odom  # 오도메트리 토픽
+    default_bt_xml_filename: "navigate_w_replanning_and_recovery.xml"  # 기본 BT XML 파일
+    plugin_lib_names:  # 플러그인 라이브러리 이름 목록
+    - nav2_compute_path_to_pose_action_bt_node
+    - nav2_follow_path_action_bt_node
+    - nav2_back_up_action_bt_node
+    - nav2_spin_action_bt_node
+    - nav2_wait_action_bt_node
+    - nav2_clear_costmap_service_bt_node
+    - nav2_is_stuck_condition_bt_node
+    - nav2_goal_reached_condition_bt_node
+    - nav2_goal_updated_condition_bt_node
+    - nav2_initial_pose_received_condition_bt_node
+    - nav2_reinitialize_global_localization_service_bt_node
+    - nav2_rate_controller_bt_node
+    - nav2_distance_controller_bt_node
+    - nav2_speed_controller_bt_node
+    - nav2_recovery_node_bt_node
+    - nav2_pipeline_sequence_bt_node
+    - nav2_round_robin_node_bt_node
+    - nav2_transform_available_condition_bt_node
+    - nav2_time_expired_condition_bt_node
+    - nav2_distance_traveled_condition_bt_node
+  #  - nav2_remove_passed_goals_bt_node
+    
+
+bt_navigator_rclcpp_node:
+  ros__parameters:
+    use_sim_time: False  # 시뮬레이션 시간 사용 여부
+
+controller_server:
+  ros__parameters:
+    use_sim_time: False  # 시뮬레이션 시간 사용 여부
+    controller_frequency: 10.0 #  20.0  # 컨트롤러 빈도
+    min_x_velocity_threshold: 0.001  # 최소 x축 속도 임계값
+    min_y_velocity_threshold: 0.5  # 최소 y축 속도 임계값
+    min_theta_velocity_threshold: 0.001  # 최소 theta 속도 임계값
+    progress_checker_plugins: ["progress_checker"] # progress_checker_plugin: "progress_checker" For Humble and older
+    goal_checker_plugins: ["goal_checker"] # goal_checker_plugin: "goal_checker" For Galactic and older
+    controller_plugins: ["FollowPath"]
+    progress_checker:
+      plugin: "nav2_controller::SimpleProgressChecker"
+      required_movement_radius: 0.5
+      movement_time_allowance: 20.0
+    goal_checker:
+      plugin: "nav2_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.25
+      yaw_goal_tolerance: 0.25
+      stateful: True
+
+# ------------------------------------------------------------------------
+   # DWB parameters
+    FollowPath:
+      plugin: "nav2_rotation_shim_controller::RotationShimController"
+      primary_controller: "dwb_core::DWBLocalPlanner"
+      angular_dist_threshold: 0.785
+      forward_sampling_distance: 0.5
+      rotate_to_heading_angular_vel: 1.8
+      max_angular_accel: 3.2
+      simulate_ahead_time: 1.0
+
+      plugin: "dwb_core::DWBLocalPlanner"
+      debug_trajectory_details: True  # 궤적 디버그 세부 정보 활성화
+      min_vel_x: 0.0  # 최소 x축 속도
+      min_vel_y: 0.0  # 최소 y축 속도
+      max_vel_x: 0.6  # 최대 x축 속도
+      max_vel_y: 0.0  # 최대 y축 속도
+      max_vel_theta: 0.7  # 최대 theta 속도
+      min_speed_xy: 0.0  # 최소 xy 속도
+      max_speed_xy: 0.5  # 최대 xy 속도
+      min_speed_theta: 0.0  # 최소 theta 속도
+      acc_lim_x: 1.0  # x축 가속도 한계
+      acc_lim_y: 0.0  # y축 가속도 한계
+      acc_lim_theta: 1.0  # theta 가속도 한계
+      decel_lim_x: -1.0 #-0.3  # x축 감속도 한계
+      decel_lim_y: 0.0  # y축 감속도 한계
+      decel_lim_theta: -1.0  # theta 감속도 한계
+      vx_samples: 20 # 20  # x축 속도 샘플 수
+      vy_samples: 5  # y축 속도 샘플 수
+      vtheta_samples: 30 # 20  # theta 속도 샘플 수
+      sim_time: 1.5 # 시뮬레이션 시간
+      linear_granularity: 0.05  # 선형 그래뉼러리티
+      angular_granularity: 0.025  # 각도 그래뉼러리티
+      transform_tolerance: 0.2  # 변환 허용 오차
+      xy_goal_tolerance: 0.3  # xy 목표 허용 오차
+      # yaw_goal_tolerance: 0.5  # yaw 목표 허용 오차
+      trans_stopped_velocity: 0.25  # 이동 중지 속도
+      short_circuit_trajectory_evaluation: True  # 단락 회로 궤적 평가 활성화
+      stateful: True  # 상태 유지 활성화
+      critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]  # 평가자 목록
+      BaseObstacle.scale: 0.5 # 0.02  # 장애물 크기
+      PathAlign.scale: 32.0  # 경로 정렬 크기
+      PathAlign.forward_point_distance: 0.1  # 경로 정렬 전방 포인트 거리
+      GoalAlign.scale: 24.0  # 목표 정렬 크기
+      GoalAlign.forward_point_distance: 0.1  # 목표 정렬 전방 포인트 거리
+      PathDist.scale: 32.0  # 경로 거리 크기
+      GoalDist.scale: 24.0  # 목표 거리 크기
+      RotateToGoal.scale: 32.0  # 목표 회전 크기
+      RotateToGoal.slowing_factor: 5.0  # 감속 계수
+      RotateToGoal.lookahead_time: -1.0  # 예측 시간
+
+controller_server_rclcpp_node:
+  ros__parameters:
+    use_sim_time: False  # 시뮬레이션 시간 사용 여부
+
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      update_frequency: 8.0 # 5.0  # 업데이트 빈도
+      publish_frequency: 2.0 # 2.0  # 발행 빈도
+      global_frame: "odom"  # 전역 프레임
+      robot_base_frame: "base_link"  # 로봇 기본 프레임
+      use_sim_time: False  # 시뮬레이션 시간 사용 여부
+      rolling_window: true  # 롤링 윈도우 사용
+      width: 5 # 3  # 로컬 코스트맵 너비
+      height: 5  # 로컬 코스트맵 높이
+      resolution: 0.1 # 0.2 # 0.1  # 해상도
+      robot_radius: 0.7  # 로봇 반경
+      plugins: ["obstacle_layer", "inflation_layer"]  # 플러그인 목록
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+        cost_scaling_factor: 1.5 # 0.5 # 1.0 # 3.0  # 비용 확장 계수
+        inflation_radius: 0.5 # 0.3  # 확장 반경
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::ObstacleLayer"
+        enabled: True  # 활성화 여부
+        observation_sources: "scan"  # 관측 소스
+        scan:
+          topic: /scan  # 토픽 이름
+          max_obstacle_height: 2.0  # 최대 장애물 높이
+          clearing: True  # 클리어링 사용 여부
+          marking: True  # 마킹 사용 여부
+          data_type: "LaserScan"  # 데이터 타입
+      always_send_full_costmap: True  # 항상 전체 코스트맵 전송 여부
+  local_costmap_client:
+    ros__parameters:
+      use_sim_time: False  # 시뮬레이션 시간 사용 여부
+  local_costmap_rclcpp_node:
+    ros__parameters:
+      use_sim_time: False  # 시뮬레이션 시간 사용 여부
+
+global_costmap:
+  global_costmap:
+    ros__parameters:
+      update_frequency: 1.0 # 1.0  # 업데이트 빈도
+      publish_frequency: 1.0 # 1.0  # 발행 빈도
+      global_frame": "map"  # 전역 프레임
+      robot_base_frame: "base_link"  # 로봇 기본 프레임
+      use_sim_time: False  # 시뮬레이션 시간 사용 여부
+      robot_radius: 0.6 # 로봇 반경
+      resolution: 0.25 # 0.05  # 해상도
+      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]  # 플러그인 목록
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::ObstacleLayer"
+        enabled: True  # 활성화 여부
+        observation_sources: "scan"  # 관측 소스
+        scan:
+          topic: /scan  # 토픽 이름
+          max_obstacle_height: 2.0  # 최대 장애물 높이
+          clearing: True  # 클리어링 사용 여부
+          marking: True  # 마킹 사용 여부
+          data_type: "LaserScan"  # 데이터 타입
+      static_layer:
+        plugin: "nav2_costmap_2d::StaticLayer"
+        map_subscribe_transient_local: True  # 맵 구독 일시적 로컬 여부
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+      always_send_full_costmap: True  # 항상 전체 코스트맵 전송 여부
+  global_costmap_client:
+    ros__parameters:
+      use_sim_time: False  # 시뮬레이션 시간 사용 여부
+  global_costmap_rclcpp_node:
+    ros__parameters:
+      use_sim_time: False  # 시뮬레이션 시간 사용 여부
+
+map_server:
+  ros__parameters:
+    use_sim_time: False  # 시뮬레이션 시간 사용 여부
+    yaml_filename: "map_.yaml"  # 맵 YAML 파일 이름
+
+map_saver:
+  ros__parameters:
+    use_sim_time: False  # 시뮬레이션 시간 사용 여부
+    save_map_timeout: 5000  # 맵 저장 타임아웃
+    free_thresh_default: 0.25  # 기본 자유 임계값
+    occupied_thresh_default: 0.65  # 기본 점유 임계값
+    map_subscribe_transient_local: False
+
+planner_server:
+  ros__parameters:
+    expected_planner_frequency: 10.0 # 20.0  # 예상 플래너 빈도
+    use_sim_time: False  # 시뮬레이션 시간 사용 여부
+    planner_plugins: ["GridBased"]  # 플래너 플러그인 목록
+    GridBased:
+      plugin: "nav2_navfn_planner/NavfnPlanner"
+      tolerance: 0.6 # 0.5  # 허용 오차
+      use_astar: false  # A* 알고리즘 사용 여부
+      allow_unknown: true  # 미지의 영역 허용 여부
+
+planner_server_rclcpp_node:
+  ros__parameters:
+    use_sim_time: False  # 시뮬레이션 시간 사용 여부
+
+# recoveries_server:
+#   ros__parameters:
+#     costmap_topic: local_costmap/costmap_raw  # 코스트맵 토픽
+#     footprint_topic: local_costmap/published_footprint  # 풋프린트 토픽
+#     cycle_frequency: 10.0  # 주기 빈도
+#     recovery_plugins: ["spin", "backup", "wait"]  # 회복 플러그인 목록
+#     spin:
+#       plugin: "nav2_recoveries/Spin"
+#     backup:
+#       plugin: "nav2_recoveries/BackUp"
+#     wait:
+#       plugin: "nav2_recoveries/Wait"
+#     global_frame: "odom"  # 전역 프레임
+#     robot_base_frame: "base_link"  # 로봇 기본 프레임
+#     transform_timeout: 0.1  # 변환 타임아웃
+#     use_sim_time: False  # 시뮬레이션 시간 사용 여부
+#     simulate_ahead_time: 2.0  # 예측 시간
+#     max_rotational_vel: 1.0  # 최대 회전 속도
+#     min_rotational_vel: 0.4  # 최소 회전 속도
+#     rotational_acc_lim: 1.0  # 회전 가속도 한계
+
+      
+robot_state_publisher:
+  ros__parameters:
+    use_sim_time: False  # 시뮬레이션 시간 사용 여부
