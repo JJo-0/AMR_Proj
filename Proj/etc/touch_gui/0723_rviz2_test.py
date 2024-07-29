@@ -100,7 +100,7 @@ class ControlPanel(QWidget):
         self.emergency_stop_button = QToolButton()
         self.emergency_stop_button.setCheckable(True)
         self.emergency_stop_button.setText("EMS")
-        self.emergency_stop_button.setStyleSheet("font-size: 24px; height: 300px; background-color: lightcoral;")
+        self.emergency_stop_button.setStyleSheet("font-size: 40px; height: 300px; background-color: red; border-radius: 10px; font-weight: bold;")
         self.emergency_stop_button.setFixedWidth(100)
         self.emergency_stop_button.clicked.connect(self.handle_emergency_stop)
         left_layout.addWidget(self.emergency_stop_button)
@@ -109,7 +109,7 @@ class ControlPanel(QWidget):
         status_layout = QVBoxLayout()
 
         for key, label in self.status_labels.items():
-            label.setStyleSheet("font-size: 8px; background-color: white; color: white; padding: 5px;")
+            label.setStyleSheet("font-size: 20px; background-color: white; color: white; padding: 5px; border-radius: 10px; font-weight: bold;")
             status_layout.addWidget(QLabel(key))
             status_layout.addWidget(label)
 
@@ -118,28 +118,23 @@ class ControlPanel(QWidget):
 
         self.spin_button = QPushButton("Spin")
         self.spin_button.clicked.connect(lambda: self.publish_pose_cmd(0))
-        self.spin_button.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgray;")
+        self.spin_button.setStyleSheet("font-size: 20px; height: 30px; background-color: lightgray; border-radius: 10px;")
         left_layout.addWidget(self.spin_button)
 
         main_layout.addLayout(left_layout)
 
         right_layout = QVBoxLayout()
 
-        self.exit_button = QPushButton("Exit")
-        self.exit_button.setStyleSheet("font-size: 14px; height: 12px; background-color: gray; color: white;")
-        self.exit_button.clicked.connect(self.exit_program)
-        right_layout.addWidget(self.exit_button)
-
         self.terminal_output = QTextEdit()
         self.terminal_output.setReadOnly(True)
         self.terminal_output.setStyleSheet("background-color: lightgrey; color: black;")
-        self.terminal_output.setFixedHeight(50)
+        self.terminal_output.setFixedHeight(20)
         right_layout.addWidget(self.terminal_output)
 
         self.nav_terminal_output = QTextEdit()
         self.nav_terminal_output.setReadOnly(True)
-        self.nav_terminal_output.setStyleSheet("background-color: lightgrey; color: black;")
-        self.nav_terminal_output.setFixedHeight(100)
+        self.nav_terminal_output.setStyleSheet("background-color: lightgrey; color: black; font-weight: bold;")
+        self.nav_terminal_output.setFixedHeight(150)
         right_layout.addWidget(self.nav_terminal_output)
 
         lift_group = QGroupBox("Lift Control")
@@ -150,12 +145,12 @@ class ControlPanel(QWidget):
         self.height1_button = QPushButton("1 Height")
         self.height2_button = QPushButton("2 Height")
         self.height3_button = QPushButton("3 Height")
-        self.height1_button.setStyleSheet("font-size: 24px; height: 60px; background-color: lightgrey;")
-        self.height2_button.setStyleSheet("font-size: 24px; height: 60px; background-color: lightgrey;")
-        self.height3_button.setStyleSheet("font-size: 24px; height: 60px; background-color: lightgrey;")
-        self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1 Point"))
-        self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2 Point"))
-        self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3 Point"))
+        self.height1_button.setStyleSheet("font-size: 30px; height: 60px; background-color: lightgrey; border-radius: 10px;")
+        self.height2_button.setStyleSheet("font-size: 30px; height: 60px; background-color: lightgrey; border-radius: 10px;")
+        self.height3_button.setStyleSheet("font-size: 30px; height: 60px; background-color: lightgrey; border-radius: 10px;")
+        self.height1_button.clicked.connect(lambda: self.send_lift_command("L_20", "1"))
+        self.height2_button.clicked.connect(lambda: self.send_lift_command("L_21", "2"))
+        self.height3_button.clicked.connect(lambda: self.send_lift_command("L_22", "3"))
         lift_height_group.addWidget(self.height3_button)
         lift_height_group.addWidget(self.height2_button)
         lift_height_group.addWidget(self.height1_button)
@@ -163,11 +158,11 @@ class ControlPanel(QWidget):
         lift_updown_group = QVBoxLayout()
         self.lift_up_button = QPushButton("Lift Up")
         self.lift_down_button = QPushButton("Lift Down")
-        self.lift_up_button.setStyleSheet("font-size: 20px; height: 90px; background-color: lightgrey;")
-        self.lift_down_button.setStyleSheet("font-size: 20px; height: 90px; background-color: lightgrey;")
-        self.lift_up_button.pressed.connect(lambda: self.start_lift_command("L_10", "Lift Up"))
+        self.lift_up_button.setStyleSheet("font-size: 30px; height: 90px; background-color: lightgrey; border-radius: 10px;")
+        self.lift_down_button.setStyleSheet("font-size: 30px; height: 90px; background-color: lightgrey; border-radius: 10px;")
+        self.lift_up_button.pressed.connect(lambda: self.start_lift_command("L_10", "Up"))
         self.lift_up_button.released.connect(self.stop_lift_command)
-        self.lift_down_button.pressed.connect(lambda: self.start_lift_command("L_11", "Lift Down"))
+        self.lift_down_button.pressed.connect(lambda: self.start_lift_command("L_11", "Down"))
         self.lift_down_button.released.connect(self.stop_lift_command)
         lift_updown_group.addWidget(self.lift_up_button)
         lift_updown_group.addWidget(self.lift_down_button)
@@ -187,9 +182,9 @@ class ControlPanel(QWidget):
         self.save_goal_button_1.clicked.connect(lambda: self.publish_pose_cmd(1))
         self.save_goal_button_2.clicked.connect(lambda: self.publish_pose_cmd(2))
         self.save_goal_button_3.clicked.connect(lambda: self.publish_pose_cmd(3))
-        self.save_goal_button_1.setStyleSheet("font-size: 14px; height: 30px; background-color: lightyellow;")
-        self.save_goal_button_2.setStyleSheet("font-size: 14px; height: 30px; background-color: lightyellow;")
-        self.save_goal_button_3.setStyleSheet("font-size: 14px; height: 30px; background-color: lightyellow;")
+        self.save_goal_button_1.setStyleSheet("font-size: 30px; height: 90px; background-color: lightyellow; border-radius: 10px; font-weight: bold;")
+        self.save_goal_button_2.setStyleSheet("font-size: 30px; height: 90px; background-color: lightyellow; border-radius: 10px; font-weight: bold;")
+        self.save_goal_button_3.setStyleSheet("font-size: 30px; height: 90px; background-color: lightyellow; border-radius: 10px; font-weight: bold;")
         save_goal_layout.addWidget(self.save_goal_button_1)
         save_goal_layout.addWidget(self.save_goal_button_2)
         save_goal_layout.addWidget(self.save_goal_button_3)
@@ -202,9 +197,9 @@ class ControlPanel(QWidget):
         self.go_goal_button_1.clicked.connect(lambda: self.publish_pose_cmd(4))
         self.go_goal_button_2.clicked.connect(lambda: self.publish_pose_cmd(5))
         self.go_goal_button_3.clicked.connect(lambda: self.publish_pose_cmd(6))
-        self.go_goal_button_1.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgreen;")
-        self.go_goal_button_2.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgreen;")
-        self.go_goal_button_3.setStyleSheet("font-size: 14px; height: 30px; background-color: lightgreen;")
+        self.go_goal_button_1.setStyleSheet("font-size: 30px; height: 90px; background-color: lightgreen; border-radius: 10px; font-weight: bold;")
+        self.go_goal_button_2.setStyleSheet("font-size: 30px; height: 90px; background-color: lightgreen; border-radius: 10px; font-weight: bold;")
+        self.go_goal_button_3.setStyleSheet("font-size: 30px; height: 90px; background-color: lightgreen; border-radius: 10px; font-weight: bold;")
         go_goal_layout.addWidget(self.go_goal_button_1)
         go_goal_layout.addWidget(self.go_goal_button_2)
         go_goal_layout.addWidget(self.go_goal_button_3)
@@ -236,11 +231,11 @@ class ControlPanel(QWidget):
         self.right_button.pressed.connect(lambda: self.start_movement("right"))
         self.right_button.released.connect(self.stop_movement)
         self.stop_button.clicked.connect(lambda: self.send_movement_command("stop"))
-        self.forward_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white; border-radius: 10px;")
-        self.backward_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white; border-radius: 10px;")
-        self.left_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white; border-radius: 10px;")
-        self.right_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white; border-radius: 10px;")
-        self.stop_button.setStyleSheet("font-size: 24px; height: 50px; background-color: black; color: white; border-radius: 10px;")
+        self.forward_button.setStyleSheet("font-size: 24px; height: 70px; background-color: black; color: white; border-radius: 10px; font-weight: bold;")
+        self.backward_button.setStyleSheet("font-size: 24px; height: 70px; background-color: black; color: white; border-radius: 10px; font-weight: bold;")
+        self.left_button.setStyleSheet("font-size: 24px; height: 70px; background-color: black; color: white; border-radius: 10px; font-weight: bold;")
+        self.right_button.setStyleSheet("font-size: 24px; height: 70px; background-color: black; color: white; border-radius: 10px; font-weight: bold;")
+        self.stop_button.setStyleSheet("font-size: 24px; height: 70px; background-color: black; color: white; border-radius: 10px; font-weight: bold;")
         move_control_group.setLayout(move_layout)
         right_layout.addWidget(move_control_group)
 
@@ -264,7 +259,7 @@ class ControlPanel(QWidget):
 
     def send_lift_command(self, command, label):
         """리프트 명령 전송"""
-        self.update_status_label("Lift", label, "green")
+        self.update_status_label("Lift", label, "blue")
         if self.ser:
             try:
                 self.ser.write(f"{command}\n".encode('utf-8'))
@@ -282,7 +277,7 @@ class ControlPanel(QWidget):
         """리프트 명령 시작"""
         self.current_lift_command = (command, label)
         self.send_lift_command(command, label)
-        self.lift_command_timer.start(1000)  # 1초마다 주기적으로 실행
+        self.lift_command_timer.start(500)  # 0.5초마다 주기적으로 실행
 
     def stop_lift_command(self):
         """리프트 명령 중지"""
@@ -310,7 +305,7 @@ class ControlPanel(QWidget):
         label = self.status_labels.get(label_name, None)
         if label:
             label.setText(f"{text}")
-            label.setStyleSheet(f"font-size: 14px; padding: 5px; color: white; background-color: {color}; border-radius: 10px;")
+            label.setStyleSheet(f"font-size: 20px; padding: 5px; color: white; background-color: {color}; border-radius: 10px; font-weight: bold;")
             label.setAlignment(Qt.AlignCenter)
 
     def start_serial_read_thread(self):
@@ -349,18 +344,22 @@ class ControlPanel(QWidget):
                 status = int(data.split("_")[1])
                 prev_ems_signal = self.ems_signal
                 self.ems_signal = status
-                if status == 0 or status == 2:
-                    # E_0와 E_2의 동일한 동작
+                if status == 0:
                     self.emergency_pub.publish(Int32(data=0))
                     self.update_status_label("EMS", str(status), "red")
                     self.emergency_stop_button.setChecked(True)
-                    self.log_to_terminal(f"Arduino received : EMS_{data}")
 
                 elif status == 1:
                     self.emergency_pub.publish(Int32(data=1))
                     self.update_status_label("EMS", "1", "green")
                     self.emergency_stop_button.setChecked(False)
-                    self.log_to_terminal(f"Arduino received : EMS_{data}")
+
+                elif status == 2:
+                    if (prev_ems_signal == 0): 
+                        self.ems_signal = 0
+                    self.emergency_pub.publish(Int32(data=0))
+                    self.update_status_label("EMS", str(status), "red")
+                    self.emergency_stop_button.setChecked(True)
 
                 elif status == 3:
                     if prev_ems_signal == 2: 
@@ -372,8 +371,8 @@ class ControlPanel(QWidget):
                                 self.ser.write("E_1\n".encode('utf-8'))
                                 self.log_to_terminal(f"[Arduino Send] : E_1")
                             except serial.SerialException as e:
-                                self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
-                    self.log_to_terminal(f"Arduino received : EMS_{data}")
+                                self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")                
+                self.log_to_terminal(f"Arduino received : EMS_{data}")
             except (ValueError, IndexError) as e:
                 self.log_to_terminal(f"Invalid data received: {data}")
 
@@ -382,6 +381,8 @@ class ControlPanel(QWidget):
         self.emergency_pub.publish(Int32(data=1))
         self.update_status_label("EMS", "1", "green")
         self.emergency_stop_button.setChecked(False)
+        self.emergency_stop_button.setStyleSheet("font-size: 40px; height: 300px; background-color: red; border-radius: 10px; font-weight: bold;")
+        self.emergency_stop_button.repaint()
         self.send_movement_command(direction)
 
     def stop_movement(self):
@@ -389,6 +390,8 @@ class ControlPanel(QWidget):
         self.emergency_pub.publish(Int32(data=0))
         self.update_status_label("EMS", "0", "red")
         self.emergency_stop_button.setChecked(True)
+        self.emergency_stop_button.setStyleSheet("font-size: 40px; height: 300px; background-color: darkred; border-radius: 10px; font-weight: bold;")
+        self.emergency_stop_button.repaint()
         self.send_movement_command("stop")
 
     def send_movement_command(self, direction):
@@ -417,6 +420,8 @@ class ControlPanel(QWidget):
             if self.ser:
                 try:
                     self.ser.write("E_0\n".encode('utf-8'))
+                    self.emergency_stop_button.setStyleSheet("font-size: 40px; height: 300px; background-color: darkred; border-radius: 10px; font-weight: bold;")
+                    self.emergency_stop_button.repaint()
                 except serial.SerialException as e:
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
         else:
@@ -427,6 +432,8 @@ class ControlPanel(QWidget):
                 try:
                     self.ser.write("E_1\n".encode('utf-8'))
                     self.log_to_terminal(f"[Arduino Send] : E_1")
+                    self.emergency_stop_button.setStyleSheet("font-size: 40px; height: 300px; background-color: red; border-radius: 10px; font-weight: bold;")
+                    self.emergency_stop_button.repaint()
                 except serial.SerialException as e:
                     self.log_to_terminal(f"[Arduino Sending Error] : {str(e)}")
 
@@ -447,18 +454,6 @@ class ControlPanel(QWidget):
         self.nav_terminal_output.append(data)
         self.nav_terminal_output.ensureCursorVisible()
 
-
-    def exit_program(self):
-        """프로그램 종료"""
-        self.log_to_terminal("Exiting program...")
-        
-        if self.rviz_process:
-            self.rviz_process.terminate()
-            self.rviz_process.wait()
-        
-        QApplication.quit()
-        sys.exit(0)
-
 class MainWindow(QMainWindow):
     def __init__(self, node):
         super(MainWindow, self).__init__()
@@ -468,7 +463,7 @@ class MainWindow(QMainWindow):
         screen_geometry = QApplication.primaryScreen().geometry()
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
-        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height * 9 // 10)
+        self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height)
         
         # # 전체 화면
         # self.showFullScreen()
@@ -494,11 +489,6 @@ class MainWindow(QMainWindow):
         env['LIBGL_ALWAYS_SOFTWARE'] = '1'
         self.control_panel.rviz_process = subprocess.Popen(["rviz2", "-d", config_path], env=env)  # RViz 프로세스를 시작하고 객체를 저장
         time.sleep(5)  # RViz 창이 뜰 시간을 줌
-
-    def closeEvent(self, event):
-        """윈도우가 닫힐 때 처리"""
-        self.control_panel.exit_program()
-        event.accept()
 
 def main(args=None):
     rclpy.init(args=args)  # ROS 2 초기화
