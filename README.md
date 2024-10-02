@@ -1,5 +1,4 @@
 ## 프로젝트 개요
-![amr_image](https://github.com/JJo-0/JJo-0.github.io/blob/main/image/AMR_.png?raw=true)
 
 ### 목차
 - [프로젝트 개요](#프로젝트-개요)
@@ -9,6 +8,9 @@
 - [하드웨어](#하드웨어)
 
 ---
+## 사진   
+<img src="https://github.com/JJo-0/JJo-0.github.io/blob/main/image/AMR_.png?raw=true" alt="drawing" style="width:200px;"/>
+
 ## 프로젝트 정보
 
 |프로젝트| 설명 | 기타 |
