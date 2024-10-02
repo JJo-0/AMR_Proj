@@ -1,4 +1,6 @@
 ## 프로젝트 개요
+![amr_image](https://github.com/JJo-0/JJo-0.github.io/blob/main/image/AMR_.png?raw=true)
+
 ### 목차
 - [프로젝트 개요](#프로젝트-개요)
   - [목차](#목차)
